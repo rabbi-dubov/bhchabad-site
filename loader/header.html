@@ -1,0 +1,25 @@
+<!-- BH CHABAD THEME LOADER (header). Paste once into ChabadOne > Settings > General Settings > Custom Header Code. -->
+<!-- The design itself lives in github.com/rabbi-dubov/bhchabad-site (live/ folder). Preview mode: add ?cc=test to any page URL; ?cc=off turns the theme off for you; ?cc=live returns to normal. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" type="text/css" href="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-style.css" />
+<script type="text/javascript" src="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-script.js"></script>
+<script type="text/javascript">//<![CDATA[
+(function () {
+  var m = /[?&]cc=(test|off|live)\b/.exec(location.search), mode = "live";
+  try { if (m) { localStorage.setItem("cc-mode", m[1]); } mode = localStorage.getItem("cc-mode") || "live"; } catch (e) {}
+  window.ccMode = mode;
+  if (mode === "off") { return; }
+  var base = "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/" + (mode === "test" ? "test/" : "live/");
+  window.ccBase = base;
+  var h = document.documentElement; h.className += " cc-on";
+  var l = document.createElement("link"); l.rel = "stylesheet"; l.href = base + "theme.min.css";
+  l.onerror = function () { h.className = h.className.replace(/\bcc-on\b/, ""); };
+  document.head.appendChild(l);
+  if (location.pathname === "/" || /default\.asp$/i.test(location.pathname)) {
+    setTimeout(function () { if (h.className.indexOf("cc-shell-ready") < 0) { h.className += " cc-shell-failed"; } }, 4000);
+  }
+})();
+//]]></script>
+<!-- /BH CHABAD THEME LOADER -->
