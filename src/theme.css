@@ -617,3 +617,233 @@ html body.cco_body .cc-cta p { color: var(--cc-on-dark-muted) !important; }
   html body.cco_body .cc-card, html body.cco_body .cc-btn, html body.cco_body .cc-program__img { transition: none !important; }
   html body.cco_body a.cc-card:hover, html body.cco_body .cc-btn:hover { transform: none !important; }
 }
+
+/* ==========================================================================
+   11. EVENT REGISTRATION PAGE  (/tools/events/register.asp)
+   Pure restyling of ChabadOne's reservation form. No markup or behavior is
+   changed: every input, name and button stays exactly where ChabadOne put it.
+   Scope: #RegisterSinglePage only.
+   ========================================================================== */
+html body.cco_body #RegisterSinglePage {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-size: 16px;
+  color: var(--cc-text);
+  max-width: 920px;
+  margin: 0 auto;
+}
+html body.cco_body #RegisterSinglePage,
+html body.cco_body #RegisterSinglePage * { box-sizing: border-box; }
+
+/* --- Event header: banner + description + "Event info" card --- */
+html body.cco_body #RegisterHeader { display: grid; grid-template-columns: 1fr 300px; gap: 24px; margin-bottom: 24px; }
+html body.cco_body #RegisterHeader .banner_image { grid-column: 1 / -1; margin: 0 !important; }
+html body.cco_body #RegisterHeader .banner_image img { width: 100%; height: auto; display: block; border-radius: var(--cc-radius); }
+html body.cco_body #RegisterHeader .column1,
+html body.cco_body #RegisterHeader .column2 { float: none !important; width: auto !important; margin: 0 !important; }
+html body.cco_body #RegisterHeader .column1 .event_name { display: none; } /* already the page title */
+html body.cco_body #RegisterHeader .event_description { font-size: 18px; line-height: 1.7; color: var(--cc-text); }
+html body.cco_body #RegisterHeader .column2 {
+  background: var(--cc-cream); border: 1px solid var(--cc-line); border-radius: var(--cc-radius);
+  padding: 22px 24px; align-self: start;
+}
+html body.cco_body #RegisterHeader .column2 .heading { font-family: var(--cc-font-body); font-size: 12px !important; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-sand-text); }
+html body.cco_body #RegisterHeader .column2 .label { width: auto !important; float: none !important; font-size: 13px; color: var(--cc-muted); font-weight: 700; }
+html body.cco_body #RegisterHeader .column2 a { color: var(--cc-ink) !important; font-weight: 700; text-decoration: none; }
+html body.cco_body #RegisterHeader .column2 .float_left { float: none !important; }
+@media (max-width: 760px) { html body.cco_body #RegisterHeader { grid-template-columns: 1fr; } }
+
+/* --- Each step becomes a card --- */
+html body.cco_body #RegisterBody #Performances,
+html body.cco_body #RegisterBody #Summary,
+html body.cco_body #RegisterBody #ReserversInformation,
+html body.cco_body #RegisterBody #Payment,
+html body.cco_body #RegisterBody #AdditionalInformation:not(:empty) {
+  background: var(--cc-white);
+  border: 1px solid var(--cc-line);
+  border-radius: var(--cc-radius);
+  padding: 28px 32px !important;
+  margin: 0 0 20px !important;
+}
+html body.cco_body #RegisterBody .separator { border: 0 !important; background: none !important; }
+html body.cco_body #RegisterBody .large_top_padding { padding-top: 0 !important; }
+html body.cco_body #RegisterBody .title.large span.bold,
+html body.cco_body #RegisterBody #Performances > .title span.bold {
+  display: block;
+  font-family: var(--cc-font-head);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--cc-ink);
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+}
+html body.cco_body #RegisterBody #Performances > .title { margin-top: 0 !important; padding-top: 0 !important; }
+html body.cco_body #RegisterBody .regular { font-size: 15px; color: var(--cc-muted); }
+html body.cco_body #Performances .performance { border: 0 !important; background: none !important; padding: 0 !important; }
+html body.cco_body #Performances .performance > .title .event_name span.medium { display: block; color: var(--cc-muted); font-size: 14px; }
+
+/* --- Inputs everywhere on the page --- */
+html body.cco_body #RegisterSinglePage input[type="text"],
+html body.cco_body #RegisterSinglePage input[type="email"],
+html body.cco_body #RegisterSinglePage input[type="tel"],
+html body.cco_body #RegisterSinglePage input[type="number"],
+html body.cco_body #RegisterSinglePage select,
+html body.cco_body #RegisterSinglePage textarea {
+  width: 100% !important;
+  max-width: 100%;
+  height: 48px;
+  padding: 0 14px !important;
+  border: 1px solid #CFC7B8 !important;
+  border-radius: var(--cc-radius-sm) !important;
+  background: var(--cc-white) !important;
+  color: var(--cc-text) !important;
+  font-size: 16px !important;   /* 16px stops iPhone from zooming in */
+  font-family: var(--cc-font-body) !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+html body.cco_body #RegisterSinglePage textarea { height: 110px; padding: 12px 14px !important; line-height: 1.5; }
+html body.cco_body #RegisterSinglePage input:focus,
+html body.cco_body #RegisterSinglePage select:focus,
+html body.cco_body #RegisterSinglePage textarea:focus {
+  outline: 0 !important;
+  border-color: var(--cc-navy) !important;
+  box-shadow: 0 0 0 3px rgba(28, 53, 87, .15) !important;
+}
+html body.cco_body #RegisterSinglePage input[type="radio"],
+html body.cco_body #RegisterSinglePage input[type="checkbox"] { accent-color: var(--cc-navy); width: 18px; height: 18px; margin: 0 10px 0 0 !important; flex: none; }
+
+/* --- Add-reservation bar (category, quantity, Add) --- */
+html body.cco_body #RegisterSinglePage .toggle_options { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; padding: 16px 0 !important; }
+html body.cco_body #RegisterSinglePage .toggle_options[style*="none"] { display: none !important; }
+html body.cco_body #RegisterSinglePage .toggle_options > .inline_block { flex: 1 1 180px; }
+html body.cco_body #RegisterSinglePage .toggle_options > .inline_block > div:first-child { font-size: 13px; font-weight: 700; color: var(--cc-muted); margin-bottom: 6px !important; }
+html body.cco_body #RegisterSinglePage .toggle_message { cursor: pointer; color: var(--cc-navy) !important; font-weight: 700; padding: 12px 0 !important; }
+
+/* --- Reservation rows (attendee names) --- */
+html body.cco_body #RegisterSinglePage .reservations > .clearfix:first-child { display: none; } /* old column headings */
+html body.cco_body #RegisterSinglePage .reservation {
+  border: 1px solid var(--cc-line); border-radius: var(--cc-radius-sm); padding: 18px !important; margin-top: 14px !important; background: var(--cc-cream);
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child {
+  display: grid; gap: 12px; align-items: center; padding: 0 !important;
+  grid-template-columns: 32px 1fr 1fr auto auto 36px;
+  grid-template-areas: "idx fn ln cat price rm";
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div { width: auto !important; float: none !important; margin: 0 !important; padding: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > [id$="_index"] { grid-area: idx; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2) { grid-area: fn; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3) { grid-area: ln; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g100 { grid-area: cat; color: var(--cc-muted); font-size: 14px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .price-display { grid-area: price; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g40 { grid-area: rm; }
+html body.cco_body #RegisterSinglePage .reservation .seat_selection:empty { display: none; }
+html body.cco_body #RegisterSinglePage .reservation [id$="_index"] {
+  width: 32px !important; height: 32px; border-radius: 50%; background: var(--cc-navy); color: var(--cc-white);
+  display: flex !important; align-items: center; justify-content: center; font-size: 14px;
+}
+html body.cco_body #RegisterSinglePage .reservation .price-display { font-weight: 800; color: var(--cc-ink); white-space: nowrap; }
+html body.cco_body #RegisterSinglePage .remove_reservation {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cc-line); background: var(--cc-white); color: var(--cc-muted); cursor: pointer; font-size: 18px; line-height: 1;
+}
+html body.cco_body #RegisterSinglePage .reservation input::placeholder { color: #8A8F98; }
+@media (max-width: 640px) {
+  html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child {
+    grid-template-columns: 32px 1fr auto 36px;
+    grid-template-areas: "idx fn fn rm" ". ln ln ." ". cat price .";
+  }
+}
+
+/* --- Per-attendee questions (ChabadOne form builder inside each reservation) --- */
+html body.cco_body #RegisterSinglePage .embedded_form { margin-top: 16px; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-all { background: transparent !important; box-shadow: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; font-size: 16px !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-section { padding: 0 !important; margin: 0 !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-line { display: block !important; padding: 10px 0 !important; margin: 0 !important; border: 0 !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-label-left,
+html body.cco_body #RegisterSinglePage .embedded_form .form-input {
+  float: none !important; width: auto !important; display: block !important; margin: 0 !important; padding: 0 !important;
+}
+html body.cco_body #RegisterSinglePage .embedded_form .form-label-left label:first-child {
+  display: block; font-weight: 700 !important; font-size: 15px !important; color: var(--cc-ink) !important; margin: 0 0 8px; width: auto !important; text-align: left !important;
+}
+html body.cco_body #RegisterSinglePage .form-required { color: #A4342A !important; }
+/* Radio and checkbox answers → tappable tiles */
+html body.cco_body #RegisterSinglePage .form-single-column,
+html body.cco_body #RegisterSinglePage .form-multiple-column { display: grid !important; gap: 8px; }
+html body.cco_body #RegisterSinglePage .form-single-column .clearfix,
+html body.cco_body #RegisterSinglePage .form-multiple-column .clearfix { display: none !important; }
+html body.cco_body #RegisterSinglePage .form-radio-item,
+html body.cco_body #RegisterSinglePage .form-checkbox-item {
+  display: flex !important; align-items: center; float: none !important; width: auto !important;
+  border: 1px solid #CFC7B8; border-radius: var(--cc-radius-sm); background: var(--cc-white);
+  padding: 12px 14px !important; margin: 0 !important; cursor: pointer; min-height: 48px;
+  transition: border-color .15s ease, background .15s ease;
+}
+html body.cco_body #RegisterSinglePage .form-radio-item:hover,
+html body.cco_body #RegisterSinglePage .form-checkbox-item:hover { border-color: var(--cc-navy); }
+html body.cco_body #RegisterSinglePage .form-radio-item:has(input:checked),
+html body.cco_body #RegisterSinglePage .form-checkbox-item:has(input:checked) {
+  border-color: var(--cc-navy); background: #EEF2F8; box-shadow: inset 0 0 0 1px var(--cc-navy);
+}
+html body.cco_body #RegisterSinglePage .form-radio-item label,
+html body.cco_body #RegisterSinglePage .form-checkbox-item label { margin: 0 !important; cursor: pointer; font-size: 16px; color: var(--cc-text); flex: 1; }
+html body.cco_body #RegisterSinglePage .embedded_form > .center.small { color: var(--cc-muted); font-size: 12px; margin-top: 8px; }
+
+/* --- "Your information" + "Payment" rows: label above field, two columns on desktop --- */
+html body.cco_body #ReserversInformation > div > .clearfix:not(.title),
+html body.cco_body #Payment > div > .clearfix:not(.title):not(:empty),
+html body.cco_body #Payment #CreditCard {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px;
+}
+html body.cco_body #ReserversInformation .small_vertical_padding,
+html body.cco_body #Payment .small_vertical_padding,
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin {
+  display: flex; flex-direction: column; gap: 6px; padding: 0 !important; margin: 0 !important;
+}
+html body.cco_body #ReserversInformation .label,
+html body.cco_body #Payment .label,
+html body.cco_body #Summary .label {
+  width: auto !important; margin: 0 !important; float: none !important; text-align: left !important;
+  font-size: 13px !important; font-weight: 700 !important; color: var(--cc-muted);
+}
+html body.cco_body #ReserversInformation .required .label::after,
+html body.cco_body #Payment .required .label::after { content: " *"; color: #A4342A; }
+html body.cco_body #ReserversInformation .float_left,
+html body.cco_body #Payment .float_left,
+html body.cco_body #Summary .inline_block { float: none !important; margin: 0 !important; width: 100% !important; display: block !important; }
+html body.cco_body #ReserversInformation .small_vertical_padding:has(input[type="checkbox"]) { grid-column: 1 / -1; flex-direction: row-reverse; justify-content: flex-end; align-items: center; }
+html body.cco_body #Payment #Comments { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; padding: 0 !important; margin-top: 14px !important; }
+@media (max-width: 640px) {
+  html body.cco_body #ReserversInformation > div > .clearfix:not(.title),
+  html body.cco_body #Payment > div > .clearfix:not(.title):not(:empty),
+  html body.cco_body #Payment #CreditCard { grid-template-columns: 1fr; }
+}
+
+/* --- Summary: discount + totals --- */
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 10px; }
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin .label { flex-basis: 100%; }
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin .inline_block { width: auto !important; flex: 1 1 200px; }
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin .inline_block:last-child { flex: 0 0 auto; }
+html body.cco_body #Summary #ApplyDiscountCode {
+  background: var(--cc-white) !important; color: var(--cc-navy) !important; box-shadow: inset 0 0 0 1.5px var(--cc-navy); height: 48px;
+}
+html body.cco_body #Summary .align_right { text-align: left !important; }
+html body.cco_body #Summary .align_right > .inline_block { display: block !important; width: 100% !important; }
+html body.cco_body #Totals { border-top: 1px solid var(--cc-line); padding-top: 14px; margin-top: 18px !important; font-size: 16px; }
+html body.cco_body #Totals .clearfix { display: flex; justify-content: space-between; gap: 16px; }
+html body.cco_body #Totals .clearfix > div { float: none !important; }
+html body.cco_body #Totals .clearfix:last-child { font-size: 20px; color: var(--cc-ink); padding-top: 8px; }
+
+/* --- Final button --- */
+html body.cco_body #Buttons { position: sticky; bottom: 0; z-index: 5; background: linear-gradient(rgba(255,255,255,0), var(--cc-white) 30%); padding-top: 12px; }
+html body.cco_body #Buttons .align_center { display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding: 0 0 16px !important; }
+html body.cco_body #SubmitButton_wrapper { display: block !important; width: 100%; }
+html body.cco_body #SubmitButton_wrapper #SubmitButton { width: 100%; min-height: 56px; font-size: 17px !important; }
+html body.cco_body #SubmitButton_wrapper.disabled #SubmitButton { background: #9AA3B0 !important; cursor: not-allowed; transform: none !important; }
+html body.cco_body #ValidationNotice {
+  background: #FFF6E5 !important; border: 1px solid #EBCB8B !important; color: #6B4A12 !important;
+  border-radius: var(--cc-radius-sm); padding: 10px 14px !important; font-size: 14px; text-align: left; background-image: none !important;
+}
+html body.cco_body #ValidationNotice:empty { display: none !important; }
+html body.cco_body #RegisterSinglePage .co_global_button.disabled { opacity: 1 !important; }
