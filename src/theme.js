@@ -153,7 +153,7 @@
     if (!slides.length) { return null; }
     var title = h("h1", { "class": "cc-hero__title cc-head" });
     var sub = h("p", { "class": "cc-hero__sub" });
-    var cta = h("a", { "class": "cc-btn cc-btn--sand" });
+    var cta = h("a", { "class": "cc-btn cc-btn--accent" });
     var img = h("div", { "class": "cc-hero__img", role: "img" });
     var dots = h("div", { "class": "cc-hero__dots", role: "group", "aria-label": "Featured items" });
     var idx = 0, timer = null;
