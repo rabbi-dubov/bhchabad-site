@@ -18,7 +18,11 @@
   var CC = {
     org: "Chabad Jewish Center of Bloomfield Hills",
     titleMain: "Chabad Jewish Center",
-    titleSub: "of Bloomfield Hills",
+    titleSub: "Bloomfield Hills",
+    // Show only part of the square logo file in the header (fractions of the image: x, y, width, height).
+    // Current logo = emblem on top, name underneath; we show the emblem and set the name as live text.
+    // Set to null to show the whole logo image.
+    logoCrop: { x: 0.215, y: 0.18, w: 0.57, h: 0.39 },
     tagline: "A warm, welcoming home for every Jew in Bloomfield Hills: learning, holidays and community, whatever your background.",
     street: "3805 Quarton Road",
     city: "Bloomfield Hills, MI 48302",
@@ -84,6 +88,11 @@
     function upd() { ticking = false; if (window.scrollY > 4) { addClass(body, "cc-scrolled"); } else { body.className = body.className.replace(/\s?cc-scrolled\b/g, ""); } }
     window.addEventListener("scroll", function () { if (!ticking) { ticking = true; window.requestAnimationFrame(upd); } }, { passive: true });
     upd();
+    var lw = q("#header_branding .site-logo-wrapper");
+    if (lw && CC.logoCrop) {
+      addClass(lw, "cc-logo-crop");
+      ["x", "y", "w", "h"].forEach(function (k) { lw.style.setProperty("--cc-crop-" + k, String(CC.logoCrop[k])); });
+    }
     var t = q("#header_branding a.site_title");
     if (t && !q(".cc-title-sub", t)) {
       var sub = q(".site_subtitle", t);

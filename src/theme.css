@@ -132,29 +132,50 @@ html body.cco_body #header .branding-search { height: auto !important; }
 }
 
 /* Branding */
+/* Logo: shown whole by default. When CC.logoCrop is set in theme.js, JS adds .cc-logo-crop and
+   CSS variables, and only the emblem part of the square logo file is shown (no cut-off words). */
+html body.cco_body #header_branding { --cc-logo-h: 46px; }
 html body.cco_body #header_branding .site-logo-wrapper img {
-  width: 56px !important;
-  height: 56px !important;
-  border-radius: 50%;
-  background: var(--cc-white);
+  width: auto !important; height: var(--cc-logo-h) !important; max-width: none !important;
+  border-radius: 0 !important; background: transparent !important; display: block;
+  mix-blend-mode: multiply; /* the logo file has an off-white background; this melts it into the white header */
+}
+html body.cco_body #header_branding .site-logo-wrapper.cc-logo-crop a {
+  display: block; overflow: hidden;
+  width: calc(var(--cc-logo-h) * var(--cc-crop-w) / var(--cc-crop-h));
+  height: var(--cc-logo-h);
+}
+html body.cco_body #header_branding .site-logo-wrapper.cc-logo-crop img {
+  width: calc(var(--cc-logo-h) / var(--cc-crop-h)) !important;
+  height: calc(var(--cc-logo-h) / var(--cc-crop-h)) !important;
+  margin-left: calc(var(--cc-logo-h) * var(--cc-crop-x) / var(--cc-crop-h) * -1) !important;
+  margin-top: calc(var(--cc-logo-h) * var(--cc-crop-y) / var(--cc-crop-h) * -1) !important;
+}
+/* thin rule between emblem and name */
+html body.cco_body #header_branding .site-logo-wrapper {
+  padding-right: 16px !important; margin-right: 16px !important; border-right: 1px solid var(--cc-line) !important; border-radius: 0 !important;
 }
 html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title {
   color: var(--cc-ink) !important;
   font-family: var(--cc-font-head) !important;
   font-weight: 400;
-  font-size: 22px;
-  letter-spacing: -0.01em;
+  font-size: 23px;
+  letter-spacing: -0.005em;
   text-transform: none !important;
   text-shadow: none !important;
-  line-height: 1.15;
+  line-height: 1.05;
+  text-decoration: none !important;
 }
 html body.cco_body #header_branding a.site_title .cc-title-sub {
   display: block;
-  font-family: var(--cc-font-body);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--cc-muted);
-  letter-spacing: 0;
+  margin-top: 5px;
+  font-family: var(--cc-font-body) !important;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--cc-sand-text);
+  letter-spacing: .2em;
+  text-transform: uppercase;
 }
 
 /* Desktop navigation */
@@ -228,8 +249,10 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
     color: var(--cc-sand) !important;
   }
   html body.cco_body .site-nav-wrapper .cs-mobile-menu-close i { color: var(--cc-white) !important; }
-  html body.cco_body #header_branding .site-logo-wrapper img { width: 42px !important; height: 42px !important; }
-  html body.cco_body #header_branding a.site_title { font-size: 16px; }
+  html body.cco_body #header_branding { --cc-logo-h: 36px; padding: 10px 0 !important; }
+  html body.cco_body #header_branding .site-logo-wrapper { padding-right: 12px !important; margin-right: 12px !important; }
+  html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title { font-size: 19px; }
+  html body.cco_body #header_branding a.site_title .cc-title-sub { font-size: 10px; letter-spacing: .16em; margin-top: 4px; }
 }
 
 /* ---------- 4. BUTTONS AND LINKS (native) ---------- */
