@@ -4,15 +4,27 @@ Custom design for the ChabadOne Sites 6 site of Chabad Jewish Center of Bloomfie
 (Site ID 10077). **Do not touch PrincetonChabad.org** (same ChabadOne login).
 
 ## Where the code lives
-- **Live copy:** ChabadOne › Sites › Settings › General Settings › Advanced Settings
-  - Custom Header Code = `dist/header.html` (fonts, ChabadOne modern-form CSS/JS, fail-safe script, all theme CSS)
-  - Custom Footer Code = `dist/footer.html` (theme JS)
-- **Source of truth:** `src/theme.css`, `src/theme.js`, `build.py` (also saved in the Claude project under `theme/`).
-- GitHub (`rabbi-dubov/bhchabad-site`) is created but **not used yet**: Cowork sessions can't attach repos.
-  Switch later by pushing these files and replacing the boxes with small loader tags.
+- **GitHub (source of truth):** github.com/rabbi-dubov/bhchabad-site
+  - `src/theme.css`, `src/theme.js` = source; `build.py` builds them.
+  - `live/` = what every visitor gets; `test/` = what you see after adding `?cc=test` to any page URL.
+  - `loader/header.html` + `loader/footer.html` = small tags pasted **once** into ChabadOne ›
+    Settings › General Settings › Custom Header / Footer Code. They load `live/` (or `test/`) from jsDelivr:
+    `https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/live/theme.min.css` (and `.js`).
+  - `?cc=off` turns the theme off for that visitor only; `?cc=live` returns to normal.
+- **Fallback (old method):** `python3 build.py snippets` writes `dist/header.html` / `dist/footer.html`
+  with everything inline, to paste into the same boxes if jsDelivr ever fails.
 
-## Deploying a change (what Claude does)
-1. Edit `src/*`, run `python3 build.py` (checks: no `&` or `<` in CSS, no `]]>` in JS).
+## Deploying a change (GitHub method)
+1. Edit `src/*`, run `python3 build.py test` (checks: no `&` or `<` in CSS, no `]]>` in JS). Commit + push.
+2. Purge jsDelivr: open `https://purge.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/test/theme.min.css`
+   and `.../test/theme.min.js`.
+3. Check the site with `?cc=test` (one check per change; JLI registration page too, never submit).
+4. When good: `python3 build.py promote` (copies test/ to live/), commit + push, purge the two `live/` URLs.
+5. Visitors get the new version within minutes (browser cache). No ChabadOne save/publish needed.
+
+## Deploying via the paste-everything method (fallback)
+
+1. Edit `src/*`, run `python3 build.py snippets` (checks: no `&` or `<` in CSS, no `]]>` in JS).
 2. In Site Control (lightbhchabad.org selected!) open `/platform/sitecontrol/admin/wizards/sitetitles.asp` top-level.
 3. Put the new header/footer text into `#customheader` / `#customfooter`.
 4. Save = set `#saveHeaderCodeWizard` to `1` and call `doSubmit('tag')` (this is exactly what the
