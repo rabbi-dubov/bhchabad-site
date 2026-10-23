@@ -1,0 +1,79 @@
+<title>BH Chabad Homepage Preview</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* Layout: a slim review bar above a live frame of the site; the frame narrows to phone width on demand. */
+  :root {
+    --bar-bg: #FFFFFF;
+    --bar-fg: #2E2E2D;
+    --bar-muted: #6B5A60;
+    --bar-line: #E8E1DC;
+    --stage: #F1EBE7;
+    --ink: #5D0B30;
+    --chip-on: #871A39;
+    --chip-on-fg: #FFFFFF;
+    --font-head: "DM Serif Display", Georgia, serif;
+    --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bar-bg: #1E1418; --bar-fg: #F3E9EC; --bar-muted: #BFA9B1; --bar-line: #3A2830;
+      --stage: #140D10; --ink: #F3D9E2; --chip-on: #F27730; --chip-on-fg: #2A0A18; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bar-bg: #1E1418; --bar-fg: #F3E9EC; --bar-muted: #BFA9B1; --bar-line: #3A2830;
+    --stage: #140D10; --ink: #F3D9E2; --chip-on: #F27730; --chip-on-fg: #2A0A18; color-scheme: dark;
+  }
+  html, body { height: 100%; }
+  body { background: var(--stage); color: var(--bar-fg); font-family: var(--font-body); display: flex; flex-direction: column; }
+  .bar {
+    background: var(--bar-bg); border-bottom: 1px solid var(--bar-line);
+    padding-block: 12px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+  }
+  .bar h1 { font-family: var(--font-head); font-weight: 400; font-size: 22px; line-height: 1.1; margin: 0; color: var(--ink); text-wrap: balance; }
+  .bar p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--bar-muted); flex: 1 1 320px; min-width: 0; }
+  .seg { display: inline-flex; border: 1px solid var(--bar-line); border-radius: 6px; overflow: hidden; }
+  .seg button {
+    font: 600 13px var(--font-body); padding: 8px 14px; border: 0; background: transparent; color: var(--bar-fg); cursor: pointer;
+  }
+  .seg button[aria-pressed="true"] { background: var(--chip-on); color: var(--chip-on-fg); }
+  .seg button:focus-visible { outline: 3px solid #F27730; outline-offset: -3px; }
+  .stage { flex: 1; min-height: 0; display: flex; justify-content: center; padding: 0; }
+  .stage.is-phone { padding-block: 20px; }
+  iframe { border: 0; width: 100%; height: 100%; background: #FFFFFF; display: block; }
+  .stage.is-phone iframe { width: 390px; max-width: 100%; border-radius: 18px; box-shadow: 0 0 0 1px var(--bar-line), 0 20px 50px rgba(0,0,0,.18); }
+</style>
+
+<header class="bar">
+  <h1>Homepage preview</h1>
+  <div class="seg" role="group" aria-label="Screen size">
+    <button type="button" id="view-desktop" aria-pressed="true">Desktop</button>
+    <button type="button" id="view-phone" aria-pressed="false">Phone</button>
+  </div>
+  <p>Draft for review, not the live site. Photos are ChabadOne sample photos until yours arrive; testimonials are placeholders. Buttons don't go anywhere yet.</p>
+</header>
+<main class="stage" id="stage">
+  <iframe id="site" title="BH Chabad homepage preview"></iframe>
+</main>
+
+<script type="text/plain" id="site-src">%%SITE%%</script>
+<script>
+  (function () {
+    var src = document.getElementById('site-src').textContent.replace(/<\\\/script/g, '</script');
+    var frame = document.getElementById('site');
+    frame.srcdoc = src;
+    var stage = document.getElementById('stage');
+    var bD = document.getElementById('view-desktop'), bP = document.getElementById('view-phone');
+    function set(phone) {
+      stage.classList.toggle('is-phone', phone);
+      bD.setAttribute('aria-pressed', String(!phone));
+      bP.setAttribute('aria-pressed', String(phone));
+    }
+    bD.addEventListener('click', function () { set(false); });
+    bP.addEventListener('click', function () { set(true); });
+  })();
+</script>

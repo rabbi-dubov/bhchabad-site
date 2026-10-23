@@ -35,14 +35,30 @@
     donateUrl: "/4970020",
     contactUrl: "/tools/feedback.asp",
     subscribeUrl: "/tools/subscribe/default.htm",
+    // Testimonials live on an ordinary ChabadOne page. Each one = a Quote (blockquote) whose last line
+    // starts with a dash: "— Name, context". The homepage reads them; no quotes = no section.
+    testimonialsUrl: "/testimonials",
+    shabbatPlace: "Bloomfield Hills",
     home: {
       heroEyebrow: "Chabad Jewish Center of Bloomfield Hills",
       secondaryCta: { text: "About us", href: "/about" },
+      introEyebrow: "Welcome",
       eventsEyebrow: "Upcoming classes and events",
       eventsTitle: "Discover the joy and meaning in Judaism",
-      programsEyebrow: "Whatever your age, stage and page",
-      subscribeTitle: "What's happening in Jewish Bloomfield Hills?",
-      subscribeText: "Get our weekly email: classes, holidays, community news and a short Torah thought."
+      eventsLine: "Everything is open to everyone, and the first class of every course is yours to try, commitment-free.",
+      programsEyebrow: "Our programs",
+      programsTitle: "Programs for the whole community",
+      testimonialsEyebrow: "Testimonials",
+      testimonialsTitle: "In their words",
+      partner: {
+        title: "Partner with us",
+        text: "Chabad of Bloomfield Hills is funded entirely by friends and supporters like you. Every gift keeps our classes, holidays and programs open to everyone.",
+        donate: "Donate",
+        dedicate: "Dedicate a class or event",
+        dedicateHref: "mailto:rabbi@bhchabad.org?subject=Dedicating%20a%20class%20or%20event"
+      },
+      subscribeTitle: "Stay in the loop",
+      subscribeText: "Classes, events and holiday celebrations in Bloomfield Hills, straight to your inbox."
     }
   };
 
@@ -206,43 +222,122 @@
     return h("nav", { "class": "cc-quick", "aria-label": txt(q(".widget_header h5", w)) || "Quick links" }, [h("ul", null, items)]);
   }
 
-  function weekSection(root) {
+  /* Shabbat times: read from ChabadOne's candle-lighting widget (homepage), cached for other pages */
+  function readShabbat(root) {
     var cl = q(".candlelighting", root);
     if (!cl) { return null; }
-    var cards = [];
-    var rows = qa(".times_wrapper .medium_top_padding, .times_wrapper > div", cl).filter(function (r) { return q(".when_to_light", r); });
-    if (rows.length) {
-      var loc = txt(q(".section_subheading", cl));
-      cards.push(h("div", { "class": "cc-week__item" }, [
-        h("p", { "class": "cc-week__label", text: "Shabbat" + (loc ? " in " + loc.replace(/,.*$/, "") : "") })
-      ].concat(rows.slice(0, 3).map(function (r) {
-        var a = q("a", r);
-        var when = txt(q(".when_to_light", r));
-        var time = txt(q(".bold", r));
-        var date = a ? txt(a).replace(time, "").replace(/^\s*-\s*/, "") : "";
-        return h("div", { "class": "cc-week__row" }, [h("span", { text: when.charAt(0) + when.slice(1).toLowerCase() + (date ? " · " + date : "") }), h("strong", { text: time })]);
-      }))));
+    var out = {};
+    qa(".times_wrapper .medium_top_padding, .times_wrapper > div", cl).forEach(function (r) {
+      var when = txt(q(".when_to_light", r)).toLowerCase(), time = txt(q(".bold", r)), a = q("a", r);
+      if (!time) { return; }
+      if (!out.candles && /light/.test(when)) { out.candles = time; out.day = a ? txt(a).replace(time, "").replace(/^[\s-]+/, "").split(",")[0] : ""; out.href = a ? a.getAttribute("href") : ""; }
+      else if (!out.ends && /ends/.test(when)) { out.ends = time; }
+    });
+    var pa = q(".parsha_content a", cl);
+    if (pa) { out.parsha = txt(pa); out.parshaHref = pa.getAttribute("href"); }
+    return out.candles ? out : null;
+  }
+  function shabbatBar() {
+    var KEY = "cc-shabbat-v1", data = null, now = Date.now();
+    var hp = q(".hp-table");
+    // Cache the result (or the absence of a result) for 6h so inner pages don't refetch "/" every time
+    function save(dd) { try { localStorage.setItem(KEY, JSON.stringify({ at: Date.now(), d: dd || null })); } catch (e) {} }
+    if (hp) { data = readShabbat(hp); save(data); }
+    function render(dd) {
+      if (!dd || q(".cc-shabbat-bar")) { return; }
+      var t = (dd.candles || "").toLowerCase();
+      var bits = ["Candle lighting " + t + (dd.day ? " (" + dd.day + ")" : "")];
+      if (dd.ends) { bits.push("Shabbat ends " + dd.ends.toLowerCase()); }
+      if (dd.parsha) { bits.push("Torah portion: " + dd.parsha); }
+      var bar = h("div", { "class": "cc-shabbat-bar", role: "note" }, [h("div", { "class": "cc-wrap" }, [
+        h("a", { href: dd.href || "/tools/shabbat-holiday-calendar/default.htm" }, [
+          h("strong", { text: "Shabbat in " + CC.shabbatPlace }),
+          h("span", { "class": "cc-shabbat-bar__full", text: " \u00b7 " + bits.join(" \u00b7 ") }),
+          h("span", { "class": "cc-shabbat-bar__short", text: " \u00b7 candles " + t })
+        ])
+      ])]);
+      d.body.insertBefore(bar, d.body.firstChild);
     }
-    var par = q(".parsha_content", cl);
-    if (par) {
-      var pa = q("a", par);
-      cards.push(h("div", { "class": "cc-week__item" }, [
-        h("p", { "class": "cc-week__label", text: "This week's Torah portion" }),
-        h("p", { "class": "cc-week__value" }, [pa ? h("a", { href: pa.getAttribute("href"), text: txt(pa) }) : txt(par)]),
-        h("p", { "class": "cc-week__meta" }, [h("a", { "class": "cc-link", href: pa ? pa.getAttribute("href") : "/parshah", text: "Read and listen" })])
+    if (data) { render(data); return; }
+    if (hp) { return; }
+    try { var c = JSON.parse(localStorage.getItem(KEY) || "null"); if (c && now - c.at < 6 * 3600 * 1000) { render(c.d); return; } } catch (e) {}
+    if (!window.fetch || !window.DOMParser) { return; }
+    fetch("/", { credentials: "same-origin" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (html2) {
+      var dd = html2 ? readShabbat(new DOMParser().parseFromString(html2, "text/html")) : null;
+      save(dd); render(dd);
+    }).catch(function () {});
+  }
+
+  /* Testimonials: quotes come from the Testimonials page (CC.testimonialsUrl) */
+  function parseTestimonials(doc) {
+    return qa(".article-body blockquote, .co_body blockquote, blockquote", doc).map(function (bq) {
+      var ps = qa("p", bq).map(txt).filter(Boolean);
+      if (!ps.length) { ps = [txt(bq)]; }
+      var by = "", ctx = "";
+      var last = ps[ps.length - 1];
+      if (ps.length > 1 && /^[\u2014\u2013-]/.test(last)) {
+        ps.pop();
+        var who = last.replace(/^[\u2014\u2013-]+\s*/, "");
+        var cut = who.indexOf(",");
+        by = cut > 0 ? who.slice(0, cut).trim() : who; ctx = cut > 0 ? who.slice(cut + 1).trim() : "";
+      }
+      return { quote: ps.join(" ").replace(/^["\u201c]|["\u201d]$/g, ""), by: by, ctx: ctx };
+    }).filter(function (t) { return t.quote; });
+  }
+  function testimonialsSection(list) {
+    var sec = h("section", { "class": "cc-section cc-section--cream cc-testimonials", "aria-labelledby": "cc-tm-h" });
+    function build(items) {
+      if (!items || !items.length) { if (sec.parentNode) { sec.parentNode.removeChild(sec); } return; }
+      var idx = 0;
+      var quote = h("p", { "class": "cc-testimonial__quote" });
+      var by = h("p", { "class": "cc-testimonial__by" });
+      var dots = h("div", { "class": "cc-hero__dots cc-testimonials__dots", role: "group", "aria-label": "Choose a testimonial" });
+      function show(i) {
+        idx = (i + items.length) % items.length; var t = items[idx];
+        quote.textContent = "\u201c" + t.quote + "\u201d";
+        by.textContent = "";
+        if (t.by) { by.appendChild(h("strong", { text: t.by })); }
+        if (t.ctx) { by.appendChild(h("span", { text: t.ctx })); }
+        qa("button", dots).forEach(function (b, j) { b.setAttribute("aria-current", j === idx ? "true" : "false"); });
+      }
+      var nav = null;
+      if (items.length > 1) {
+        items.forEach(function (t, i) { var b = h("button", { type: "button", "aria-label": "Testimonial " + (i + 1) }); b.addEventListener("click", function () { show(i); }); dots.appendChild(b); });
+        var prev = h("button", { type: "button", "class": "cc-round", "aria-label": "Previous testimonial", text: "\u2190" });
+        var next = h("button", { type: "button", "class": "cc-round", "aria-label": "Next testimonial", text: "\u2192" });
+        prev.addEventListener("click", function () { show(idx - 1); });
+        next.addEventListener("click", function () { show(idx + 1); });
+        nav = h("div", { "class": "cc-testimonials__nav" }, [prev, dots, next]);
+      }
+      sec.textContent = "";
+      sec.appendChild(h("div", { "class": "cc-wrap" }, [
+        h("p", { "class": "cc-eyebrow", text: CC.home.testimonialsEyebrow }),
+        h("h2", { "class": "cc-h2 cc-head", id: "cc-tm-h", text: CC.home.testimonialsTitle }),
+        h("figure", { "class": "cc-testimonial", "aria-live": "polite" }, [quote, by]),
+        nav
       ]));
+      show(0);
     }
-    var hol = q(".upcomingholiday_content", cl);
-    if (hol) {
-      var ha = q("a", hol), dates = qa(".medium_left_margin", hol).pop();
-      cards.push(h("div", { "class": "cc-week__item" }, [
-        h("p", { "class": "cc-week__label", text: "Next on the calendar" }),
-        h("p", { "class": "cc-week__value" }, [ha ? h("a", { href: ha.getAttribute("href"), text: txt(ha) }) : ""]),
-        dates && !q("a", dates) ? h("p", { "class": "cc-week__meta", text: txt(dates) }) : null
-      ]));
-    }
-    if (!cards.length) { return null; }
-    return h("section", { "class": "cc-week", "aria-label": "This week" }, [h("div", { "class": "cc-wrap" }, [h("div", { "class": "cc-grid" }, cards)])]);
+    if (list) { build(list); return sec; }
+    if (!CC.testimonialsUrl || !window.fetch || !window.DOMParser) { return null; }
+    fetch(CC.testimonialsUrl, { credentials: "same-origin" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
+      build(t ? parseTestimonials(new DOMParser().parseFromString(t, "text/html")) : []);
+    }).catch(function () { build([]); });
+    return sec;
+  }
+
+  function partnerSection() {
+    var p = CC.home.partner;
+    if (!p) { return null; }
+    return h("section", { "class": "cc-section cc-section--ink cc-partner", "aria-labelledby": "cc-partner-h" }, [
+      h("div", { "class": "cc-wrap cc-split" }, [
+        h("div", null, [h("h2", { "class": "cc-h2 cc-head", id: "cc-partner-h", text: p.title }), h("p", { "class": "cc-lede", text: p.text })]),
+        h("div", { "class": "cc-partner__ctas" }, [
+          h("a", { "class": "cc-btn cc-btn--accent", href: CC.donateUrl, text: p.donate }),
+          h("a", { "class": "cc-btn cc-btn--ghost", href: p.dedicateHref, text: p.dedicate, style: "color: var(--cc-white) !important" })
+        ])
+      ])
+    ]);
   }
 
   function eventCard(ev) {
@@ -267,16 +362,24 @@
     var sec = h("section", { "class": "cc-section cc-section--cream cc-events", "aria-labelledby": "cc-events-h" }, [
       h("div", { "class": "cc-wrap" }, [
         h("div", { "class": "cc-head-row" }, [
-          h("div", null, [h("p", { "class": "cc-eyebrow", text: CC.home.eventsEyebrow }), h("h2", { "class": "cc-h2 cc-head", id: "cc-events-h", text: CC.home.eventsTitle })]),
+          h("div", null, [h("p", { "class": "cc-eyebrow", text: CC.home.eventsEyebrow }), h("h2", { "class": "cc-h2 cc-head", id: "cc-events-h", text: CC.home.eventsTitle }), CC.home.eventsLine ? h("p", { "class": "cc-lede", text: CC.home.eventsLine }) : null]),
           h("div", { "class": "cc-events__nav" }, [prev, next, h("a", { "class": "cc-btn cc-btn--ghost", href: CC.eventsUrl, text: "All events" })])
         ]),
         track
       ])
     ]);
     // 1) Calendar items already on the page (native "Upcoming Events" feed) as a quick first paint
+    // Titles are compared loosely ("JLI: Kabbalah..." = "Kabbalah...") so a course shows once
+    function evKey(t) { return String(t || "").toLowerCase().replace(/^\s*jli\s*:?\s*/, "").replace(/[^a-z0-9]+/g, ""); }
+    var nativeSeen = {};
     var native = qa(".upcoming_events .widget_content li", root).map(function (li) {
-      var a = q("h6 a, a", li);
-      return a ? { title: txt(a), href: a.getAttribute("href"), date: txt(q("small", li)), cta: "Details" } : null;
+      // The title link sits in the heading; a separate icon-only link (.register_link) may come first
+      var a = q("h6 a, h5 a, h4 a, h3 a", li) || q("a:not(.register_link)", li);
+      var reg = q("a.register_link", li);
+      var title = a ? txt(a) : "";
+      if (!title || nativeSeen[evKey(title)]) { return null; }   // next session of each class only
+      nativeSeen[evKey(title)] = 1;
+      return { title: title, href: (reg || a).getAttribute("href"), date: txt(q("small", li)), cta: reg ? "Register" : "Details" };
     }).filter(Boolean);
     function render(list) {
       track.textContent = "";
@@ -300,14 +403,14 @@
         return {
           title: txt(a), href: a.getAttribute("href"),
           date: txt(q(".performance__date", e)),
-          desc: tmp.value.replace(/\s+/g, " ").replace(/^( · )+/, "").trim(),
+          desc: tmp.value.replace(/\s+/g, " ").replace(/(\s*\u00b7\s*)+/g, " \u00b7 ").replace(/^\s*\u00b7\s*|\s*\u00b7\s*$/g, "").trim(),
           img: im ? im.getAttribute("src") : "", cta: "Register"
         };
       }).filter(Boolean);
       if (evs.length) {
         var seen = {};
-        evs.forEach(function (e) { seen[e.title.toLowerCase()] = 1; });
-        render(evs.concat(native.filter(function (n) { return !seen[n.title.toLowerCase()]; })));
+        evs.forEach(function (e) { seen[evKey(e.title)] = 1; });
+        render(evs.concat(native.filter(function (n) { return !seen[evKey(n.title)]; })));
       }
     }).catch(function () { /* keep the native list */ });
     return sec;
@@ -322,8 +425,8 @@
     var bodyText = body ? txt(body).replace(more ? txt(more) : "\u0000", "").trim() : "";
     return h("section", { "class": "cc-section cc-intro", "aria-label": head || "About us" }, [
       h("div", { "class": "cc-wrap" }, [
-        h("p", { "class": "cc-eyebrow", text: CC.home.programsEyebrow }),
-        h("h2", { "class": "cc-h2 cc-head", text: head || "Programs for the whole family" }),
+        h("p", { "class": "cc-eyebrow", text: CC.home.introEyebrow }),
+        h("h2", { "class": "cc-h2 cc-head", text: head || "There's a place for you here." }),
         bodyText ? h("p", { "class": "cc-lede", text: bodyText }) : null,
         more ? h("p", { style: "margin-top:24px" }, [h("a", { "class": "cc-link", href: more.getAttribute("href"), text: txt(more) || "Learn more" })]) : null
       ])
@@ -342,26 +445,15 @@
       ]);
     }).filter(Boolean);
     if (!cards.length) { return null; }
-    return h("section", { "class": "cc-section", style: "padding-top:0", "aria-label": txt(q(".header-title", c)) || "Programs" }, [
-      h("div", { "class": "cc-wrap" }, [h("div", { "class": "cc-grid cc-grid--4" }, cards)])
-    ]);
-  }
-
-  function photosSection(root) {
-    var p = q(".latest_photos", root);
-    if (!p) { return null; }
-    var more = q("a.readMore", p);
-    var sec = h("section", { "class": "cc-section cc-photos", "aria-labelledby": "cc-photos-h" }, [
+    return h("section", { "class": "cc-section cc-programs", "aria-labelledby": "cc-programs-h" }, [
       h("div", { "class": "cc-wrap" }, [
-        h("div", { "class": "cc-head-row" }, [
-          h("div", null, [h("p", { "class": "cc-eyebrow", text: "Life at Chabad" }), h("h2", { "class": "cc-h2 cc-head", id: "cc-photos-h", text: txt(q(".widget_header h5", p)) || "Latest photos" })]),
-          more ? h("a", { "class": "cc-btn cc-btn--ghost", href: more.getAttribute("href"), text: "See all photos" }) : null
-        ])
+        h("div", { "class": "cc-head-row" }, [h("div", null, [
+          h("p", { "class": "cc-eyebrow", text: CC.home.programsEyebrow }),
+          h("h2", { "class": "cc-h2 cc-head", id: "cc-programs-h", text: CC.home.programsTitle })
+        ])]),
+        h("div", { "class": "cc-grid cc-grid--4" }, cards)
       ])
     ]);
-    if (more) { more.style.display = "none"; }
-    q(".cc-wrap", sec).appendChild(p);
-    return sec;
   }
 
   function subscribeSection(root) {
@@ -387,11 +479,11 @@
     [
       heroSection(readSlides(q(".promo_slider", hp) || hp)),
       quickSection(hp),
-      weekSection(hp),
-      eventsSection(hp),
       introSection(hp),
+      eventsSection(hp),
       programsSection(hp),
-      photosSection(hp),
+      testimonialsSection(),
+      partnerSection(),
       subscribeSection(hp)
     ].forEach(function (s) { if (s) { shell.appendChild(s); } });
     hp.parentNode.insertBefore(shell, hp);
@@ -466,9 +558,12 @@
     });
   }
 
+  // Tiny hook so a design preview can show the testimonials layout with sample data (never used by the site itself)
+  window.ccTheme = { testimonialsSection: testimonialsSection };
+
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, footer, homeShell, registration].forEach(function (fn) {
+    [header, shabbatBar, footer, homeShell, registration].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
