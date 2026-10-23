@@ -26,6 +26,11 @@ Custom design for the ChabadOne Sites 6 site of Chabad Jewish Center of Bloomfie
 - The disclaimer modal's Ok handler is only attached on a real mouseup, so scripted clicks don't save.
 - The Preview popup does not show pending header code; testing is done by client-side injection instead.
 - `default-theme.css` declares `--theme-*` variables but hard-codes colors, so overriding variables does nothing.
+- The platform forces Muli on every element. Our base rule sets `font-family: inherit` on every element
+  (very specific selector), so any rule that sets the serif must use `var(--cc-font-head) !important`.
+- Fonts: headings DM Serif Display (only weight 400 exists, never bold it), body Instrument Sans 400–700.
+  Corners 6–8px (`--cc-radius*`), buttons 6px (`--cc-pill`).
+- Registration page: name inputs have no `type` attribute; input rules use `input:not([type=radio])...` instead of `[type=text]`.
 
 ## Rollback
 Empty both boxes, save, publish (steps 3–5). Or set `CC_ENABLED = false` in `src/theme.js` and redeploy the footer.
