@@ -45,7 +45,13 @@
   /* ---------- Helpers ---------- */
   function q(s, c) { return (c || d).querySelector(s); }
   function qa(s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); }
-  function txt(n) { return n ? (n.textContent || "").replace(/\s+/g, " ").trim() : ""; }
+  function txt(n) {
+    if (!n) { return ""; }
+    // the platform sometimes wraps long menu labels with <br>; treat those as spaces
+    var c = n.cloneNode(true), br = c.querySelectorAll("br");
+    for (var i = 0; i < br.length; i++) { br[i].parentNode.replaceChild(document.createTextNode(" "), br[i]); }
+    return (c.textContent || "").replace(/\s+/g, " ").trim();
+  }
   function h(tag, attrs, kids) {
     var n = d.createElement(tag), k;
     if (attrs) {

@@ -17,7 +17,7 @@ assert '&' not in css and '<' not in css, 'CSS must not contain & or <'
 subprocess.run(['npx','--yes','terser@5','src/theme.js','-c','-m','-o','dist/theme.min.js'], cwd=root, check=True)
 js = (root/'dist/theme.min.js').read_text().strip()
 assert ']]>' not in js and '</script' not in js.lower()
-fonts = 'https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap'  # ChabadOne decodes &amp; on save, so store the decoded form
+fonts = 'https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap'  # ChabadOne decodes &amp; on save, so store the decoded form
 header = f'''<!-- BH CHABAD THEME v{ver} : header (CSS). Source: project docs. Do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />

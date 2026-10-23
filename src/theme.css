@@ -32,15 +32,15 @@
   --cc-focus: #C9A36A;
 
   /* type */
-  --cc-font-head: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --cc-font-body: "Mulish", "Muli", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --cc-font-head: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --cc-font-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
 
   /* shape and spacing */
   --cc-max: 1200px;
   --cc-gutter: 32px;
-  --cc-radius: 20px;
-  --cc-radius-sm: 12px;
-  --cc-pill: 999px;
+  --cc-radius: 8px;
+  --cc-radius-sm: 6px;
+  --cc-pill: 6px;           /* buttons: crisp, not pill-shaped */
   --cc-shadow: 0 10px 30px rgba(20, 36, 59, .08);
   --cc-shadow-lg: 0 24px 60px rgba(20, 36, 59, .14);
   --cc-section: 96px;         /* vertical rhythm for homepage sections */
@@ -64,12 +64,14 @@
    The platform forces Muli on every element with a long selector list.
    This beats it while leaving icon fonts (.fa / i) alone. */
 html body.cco_body { background: var(--cc-white); color: var(--cc-text); }
-html body.cco_body, html body.cco_body *:not(i):not(.fa):not([class*="fa-"]) {
-  font-family: var(--cc-font-body);
-}
+html body.cco_body { font-family: var(--cc-font-body); }
+/* Everything inherits (beats the platform's Muli list), so text inside a serif heading stays serif.
+   Head-font declarations below carry !important because this rule is very specific. */
+html body.cco_body *:not(i):not(.fa):not([class*="fa-"]) { font-family: inherit; }
 html body.cco_body h1, html body.cco_body h2, html body.cco_body h3, html body.cco_body h4, html body.cco_body h1 a, html body.cco_body h2 a, html body.cco_body h3 a, html body.cco_body .cc-head, html body.cco_body .article-header__title, html body.cco_body .widget_header h5, html body.cco_body .header-title {
-  font-family: var(--cc-font-head);
-  letter-spacing: -0.02em;
+  font-family: var(--cc-font-head) !important;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--cc-ink);
 }
 html body.cco_body ::selection { background: var(--cc-sand-soft); }
@@ -108,6 +110,11 @@ html body.cco_body #header_branding .site-logo-wrapper {
   margin: 0 14px 0 0 !important; background: transparent !important; box-shadow: none !important;
 }
 html body.cco_body #header .branding-search { height: auto !important; }
+@media (max-width: 1024px) {
+  /* platform reserves 50px for a fixed header; ours is sticky, so remove the gap */
+  html body.cco_body #header, html body.cco_body #header .header-wrapper { height: auto !important; min-height: 0 !important; }
+  html body.cco_body #content { margin-top: 0 !important; }
+}
 @media (min-width: 1025px) {
   html body.cco_body #header .header-wrapper {
     grid-template-areas: "b c" !important;
@@ -133,9 +140,9 @@ html body.cco_body #header_branding .site-logo-wrapper img {
 }
 html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title {
   color: var(--cc-ink) !important;
-  font-family: var(--cc-font-head);
-  font-weight: 800;
-  font-size: 19px;
+  font-family: var(--cc-font-head) !important;
+  font-weight: 400;
+  font-size: 22px;
   letter-spacing: -0.01em;
   text-transform: none !important;
   text-shadow: none !important;
@@ -159,7 +166,10 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
     font-size: 15px;
     text-transform: none;
     letter-spacing: 0;
+    white-space: nowrap;
   }
+  html body.cco_body #header_branding a.site_title { white-space: nowrap; }
+  html body.cco_body #header .branding-search { flex-shrink: 0; }
   html body.cco_body #tabContentMain .co_menu_item:not(.donate_link) span.parent a:hover {
     color: var(--cc-navy) !important;
     box-shadow: inset 0 -2px 0 var(--cc-sand);
@@ -175,7 +185,7 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
     border: 0 !important;
     border-radius: var(--cc-pill);
     padding: 11px 22px !important;
-    font-weight: 800;
+    font-weight: 700;
   }
   html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent a:hover {
     background: var(--cc-sand-2) !important;
@@ -197,6 +207,13 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
     color: var(--cc-navy) !important;
     background: var(--cc-cream);
   }
+}
+
+/* Narrow desktops (1025-1240px): long menu labels may wrap to two lines; the logo title never does */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  html body.cco_body #tabContentMain .co_menu_item span.parent { padding-left: 7px !important; padding-right: 7px !important; }
+  html body.cco_body #tabContentMain .co_menu_item span.parent a, html body.cco_body #header.on-scroll #tabContentMain .co_menu_item span.parent a { font-size: 14px; white-space: normal; line-height: 1.2; text-align: center; display: inline-block; max-width: 120px; }
+  html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent a { padding: 10px 16px !important; }
 }
 
 /* Mobile navigation (≤1024px: hamburger + slide-in drawer) */
@@ -223,7 +240,7 @@ html body.cco_body .co_global_button .button, html body.cco_body .co_global_butt
   border: 0 !important;
   border-radius: var(--cc-pill) !important;
   font-family: var(--cc-font-body);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 15px;
   letter-spacing: 0;
   text-transform: none;
@@ -252,7 +269,7 @@ html body.cco_body .cc-btn.cc-btn--ghost:hover { background: var(--cc-cream) !im
 html body.cco_body .cc-btn.cc-btn--light { background: var(--cc-white) !important; color: var(--cc-ink) !important; }
 html body.cco_body .cc-link {
   color: var(--cc-navy);
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
   border-bottom: 2px solid var(--cc-sand);
   padding-bottom: 2px;
@@ -264,6 +281,9 @@ html body.cco_body .cc-link:hover { color: var(--cc-navy-2); }
 html body.cco_body.sites-article #co_content_container > .clearfix > .master-content-wrapper, html body.cco_body.sites-article .master-content-wrapper {
   width: auto !important;
   float: none;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent !important;
 }
 html body.cco_body.sites-article header.article-header {
   background: var(--cc-cream);
@@ -281,9 +301,9 @@ html body.cco_body.sites-article header.article-header > * {
   box-sizing: border-box;
 }
 html body.cco_body .article-header__title, html body.cco_body .content_title_container h1 {
-  font-size: clamp(34px, 4.6vw, 54px) !important;
-  font-weight: 800 !important;
-  line-height: 1.08 !important;
+  font-size: clamp(38px, 5vw, 60px) !important;
+  font-weight: 400 !important;
+  line-height: 1.04 !important;
   color: var(--cc-ink) !important;
   margin: 0 !important;
   text-transform: none !important;
@@ -314,8 +334,8 @@ html body.cco_body .co_body .article-body {
 html body.cco_body.sites-article:not(.form) .co_body .article-body > p, html body.cco_body.sites-article:not(.form) .co_body .article-body > ul, html body.cco_body.sites-article:not(.form) .co_body .article-body > ol, html body.cco_body.sites-article:not(.form) .co_body .article-body > h2, html body.cco_body.sites-article:not(.form) .co_body .article-body > h3, html body.cco_body.sites-article:not(.form) .co_body .article-body > blockquote {
   max-width: 760px;
 }
-html body.cco_body .co_body .article-body h2 { font-size: 30px !important; font-weight: 800; color: var(--cc-ink) !important; margin: 1.6em 0 .5em; line-height: 1.2; }
-html body.cco_body .co_body .article-body h3 { font-size: 22px !important; font-weight: 800; color: var(--cc-ink) !important; margin: 1.4em 0 .4em; }
+html body.cco_body .co_body .article-body h2 { font-size: 34px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.6em 0 .5em; line-height: 1.2; }
+html body.cco_body .co_body .article-body h3 { font-size: 25px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.4em 0 .4em; }
 html body.cco_body .co_body .article-body a:not(.cc-btn):not(.cc-card) {
   color: var(--cc-navy);
   text-decoration: underline;
@@ -329,7 +349,7 @@ html body.cco_body .co_body .article-body blockquote {
   margin: 2em 0;
   padding: 0 0 0 24px;
   box-shadow: inset 3px 0 0 var(--cc-sand);
-  font-family: var(--cc-font-head);
+  font-family: var(--cc-font-head) !important;
   font-size: 22px;
   line-height: 1.5;
   color: var(--cc-ink);
@@ -386,9 +406,9 @@ html body.cco_body #footer .footer_container { font-size: 13px; text-align: cent
 
 html body.cco_body .cc-footer { max-width: var(--cc-max); margin: 0 auto; padding: 72px var(--cc-gutter) 40px; box-sizing: border-box; }
 html body.cco_body .cc-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
-html body.cco_body .cc-footer__brand { font-family: var(--cc-font-head); color: var(--cc-white); font-weight: 800; font-size: 20px; letter-spacing: -0.01em; margin: 0 0 12px; }
+html body.cco_body .cc-footer__brand { font-family: var(--cc-font-head) !important; color: var(--cc-white); font-weight: 400; font-size: 24px; letter-spacing: -0.01em; margin: 0 0 12px; }
 html body.cco_body .cc-footer__tag { color: var(--cc-on-dark-muted); line-height: 1.7; margin: 0 0 20px; font-size: 15px; }
-html body.cco_body .cc-footer h4 { font-family: var(--cc-font-body) !important; color: var(--cc-sand) !important; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin: 6px 0 16px; }
+html body.cco_body .cc-footer h4 { font-family: var(--cc-font-body) !important; color: var(--cc-sand) !important; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin: 6px 0 16px; }
 html body.cco_body .cc-footer ul { list-style: none; margin: 0; padding: 0; }
 html body.cco_body .cc-footer li { margin: 0 0 10px; }
 html body.cco_body .cc-footer a { text-decoration: none; font-size: 15px; }
@@ -407,14 +427,14 @@ html body.cco_body .cc-eyebrow {
   display: inline-block;
   font-family: var(--cc-font-body);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--cc-sand-text);
   margin: 0 0 12px;
 }
 html body.cco_body .cc-section--ink .cc-eyebrow { color: var(--cc-sand); }
-html body.cco_body .cc-h2 { font-size: clamp(30px, 3.6vw, 44px); font-weight: 800; line-height: 1.1; margin: 0 0 16px; }
+html body.cco_body .cc-h2 { font-size: clamp(34px, 4vw, 52px); font-weight: 400; line-height: 1.04; margin: 0 0 16px; }
 html body.cco_body .cc-section--ink .cc-h2 { color: var(--cc-white); }
 html body.cco_body .cc-lede { font-size: 19px; line-height: 1.65; color: var(--cc-muted); max-width: 640px; margin: 0; }
 html body.cco_body .cc-section--ink .cc-lede { color: var(--cc-on-dark-muted); }
@@ -436,12 +456,12 @@ html body.cco_body .cc-card {
   transition: box-shadow .2s ease, transform .2s ease;
 }
 html body.cco_body a.cc-card:hover { box-shadow: var(--cc-shadow-lg); transform: translateY(-3px); }
-html body.cco_body .cc-card h3 { font-size: 21px !important; font-weight: 800; margin: 0 0 8px; color: var(--cc-ink); }
+html body.cco_body .cc-card h3 { font-size: 24px !important; font-weight: 400; margin: 0 0 8px; color: var(--cc-ink); }
 html body.cco_body .cc-card p { margin: 0; color: var(--cc-muted) !important; line-height: 1.6; font-size: 16px; }
 html body.cco_body .cc-chip {
   display: inline-block;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
   padding: 6px 12px;
@@ -476,10 +496,10 @@ html body.cco_body .cc-hero__text { flex: 1 1 460px; min-width: 0; }
 html body.cco_body .cc-hero__media { flex: 1 1 420px; min-width: 0; }
 html body.cco_body .cc-hero__title {
   color: var(--cc-white);
-  font-size: clamp(40px, 5.4vw, 68px);
-  line-height: 1.04;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-size: clamp(46px, 6.2vw, 80px);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   margin: 0 0 20px;
 }
 html body.cco_body .cc-hero .cc-eyebrow { color: var(--cc-sand); }
@@ -487,7 +507,7 @@ html body.cco_body .cc-hero__title em { font-style: normal; color: var(--cc-sand
 html body.cco_body .cc-hero__sub { font-size: 20px; line-height: 1.6; color: var(--cc-on-dark-muted) !important; margin: 0 0 32px; max-width: 520px; }
 html body.cco_body .cc-hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 html body.cco_body .cc-hero__img {
-  border-radius: 28px;
+  border-radius: var(--cc-radius);
   aspect-ratio: 5 / 4;
   background-color: var(--cc-navy);
   background-size: cover;
@@ -509,8 +529,8 @@ html body.cco_body .cc-quick a:hover { color: var(--cc-sand) !important; }
 html body.cco_body .cc-week { background: var(--cc-cream); border-bottom: 1px solid var(--cc-line); }
 html body.cco_body .cc-week .cc-grid { padding: 40px 0; }
 html body.cco_body .cc-week__item { background: var(--cc-white); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); padding: 22px 24px; }
-html body.cco_body .cc-week__label { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-sand-text); margin: 0 0 8px; }
-html body.cco_body .cc-week__value { font-family: var(--cc-font-head); font-weight: 800; font-size: 24px; color: var(--cc-ink); margin: 0; line-height: 1.2; }
+html body.cco_body .cc-week__label { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-sand-text); margin: 0 0 8px; }
+html body.cco_body .cc-week__value { font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 27px; color: var(--cc-ink); margin: 0; line-height: 1.2; }
 html body.cco_body .cc-week__value a { color: inherit !important; text-decoration: none; }
 html body.cco_body .cc-week__meta { color: var(--cc-muted); font-size: 15px; margin: 6px 0 0; }
 html body.cco_body .cc-week__row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; margin-top: 6px; }
@@ -532,8 +552,8 @@ html body.cco_body .cc-events__track > * { scroll-snap-align: start; }
 html body.cco_body .cc-event { display: flex; flex-direction: column; background: var(--cc-white); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); overflow: hidden; }
 html body.cco_body .cc-event__img { aspect-ratio: 16 / 9; background: var(--cc-sand-soft) center / cover no-repeat; }
 html body.cco_body .cc-event__body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-html body.cco_body .cc-event__date { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--cc-sand-text); }
-html body.cco_body .cc-event__title { font-size: 21px !important; font-weight: 800; line-height: 1.25; margin: 0; color: var(--cc-ink); }
+html body.cco_body .cc-event__date { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cc-sand-text); }
+html body.cco_body .cc-event__title { font-size: 24px !important; font-weight: 400; line-height: 1.15; margin: 0; color: var(--cc-ink); }
 html body.cco_body .cc-event__desc { color: var(--cc-muted) !important; font-size: 15px; line-height: 1.6; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 html body.cco_body .cc-event__cta { margin-top: auto; padding-top: 6px; }
 html body.cco_body .cc-events__nav { display: flex; gap: 10px; }
@@ -555,8 +575,8 @@ html body.cco_body .cc-program__img { position: absolute; inset: 0; background: 
 html body.cco_body .cc-program::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 36, 59, 0) 40%, rgba(20, 36, 59, .88) 100%); }
 html body.cco_body .cc-program:hover .cc-program__img { transform: scale(1.04); }
 html body.cco_body .cc-program__label { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 24px; }
-html body.cco_body .cc-program__title { color: var(--cc-white); font-size: 22px; font-weight: 800; margin: 0 0 6px; }
-html body.cco_body .cc-program__more { color: var(--cc-sand); font-weight: 800; font-size: 14px; }
+html body.cco_body .cc-program__title { color: var(--cc-white); font-family: var(--cc-font-head) !important; font-size: 26px; font-weight: 400; margin: 0 0 6px; }
+html body.cco_body .cc-program__more { color: var(--cc-sand); font-weight: 700; font-size: 14px; }
 
 /* Shabbat + feeds row */
 html body.cco_body .cc-feeds .cc-card { height: 100%; }
@@ -577,7 +597,7 @@ html body.cco_body .cc-subscribe #formContainer input.co_global_input {
 html body.cco_body .cc-subscribe #formContainer input[type="submit"] {
   height: 52px; padding: 0 28px !important; border-radius: var(--cc-radius-sm) !important;
   background: var(--cc-sand) !important; color: var(--cc-ink) !important; border: 0 !important;
-  font-weight: 800 !important; font-size: 16px; cursor: pointer; margin: 0 !important; width: auto !important;
+  font-weight: 700 !important; font-size: 16px; cursor: pointer; margin: 0 !important; width: auto !important;
 }
 html body.cco_body .cc-subscribe #formContainer small { flex-basis: 100%; color: var(--cc-on-dark-muted) !important; }
 html body.cco_body .cc-subscribe #response { color: var(--cc-white) !important; height: auto !important; }
@@ -592,22 +612,22 @@ html body.cco_body .cc-photos li:nth-child(n+9) { display: none; }
 /* ---------- 9. CONTENT COMPONENTS (used inside page HTML) ---------- */
 /* Course / event info box */
 html body.cco_body .cc-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px 28px; background: var(--cc-cream); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); padding: 28px; margin: 32px 0; }
-html body.cco_body .cc-info__label { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-sand-text); margin: 0 0 4px; }
+html body.cco_body .cc-info__label { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-sand-text); margin: 0 0 4px; }
 html body.cco_body .cc-info__value { font-weight: 700; color: var(--cc-ink); font-size: 16px; line-height: 1.5; margin: 0; }
 /* Numbered lessons */
 html body.cco_body .cc-lessons { list-style: none; padding: 0 !important; margin: 24px 0; display: grid; gap: 14px; counter-reset: cc-lesson; }
 html body.cco_body .cc-lessons li { counter-increment: cc-lesson; position: relative; padding: 20px 22px 20px 76px !important; border: 1px solid var(--cc-line); border-radius: var(--cc-radius-sm); background: var(--cc-white); list-style: none !important; margin: 0 !important; }
-html body.cco_body .cc-lessons li::before { content: counter(cc-lesson, decimal-leading-zero); position: absolute; left: 22px; top: 18px; font-family: var(--cc-font-head); font-weight: 800; font-size: 24px; color: var(--cc-sand); }
-html body.cco_body .cc-lessons strong { display: block; font-family: var(--cc-font-head); color: var(--cc-ink); font-size: 18px; margin-bottom: 4px; }
+html body.cco_body .cc-lessons li::before { content: counter(cc-lesson, decimal-leading-zero); position: absolute; left: 22px; top: 18px; font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 28px; color: var(--cc-sand); }
+html body.cco_body .cc-lessons strong { display: block; font-family: var(--cc-font-head) !important; font-weight: 400; color: var(--cc-ink); font-size: 21px; margin-bottom: 4px; }
 /* FAQ (uses a details element, works without JS) */
 html body.cco_body .cc-faq details { border-bottom: 1px solid var(--cc-line); padding: 18px 0; }
-html body.cco_body .cc-faq summary { cursor: pointer; font-family: var(--cc-font-head); font-weight: 800; font-size: 19px; color: var(--cc-ink); list-style: none; }
+html body.cco_body .cc-faq summary { cursor: pointer; font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 22px; color: var(--cc-ink); list-style: none; }
 html body.cco_body .cc-faq summary::-webkit-details-marker { display: none; }
 html body.cco_body .cc-faq summary::after { content: "+"; float: right; color: var(--cc-sand-text); font-size: 24px; line-height: 1; }
 html body.cco_body .cc-faq details[open] summary::after { content: "\2212"; }
 html body.cco_body .cc-faq details p { margin: 12px 0 0; color: var(--cc-muted); }
 /* Call-to-action panel */
-html body.cco_body .cc-cta { background: var(--cc-ink); border-radius: 28px; padding: 48px; color: var(--cc-on-dark); margin: 40px 0; }
+html body.cco_body .cc-cta { background: var(--cc-ink); border-radius: var(--cc-radius); padding: 48px; color: var(--cc-on-dark); margin: 40px 0; }
 html body.cco_body .cc-cta h2, html body.cco_body .cc-cta h3 { color: var(--cc-white) !important; margin-top: 0 !important; }
 html body.cco_body .cc-cta p { color: var(--cc-on-dark-muted) !important; }
 @media (max-width: 760px) { html body.cco_body .cc-cta { padding: 32px 24px; } }
@@ -648,7 +668,7 @@ html body.cco_body #RegisterHeader .column2 {
   background: var(--cc-cream); border: 1px solid var(--cc-line); border-radius: var(--cc-radius);
   padding: 22px 24px; align-self: start;
 }
-html body.cco_body #RegisterHeader .column2 .heading { font-family: var(--cc-font-body); font-size: 12px !important; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-sand-text); }
+html body.cco_body #RegisterHeader .column2 .heading { font-family: var(--cc-font-body); font-size: 12px !important; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-sand-text); }
 html body.cco_body #RegisterHeader .column2 .label { width: auto !important; float: none !important; font-size: 13px; color: var(--cc-muted); font-weight: 700; }
 html body.cco_body #RegisterHeader .column2 a { color: var(--cc-ink) !important; font-weight: 700; text-decoration: none; }
 html body.cco_body #RegisterHeader .column2 .float_left { float: none !important; }
@@ -671,9 +691,9 @@ html body.cco_body #RegisterBody .large_top_padding { padding-top: 0 !important;
 html body.cco_body #RegisterBody .title.large span.bold,
 html body.cco_body #RegisterBody #Performances > .title span.bold {
   display: block;
-  font-family: var(--cc-font-head);
-  font-weight: 700;
-  font-size: 24px;
+  font-family: var(--cc-font-head) !important;
+  font-weight: 400;
+  font-size: 28px;
   color: var(--cc-ink);
   letter-spacing: -0.01em;
   margin: 0 0 4px;
@@ -684,10 +704,7 @@ html body.cco_body #Performances .performance { border: 0 !important; background
 html body.cco_body #Performances .performance > .title .event_name span.medium { display: block; color: var(--cc-muted); font-size: 14px; }
 
 /* --- Inputs everywhere on the page --- */
-html body.cco_body #RegisterSinglePage input[type="text"],
-html body.cco_body #RegisterSinglePage input[type="email"],
-html body.cco_body #RegisterSinglePage input[type="tel"],
-html body.cco_body #RegisterSinglePage input[type="number"],
+html body.cco_body #RegisterSinglePage input:not([type="radio"]):not([type="checkbox"]):not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="image"]):not([type="file"]),
 html body.cco_body #RegisterSinglePage select,
 html body.cco_body #RegisterSinglePage textarea {
   width: 100% !important;
@@ -722,12 +739,12 @@ html body.cco_body #RegisterSinglePage .toggle_options > .inline_block > div:fir
 html body.cco_body #RegisterSinglePage .toggle_message { cursor: pointer; color: var(--cc-navy) !important; font-weight: 700; padding: 12px 0 !important; }
 
 /* --- Reservation rows (attendee names) --- */
-html body.cco_body #RegisterSinglePage .reservations > .clearfix:first-child { display: none; } /* old column headings */
+html body.cco_body #RegisterSinglePage .reservations > .clearfix:not(.reservation) { display: none; } /* old column headings; labels are added per row below */
 html body.cco_body #RegisterSinglePage .reservation {
   border: 1px solid var(--cc-line); border-radius: var(--cc-radius-sm); padding: 18px !important; margin-top: 14px !important; background: var(--cc-cream);
 }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child {
-  display: grid; gap: 12px; align-items: center; padding: 0 !important;
+  display: grid; gap: 12px; align-items: end; padding: 0 !important;
   grid-template-columns: 32px 1fr 1fr auto auto 36px;
   grid-template-areas: "idx fn ln cat price rm";
 }
@@ -739,13 +756,20 @@ html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .price-display { grid-area: price; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g40 { grid-area: rm; }
 html body.cco_body #RegisterSinglePage .reservation .seat_selection:empty { display: none; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before,
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { display: block; font-size: 14px; font-weight: 600; color: var(--cc-ink); margin: 0 0 6px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before { content: "First name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { content: "Last name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g100,
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .price-display { line-height: 48px; }
 html body.cco_body #RegisterSinglePage .reservation [id$="_index"] {
   width: 32px !important; height: 32px; border-radius: 50%; background: var(--cc-navy); color: var(--cc-white);
   display: flex !important; align-items: center; justify-content: center; font-size: 14px;
+  margin-bottom: 8px !important;
 }
-html body.cco_body #RegisterSinglePage .reservation .price-display { font-weight: 800; color: var(--cc-ink); white-space: nowrap; }
+html body.cco_body #RegisterSinglePage .reservation .price-display { font-weight: 700; color: var(--cc-ink); white-space: nowrap; }
 html body.cco_body #RegisterSinglePage .remove_reservation {
-  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cc-line); background: var(--cc-white); color: var(--cc-muted); cursor: pointer; font-size: 18px; line-height: 1;
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cc-line); background: var(--cc-white); color: var(--cc-muted); cursor: pointer; font-size: 18px; line-height: 1; margin-bottom: 6px;
 }
 html body.cco_body #RegisterSinglePage .reservation input::placeholder { color: #8A8F98; }
 @media (max-width: 640px) {
@@ -805,7 +829,7 @@ html body.cco_body #ReserversInformation .label,
 html body.cco_body #Payment .label,
 html body.cco_body #Summary .label {
   width: auto !important; margin: 0 !important; float: none !important; text-align: left !important;
-  font-size: 13px !important; font-weight: 700 !important; color: var(--cc-muted);
+  font-size: 14px !important; font-weight: 600 !important; color: var(--cc-ink);
 }
 html body.cco_body #ReserversInformation .required .label::after,
 html body.cco_body #Payment .required .label::after { content: " *"; color: #A4342A; }
@@ -828,15 +852,17 @@ html body.cco_body #Summary .large_top_margin.medium_bottom_margin .inline_block
 html body.cco_body #Summary #ApplyDiscountCode {
   background: var(--cc-white) !important; color: var(--cc-navy) !important; box-shadow: inset 0 0 0 1.5px var(--cc-navy); height: 48px;
 }
+html body.cco_body #Summary #ApplyDiscountCode span { color: var(--cc-navy) !important; }
 html body.cco_body #Summary .align_right { text-align: left !important; }
 html body.cco_body #Summary .align_right > .inline_block { display: block !important; width: 100% !important; }
 html body.cco_body #Totals { border-top: 1px solid var(--cc-line); padding-top: 14px; margin-top: 18px !important; font-size: 16px; }
 html body.cco_body #Totals .clearfix { display: flex; justify-content: space-between; gap: 16px; }
 html body.cco_body #Totals .clearfix > div { float: none !important; }
+html body.cco_body #Totals .clearfix::before, html body.cco_body #Totals .clearfix::after { display: none !important; } /* clearfix pseudo-elements would act as flex items */
 html body.cco_body #Totals .clearfix:last-child { font-size: 20px; color: var(--cc-ink); padding-top: 8px; }
 
 /* --- Final button --- */
-html body.cco_body #Buttons { position: sticky; bottom: 0; z-index: 5; background: linear-gradient(rgba(255,255,255,0), var(--cc-white) 30%); padding-top: 12px; }
+html body.cco_body #Buttons { padding-top: 12px; }
 html body.cco_body #Buttons .align_center { display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding: 0 0 16px !important; }
 html body.cco_body #SubmitButton_wrapper { display: block !important; width: 100%; }
 html body.cco_body #SubmitButton_wrapper #SubmitButton { width: 100%; min-height: 56px; font-size: 17px !important; }
