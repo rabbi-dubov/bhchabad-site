@@ -418,6 +418,23 @@
       }, 0);
     });
 
+    // 3) Hide a per-person "Notes / Comments" box when the page already has the general
+    //    Comments box further down (it would ask the same thing twice). Optional fields only.
+    function hideDuplicateNotes() {
+      if (!d.getElementById("PaymentComments")) { return; }
+      qa(".reservation .embedded_form .form-line", page).forEach(function (li) {
+        if (li.getAttribute("data-cc-dup") || !q("textarea", li) || q(".form-required", li)) { return; }
+        if (/^\s*(notes|comments)\b/i.test(txt(q("label", li)))) {
+          li.setAttribute("data-cc-dup", "1");
+          li.style.setProperty("display", "none", "important");
+        }
+      });
+    }
+    hideDuplicateNotes();
+    if (window.MutationObserver) {
+      new MutationObserver(hideDuplicateNotes).observe(page, { childList: true, subtree: true });
+    }
+
     // 2) Make "Add additional reservations" say which registration types exist.
     qa(".performance", page).forEach(function (perf) {
       var sel = q("select[id$='_priceCategory']", perf);
