@@ -481,13 +481,13 @@ html body.cco_body .cc-sr { position: absolute !important; width: 1px; height: 1
 /* ---------- 8. HOMEPAGE SHELL ---------- */
 /* While JS builds the shell, keep the native homepage out of sight (prevents flash).
    html.cc-on is set by the header loader; if JS fails, cc-shell-failed restores it. */
-html.cc-on body.cco_body.home .hp-table { visibility: hidden; }
-html.cc-on.cc-shell-ready body.cco_body.home .hp-table, html.cc-on.cc-shell-failed body.cco_body.home .hp-table { visibility: visible; }
-html.cc-shell-ready body.cco_body.home .cc-native-parked {
+html.cc-on body.cco_body .hp-table { visibility: hidden; }
+html.cc-on.cc-shell-ready body.cco_body .hp-table, html.cc-on.cc-shell-failed body.cco_body .hp-table { visibility: visible; }
+html.cc-shell-ready body.cco_body .cc-native-parked {
   position: absolute !important; left: -20000px !important; top: 0;
   width: 1px; height: 1px; overflow: hidden;
 }
-html body.cco_body.home #BodyContainer, html body.cco_body.home .body_wrapper, html body.cco_body.home .g960, html body.cco_body.home .main { width: auto !important; max-width: none !important; padding: 0 !important; margin: 0 !important; float: none !important; }
+html.cc-home-page body.cco_body #BodyContainer, html.cc-home-page body.cco_body .body_wrapper, html.cc-home-page body.cco_body .g960, html.cc-home-page body.cco_body .main { width: auto !important; max-width: none !important; padding: 0 !important; margin: 0 !important; float: none !important; }
 
 /* Hero */
 html body.cco_body .cc-hero { background: var(--cc-ink); color: var(--cc-on-dark); overflow: hidden; }

@@ -369,9 +369,11 @@
   }
 
   function homeShell() {
-    if (!/\bhome\b/.test(d.body.className)) { return; }
+    // Detect the homepage by its widget table, NOT by body.home: ChabadOne adds that class
+    // late with its own script, so checking it caused random fall-backs to the native homepage.
     var hp = q(".hp-table");
     if (!hp || q("#cc-home")) { return; }
+    addClass(html, "cc-home-page");
     var shell = h("div", { id: "cc-home" });
     [
       heroSection(readSlides(q(".promo_slider", hp) || hp)),
