@@ -25,7 +25,7 @@ header = f'''<!-- BH CHABAD THEME v{ver} : header (CSS). Source: project docs. D
 <link rel="stylesheet" type="text/css" href="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-style.css" />
 <script type="text/javascript" src="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-script.js"></script>
 <script type="text/javascript">//<![CDATA[
-(function(){{var h=document.documentElement;h.className+=" cc-on";if(location.pathname==="/"||/default\.asp$/i.test(location.pathname)){{setTimeout(function(){{if(h.className.indexOf("cc-shell-ready")<0){{h.className+=" cc-shell-failed";}}}},4000);}}}})();
+(function(){{var h=document.documentElement;h.className+=" cc-on";if(location.pathname==="/"||/default\\.asp$/i.test(location.pathname)){{setTimeout(function(){{if(h.className.indexOf("cc-shell-ready")<0){{h.className+=" cc-shell-failed";}}}},4000);}}}})();
 //]]></script>
 <style type="text/css">{css}</style>
 <!-- /BH CHABAD THEME -->'''
