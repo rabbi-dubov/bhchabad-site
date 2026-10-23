@@ -679,7 +679,7 @@ html body.cco_body #RegisterBody #Performances,
 html body.cco_body #RegisterBody #Summary,
 html body.cco_body #RegisterBody #ReserversInformation,
 html body.cco_body #RegisterBody #Payment,
-html body.cco_body #RegisterBody #AdditionalInformation:not(:empty) {
+html body.cco_body #RegisterBody #AdditionalInformation:has(*) {
   background: var(--cc-white);
   border: 1px solid var(--cc-line);
   border-radius: var(--cc-radius);
@@ -736,7 +736,21 @@ html body.cco_body #RegisterSinglePage .toggle_options { display: flex; flex-wra
 html body.cco_body #RegisterSinglePage .toggle_options[style*="none"] { display: none !important; }
 html body.cco_body #RegisterSinglePage .toggle_options > .inline_block { flex: 1 1 180px; }
 html body.cco_body #RegisterSinglePage .toggle_options > .inline_block > div:first-child { font-size: 13px; font-weight: 700; color: var(--cc-muted); margin-bottom: 6px !important; }
-html body.cco_body #RegisterSinglePage .toggle_message { cursor: pointer; color: var(--cc-navy) !important; font-weight: 700; padding: 12px 0 !important; }
+html body.cco_body #RegisterSinglePage .toggle_message {
+  cursor: pointer; color: var(--cc-navy) !important; font-weight: 700; font-size: 16px;
+  padding: 14px 18px !important; margin-top: 16px; border: 1.5px dashed #B9C3D1; border-radius: var(--cc-radius-sm);
+  background: var(--cc-white); text-align: center;
+}
+html body.cco_body #RegisterSinglePage .toggle_message:hover { border-color: var(--cc-navy); background: #EEF2F8; }
+html body.cco_body #RegisterSinglePage .toggle_message i { margin-right: 8px !important; }
+html body.cco_body #RegisterSinglePage .add_attendee:not(:disabled) { opacity: 1 !important; cursor: pointer; }
+html body.cco_body #RegisterSinglePage .add_attendee:disabled { opacity: 1 !important; background: #9AA3B0 !important; cursor: not-allowed; transform: none !important; }
+/* registration type shown as a chip on each attendee row */
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g100 {
+  justify-self: start; line-height: 1.2 !important; padding: 6px 12px !important; margin-bottom: 9px !important;
+  background: var(--cc-sand-soft); color: var(--cc-sand-text) !important; border-radius: var(--cc-radius-sm);
+  font-size: 13px !important; font-weight: 700;
+}
 
 /* --- Reservation rows (attendee names) --- */
 html body.cco_body #RegisterSinglePage .reservations > .clearfix:not(.reservation) { display: none; } /* old column headings; labels are added per row below */
@@ -760,7 +774,6 @@ html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > di
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { display: block; font-size: 14px; font-weight: 600; color: var(--cc-ink); margin: 0 0 6px; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before { content: "First name"; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { content: "Last name"; }
-html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g100,
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .price-display { line-height: 48px; }
 html body.cco_body #RegisterSinglePage .reservation [id$="_index"] {
   width: 32px !important; height: 32px; border-radius: 50%; background: var(--cc-navy); color: var(--cc-white);

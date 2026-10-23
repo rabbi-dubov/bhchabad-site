@@ -388,9 +388,59 @@
     addClass(html, "cc-shell-ready");
   }
 
+  /* ---------- Event registration page ----------
+     Only adds conveniences on top of ChabadOne's own form logic; never submits anything. */
+  function registration() {
+    var page = d.getElementById("RegisterSinglePage");
+    if (!page) { return; }
+
+    // 1) Picking a package category (e.g. "Couple - $215, for up to 2 reservations")
+    //    pre-selects that many attendees instead of 1.
+    page.addEventListener("change", function (e) {
+      var sel = e.target;
+      if (!sel || !sel.id || !/_priceCategory$/.test(sel.id)) { return; }
+      var base = sel.id.replace(/_priceCategory$/, "");
+      setTimeout(function () {   // let ChabadOne fill the quantity list first
+        var qty = d.getElementById(base + "_quantityOfAttendees");
+        if (!qty || qty.disabled) { return; }
+        var opt = sel.options[sel.selectedIndex];
+        var info = txt(d.getElementById(base + "_priceInfo"));
+        var m = info.match(/up to (\d+)/i);
+        var want = m ? m[1] : (opt && /couple/i.test(opt.text) ? "2" : "");
+        if (!want) { return; }
+        for (var i = 0; i < qty.options.length; i++) {
+          if (qty.options[i].value === want) {
+            qty.value = want;
+            qty.dispatchEvent(new Event("change", { bubbles: true }));
+            break;
+          }
+        }
+      }, 0);
+    });
+
+    // 2) Make "Add additional reservations" say which registration types exist.
+    qa(".performance", page).forEach(function (perf) {
+      var sel = q("select[id$='_priceCategory']", perf);
+      var link = q(".toggle_message", perf);
+      if (!sel || !link) { return; }
+      var names = [];
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === "") { continue; }
+        var n = sel.options[i].text.split(" - ")[0].trim();
+        if (n) { names.push(n); }
+      }
+      if (names.length > 1) {
+        for (var k = link.childNodes.length - 1; k >= 0; k--) {
+          if (link.childNodes[k].nodeType === 3) { link.removeChild(link.childNodes[k]); }
+        }
+        link.appendChild(d.createTextNode("Add another registration (" + names.join(" or ") + ")"));
+      }
+    });
+  }
+
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, footer, homeShell].forEach(function (fn) {
+    [header, footer, homeShell, registration].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
