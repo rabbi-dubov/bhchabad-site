@@ -4,7 +4,7 @@
    dist/footer.html -> Settings > General Settings > Custom Footer Code"""
 import re, subprocess, datetime, pathlib
 root = pathlib.Path(__file__).parent
-ver = datetime.datetime.utcnow().strftime('%Y%m%d.%H%M')
+ver = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d.%H%M')
 css = (root/'src/theme.css').read_text()
 css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
 css = re.sub(r'\s+', ' ', css)
@@ -17,7 +17,7 @@ assert '&' not in css and '<' not in css, 'CSS must not contain & or <'
 subprocess.run(['npx','--yes','terser@5','src/theme.js','-c','-m','-o','dist/theme.min.js'], cwd=root, check=True)
 js = (root/'dist/theme.min.js').read_text().strip()
 assert ']]>' not in js and '</script' not in js.lower()
-fonts = 'https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=Mulish:wght@400;500;600;700;800&amp;display=swap'
+fonts = 'https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap'  # ChabadOne decodes &amp; on save, so store the decoded form
 header = f'''<!-- BH CHABAD THEME v{ver} : header (CSS). Source: project docs. Do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -25,7 +25,7 @@ header = f'''<!-- BH CHABAD THEME v{ver} : header (CSS). Source: project docs. D
 <link rel="stylesheet" type="text/css" href="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-style.css" />
 <script type="text/javascript" src="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-script.js"></script>
 <script type="text/javascript">//<![CDATA[
-(function(){{var h=document.documentElement;h.className+=" cc-on";setTimeout(function(){{if(h.className.indexOf("cc-shell-ready")<0){{h.className+=" cc-shell-failed";}}}},4000);}})();
+(function(){{var h=document.documentElement;h.className+=" cc-on";if(location.pathname==="/"||/default\.asp$/i.test(location.pathname)){{setTimeout(function(){{if(h.className.indexOf("cc-shell-ready")<0){{h.className+=" cc-shell-failed";}}}},4000);}}}})();
 //]]></script>
 <style type="text/css">{css}</style>
 <!-- /BH CHABAD THEME -->'''

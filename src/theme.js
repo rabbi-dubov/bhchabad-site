@@ -64,7 +64,7 @@
     if (!node) { return ""; }
     var s = node.getAttribute("style") || "";
     var m = s.match(/url\((['"]?)(.*?)\1\)/) || (getComputedStyle(node).backgroundImage || "").match(/url\((['"]?)(.*?)\1\)/);
-    if (m && m[2]) { return m[2].replace(/&quot;/g, ""); }
+    if (m && m[2]) { return m[2].replace(/"/g, ""); }
     if (node.tagName === "IMG" && !/spacer\.gif/.test(node.src)) { return node.src; }
     return "";
   }

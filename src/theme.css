@@ -335,6 +335,12 @@ html body.cco_body .co_body .article-body blockquote {
   color: var(--cc-ink);
 }
 
+/* B"H marker that ChabadOne shows on phones: keep it small and out of the way */
+html body.cco_body .bh.mobile-only {
+  background: transparent !important; color: var(--cc-muted) !important;
+  font-size: 12px; padding: 4px var(--cc-gutter) 0; margin: 0; text-align: right; box-shadow: none !important;
+}
+
 /* ---------- 5b. NATIVE POPUP DIALOGS (e.g. "Shalom! We're glad you're here" subscribe prompt) ---------- */
 html body.cco_body .co_dialog.rounded_box,
 html body.cco_body .co_dialog .b_inside {
