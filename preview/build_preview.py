@@ -203,30 +203,35 @@ SITE_JS = """
 })();
 """
 
-site = f'''<!doctype html>
-<html lang="en" class="cc-on cc-home-page cc-shell-ready"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{FONTS}">
-<style>{THEME}
-{SHIM}</style></head>
-<body class="cco_body home cc-footer-built">
-{header()}
-<div id="content"><div id="cc-home">
-{hero()}
-{events()}
-{programs()}
-{testimonials()}
-{partner()}
-{subscribe()}
-</div></div>
-{footer()}
-<script>{SITE_JS}</script>
-</body></html>'''
+def main():
+    site = f'''<!doctype html>
+    <html lang="en" class="cc-on cc-home-page cc-shell-ready"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{FONTS}">
+    <style>{THEME}
+    {SHIM}</style></head>
+    <body class="cco_body home cc-footer-built">
+    {header()}
+    <div id="content"><div id="cc-home">
+    {hero()}
+    {events()}
+    {programs()}
+    {testimonials()}
+    {partner()}
+    {subscribe()}
+    </div></div>
+    {footer()}
+    <script>{SITE_JS}</script>
+    </body></html>'''
 
-# Escape for embedding inside a <script type="text/plain"> block
-embedded = site.replace("</script", "<\\/script")
+    # Escape for embedding inside a <script type="text/plain"> block
+    embedded = site.replace("</script", "<\\/script")
 
-SHELL = (ROOT / "preview/shell.html").read_text()
-out = SHELL.replace("%%SITE%%", embedded)
-(ROOT / "preview/homepage-preview.html").write_text(out)
-(ROOT / "preview/site-standalone.html").write_text(site)
-print("ok", len(out))
+    SHELL = (ROOT / "preview/shell.html").read_text()
+    out = SHELL.replace("%%SITE%%", embedded)
+    (ROOT / "preview/homepage-preview.html").write_text(out)
+    (ROOT / "preview/site-standalone.html").write_text(site)
+    print("ok", len(out))
+
+
+if __name__ == '__main__':
+    main()

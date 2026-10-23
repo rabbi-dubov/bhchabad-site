@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="en" class="cc-on"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>/* ==========================================================================
+   BH CHABAD — SITE THEME  (Chabad Jewish Center of Bloomfield Hills)
+   Platform: ChabadOne Sites 6 (lightbhchabad.org, Site ID 10077)
+   Loaded AFTER the platform stylesheets, so equal-specificity rules win.
+
+   Rules for anyone editing this file:
+   - Every color/font/radius comes from a token in :root. No raw hex below it.
+   - Every custom class starts with "cc-".
+   - Native ChabadOne selectors are listed in docs/selectors.md.
+   - !important only where the platform uses !important or inline styles.
+   - No ampersand or less-than characters anywhere (file may be pasted into an XHTML box).
+   ========================================================================== */
+
+/* ---------- 1. DESIGN TOKENS ---------- */
+:root {
+  /* palette: official Chabad brand hues (chabadbrand.com), refined for a quieter, more premium feel:
+     maroons a shade deeper, orange kept for Donate and small accents, warm paper neutrals */
+  --cc-ink: #4E0A29;          /* Dark Maroon (deepened): hero, partner band, headings */
+  --cc-ink-deep: #2F0619;     /* deepest maroon: footer */
+  --cc-primary: #7E1735;      /* Maroon: buttons, links, icons */
+  --cc-primary-2: #651129;    /* primary hover */
+  --cc-accent: #F27730;       /* Orange (brand): Donate and small accents only */
+  --cc-accent-2: #DB6420;     /* accent hover */
+  --cc-accent-text: #9C4A1E;  /* copper TEXT on light backgrounds (eyebrows, dates) */
+  --cc-accent-on-dark: #F4B48A; /* soft apricot TEXT on dark maroon (eyebrows, labels) */
+  --cc-accent-soft: #FBEDE3;  /* soft orange tint background */
+  --cc-cream: #F7F2ED;        /* warm paper for alternating sections */
+  --cc-white: #FFFFFF;
+  --cc-text: #2A2325;         /* body text (warm near-black) */
+  --cc-muted: #655A5C;        /* secondary text (warm grey) */
+  --cc-on-dark: #F6EEF1;      /* body text on dark maroon */
+  --cc-on-dark-muted: #D8C2CA;
+  --cc-line: #E7DED7;         /* borders, dividers */
+  --cc-line-dark: #6B2443;    /* dividers on dark */
+  --cc-field-border: #CDC3BD; /* form field borders */
+  --cc-tint: #F6EBEE;         /* selected/hover tint (light maroon) */
+  --cc-focus: #F27730;
+  /* course "textbook" cover colors, one per topic (brand maroons, warm charcoal, copper, walnut) */
+  --cc-book-1: #2F0619; --cc-book-2: #7E1735; --cc-book-3: #43363A; --cc-book-4: #9C4A1E; --cc-book-5: #5E4630;
+
+  /* type */
+  --cc-font-head: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --cc-font-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* shape and spacing */
+  --cc-max: 1200px;
+  --cc-gutter: 32px;
+  --cc-radius: 8px;
+  --cc-radius-sm: 6px;
+  --cc-pill: 6px;           /* buttons: crisp, not pill-shaped */
+  --cc-shadow: 0 10px 30px rgba(78, 10, 41, .08);
+  --cc-shadow-lg: 0 24px 60px rgba(78, 10, 41, .14);
+  --cc-section: 96px;         /* vertical rhythm for homepage sections */
+
+  /* ChabadOne modern-form theme variables (form-style.css reads these) */
+  --font-form-main: var(--cc-font-body);
+  --primary-form-color: var(--cc-primary);
+  --contrast-form-color: var(--cc-primary);
+  --accent-form-color: var(--cc-accent);
+  --accent-form-light: var(--cc-cream);
+  --accent-form-medium: var(--cc-accent-soft);
+  --border-form-color: var(--cc-line);
+  --text-form-dark: var(--cc-text);
+  --text-form-muted: var(--cc-muted);
+}
+@media (max-width: 760px) {
+  :root { --cc-gutter: 20px; --cc-section: 64px; }
+}
+
+/* ---------- 2. BASE TYPOGRAPHY ----------
+   The platform forces Muli on every element with a long selector list.
+   This beats it while leaving icon fonts (.fa / i) alone. */
+html body.cco_body { background: var(--cc-white); color: var(--cc-text); }
+html body.cco_body { font-family: var(--cc-font-body); }
+/* Everything inherits (beats the platform's Muli list), so text inside a serif heading stays serif.
+   Head-font declarations below carry !important because this rule is very specific. */
+html body.cco_body *:not(i):not(.fa):not([class*="fa-"]) { font-family: inherit; }
+html body.cco_body h1, html body.cco_body h2, html body.cco_body h3, html body.cco_body h4, html body.cco_body h1 a, html body.cco_body h2 a, html body.cco_body h3 a, html body.cco_body .cc-head, html body.cco_body .article-header__title, html body.cco_body .widget_header h5, html body.cco_body .header-title {
+  font-family: var(--cc-font-head) !important;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--cc-ink);
+}
+html body.cco_body ::selection { background: var(--cc-accent-soft); }
+html body.cco_body a:focus-visible, html body.cco_body button:focus-visible, html body.cco_body input:focus-visible, html body.cco_body select:focus-visible, html body.cco_body textarea:focus-visible {
+  outline: 3px solid var(--cc-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. HEADER ---------- */
+/* Solid, sticky header on every page (Sites 6 makes it transparent on the homepage). */
+html body.cco_body #header, html body.cco_body #header.on-scroll {
+  position: sticky !important;
+  top: 0;
+  z-index: 1000;
+  background: var(--cc-white) !important;
+  border-bottom: 1px solid var(--cc-line);
+  box-shadow: none;
+}
+html body.cco_body.cc-scrolled #header { box-shadow: 0 6px 24px rgba(78, 10, 41, .08); }
+html body.cco_body #header .header-wrapper, html body.cco_body #header > .wrapper {
+  max-width: var(--cc-max);
+  width: auto;
+  margin: 0 auto;
+  padding: 0 var(--cc-gutter);
+  box-sizing: border-box;
+}
+
+/* Top utility bar (Ask the Rabbi, Subscribe, Sign In...) hidden for a clean header.
+   Its key links live in the footer and the mobile menu instead. */
+html body.cco_body #header #header_container { display: none !important; }
+
+/* One clean row: logo + title on the left, menu on the right (desktop) */
+html body.cco_body #header_branding { height: auto !important; padding: 12px 0 !important; align-items: center; }
+html body.cco_body #header_branding .site-logo-wrapper {
+  padding: 0 !important; height: auto !important; width: auto !important;
+  margin: 0 14px 0 0 !important; background: transparent !important; box-shadow: none !important;
+}
+html body.cco_body #header .branding-search { height: auto !important; }
+@media (max-width: 1024px) {
+  /* platform reserves 50px for a fixed header; ours is sticky, so remove the gap */
+  html body.cco_body #header, html body.cco_body #header .header-wrapper { height: auto !important; min-height: 0 !important; }
+  html body.cco_body #content { margin-top: 0 !important; }
+}
+@media (min-width: 1025px) {
+  html body.cco_body #header .header-wrapper {
+    grid-template-areas: "b c" !important;
+    grid-template-columns: auto 1fr !important;
+    grid-template-rows: auto !important;
+    align-items: center;
+    height: auto !important; min-height: 0 !important;
+    padding-top: 0 !important; padding-bottom: 0 !important;
+  }
+  html body.cco_body #header .branding-search { grid-area: b !important; }
+  html body.cco_body #header .site-nav-wrapper { grid-area: c !important; justify-self: end; display: flex; align-items: center; }
+  html body.cco_body #header .site-nav-wrapper,
+  html body.cco_body #header #co_menu_container,
+  html body.cco_body #header .main_menu_container { height: auto !important; }
+}
+
+/* Branding */
+/* Logo: shown whole by default. When CC.logoCrop is set in theme.js, JS adds .cc-logo-crop and
+   CSS variables, and only the emblem part of the square logo file is shown (no cut-off words). */
+html body.cco_body #header_branding { --cc-logo-h: 46px; }
+html body.cco_body #header_branding .site-logo-wrapper img {
+  width: auto !important; height: var(--cc-logo-h) !important; max-width: none !important;
+  border-radius: 0 !important; background: transparent !important; display: block;
+  mix-blend-mode: multiply; /* the logo file has an off-white background; this melts it into the white header */
+}
+html body.cco_body #header_branding .site-logo-wrapper.cc-logo-crop a {
+  display: block; overflow: hidden;
+  width: calc(var(--cc-logo-h) * var(--cc-crop-w) / var(--cc-crop-h));
+  height: var(--cc-logo-h);
+}
+html body.cco_body #header_branding .site-logo-wrapper.cc-logo-crop img {
+  width: calc(var(--cc-logo-h) / var(--cc-crop-h)) !important;
+  height: calc(var(--cc-logo-h) / var(--cc-crop-h)) !important;
+  margin-left: calc(var(--cc-logo-h) * var(--cc-crop-x) / var(--cc-crop-h) * -1) !important;
+  margin-top: calc(var(--cc-logo-h) * var(--cc-crop-y) / var(--cc-crop-h) * -1) !important;
+}
+/* thin rule between emblem and name */
+html body.cco_body #header_branding .site-logo-wrapper {
+  padding-right: 16px !important; margin-right: 16px !important; border-right: 1px solid var(--cc-line) !important; border-radius: 0 !important;
+}
+html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title {
+  color: var(--cc-ink) !important;
+  font-family: var(--cc-font-head) !important;
+  font-weight: 400;
+  font-size: 23px;
+  letter-spacing: -0.005em;
+  text-transform: none !important;
+  text-shadow: none !important;
+  line-height: 1.05;
+  text-decoration: none !important;
+}
+html body.cco_body #header_branding a.site_title .cc-title-sub {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--cc-font-body) !important;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--cc-accent-text);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+/* Desktop navigation */
+@media (min-width: 1025px) {
+  html body.cco_body #tabContentMain .co_menu_item span.parent a, html body.cco_body #header.on-scroll #tabContentMain .co_menu_item span.parent a, html body.cco_body #tabContentMain .co_menu_item.hover span.parent a {
+    color: var(--cc-ink) !important;
+    font-family: var(--cc-font-body);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: none;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+  html body.cco_body #header_branding a.site_title { white-space: nowrap; }
+  html body.cco_body #header .branding-search { flex-shrink: 0; }
+  html body.cco_body #tabContentMain .co_menu_item:not(.donate_link) span.parent a:hover {
+    color: var(--cc-primary) !important;
+    box-shadow: inset 0 -2px 0 var(--cc-accent);
+  }
+  /* Donate → orange accent button */
+  html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent, html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent div {
+    border: 0 !important;
+    background: transparent !important;
+  }
+  html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent a {
+    background: var(--cc-accent) !important;
+    color: var(--cc-ink) !important;
+    border: 0 !important;
+    border-radius: var(--cc-pill);
+    padding: 11px 22px !important;
+    font-weight: 700;
+  }
+  html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent a:hover {
+    background: var(--cc-accent-2) !important;
+  }
+  /* Dropdowns → floating card */
+  html body.cco_body #tabContentMain .co_submenu_container {
+    background: var(--cc-white) !important;
+    border: 1px solid var(--cc-line);
+    border-radius: var(--cc-radius-sm);
+    box-shadow: var(--cc-shadow-lg);
+    overflow: hidden;
+  }
+  html body.cco_body #tabContentMain .co_submenu_container a.item, html body.cco_body #tabContentMain .co_submenu_container a.item span, html body.cco_body #tabContentMain .co_submenu_container .co_column a {
+    color: var(--cc-text) !important;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  html body.cco_body #tabContentMain .co_submenu_container .co_column a:hover, html body.cco_body #tabContentMain .co_submenu_container a.item:hover span {
+    color: var(--cc-primary) !important;
+    background: var(--cc-cream);
+  }
+}
+
+/* Narrow desktops (1025-1240px): long menu labels may wrap to two lines; the logo title never does */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  html body.cco_body #tabContentMain .co_menu_item span.parent { padding-left: 7px !important; padding-right: 7px !important; }
+  html body.cco_body #tabContentMain .co_menu_item span.parent a, html body.cco_body #header.on-scroll #tabContentMain .co_menu_item span.parent a { font-size: 14px; white-space: normal; line-height: 1.2; text-align: center; display: inline-block; max-width: 120px; }
+  html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent a { padding: 10px 16px !important; }
+}
+
+/* Mobile navigation (≤1024px: hamburger + slide-in drawer) */
+@media (max-width: 1024px) {
+  html body.cco_body .cs-mobile-menu-open, html body.cco_body .cs-mobile-menu-open i { color: var(--cc-ink) !important; }
+  html body.cco_body .site-nav-wrapper { background: var(--cc-ink) !important; }
+  html body.cco_body .site-nav-wrapper a, html body.cco_body .site-nav-wrapper #tabContentMain .co_menu_item span.parent a, html body.cco_body .site-nav-wrapper .co_column a {
+    color: var(--cc-on-dark) !important;
+    font-weight: 700;
+  }
+  html body.cco_body .site-nav-wrapper .donate_link span.parent a {
+    color: var(--cc-accent-on-dark) !important;
+  }
+  html body.cco_body .site-nav-wrapper .cs-mobile-menu-close i { color: var(--cc-white) !important; }
+  html body.cco_body #header_branding { --cc-logo-h: 36px; padding: 10px 0 !important; }
+  html body.cco_body #header_branding .site-logo-wrapper { padding-right: 12px !important; margin-right: 12px !important; }
+  html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title { font-size: 19px; }
+  html body.cco_body #header_branding a.site_title .cc-title-sub { font-size: 10px; letter-spacing: .16em; margin-top: 4px; }
+}
+
+/* ---------- 4. BUTTONS AND LINKS (native) ---------- */
+html body.cco_body .co_global_button .button, html body.cco_body .co_global_button button, html body.cco_body input.buttonStyle1, html body.cco_body input[type="submit"].co_global_submit, html body.cco_body a.cc-btn, html body.cco_body .cc-btn {
+  background: var(--cc-primary) !important;
+  background-image: none !important;
+  color: var(--cc-white) !important;
+  border: 0 !important;
+  border-radius: var(--cc-pill) !important;
+  font-family: var(--cc-font-body);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 13px 26px;
+  line-height: 1.2;
+  min-height: 44px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background .15s ease, transform .15s ease;
+}
+html body.cco_body .co_global_button .button:hover, html body.cco_body input.buttonStyle1:hover, html body.cco_body .cc-btn:hover { background: var(--cc-primary-2) !important; transform: translateY(-1px); }
+html body.cco_body .co_global_button { background: transparent !important; border: 0 !important; }
+html body.cco_body .cc-btn.cc-btn--accent { background: var(--cc-accent) !important; color: var(--cc-ink) !important; }
+html body.cco_body .cc-btn.cc-btn--accent:hover { background: var(--cc-accent-2) !important; }
+html body.cco_body .cc-btn.cc-btn--ghost {
+  background: transparent !important;
+  color: var(--cc-primary) !important;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+html body.cco_body .cc-btn.cc-btn--ghost:hover { background: var(--cc-cream) !important; }
+html body.cco_body .cc-btn.cc-btn--light { background: var(--cc-cream) !important; color: var(--cc-ink) !important; }
+html body.cco_body .cc-btn.cc-btn--light:hover { background: var(--cc-white) !important; }
+html body.cco_body .cc-link {
+  color: var(--cc-primary);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid var(--cc-accent);
+  padding-bottom: 2px;
+}
+html body.cco_body .cc-link:hover { color: var(--cc-primary-2); }
+
+/* ---------- 5. INNER PAGES ---------- */
+/* Page title band */
+html body.cco_body.sites-article #co_content_container > .clearfix > .master-content-wrapper, html body.cco_body.sites-article .master-content-wrapper {
+  width: auto !important;
+  float: none;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent !important;
+}
+html body.cco_body.sites-article header.article-header {
+  background: var(--cc-cream);
+  margin: 0 calc(50% - 50vw) 48px;
+  padding: 64px calc(50vw - 50%) 56px;
+  border-bottom: 1px solid var(--cc-line);
+  text-align: left;
+}
+html body.cco_body.sites-article header.article-header > * {
+  max-width: var(--cc-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--cc-gutter);
+  padding-right: var(--cc-gutter);
+  box-sizing: border-box;
+}
+html body.cco_body .article-header__title, html body.cco_body .content_title_container h1 {
+  font-size: clamp(38px, 5vw, 60px) !important;
+  font-weight: 400 !important;
+  line-height: 1.04 !important;
+  color: var(--cc-ink) !important;
+  margin: 0 !important;
+  text-transform: none !important;
+}
+html body.cco_body .article-header__subtitle {
+  font-family: var(--cc-font-body);
+  font-size: 19px !important;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--cc-muted) !important;
+  margin-top: 14px !important;
+}
+html body.cco_body .breadcrumbs, html body.cco_body .breadcrumbs a {
+  color: var(--cc-accent-text) !important;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* Readable article body */
+html body.cco_body .co_body .article-body {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--cc-text);
+}
+html body.cco_body.sites-article:not(.form) .co_body .article-body > p, html body.cco_body.sites-article:not(.form) .co_body .article-body > ul, html body.cco_body.sites-article:not(.form) .co_body .article-body > ol, html body.cco_body.sites-article:not(.form) .co_body .article-body > h2, html body.cco_body.sites-article:not(.form) .co_body .article-body > h3, html body.cco_body.sites-article:not(.form) .co_body .article-body > blockquote {
+  max-width: 760px;
+}
+html body.cco_body .co_body .article-body h2 { font-size: 34px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.6em 0 .5em; line-height: 1.2; }
+html body.cco_body .co_body .article-body h3 { font-size: 25px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.4em 0 .4em; }
+html body.cco_body .co_body .article-body a:not(.cc-btn):not(.cc-card) {
+  color: var(--cc-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--cc-accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+html body.cco_body .co_body .article-body img { border-radius: var(--cc-radius-sm); max-width: 100%; height: auto; }
+html body.cco_body .co_body .article-body blockquote {
+  border: 0;
+  margin: 2em 0;
+  padding: 0 0 0 24px;
+  box-shadow: inset 3px 0 0 var(--cc-accent);
+  font-family: var(--cc-font-head) !important;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--cc-ink);
+}
+
+/* B"H marker that ChabadOne shows on phones: keep it small and out of the way */
+html body.cco_body .bh.mobile-only {
+  background: transparent !important; color: var(--cc-muted) !important;
+  font-size: 12px; padding: 4px var(--cc-gutter) 0; margin: 0; text-align: right; box-shadow: none !important;
+}
+
+/* ---------- 5b. NATIVE POPUP DIALOGS (e.g. "Shalom! We're glad you're here" subscribe prompt) ---------- */
+html body.cco_body .co_dialog.rounded_box,
+html body.cco_body .co_dialog .b_inside {
+  border-radius: var(--cc-radius) !important;
+  border: 0 !important;
+  overflow: hidden;
+  box-shadow: var(--cc-shadow-lg) !important;
+  background: var(--cc-white) !important;
+}
+html body.cco_body .co_dialog .co_dialog_header,
+html body.cco_body .co_dialog .b_title,
+html body.cco_body .co_dialog h1, html body.cco_body .co_dialog h2, html body.cco_body .co_dialog h3 {
+  font-family: var(--cc-font-head) !important;
+  color: var(--cc-ink) !important;
+  background: var(--cc-cream) !important;
+}
+html body.cco_body .co_dialog input.co_global_input,
+html body.cco_body .co_dialog input[type="text"],
+html body.cco_body .co_dialog input[type="email"] {
+  border: 1px solid var(--cc-line) !important;
+  border-radius: var(--cc-radius-sm) !important;
+  height: 44px !important;
+  padding: 0 12px !important;
+  box-sizing: border-box;
+  font-size: 16px !important;
+}
+html body.cco_body .co_dialog #CancelButton_wrapper .button { background: transparent !important; color: var(--cc-primary) !important; box-shadow: inset 0 0 0 1.5px currentColor; }
+
+/* ---------- 6. FOOTER ---------- */
+html body.cco_body #footer {
+  background: var(--cc-ink-deep) !important;
+  color: var(--cc-on-dark-muted);
+  padding: 0;
+  margin-top: 0;
+}
+html body.cco_body #footer .footer_hr { display: none; }
+html body.cco_body #footer, html body.cco_body #footer .footer_text, html body.cco_body #footer .footer3, html body.cco_body #footer .footer3 span { color: var(--cc-on-dark-muted) !important; }
+html body.cco_body #footer a { color: var(--cc-on-dark) !important; }
+html body.cco_body #footer .cs-f-social-icons a { color: var(--cc-accent) !important; }
+/* JS builds #cc-footer; the native block then only shows the credit line */
+html body.cco_body.cc-footer-built #footer .footer3 { display: none; }
+html body.cco_body #footer .footer_container { font-size: 13px; text-align: center; padding: 20px 0 28px; }
+
+html body.cco_body .cc-footer { max-width: var(--cc-max); margin: 0 auto; padding: 72px var(--cc-gutter) 40px; box-sizing: border-box; }
+html body.cco_body .cc-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+html body.cco_body .cc-footer__brand { font-family: var(--cc-font-head) !important; color: var(--cc-white); font-weight: 400; font-size: 24px; letter-spacing: -0.01em; margin: 0 0 12px; }
+html body.cco_body .cc-footer__tag { color: var(--cc-on-dark-muted); line-height: 1.7; margin: 0 0 20px; font-size: 15px; }
+html body.cco_body .cc-footer h4 { font-family: var(--cc-font-body) !important; color: var(--cc-accent-on-dark) !important; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin: 6px 0 16px; }
+html body.cco_body .cc-footer ul { list-style: none; margin: 0; padding: 0; }
+html body.cco_body .cc-footer li { margin: 0 0 10px; }
+html body.cco_body .cc-footer a { text-decoration: none; font-size: 15px; }
+html body.cco_body .cc-footer a:hover { color: var(--cc-accent-on-dark) !important; }
+html body.cco_body .cc-footer address { font-style: normal; line-height: 1.8; font-size: 15px; color: var(--cc-on-dark); }
+html body.cco_body .cc-footer__bottom { border-top: 1px solid var(--cc-line-dark); margin-top: 48px; }
+@media (max-width: 900px) { html body.cco_body .cc-footer__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { html body.cco_body .cc-footer__grid { grid-template-columns: 1fr; } }
+
+/* ---------- 7. SHARED LAYOUT HELPERS (homepage shell + page content) ---------- */
+html body.cco_body .cc-wrap { max-width: var(--cc-max); margin: 0 auto; padding: 0 var(--cc-gutter); box-sizing: border-box; }
+html body.cco_body .cc-section { padding: var(--cc-section) 0; }
+html body.cco_body .cc-section--cream { background: var(--cc-cream); }
+html body.cco_body .cc-section--ink { background: var(--cc-ink); color: var(--cc-on-dark); }
+html body.cco_body .cc-eyebrow {
+  display: inline-block;
+  font-family: var(--cc-font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--cc-accent-text);
+  margin: 0 0 12px;
+}
+html body.cco_body .cc-section--ink .cc-eyebrow { color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-h2 { font-size: clamp(34px, 4vw, 52px); font-weight: 400; line-height: 1.04; margin: 0 0 16px; }
+html body.cco_body .cc-section--ink .cc-h2 { color: var(--cc-white); }
+html body.cco_body .cc-lede { font-size: 19px; line-height: 1.65; color: var(--cc-muted); max-width: 640px; margin: 0; }
+html body.cco_body .cc-section--ink .cc-lede { color: var(--cc-on-dark-muted); }
+html body.cco_body .cc-head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+html body.cco_body .cc-head-row .cc-lede { margin-top: 4px; }
+html body.cco_body .cc-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+html body.cco_body .cc-grid--2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+html body.cco_body .cc-grid--4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+html body.cco_body .cc-split { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; }
+html body.cco_body .cc-split > * { flex: 1 1 420px; min-width: 0; }
+html body.cco_body .cc-card {
+  background: var(--cc-white);
+  border: 1px solid var(--cc-line);
+  border-radius: var(--cc-radius);
+  padding: 28px;
+  box-sizing: border-box;
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+html body.cco_body a.cc-card:hover { box-shadow: var(--cc-shadow-lg); transform: translateY(-3px); }
+html body.cco_body .cc-card h3 { font-size: 24px !important; font-weight: 400; margin: 0 0 8px; color: var(--cc-ink); }
+html body.cco_body .cc-card p { margin: 0; color: var(--cc-muted) !important; line-height: 1.6; font-size: 16px; }
+html body.cco_body .cc-chip {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--cc-pill);
+  background: var(--cc-accent-soft);
+  color: var(--cc-accent-text);
+}
+html body.cco_body .cc-media {
+  border-radius: var(--cc-radius);
+  overflow: hidden;
+  background: var(--cc-accent-soft);
+  aspect-ratio: 4 / 3;
+}
+html body.cco_body .cc-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+html body.cco_body .cc-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- 8. HOMEPAGE SHELL ---------- */
+/* While JS builds the shell, keep the native homepage out of sight (prevents flash).
+   html.cc-on is set by the header loader; if JS fails, cc-shell-failed restores it. */
+html.cc-on body.cco_body .hp-table { visibility: hidden; }
+html.cc-on.cc-shell-ready body.cco_body .hp-table, html.cc-on.cc-shell-failed body.cco_body .hp-table { visibility: visible; }
+html.cc-shell-ready body.cco_body .cc-native-parked {
+  position: absolute !important; left: -20000px !important; top: 0;
+  width: 1px; height: 1px; overflow: hidden;
+}
+html.cc-home-page body.cco_body #BodyContainer, html.cc-home-page body.cco_body .body_wrapper, html.cc-home-page body.cco_body .g960, html.cc-home-page body.cco_body .main { width: auto !important; max-width: none !important; padding: 0 !important; margin: 0 !important; float: none !important; }
+
+/* Hero */
+html body.cco_body .cc-hero { background: var(--cc-ink); color: var(--cc-on-dark); overflow: hidden; }
+html body.cco_body .cc-hero .cc-wrap { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding-top: 88px; padding-bottom: 96px; }
+html body.cco_body .cc-hero__text { flex: 1 1 460px; min-width: 0; }
+html body.cco_body .cc-hero__media { flex: 1 1 420px; min-width: 0; }
+html body.cco_body .cc-hero__title {
+  color: var(--cc-white);
+  font-size: clamp(46px, 6.2vw, 80px);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+}
+html body.cco_body .cc-hero .cc-eyebrow { color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-hero__title em { font-style: normal; color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-hero__sub { font-size: 20px; line-height: 1.6; color: var(--cc-on-dark-muted) !important; margin: 0 0 32px; max-width: 520px; }
+html body.cco_body .cc-hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+html body.cco_body .cc-hero__img {
+  border-radius: var(--cc-radius);
+  aspect-ratio: 5 / 4;
+  background-color: var(--cc-primary);
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--cc-shadow-lg);
+}
+html body.cco_body .cc-hero__dots { display: flex; gap: 8px; margin-top: 18px; justify-content: center; }
+html body.cco_body .cc-hero__dots button { width: 10px; height: 10px; border-radius: 50%; border: 0; padding: 0; background: var(--cc-line-dark); cursor: pointer; }
+html body.cco_body .cc-hero__dots button[aria-current="true"] { background: var(--cc-accent); }
+
+/* Quick-links strip (from the "I would like to…" icons widget) */
+html body.cco_body .cc-quick { background: var(--cc-primary); }
+html body.cco_body .cc-quick ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 36px; list-style: none; margin: 0; padding: 22px var(--cc-gutter); }
+html body.cco_body .cc-quick a { display: inline-flex; align-items: center; gap: 12px; color: var(--cc-white) !important; text-decoration: none; font-weight: 700; font-size: 15px; min-height: 44px; }
+html body.cco_body .cc-quick img { width: 34px; height: 34px; border-radius: 50%; background: var(--cc-white); padding: 5px; box-sizing: border-box; object-fit: contain; }
+html body.cco_body .cc-quick a:hover { color: var(--cc-accent-on-dark) !important; }
+
+/* This-week band (Shabbat, Parshah, holiday) */
+/* Slim Shabbat bar at the very top of every page (JS fills it from the candle-lighting feed) */
+html body.cco_body .cc-shabbat-bar { background: var(--cc-ink-deep); color: var(--cc-on-dark); font-size: 13px; line-height: 1.3; }
+html body.cco_body .cc-shabbat-bar .cc-wrap { padding-top: 7px; padding-bottom: 7px; text-align: center; }
+html body.cco_body .cc-shabbat-bar a { color: var(--cc-on-dark) !important; text-decoration: none !important; }
+html body.cco_body .cc-shabbat-bar a:hover .cc-shabbat-bar__full, html body.cco_body .cc-shabbat-bar a:hover .cc-shabbat-bar__short { text-decoration: underline; }
+html body.cco_body .cc-shabbat-bar strong { color: var(--cc-accent-on-dark); font-weight: 700; }
+html body.cco_body .cc-shabbat-bar__short { display: none; }
+@media (max-width: 760px) {
+  html body.cco_body .cc-shabbat-bar__full { display: none; }
+  html body.cco_body .cc-shabbat-bar__short { display: inline; }
+}
+
+/* Events carousel */
+html body.cco_body .cc-events__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(300px, calc((100% - 48px) / 3));
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 20px;
+  margin: 0 -4px;
+  scrollbar-width: thin;
+}
+html body.cco_body .cc-events__track > * { scroll-snap-align: start; }
+html body.cco_body .cc-event { display: flex; flex-direction: column; background: var(--cc-white); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); overflow: hidden; }
+html body.cco_body .cc-event__img { aspect-ratio: 16 / 9; background: var(--cc-accent-soft) center / cover no-repeat; }
+html body.cco_body .cc-event__body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+html body.cco_body .cc-event__date { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body .cc-event__title { font-size: 24px !important; font-weight: 400; line-height: 1.15; margin: 0; color: var(--cc-ink); }
+html body.cco_body .cc-event__desc { color: var(--cc-muted) !important; font-size: 15px; line-height: 1.6; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+html body.cco_body .cc-event__cta { margin-top: auto; padding-top: 6px; }
+html body.cco_body .cc-events__nav { display: flex; gap: 10px; }
+html body.cco_body .cc-events__nav button {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1.5px solid var(--cc-line); background: var(--cc-white); color: var(--cc-ink);
+  cursor: pointer; font-size: 18px; line-height: 1;
+}
+html body.cco_body .cc-events__nav button:hover { border-color: var(--cc-primary); }
+@media (max-width: 760px) { html body.cco_body .cc-events__track { grid-auto-columns: 86%; } }
+
+/* Featured courses ("Coming up"): registration events as date-led cards; calendar sessions fold in as "Next class" */
+html body.cco_body .cc-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 24px; }
+html body.cco_body .cc-feature { display: grid; grid-template-columns: 112px minmax(0, 1fr); background: var(--cc-white); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); overflow: hidden; }
+html body.cco_body .cc-feature__date { background: var(--cc-ink); color: var(--cc-on-dark); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 26px 8px; text-align: center; }
+html body.cco_body .cc-feature__m { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-feature__d { font-family: var(--cc-font-head) !important; font-size: 54px; line-height: 1; color: var(--cc-white); }
+html body.cco_body .cc-feature__w { font-size: 13px; color: var(--cc-on-dark-muted); }
+html body.cco_body .cc-feature__body { padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+html body.cco_body .cc-feature__kicker { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body .cc-feature__title { margin: 0; font-size: 30px !important; line-height: 1.1; color: var(--cc-ink); text-wrap: balance; }
+html body.cco_body .cc-feature__desc { margin: 0; color: var(--cc-muted) !important; font-size: 16px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+html body.cco_body .cc-feature__meta { margin: 4px 0 0; padding-top: 12px; border-top: 1px solid var(--cc-line); font-size: 14px; line-height: 1.5; color: var(--cc-text); }
+html body.cco_body .cc-feature__meta strong { color: var(--cc-ink); }
+html body.cco_body .cc-feature__cta { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+@media (max-width: 560px) {
+  html body.cco_body .cc-feature { grid-template-columns: 76px minmax(0, 1fr); }
+  html body.cco_body .cc-feature__date { padding: 20px 4px; }
+  html body.cco_body .cc-feature__d { font-size: 38px; }
+  html body.cco_body .cc-feature__body { padding: 20px 18px 22px; }
+  html body.cco_body .cc-feature__title { font-size: 24px !important; }
+}
+
+/* Intro / message */
+html body.cco_body .cc-intro { text-align: center; }
+html body.cco_body .cc-intro .cc-lede { margin: 0 auto; }
+
+/* Program / department cards */
+html body.cco_body .cc-program { position: relative; display: block; border-radius: var(--cc-radius); overflow: hidden; text-decoration: none !important; background: var(--cc-ink); aspect-ratio: 4 / 5; }
+html body.cco_body .cc-program__img { position: absolute; inset: 0; background: var(--cc-primary) center / cover no-repeat; transition: transform .4s ease; }
+html body.cco_body .cc-program::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(47, 6, 25, 0) 40%, rgba(47, 6, 25, .9) 100%); }
+html body.cco_body .cc-program:hover .cc-program__img { transform: scale(1.04); }
+html body.cco_body .cc-program__label { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 24px; }
+html body.cco_body .cc-program__title { color: var(--cc-white); font-family: var(--cc-font-head) !important; font-size: 26px; font-weight: 400; margin: 0 0 6px; }
+html body.cco_body .cc-program__more { color: var(--cc-accent-on-dark); font-weight: 700; font-size: 14px; }
+/* Phones: two cards per row so four programs fit in one screen instead of four */
+@media (max-width: 560px) {
+  html body.cco_body .cc-grid--4 { grid-template-columns: 1fr 1fr; gap: 12px; }
+  html body.cco_body .cc-program { aspect-ratio: 3 / 4; }
+  html body.cco_body .cc-program__label { padding: 14px; }
+  html body.cco_body .cc-program__title { font-size: 19px; line-height: 1.15; }
+  html body.cco_body .cc-program__more { font-size: 13px; }
+}
+
+/* Shabbat + feeds row */
+html body.cco_body .cc-feeds .cc-card { height: 100%; }
+
+/* Testimonials */
+html body.cco_body .cc-testimonials { text-align: center; }
+html body.cco_body .cc-testimonial { max-width: 820px; margin: 28px auto 0; padding: 0; }
+html body.cco_body .cc-testimonial__quote {
+  font-family: var(--cc-font-head) !important; font-weight: 400; font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.3; color: var(--cc-ink); margin: 0 0 22px; min-height: 3.9em;
+}
+html body.cco_body .cc-testimonial__by { margin: 0; font-size: 15px; color: var(--cc-muted); }
+html body.cco_body .cc-testimonial__by strong { display: block; color: var(--cc-primary); font-size: 16px; }
+html body.cco_body .cc-testimonials__nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 28px; }
+html body.cco_body .cc-testimonials__nav .cc-round {
+  width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid var(--cc-line); background: var(--cc-white);
+  color: var(--cc-ink); cursor: pointer; font-size: 18px; line-height: 1;
+}
+html body.cco_body .cc-testimonials__nav .cc-round:hover { border-color: var(--cc-primary); }
+html body.cco_body .cc-testimonials__dots { margin: 0; }
+html body.cco_body .cc-testimonials__dots button { background: var(--cc-line); }
+
+/* Partner with us */
+html body.cco_body .cc-partner__ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+@media (max-width: 900px) { html body.cco_body .cc-partner__ctas { justify-content: flex-start; } }
+
+/* Subscribe band */
+html body.cco_body .cc-subscribe { background: var(--cc-white); color: var(--cc-text); border-top: 1px solid var(--cc-line); }
+html body.cco_body .cc-subscribe .cc-split { gap: 40px; }
+html body.cco_body .cc-subscribe .cc-h2 { color: var(--cc-ink); }
+html body.cco_body .cc-subscribe .cc-lede { color: var(--cc-muted); }
+html body.cco_body .cc-subscribe .widget_header { display: none; }
+html body.cco_body .cc-subscribe #formContainer fieldset { display: flex; flex-wrap: wrap; gap: 12px; border: 0; padding: 0; margin: 0; }
+html body.cco_body .cc-subscribe #formContainer label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+html body.cco_body .cc-subscribe #formContainer input.co_global_input {
+  flex: 1 1 180px; height: 52px; border-radius: var(--cc-radius-sm) !important;
+  padding: 0 16px !important; font-size: 16px; color: var(--cc-text) !important; background: var(--cc-white) !important; border: 1px solid var(--cc-field-border) !important;
+  box-sizing: border-box; margin: 0 !important; width: auto !important;
+}
+html body.cco_body .cc-subscribe #formContainer input[type="submit"] {
+  height: 52px; padding: 0 28px !important; border-radius: var(--cc-radius-sm) !important;
+  background: var(--cc-primary) !important; color: var(--cc-white) !important; border: 0 !important;
+  font-weight: 700 !important; font-size: 16px; cursor: pointer; margin: 0 !important; width: auto !important;
+}
+html body.cco_body .cc-subscribe #formContainer small { flex-basis: 100%; color: var(--cc-muted) !important; }
+html body.cco_body .cc-subscribe #response { color: var(--cc-text) !important; height: auto !important; }
+
+/* Photos strip */
+html body.cco_body .cc-photos ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
+html body.cco_body .cc-photos li { margin: 0 !important; width: auto !important; float: none !important; }
+html body.cco_body .cc-photos li a, html body.cco_body .cc-photos li img { display: block; width: 100% !important; aspect-ratio: 1 / 1; height: auto !important; border-radius: var(--cc-radius-sm); background-size: cover !important; background-position: center !important; }
+html body.cco_body .cc-photos .widget_header { display: none; }
+html body.cco_body .cc-photos li:nth-child(n+9) { display: none; }
+
+/* ---------- 9. CONTENT COMPONENTS (used inside page HTML) ---------- */
+/* Course / event info box */
+html body.cco_body .cc-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px 28px; background: var(--cc-cream); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); padding: 28px; margin: 32px 0; }
+html body.cco_body .cc-info__label { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-accent-text); margin: 0 0 4px; }
+html body.cco_body .cc-info__value { font-weight: 700; color: var(--cc-ink); font-size: 16px; line-height: 1.5; margin: 0; }
+/* Numbered lessons */
+html body.cco_body .cc-lessons { list-style: none; padding: 0 !important; margin: 24px 0; display: grid; gap: 14px; counter-reset: cc-lesson; }
+html body.cco_body .cc-lessons li { counter-increment: cc-lesson; position: relative; padding: 20px 22px 20px 76px !important; border: 1px solid var(--cc-line); border-radius: var(--cc-radius-sm); background: var(--cc-white); list-style: none !important; margin: 0 !important; }
+html body.cco_body .cc-lessons li::before { content: counter(cc-lesson, decimal-leading-zero); position: absolute; left: 22px; top: 18px; font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 28px; color: var(--cc-accent); }
+html body.cco_body .cc-lessons strong { display: block; font-family: var(--cc-font-head) !important; font-weight: 400; color: var(--cc-ink); font-size: 21px; margin-bottom: 4px; }
+/* FAQ (uses a details element, works without JS) */
+html body.cco_body .cc-faq details { border-bottom: 1px solid var(--cc-line); padding: 18px 0; }
+html body.cco_body .cc-faq summary { cursor: pointer; font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 22px; color: var(--cc-ink); list-style: none; }
+html body.cco_body .cc-faq summary::-webkit-details-marker { display: none; }
+html body.cco_body .cc-faq summary::after { content: "+"; float: right; color: var(--cc-accent-text); font-size: 24px; line-height: 1; }
+html body.cco_body .cc-faq details[open] summary::after { content: "\2212"; }
+html body.cco_body .cc-faq details p { margin: 12px 0 0; color: var(--cc-muted); }
+/* Call-to-action panel */
+html body.cco_body .cc-cta { background: var(--cc-ink); border-radius: var(--cc-radius); padding: 48px; color: var(--cc-on-dark); margin: 40px 0; }
+html body.cco_body .cc-cta h2, html body.cco_body .cc-cta h3 { color: var(--cc-white) !important; margin-top: 0 !important; }
+html body.cco_body .cc-cta p { color: var(--cc-on-dark-muted) !important; }
+@media (max-width: 760px) { html body.cco_body .cc-cta { padding: 32px 24px; } }
+
+/* Course shelf ("Past courses" page): each course is a textbook cover, grouped by year.
+   theme.js builds it from a plain table on a ChabadOne page (Season | Course | Tagline | Topic | Video | Audio). */
+html body.cco_body .cc-stats { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 28px 0 0; padding: 0; list-style: none; }
+html body.cco_body .cc-stats li { display: flex; flex-direction: column; gap: 2px; }
+html body.cco_body .cc-stats strong { font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 44px; line-height: 1; color: var(--cc-ink); }
+html body.cco_body .cc-stats span { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body .cc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 36px; }
+html body.cco_body .cc-chips button {
+  font: 600 14px var(--cc-font-body); padding: 9px 16px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--cc-line); background: var(--cc-white); color: var(--cc-text);
+}
+html body.cco_body .cc-chips button:hover { border-color: var(--cc-primary); }
+html body.cco_body .cc-chips button[aria-pressed="true"] { background: var(--cc-ink); border-color: var(--cc-ink); color: var(--cc-white); }
+html body.cco_body .cc-chips i { font-style: normal; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 8px; vertical-align: 0; }
+html body.cco_body .cc-shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 20px; }
+html body.cco_body .cc-shelf__year {
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; aspect-ratio: 3 / 4; max-width: 100%;
+  padding: 0 4px 16px; box-sizing: border-box; border-bottom: 3px solid var(--cc-accent);
+}
+html body.cco_body .cc-shelf__year strong { font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 52px; line-height: 1; color: var(--cc-ink); }
+html body.cco_body .cc-shelf__year span { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body .cc-book {
+  --book: var(--cc-ink);
+  position: relative; display: flex; flex-direction: column; gap: 10px; aspect-ratio: 3 / 4; max-width: 100%;
+  padding: 18px 16px 16px 24px; border-radius: 4px 8px 8px 4px; box-sizing: border-box;
+  background: var(--book); color: var(--cc-on-dark); text-decoration: none !important;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .08) inset, 0 12px 28px rgba(47, 6, 25, .18);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+html body.cco_body .cc-book::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background: rgba(0, 0, 0, .22); box-shadow: 1px 0 0 rgba(255, 255, 255, .12); }
+html body.cco_body .cc-book:hover { transform: translateY(-4px); box-shadow: 0 1px 0 rgba(255, 255, 255, .08) inset, 0 20px 40px rgba(47, 6, 25, .26); }
+html body.cco_body .cc-book__season { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-book__title { font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 22px; line-height: 1.08; color: var(--cc-white); margin: 0; text-wrap: balance; overflow-wrap: anywhere; hyphens: auto; }
+html body.cco_body .cc-book__tag { font-size: 13px; line-height: 1.45; color: var(--cc-on-dark-muted); margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+html body.cco_body .cc-book__foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 6px; }
+html body.cco_body .cc-book__foot a, html body.cco_body .cc-book__foot span {
+  font-size: 12px; font-weight: 700; padding: 5px 9px; border-radius: 999px; text-decoration: none !important;
+  background: rgba(255, 255, 255, .14); color: var(--cc-white) !important;
+}
+html body.cco_body .cc-book__foot a:hover { background: var(--cc-white); color: var(--cc-ink) !important; }
+html body.cco_body .cc-book[hidden], html body.cco_body .cc-shelf__year[hidden] { display: none !important; }
+html body.cco_body .cc-book--t1 { --book: var(--cc-book-1); }
+html body.cco_body .cc-book--t2 { --book: var(--cc-book-2); }
+html body.cco_body .cc-book--t3 { --book: var(--cc-book-3); }
+html body.cco_body .cc-book--t4 { --book: var(--cc-book-4); }
+html body.cco_body .cc-book--t5 { --book: var(--cc-book-5); }
+@media (max-width: 640px) {
+  html body.cco_body .cc-shelf { grid-template-columns: 1fr 1fr; gap: 12px; }
+  html body.cco_body .cc-shelf__year { aspect-ratio: auto; grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; align-items: baseline; gap: 10px; padding: 12px 0 8px; }
+  html body.cco_body .cc-shelf__year strong { font-size: 36px; }
+  html body.cco_body .cc-book { padding: 14px 12px 12px 20px; aspect-ratio: auto; min-height: 150px; }
+  html body.cco_body .cc-book__title { font-size: 19px; }
+  html body.cco_body .cc-book__tag { display: none; }
+  html body.cco_body .cc-stats strong { font-size: 34px; }
+}
+
+/* ---------- 10. REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html body.cco_body .cc-card, html body.cco_body .cc-btn, html body.cco_body .cc-program__img { transition: none !important; }
+  html body.cco_body a.cc-card:hover, html body.cco_body .cc-btn:hover { transform: none !important; }
+}
+
+/* ==========================================================================
+   11. EVENT REGISTRATION PAGE  (/tools/events/register.asp)
+   Pure restyling of ChabadOne's reservation form. No markup or behavior is
+   changed: every input, name and button stays exactly where ChabadOne put it.
+   Scope: #RegisterSinglePage only.
+   ========================================================================== */
+html body.cco_body #RegisterSinglePage {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-size: 16px;
+  color: var(--cc-text);
+  max-width: 920px;
+  margin: 0 auto;
+}
+html body.cco_body #RegisterSinglePage,
+html body.cco_body #RegisterSinglePage * { box-sizing: border-box; }
+
+/* --- Event header: banner + description + "Event info" card --- */
+html body.cco_body #RegisterHeader { display: grid; grid-template-columns: 1fr 300px; gap: 24px; margin-bottom: 24px; }
+html body.cco_body #RegisterHeader .banner_image { grid-column: 1 / -1; margin: 0 !important; }
+html body.cco_body #RegisterHeader .banner_image img { width: 100%; height: auto; display: block; border-radius: var(--cc-radius); }
+html body.cco_body #RegisterHeader .column1,
+html body.cco_body #RegisterHeader .column2 { float: none !important; width: auto !important; margin: 0 !important; }
+html body.cco_body #RegisterHeader .column1 .event_name { display: none; } /* already the page title */
+html body.cco_body #RegisterHeader .event_description { font-size: 18px; line-height: 1.7; color: var(--cc-text); }
+html body.cco_body #RegisterHeader .column2 {
+  background: var(--cc-cream); border: 1px solid var(--cc-line); border-radius: var(--cc-radius);
+  padding: 22px 24px; align-self: start;
+}
+html body.cco_body #RegisterHeader .column2 .heading { font-family: var(--cc-font-body); font-size: 12px !important; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body #RegisterHeader .column2 .label { width: auto !important; float: none !important; font-size: 13px; color: var(--cc-muted); font-weight: 700; }
+html body.cco_body #RegisterHeader .column2 a { color: var(--cc-ink) !important; font-weight: 700; text-decoration: none; }
+html body.cco_body #RegisterHeader .column2 .float_left { float: none !important; }
+@media (max-width: 760px) { html body.cco_body #RegisterHeader { grid-template-columns: 1fr; } }
+
+/* --- Each step becomes a card --- */
+html body.cco_body #RegisterBody #Performances,
+html body.cco_body #RegisterBody #Summary,
+html body.cco_body #RegisterBody #ReserversInformation,
+html body.cco_body #RegisterBody #Payment,
+html body.cco_body #RegisterBody #AdditionalInformation:has(*) {
+  background: var(--cc-white);
+  border: 1px solid var(--cc-line);
+  border-radius: var(--cc-radius);
+  padding: 28px 32px !important;
+  margin: 0 0 20px !important;
+}
+html body.cco_body #RegisterBody .separator { border: 0 !important; background: none !important; }
+html body.cco_body #RegisterBody .large_top_padding { padding-top: 0 !important; }
+html body.cco_body #RegisterBody .title.large span.bold,
+html body.cco_body #RegisterBody #Performances > .title span.bold {
+  display: block;
+  font-family: var(--cc-font-head) !important;
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--cc-ink);
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+}
+html body.cco_body #RegisterBody #Performances > .title { margin-top: 0 !important; padding-top: 0 !important; }
+html body.cco_body #RegisterBody .regular { font-size: 15px; color: var(--cc-muted); }
+html body.cco_body #Performances .performance { border: 0 !important; background: none !important; padding: 0 !important; }
+html body.cco_body #Performances .performance > .title .event_name span.medium { display: block; color: var(--cc-muted); font-size: 14px; }
+
+/* --- Inputs everywhere on the page --- */
+html body.cco_body #RegisterSinglePage input:not([type="radio"]):not([type="checkbox"]):not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="image"]):not([type="file"]),
+html body.cco_body #RegisterSinglePage select,
+html body.cco_body #RegisterSinglePage textarea {
+  width: 100% !important;
+  max-width: 100%;
+  height: 48px;
+  padding: 0 14px !important;
+  border: 1px solid var(--cc-field-border) !important;
+  border-radius: var(--cc-radius-sm) !important;
+  background: var(--cc-white) !important;
+  color: var(--cc-text) !important;
+  font-size: 16px !important;   /* 16px stops iPhone from zooming in */
+  font-family: var(--cc-font-body) !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+html body.cco_body #RegisterSinglePage textarea { height: 110px; padding: 12px 14px !important; line-height: 1.5; }
+html body.cco_body #RegisterSinglePage input:focus,
+html body.cco_body #RegisterSinglePage select:focus,
+html body.cco_body #RegisterSinglePage textarea:focus {
+  outline: 0 !important;
+  border-color: var(--cc-primary) !important;
+  box-shadow: 0 0 0 3px rgba(135, 26, 57, .18) !important;
+}
+html body.cco_body #RegisterSinglePage input[type="radio"],
+html body.cco_body #RegisterSinglePage input[type="checkbox"] { accent-color: var(--cc-primary); width: 18px; height: 18px; margin: 0 10px 0 0 !important; flex: none; }
+
+/* --- Add-reservation bar (category, quantity, Add) --- */
+html body.cco_body #RegisterSinglePage .toggle_options { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; padding: 16px 0 !important; }
+html body.cco_body #RegisterSinglePage .toggle_options[style*="none"] { display: none !important; }
+html body.cco_body #RegisterSinglePage .toggle_options > .inline_block { flex: 1 1 180px; }
+html body.cco_body #RegisterSinglePage .toggle_options > .inline_block > div:first-child { font-size: 13px; font-weight: 700; color: var(--cc-muted); margin-bottom: 6px !important; }
+html body.cco_body #RegisterSinglePage .toggle_message {
+  cursor: pointer; color: var(--cc-primary) !important; font-weight: 700; font-size: 16px;
+  padding: 14px 18px !important; margin-top: 16px; border: 1.5px dashed var(--cc-field-border); border-radius: var(--cc-radius-sm);
+  background: var(--cc-white); text-align: center;
+}
+html body.cco_body #RegisterSinglePage .toggle_message:hover { border-color: var(--cc-primary); background: var(--cc-tint); }
+html body.cco_body #RegisterSinglePage .toggle_message i { margin-right: 8px !important; }
+html body.cco_body #RegisterSinglePage .add_attendee:not(:disabled) { opacity: 1 !important; cursor: pointer; }
+html body.cco_body #RegisterSinglePage .add_attendee:disabled { opacity: 1 !important; background: #9AA3B0 !important; cursor: not-allowed; transform: none !important; }
+/* registration type shown as a chip on each attendee row */
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g100 {
+  justify-self: start; line-height: 1.2 !important; padding: 6px 12px !important; margin-bottom: 9px !important;
+  background: var(--cc-accent-soft); color: var(--cc-accent-text) !important; border-radius: var(--cc-radius-sm);
+  font-size: 13px !important; font-weight: 700;
+}
+
+/* --- Reservation rows (attendee names) --- */
+html body.cco_body #RegisterSinglePage .reservations > .clearfix:not(.reservation) { display: none; } /* old column headings; labels are added per row below */
+html body.cco_body #RegisterSinglePage .reservation {
+  border: 1px solid var(--cc-line); border-radius: var(--cc-radius-sm); padding: 18px !important; margin-top: 14px !important; background: var(--cc-cream);
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child {
+  display: grid; gap: 12px; align-items: end; padding: 0 !important;
+  grid-template-columns: 32px 1fr 1fr auto auto 36px;
+  grid-template-areas: "idx fn ln cat price rm";
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div { width: auto !important; float: none !important; margin: 0 !important; padding: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > [id$="_index"] { grid-area: idx; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2) { grid-area: fn; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3) { grid-area: ln; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g100 { grid-area: cat; color: var(--cc-muted); font-size: 14px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .price-display { grid-area: price; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g40 { grid-area: rm; }
+html body.cco_body #RegisterSinglePage .reservation .seat_selection:empty { display: none; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before,
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { display: block; font-size: 14px; font-weight: 600; color: var(--cc-ink); margin: 0 0 6px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before { content: "First name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { content: "Last name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .price-display { line-height: 48px; }
+html body.cco_body #RegisterSinglePage .reservation [id$="_index"] {
+  width: 32px !important; height: 32px; border-radius: 50%; background: var(--cc-primary); color: var(--cc-white);
+  display: flex !important; align-items: center; justify-content: center; font-size: 14px;
+  margin-bottom: 8px !important;
+}
+html body.cco_body #RegisterSinglePage .reservation .price-display { font-weight: 700; color: var(--cc-ink); white-space: nowrap; }
+html body.cco_body #RegisterSinglePage .remove_reservation {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cc-line); background: var(--cc-white); color: var(--cc-muted); cursor: pointer; font-size: 18px; line-height: 1; margin-bottom: 6px;
+}
+html body.cco_body #RegisterSinglePage .reservation input::placeholder { color: #8A8F98; }
+@media (max-width: 640px) {
+  html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child {
+    grid-template-columns: 32px 1fr auto 36px;
+    grid-template-areas: "idx fn fn rm" ". ln ln ." ". cat price .";
+  }
+}
+
+/* --- Phone markup: ChabadOne serves a different row structure to phones (by user agent):
+       [index] [type + price + remove] [names + questions]. Lay it out as: header bar, then full-width body. --- */
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) {
+  grid-template-columns: 32px 1fr !important;
+  grid-template-areas: "idx meta" "body body" !important;
+  align-items: center !important; row-gap: 14px;
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > [id$="_index"] { grid-area: idx; margin: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .float_right { grid-area: meta; display: flex !important; align-items: center; justify-content: flex-end; gap: 10px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .float_right > .inline_block:first-child {
+  margin-right: auto !important; padding: 6px 12px !important; background: var(--cc-accent-soft); color: var(--cc-accent-text);
+  border-radius: var(--cc-radius-sm); font-size: 13px; font-weight: 700; line-height: 1.2;
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .float_right .remove_reservation { margin: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding { grid-area: body; display: block !important; width: auto !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > div:nth-child(2)::before, html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > div:nth-child(3)::before { content: none !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block { display: block !important; width: 100% !important; margin: 0 0 12px !important; padding: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block::before { display: block; font-size: 14px; font-weight: 600; color: var(--cc-ink); margin: 0 0 6px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block:nth-child(1)::before { content: "First name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block:nth-child(2)::before { content: "Last name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .seat_selection:empty { display: none !important; }
+html body.cco_body #RegisterSinglePage .embedded_form #formContainer { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; max-width: none !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-input input:not([type="radio"]):not([type="checkbox"]), html body.cco_body #RegisterSinglePage .embedded_form .form-input textarea { width: 100% !important; box-sizing: border-box; }
+
+/* Small phones: less nested padding so fields get the width */
+@media (max-width: 480px) {
+  html body.cco_body #RegisterBody { padding-left: 0 !important; padding-right: 0 !important; }
+  html body.cco_body #RegisterBody #Performances,
+  html body.cco_body #RegisterBody #Summary,
+  html body.cco_body #RegisterBody #ReserversInformation,
+  html body.cco_body #RegisterBody #Payment,
+  html body.cco_body #RegisterBody #AdditionalInformation:has(*) { padding: 22px 16px !important; }
+  html body.cco_body #RegisterSinglePage .reservation { padding: 14px !important; }
+  html body.cco_body #RegisterSinglePage .toggle_options > .inline_block { flex: 1 1 100%; }
+  html body.cco_body #RegisterSinglePage .toggle_options .co_global_button, html body.cco_body #RegisterSinglePage .toggle_options .add_attendee { width: 100%; }
+}
+
+/* --- Per-attendee questions (ChabadOne form builder inside each reservation) --- */
+html body.cco_body #RegisterSinglePage .embedded_form { margin-top: 16px; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-all { background: transparent !important; box-shadow: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; font-size: 16px !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-section { padding: 0 !important; margin: 0 !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-line { display: block !important; padding: 10px 0 !important; margin: 0 !important; border: 0 !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-label-left,
+html body.cco_body #RegisterSinglePage .embedded_form .form-input {
+  float: none !important; width: auto !important; display: block !important; margin: 0 !important; padding: 0 !important;
+}
+html body.cco_body #RegisterSinglePage .embedded_form .form-label-left label:first-child {
+  display: block; font-weight: 700 !important; font-size: 15px !important; color: var(--cc-ink) !important; margin: 0 0 8px; width: auto !important; text-align: left !important;
+}
+html body.cco_body #RegisterSinglePage .form-required { color: #A4342A !important; }
+/* Radio and checkbox answers → tappable tiles */
+html body.cco_body #RegisterSinglePage .form-single-column,
+html body.cco_body #RegisterSinglePage .form-multiple-column { display: grid !important; gap: 8px; }
+html body.cco_body #RegisterSinglePage .form-single-column .clearfix,
+html body.cco_body #RegisterSinglePage .form-multiple-column .clearfix { display: none !important; }
+html body.cco_body #RegisterSinglePage .form-radio-item,
+html body.cco_body #RegisterSinglePage .form-checkbox-item {
+  display: flex !important; align-items: center; float: none !important; width: auto !important;
+  border: 1px solid var(--cc-field-border); border-radius: var(--cc-radius-sm); background: var(--cc-white);
+  padding: 12px 14px !important; margin: 0 !important; cursor: pointer; min-height: 48px;
+  transition: border-color .15s ease, background .15s ease;
+}
+html body.cco_body #RegisterSinglePage .form-radio-item:hover,
+html body.cco_body #RegisterSinglePage .form-checkbox-item:hover { border-color: var(--cc-primary); }
+html body.cco_body #RegisterSinglePage .form-radio-item:has(input:checked),
+html body.cco_body #RegisterSinglePage .form-checkbox-item:has(input:checked) {
+  border-color: var(--cc-primary); background: var(--cc-tint); box-shadow: inset 0 0 0 1px var(--cc-primary);
+}
+html body.cco_body #RegisterSinglePage .form-radio-item label,
+html body.cco_body #RegisterSinglePage .form-checkbox-item label { margin: 0 !important; cursor: pointer; font-size: 16px; color: var(--cc-text); flex: 1; }
+html body.cco_body #RegisterSinglePage .embedded_form > .center.small { color: var(--cc-muted); font-size: 12px; margin-top: 8px; }
+
+/* --- "Your information" + "Payment" rows: label above field, two columns on desktop --- */
+html body.cco_body #ReserversInformation > div > .clearfix:not(.title),
+html body.cco_body #Payment > div > .clearfix:not(.title):not(:empty),
+html body.cco_body #Payment #CreditCard {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px;
+}
+html body.cco_body #ReserversInformation .small_vertical_padding,
+html body.cco_body #Payment .small_vertical_padding,
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin {
+  display: flex; flex-direction: column; gap: 6px; padding: 0 !important; margin: 0 !important;
+}
+html body.cco_body #ReserversInformation .label,
+html body.cco_body #Payment .label,
+html body.cco_body #Summary .label {
+  width: auto !important; margin: 0 !important; float: none !important; text-align: left !important;
+  font-size: 14px !important; font-weight: 600 !important; color: var(--cc-ink);
+}
+html body.cco_body #ReserversInformation .required .label::after,
+html body.cco_body #Payment .required .label::after { content: " *"; color: #A4342A; }
+html body.cco_body #ReserversInformation .float_left,
+html body.cco_body #Payment .float_left,
+html body.cco_body #Summary .inline_block { float: none !important; margin: 0 !important; width: 100% !important; display: block !important; }
+html body.cco_body #ReserversInformation .small_vertical_padding:has(input[type="checkbox"]) { grid-column: 1 / -1; flex-direction: row-reverse; justify-content: flex-end; align-items: center; }
+html body.cco_body #Payment #Comments { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; padding: 0 !important; margin-top: 14px !important; }
+@media (max-width: 640px) {
+  html body.cco_body #ReserversInformation > div > .clearfix:not(.title),
+  html body.cco_body #Payment > div > .clearfix:not(.title):not(:empty),
+  html body.cco_body #Payment #CreditCard { grid-template-columns: 1fr; }
+}
+
+/* --- Summary: discount + totals --- */
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 10px; }
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin .label { flex-basis: 100%; }
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin .inline_block { width: auto !important; flex: 1 1 200px; }
+html body.cco_body #Summary .large_top_margin.medium_bottom_margin .inline_block:last-child { flex: 0 0 auto; }
+html body.cco_body #Summary #ApplyDiscountCode {
+  background: var(--cc-white) !important; color: var(--cc-primary) !important; box-shadow: inset 0 0 0 1.5px var(--cc-primary); height: 48px;
+}
+html body.cco_body #Summary #ApplyDiscountCode span { color: var(--cc-primary) !important; }
+html body.cco_body #Summary .align_right { text-align: left !important; }
+html body.cco_body #Summary .align_right > .inline_block { display: block !important; width: 100% !important; }
+html body.cco_body #Totals { border-top: 1px solid var(--cc-line); padding-top: 14px; margin-top: 18px !important; font-size: 16px; }
+html body.cco_body #Totals .clearfix { display: flex; justify-content: space-between; gap: 16px; }
+html body.cco_body #Totals .clearfix > div { float: none !important; }
+html body.cco_body #Totals .clearfix::before, html body.cco_body #Totals .clearfix::after { display: none !important; } /* clearfix pseudo-elements would act as flex items */
+html body.cco_body #Totals .clearfix:last-child { font-size: 20px; color: var(--cc-ink); padding-top: 8px; }
+
+/* --- Final button --- */
+html body.cco_body #Buttons { padding-top: 12px; }
+html body.cco_body #Buttons .align_center { display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding: 0 0 16px !important; }
+html body.cco_body #SubmitButton_wrapper { display: block !important; width: 100%; }
+html body.cco_body #SubmitButton_wrapper #SubmitButton { width: 100%; min-height: 56px; font-size: 17px !important; }
+html body.cco_body #SubmitButton_wrapper.disabled #SubmitButton { background: #9AA3B0 !important; cursor: not-allowed; transform: none !important; }
+html body.cco_body #ValidationNotice {
+  background: #FFF6E5 !important; border: 1px solid #EBCB8B !important; color: #6B4A12 !important;
+  border-radius: var(--cc-radius-sm); padding: 10px 14px !important; font-size: 14px; text-align: left; background-image: none !important;
+}
+html body.cco_body #ValidationNotice:empty { display: none !important; }
+html body.cco_body #RegisterSinglePage .co_global_button.disabled { opacity: 1 !important; }
+
+
+/* ---- preview only: the earlier (straight brand) palette, for side-by-side comparison ---- */
+html.pv-original {
+  --cc-ink: #5D0B30; --cc-ink-deep: #5D0B30; --cc-primary: #871A39; --cc-primary-2: #6E1530;
+  --cc-accent-text: #A8461A; --cc-accent-on-dark: #F27730; --cc-cream: #FAF6F3; --cc-text: #2E2E2D;
+  --cc-muted: #555555; --cc-on-dark: #F7EEF1; --cc-on-dark-muted: #E4C7D1; --cc-line: #E8E1DC; --cc-line-dark: #7A2A4B;
+}
+/* ---- preview shim: stands in for ChabadOne's own stylesheets ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+img { max-width: 100%; }
+a { color: var(--cc-primary); }
+p { margin: 0 0 1em; }
+#header .header-wrapper { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+#header_branding { display: flex; align-items: center; }
+#header_branding a.site_title { display: block; }
+.main_menu_container { border-collapse: collapse; }
+.main_menu_container td { padding: 0; vertical-align: middle; }
+#tabContentMain .co_menu_item span.parent { display: block; padding: 0 12px; }
+#tabContentMain .co_menu_item span.parent a { text-decoration: none; display: inline-block; padding: 8px 0; }
+.cs-mobile-menu-open, .cs-mobile-menu-close { display: none; background: none; border: 0; cursor: pointer; font-size: 26px; line-height: 1; padding: 8px; color: var(--cc-ink); }
+@media (max-width: 1024px) {
+  .cs-mobile-menu-open { display: block; }
+  #header .site-nav-wrapper { display: none; position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 86vw); z-index: 2000; padding: 64px 24px 24px; overflow-y: auto; box-shadow: var(--cc-shadow-lg); }
+  #header .site-nav-wrapper.is-open { display: block; }
+  #header .site-nav-wrapper .cs-mobile-menu-close { display: block; position: absolute; top: 12px; right: 12px; color: var(--cc-white); }
+  .main_menu_container, .main_menu_container tbody, .main_menu_container tr, .main_menu_container td { display: block; width: 100%; }
+  #tabContentMain .co_menu_item span.parent { padding: 0; border-bottom: 1px solid var(--cc-line-dark); }
+  #tabContentMain .co_menu_item span.parent a { padding: 14px 0; font-size: 17px; }
+}
+#footer .footer_container { max-width: var(--cc-max); margin: 0 auto; }
+#footer .footer3 { display: none; }
+.pv-note { background: var(--cc-accent-soft); color: var(--cc-ink); font-size: 13px; line-height: 1.5; text-align: center; padding: 10px 16px; font-family: var(--cc-font-body); }
+.pv-note strong { font-weight: 700; }
+.cc-program__tag { position: absolute; top: 12px; left: 12px; z-index: 2; background: rgba(255,255,255,.92); color: var(--cc-ink); font: 700 11px/1 var(--cc-font-body); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 4px; }
+.cc-subscribe__form form { display: flex; flex-wrap: wrap; gap: 12px; }
+.cc-subscribe__form input { flex: 1 1 180px; height: 52px; border-radius: var(--cc-radius-sm); padding: 0 16px; font: 16px var(--cc-font-body); color: var(--cc-text); background: var(--cc-white); border: 1px solid var(--cc-field-border); }
+.cc-subscribe__form button { height: 52px; }
+</style></head>
+<body class="cco_body cc-footer-built">
+<div class="cc-shabbat-bar" role="note"><div class="cc-wrap"><a href="#"><strong>Shabbat in Bloomfield Hills</strong><span class="cc-shabbat-bar__full"> · Candle lighting 6:20 pm (Friday) · Shabbat ends 7:19 pm · Torah portion: Lech-Lecha</span><span class="cc-shabbat-bar__short"> · candles 6:20 pm</span></a></div></div>
+<div id="header" class="on-scroll"><div class="wrapper header-wrapper">
+<div class="clearfix branding-search"><div id="header_branding" class="no_outline logo">
+<div class="float_left site-logo-wrapper"><a href="#"><img src="data:image/webp;base64,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" alt="Chabad"></a></div>
+<a href="#" class="site_title">Chabad Jewish Center<span class="cc-title-sub">Bloomfield Hills</span></a></div></div>
+<button type="button" class="cs-mobile-menu-open" aria-label="Open menu" id="pv-menu-open">&#9776;</button>
+<div class="site-nav-wrapper" id="pv-nav"><button type="button" class="cs-mobile-menu-close" aria-label="Close menu" id="pv-menu-close">&#215;</button>
+<div id="co_menu_container" class="co_menu_container"><table class="main_menu_container"><tbody><tr id="tabContentMain"><td class="co_menu_item"><span class="parent"><div><a href="#">Online Resources</a></div></span></td><td class="co_menu_item"><span class="parent"><div><a href="#">Jewish.tv</a></div></span></td><td class="co_menu_item"><span class="parent"><div><a href="#">Magazine</a></div></span></td><td class="co_menu_item"><span class="parent"><div><a href="#">Parshah&nbsp;(Weekly Torah)</a></div></span></td><td class="co_menu_item"><span class="parent"><div><a href="#">Jewish Holidays</a></div></span></td><td class="co_menu_item donate_link"><span class="parent"><div><a href="#">Donate</a></div></span></td></tr></tbody></table></div></div>
+</div></div>
+<div id="content">
+<section class="cc-section cc-section--cream" style="padding-top:72px;padding-bottom:64px;border-bottom:1px solid var(--cc-line)"><div class="cc-wrap">
+<p class="cc-eyebrow">Adult education</p>
+<h1 class="cc-h2 cc-head" style="font-size:clamp(40px,5.4vw,64px)">Years of learning together</h1>
+<p class="cc-lede">Since 2017, our courses have explored everything from Kabbalah and the soul to Talmudic law and the art of prayer. Browse every course we've offered, and watch or listen to the recordings.</p>
+<ul class="cc-stats"><li><strong>22</strong><span>courses taught</span></li><li><strong>2017</strong><span>teaching since</span></li><li><strong>12</strong><span>with recordings</span></li></ul>
+</div></section>
+<section class="cc-section" style="padding-top:56px;padding-bottom:40px"><div class="cc-wrap">
+<p class="cc-eyebrow">Join a course now</p>
+<div class="cc-features" style="margin-top:8px">
+<article class="cc-feature"><div class="cc-feature__date" aria-hidden="true"><span class="cc-feature__m">Oct</span><span class="cc-feature__d">28</span><span class="cc-feature__w">Wed</span></div>
+<div class="cc-feature__body"><p class="cc-feature__kicker">Now enrolling · JLI course</p><h3 class="cc-feature__title cc-head">Kabbalah and the hidden architecture of you</h3>
+<p class="cc-feature__desc">Reincarnation, soulmates, dreams, names: what these and other mysteries reveal about the hidden design of your life.</p>
+<div class="cc-feature__cta"><a class="cc-btn" href="#">Register</a></div></div></article>
+<article class="cc-feature"><div class="cc-feature__date" aria-hidden="true"><span class="cc-feature__m">Nov</span><span class="cc-feature__d">17</span><span class="cc-feature__w">Tue</span></div>
+<div class="cc-feature__body"><p class="cc-feature__kicker">Now enrolling · Rosh Chodesh Society</p><h3 class="cc-feature__title cc-head">NEXT GENesis</h3>
+<p class="cc-feature__desc">Seven monthly evenings reading the first stories of Genesis as a mirror of the soul, with Mushky Dubov. Dinner served.</p>
+<div class="cc-feature__cta"><a class="cc-btn" href="#">Register</a></div></div></article></div>
+</div></section>
+<section class="cc-section" style="padding-top:24px"><div class="cc-wrap">
+<p class="cc-eyebrow">The course library</p>
+<div class="cc-chips" role="group" aria-label="Filter courses"><button type="button" aria-pressed="true" data-f="all">All courses</button><button type="button" aria-pressed="false" data-f="soul"><i style="background: var(--cc-book-1)"></i>Mysticism and the soul</button><button type="button" aria-pressed="false" data-f="big"><i style="background: var(--cc-book-2)"></i>Big questions</button><button type="button" aria-pressed="false" data-f="law"><i style="background: var(--cc-book-3)"></i>Law, ethics and history</button><button type="button" aria-pressed="false" data-f="life"><i style="background: var(--cc-book-4)"></i>Life and relationships</button><button type="button" aria-pressed="false" data-f="torah"><i style="background: var(--cc-book-5)"></i>Torah, prayer and holidays</button><button type="button" aria-pressed="false" data-f="rec">With recordings</button></div>
+<div class="cc-shelf"><div class="cc-shelf__year" role="heading" aria-level="2"><strong>2026</strong><span>3 courses</span></div><article class="cc-book cc-book--t3" data-topic="law" data-rec="0" aria-label="Sinai and Civics, Summer 2026"><span class="cc-book__season">Summer 2026</span><h3 class="cc-book__title">Sinai and Civics</h3><p class="cc-book__tag">How Jewish values helped shape American ideals</p><div class="cc-book__foot"></div></article><article class="cc-book cc-book--t2" data-topic="big" data-rec="0" aria-label="For All Humankind, Spring 2026"><span class="cc-book__season">Spring 2026</span><h3 class="cc-book__title">For All Humankind</h3><p class="cc-book__tag">Your Judaism holds a message the world wants to hear</p><div class="cc-book__foot"></div></article><article class="cc-book cc-book--t3" data-topic="law" data-rec="0" aria-label="Captivating Cases in Rabbinic Responsa, Winter 2026"><span class="cc-book__season">Winter 2026</span><h3 class="cc-book__title">Captivating Cases in Rabbinic Responsa</h3><p class="cc-book__tag">The surprising questions your ancestors asked their rabbis</p><div class="cc-book__foot"></div></article><div class="cc-shelf__year" role="heading" aria-level="2"><strong>2025</strong><span>1 course</span></div><article class="cc-book cc-book--t1" data-topic="soul" data-rec="0" aria-label="The Kabbalah of Meaning, Fall 2025"><span class="cc-book__season">Fall 2025</span><h3 class="cc-book__title">The Kabbalah of Meaning</h3><p class="cc-book__tag">Finding the purpose that connects all parts of life</p><div class="cc-book__foot"></div></article><div class="cc-shelf__year" role="heading" aria-level="2"><strong>2021</strong><span>3 courses</span></div><article class="cc-book cc-book--t3" data-topic="law" data-rec="0" aria-label="Judaism Decoded, Summer 2021"><span class="cc-book__season">Summer 2021</span><h3 class="cc-book__title">Judaism Decoded</h3><p class="cc-book__tag">The logic behind Torah law and Talmudic debate</p><div class="cc-book__foot"></div></article><article class="cc-book cc-book--t2" data-topic="big" data-rec="1" aria-label="This Can Happen, Spring 2021"><span class="cc-book__season">Spring 2021</span><h3 class="cc-book__title">This Can Happen</h3><p class="cc-book__tag">A credible case for feeling good about the future</p><div class="cc-book__foot"><a href="https://www.youtube.com/playlist?list=PLbHO_Q5DmD_Mrplg7dJW0resJH-m432Xq" target="_blank" rel="noopener">&#9654; Watch</a></div></article><article class="cc-book cc-book--t1" data-topic="soul" data-rec="1" aria-label="Journey of the Soul, Winter 2021"><span class="cc-book__season">Winter 2021</span><h3 class="cc-book__title">Journey of the Soul</h3><p class="cc-book__tag">A fresh look at life, death and the rest, in peace</p><div class="cc-book__foot"><a href="https://www.youtube.com/playlist?list=PLbHO_Q5DmD_OYo3Hi1VkTcC7NrH0q2ijY" target="_blank" rel="noopener">&#9654; Watch</a></div></article><div class="cc-shelf__year" role="heading" aria-level="2"><strong>2020</strong><span>6 courses</span></div><article class="cc-book cc-book--t5" data-topic="torah" data-rec="1" aria-label="Secrets of the Bible, Fall 2020"><span class="cc-book__season">Fall 2020</span><h3 class="cc-book__title">Secrets of the Bible</h3><p class="cc-book__tag">Iconic stories, mystical meanings and lessons for life</p><div class="cc-book__foot"><a href="https://www.youtube.com/playlist?list=PLbHO_Q5DmD_NTBpY5gkghY7worBkSyZKJ" target="_blank" rel="noopener">&#9654; Watch</a></div></article><article class="cc-book cc-book--t5" data-topic="torah" data-rec="1" aria-label="High Holidays: Making It Meaningful, Fall 2020"><span class="cc-book__season">Fall 2020</span><h3 class="cc-book__title">High Holidays: Making It Meaningful</h3><p class="cc-book__tag">Making these special days meaningful at home</p><div class="cc-book__foot"><a href="https://www.youtube.com/playlist?list=PLbHO_Q5DmD_PjdtLUb8LcJigU5pAKPFXE" target="_blank" rel="noopener">&#9654; Watch</a></div></article><article class="cc-book cc-book--t4" data-topic="life" data-rec="1" aria-label="Pirkei Avot Studies, Summer 2020"><span class="cc-book__season">Summer 2020</span><h3 class="cc-book__title">Pirkei Avot Studies</h3><p class="cc-book__tag">Life wisdom from the Ethics of Our Fathers</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><article class="cc-book cc-book--t4" data-topic="life" data-rec="1" aria-label="Judaism at Home, Spring 2020"><span class="cc-book__season">Spring 2020</span><h3 class="cc-book__title">Judaism at Home</h3><p class="cc-book__tag">For when the only place Judaism can thrive is at home</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><article class="cc-book cc-book--t2" data-topic="big" data-rec="1" aria-label="The Jewish Course of Why, Spring 2020"><span class="cc-book__season">Spring 2020</span><h3 class="cc-book__title">The Jewish Course of Why</h3><p class="cc-book__tag">50 of the biggest questions about Jews and Judaism</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><article class="cc-book cc-book--t3" data-topic="law" data-rec="1" aria-label="Judaism&#x27;s Gifts to the World, Winter 2020"><span class="cc-book__season">Winter 2020</span><h3 class="cc-book__title">Judaism&#x27;s Gifts to the World</h3><p class="cc-book__tag">How major Jewish ideas became universal values</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><div class="cc-shelf__year" role="heading" aria-level="2"><strong>2019</strong><span>4 courses</span></div><article class="cc-book cc-book--t4" data-topic="life" data-rec="1" aria-label="Worrier to Warrior, Fall 2019"><span class="cc-book__season">Fall 2019</span><h3 class="cc-book__title">Worrier to Warrior</h3><p class="cc-book__tag">Jewish secrets to feeling good however you feel</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><article class="cc-book cc-book--t1" data-topic="soul" data-rec="1" aria-label="Paradigm Shift, Summer 2019"><span class="cc-book__season">Summer 2019</span><h3 class="cc-book__title">Paradigm Shift</h3><p class="cc-book__tag">Transformational life teachings of the Lubavitcher Rebbe</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><article class="cc-book cc-book--t5" data-topic="torah" data-rec="1" aria-label="With All My Heart, Spring 2019"><span class="cc-book__season">Spring 2019</span><h3 class="cc-book__title">With All My Heart</h3><p class="cc-book__tag">The Jewish art of prayer and spiritual experience</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><article class="cc-book cc-book--t3" data-topic="law" data-rec="1" aria-label="Crime and Consequence, Winter 2019"><span class="cc-book__season">Winter 2019</span><h3 class="cc-book__title">Crime and Consequence</h3><p class="cc-book__tag">A Jewish look at conviction, sentencing and rehabilitation</p><div class="cc-book__foot"><span title="Audio recordings are being moved from the old site">&#9835; Audio</span></div></article><div class="cc-shelf__year" role="heading" aria-level="2"><strong>2018</strong><span>4 courses</span></div><article class="cc-book cc-book--t2" data-topic="big" data-rec="0" aria-label="Wrestling with Faith, Fall 2018"><span class="cc-book__season">Fall 2018</span><h3 class="cc-book__title">Wrestling with Faith</h3><p class="cc-book__tag">Tackling the biggest questions and challenges to faith</p><div class="cc-book__foot"></div></article><article class="cc-book cc-book--t5" data-topic="torah" data-rec="0" aria-label="Heaven on Earth, Summer 2018"><span class="cc-book__season">Summer 2018</span><h3 class="cc-book__title">Heaven on Earth</h3><p class="cc-book__tag">A virtual tour of our Holy Temple</p><div class="cc-book__foot"></div></article><article class="cc-book cc-book--t1" data-topic="soul" data-rec="0" aria-label="What Is?, Spring 2018"><span class="cc-book__season">Spring 2018</span><h3 class="cc-book__title">What Is?</h3><p class="cc-book__tag">Rethinking everything we know about our universe</p><div class="cc-book__foot"></div></article><article class="cc-book cc-book--t4" data-topic="life" data-rec="0" aria-label="Communication: Its Art and Soul, Winter 2018"><span class="cc-book__season">Winter 2018</span><h3 class="cc-book__title">Communication: Its Art and Soul</h3><p class="cc-book__tag">Reclaim the lost art of human connection</p><div class="cc-book__foot"></div></article><div class="cc-shelf__year" role="heading" aria-level="2"><strong>2017</strong><span>1 course</span></div><article class="cc-book cc-book--t3" data-topic="law" data-rec="0" aria-label="Great Debates in Jewish History, Fall 2017"><span class="cc-book__season">Fall 2017</span><h3 class="cc-book__title">Great Debates in Jewish History</h3><p class="cc-book__tag">Six epic debates that rocked the Jewish world</p><div class="cc-book__foot"></div></article></div>
+</div></section>
+</div>
+<div id="footer"><div id="cc-footer" class="cc-footer"><div class="cc-footer__grid">
+<div><p class="cc-footer__brand">Chabad Jewish Center of Bloomfield Hills</p><p class="cc-footer__tag">A warm, welcoming home for every Jew in Bloomfield Hills: learning, holidays and community, whatever your background.</p></div>
+<div><h4>Explore</h4><ul><li><a href="#">Online Resources</a></li><li><a href="#">Jewish.tv</a></li><li><a href="#">Magazine</a></li><li><a href="#">Parshah (Weekly Torah)</a></li><li><a href="#">Jewish Holidays</a></li></ul></div>
+<div><h4>Get involved</h4><ul><li><a href="#">Upcoming events</a></li><li><a href="#">Weekly email</a></li><li><a href="#">Contact us</a></li><li><a href="#">Donate</a></li></ul></div>
+<div><h4>Visit</h4><address>3805 Quarton Road<br>Bloomfield Hills, MI 48302<br>248-949-6210<br>info@bhchabad.org</address></div>
+</div><div class="cc-footer__bottom"></div></div>
+<div class="footer_container footer_text">Powered by Chabad.org &#169; 1993-2026 &#183; Privacy Policy</div></div>
+<script>(function(){var d=document,bs=d.querySelectorAll('.cc-chips button');
+bs.forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f;bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+d.querySelectorAll('.cc-book').forEach(function(k){k.hidden=!(f==='all'||(f==='rec'?k.dataset.rec==='1':k.dataset.topic===f));});
+d.querySelectorAll('.cc-shelf__year').forEach(function(y){var n=y.nextElementSibling,any=false;while(n&&n.classList.contains('cc-book')){if(!n.hidden){any=true;}n=n.nextElementSibling;}y.hidden=!any;});});});
+d.getElementById('pv-menu-open').addEventListener('click',function(){d.getElementById('pv-nav').classList.add('is-open');});
+d.getElementById('pv-menu-close').addEventListener('click',function(){d.getElementById('pv-nav').classList.remove('is-open');});
+d.querySelectorAll('a[href="#"]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();});});})();</script>
+</body></html>
