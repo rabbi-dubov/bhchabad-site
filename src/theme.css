@@ -792,6 +792,43 @@ html body.cco_body #RegisterSinglePage .reservation input::placeholder { color: 
   }
 }
 
+/* --- Phone markup: ChabadOne serves a different row structure to phones (by user agent):
+       [index] [type + price + remove] [names + questions]. Lay it out as: header bar, then full-width body. --- */
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) {
+  grid-template-columns: 32px 1fr !important;
+  grid-template-areas: "idx meta" "body body" !important;
+  align-items: center !important; row-gap: 14px;
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > [id$="_index"] { grid-area: idx; margin: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .float_right { grid-area: meta; display: flex !important; align-items: center; justify-content: flex-end; gap: 10px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .float_right > .inline_block:first-child {
+  margin-right: auto !important; padding: 6px 12px !important; background: var(--cc-sand-soft); color: var(--cc-sand-text);
+  border-radius: var(--cc-radius-sm); font-size: 13px; font-weight: 700; line-height: 1.2;
+}
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .float_right .remove_reservation { margin: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .small_horizontal_padding { grid-area: body; display: block !important; width: auto !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > div:nth-child(2)::before, html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > div:nth-child(3)::before { content: none !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .small_horizontal_padding > .inline_block { display: block !important; width: 100% !important; margin: 0 0 12px !important; padding: 0 !important; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .small_horizontal_padding > .inline_block::before { display: block; font-size: 14px; font-weight: 600; color: var(--cc-ink); margin: 0 0 6px; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .small_horizontal_padding > .inline_block:nth-child(1)::before { content: "First name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .small_horizontal_padding > .inline_block:nth-child(2)::before { content: "Last name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .small_horizontal_padding) > .small_horizontal_padding > .seat_selection:empty { display: none !important; }
+html body.cco_body #RegisterSinglePage .embedded_form #formContainer { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; max-width: none !important; }
+html body.cco_body #RegisterSinglePage .embedded_form .form-input input:not([type="radio"]):not([type="checkbox"]), html body.cco_body #RegisterSinglePage .embedded_form .form-input textarea { width: 100% !important; box-sizing: border-box; }
+
+/* Small phones: less nested padding so fields get the width */
+@media (max-width: 480px) {
+  html body.cco_body #RegisterBody { padding-left: 0 !important; padding-right: 0 !important; }
+  html body.cco_body #RegisterBody #Performances,
+  html body.cco_body #RegisterBody #Summary,
+  html body.cco_body #RegisterBody #ReserversInformation,
+  html body.cco_body #RegisterBody #Payment,
+  html body.cco_body #RegisterBody #AdditionalInformation:has(*) { padding: 22px 16px !important; }
+  html body.cco_body #RegisterSinglePage .reservation { padding: 14px !important; }
+  html body.cco_body #RegisterSinglePage .toggle_options > .inline_block { flex: 1 1 100%; }
+  html body.cco_body #RegisterSinglePage .toggle_options .co_global_button, html body.cco_body #RegisterSinglePage .toggle_options .add_attendee { width: 100%; }
+}
+
 /* --- Per-attendee questions (ChabadOne form builder inside each reservation) --- */
 html body.cco_body #RegisterSinglePage .embedded_form { margin-top: 16px; }
 html body.cco_body #RegisterSinglePage .embedded_form .form-all { background: transparent !important; box-shadow: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; font-size: 16px !important; }
