@@ -40,12 +40,18 @@
     testimonialsUrl: "/testimonials",
     shabbatPlace: "Bloomfield Hills",
     home: {
-      heroEyebrow: "Chabad Jewish Center of Bloomfield Hills",
+      // Homepage sections, in order. Also available: "quick" (icon links strip), "intro" (message widget).
+      sections: ["hero", "events", "programs", "testimonials", "partner", "subscribe"],
+      heroEyebrow: "Shalom and welcome",
+      heroCta: "See what's coming up",
       secondaryCta: { text: "About us", href: "/about" },
       introEyebrow: "Welcome",
-      eventsEyebrow: "Upcoming classes and events",
+      eventsEyebrow: "Coming up",
       eventsTitle: "Discover the joy and meaning in Judaism",
-      eventsLine: "Everything is open to everyone, and the first class of every course is yours to try, commitment-free.",
+      eventsLine: "The first class of every course is yours to try, commitment-free.",
+      eventsAll: "Full calendar",
+      // Event-name prefixes turned into a readable label on the course card
+      prefixes: { "JLI": "JLI course", "RCS": "Rosh Chodesh Society" },
       programsEyebrow: "Our programs",
       programsTitle: "Programs for the whole community",
       testimonialsEyebrow: "Testimonials",
@@ -165,47 +171,26 @@
     }).filter(function (s) { return s.title || s.img; });
   }
 
+  // One calm welcome hero from the FIRST slide of the ChabadOne slider (title, text, link, image).
+  // Other slides are not shown: dated courses appear in "Coming up" instead (no rotating carousel).
   function heroSection(slides) {
-    if (!slides.length) { return null; }
-    var title = h("h1", { "class": "cc-hero__title cc-head" });
-    var sub = h("p", { "class": "cc-hero__sub" });
-    var cta = h("a", { "class": "cc-btn cc-btn--accent" });
-    var img = h("div", { "class": "cc-hero__img", role: "img" });
-    var dots = h("div", { "class": "cc-hero__dots", role: "group", "aria-label": "Featured items" });
-    var idx = 0, timer = null;
-    function show(i) {
-      idx = i; var s = slides[i];
-      title.textContent = s.title; sub.textContent = s.sub;
-      sub.style.display = s.sub ? "" : "none";
-      if (s.href) { cta.setAttribute("href", s.href); cta.textContent = s.cta || "Learn more"; cta.style.display = ""; if (s.target) { cta.setAttribute("target", s.target); } }
-      else { cta.style.display = "none"; }
-      img.style.backgroundImage = s.img ? "url(\"" + s.img + "\")" : "";
-      img.setAttribute("aria-label", s.title);
-      qa("button", dots).forEach(function (b, j) { b.setAttribute("aria-current", j === i ? "true" : "false"); });
-    }
-    if (slides.length > 1) {
-      slides.forEach(function (s, i) {
-        var b = h("button", { type: "button", "aria-label": "Show: " + s.title });
-        b.addEventListener("click", function () { stop(); show(i); });
-        dots.appendChild(b);
-      });
-    }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-    function start() { if (slides.length > 1 && !reduceMotion && !timer) { timer = setInterval(function () { show((idx + 1) % slides.length); }, 7000); } }
-    var sec = h("section", { "class": "cc-hero", "aria-label": "Welcome" }, [
+    var s = slides[0];
+    if (!s) { return null; }
+    var ctaHref = s.href || "#cc-events-h", ctaText = s.href ? (s.cta || "Learn more") : CC.home.heroCta;
+    return h("section", { "class": "cc-hero", "aria-label": "Welcome" }, [
       h("div", { "class": "cc-wrap" }, [
         h("div", { "class": "cc-hero__text" }, [
-          h("p", { "class": "cc-eyebrow", text: CC.home.heroEyebrow }),
-          title, sub,
-          h("div", { "class": "cc-hero__ctas" }, [cta, h("a", { "class": "cc-btn cc-btn--ghost", href: CC.home.secondaryCta.href, text: CC.home.secondaryCta.text, style: "color: var(--cc-white) !important" })])
+          CC.home.heroEyebrow ? h("p", { "class": "cc-eyebrow", text: CC.home.heroEyebrow }) : null,
+          h("h1", { "class": "cc-hero__title cc-head", text: s.title }),
+          s.sub ? h("p", { "class": "cc-hero__sub", text: s.sub }) : null,
+          h("div", { "class": "cc-hero__ctas" }, [
+            h("a", { "class": "cc-btn cc-btn--light", href: ctaHref, target: s.target || null, text: ctaText }),
+            h("a", { "class": "cc-btn cc-btn--ghost", href: CC.home.secondaryCta.href, text: CC.home.secondaryCta.text, style: "color: var(--cc-white) !important" })
+          ])
         ]),
-        h("div", { "class": "cc-hero__media" }, [img, slides.length > 1 ? dots : null])
+        s.img ? h("div", { "class": "cc-hero__media" }, [h("div", { "class": "cc-hero__img", role: "img", "aria-label": s.title, style: "background-image:url(\"" + s.img + "\")" })]) : null
       ])
     ]);
-    sec.addEventListener("mouseenter", stop);
-    sec.addEventListener("mouseleave", start);
-    show(0); start();
-    return sec;
   }
 
   function quickSection(root) {
@@ -340,79 +325,106 @@
     ]);
   }
 
-  function eventCard(ev) {
-    return h("article", { "class": "cc-event" }, [
-      ev.img ? h("div", { "class": "cc-event__img", style: "background-image:url('" + ev.img.replace(/'/g, "%27") + "')" }) : null,
-      h("div", { "class": "cc-event__body" }, [
-        ev.date ? h("p", { "class": "cc-event__date", text: ev.date }) : null,
-        h("h3", { "class": "cc-event__title cc-head", text: ev.title }),
-        ev.desc ? h("p", { "class": "cc-event__desc", text: ev.desc }) : null,
-        h("div", { "class": "cc-event__cta" }, [h("a", { "class": "cc-btn", href: ev.href, text: ev.cta || "Register" })])
+  /* "Coming up": one card per course or event, led by its date.
+     Courses come from the registration Events page (title, description, Register link); their dated
+     sessions from the native calendar feed fold in as "Next class". Calendar items with no registration
+     page show as their own cards. */
+  var MONTHS = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+  function parseWhen(t) {
+    var m = /(\w{3})\w*,\s+(\w+)\s+(\d{1,2}),\s+(\d{4})(?:\s*-\s*(\d{1,2}:\d{2}\s*[ap]m))?/i.exec(t || "");
+    if (!m) { return null; }
+    var mi = MONTHS.indexOf(m[2].slice(0, 3).toLowerCase());
+    if (mi < 0) { return null; }
+    return { wd: m[1], mon: m[2].slice(0, 3), day: m[3], key: m[4] + "-" + (mi < 9 ? "0" : "") + (mi + 1) + "-" + (m[3].length < 2 ? "0" : "") + m[3],
+      time: m[5] ? m[5].replace(/\s*([ap]m)$/i, " $1").toLowerCase() : "" };
+  }
+  function evKey(t) { return String(t || "").toLowerCase().replace(/^\s*[a-z]{2,5}\s*:\s*/, "").replace(/[^a-z0-9]+/g, ""); }
+  function splitTitle(t) {
+    var m = /^\s*([A-Za-z]{2,5})\s*:\s*(.+)$/.exec(t || "");
+    if (m && CC.home.prefixes[m[1].toUpperCase()]) { return { kicker: CC.home.prefixes[m[1].toUpperCase()], title: m[2] }; }
+    return { kicker: "", title: t };
+  }
+  function featureCard(ev) {
+    var w = ev.when, st = splitTitle(ev.title);
+    var meta = null;
+    if (ev.sessions.length) {
+      var first = ev.sessions[0], times = ev.sessions.filter(function (x) { return x.key === first.key && x.time; }).map(function (x) { return x.time; });
+      meta = h("p", { "class": "cc-feature__meta" }, [h("strong", { text: "Next class: " }), first.wd + ", " + first.mon + " " + first.day + (times.length ? " · " + times.join(" or ") : "")]);
+    } else if (w) {
+      meta = h("p", { "class": "cc-feature__meta" }, [h("strong", { text: "Starts: " }), w.wd + ", " + w.mon + " " + w.day]);
+    }
+    return h("article", { "class": "cc-feature" }, [
+      w ? h("div", { "class": "cc-feature__date", "aria-hidden": "true" }, [
+        h("span", { "class": "cc-feature__m", text: w.mon }), h("span", { "class": "cc-feature__d", text: w.day }), h("span", { "class": "cc-feature__w", text: w.wd })
+      ]) : h("div", { "class": "cc-feature__date", "aria-hidden": "true" }),
+      h("div", { "class": "cc-feature__body" }, [
+        st.kicker ? h("p", { "class": "cc-feature__kicker", text: st.kicker }) : null,
+        h("h3", { "class": "cc-feature__title cc-head", text: st.title }),
+        ev.desc ? h("p", { "class": "cc-feature__desc", text: ev.desc }) : null,
+        meta,
+        h("div", { "class": "cc-feature__cta" }, [h("a", { "class": "cc-btn", href: ev.href, text: ev.cta })])
       ])
     ]);
   }
 
   function eventsSection(root) {
-    var track = h("div", { "class": "cc-events__track", tabindex: "0", "aria-label": "Upcoming events, scroll sideways for more" });
-    var prev = h("button", { type: "button", "aria-label": "Previous events", text: "←" });
-    var next = h("button", { type: "button", "aria-label": "More events", text: "→" });
-    function step(dir) { track.scrollBy({ left: dir * (track.clientWidth * 0.9), behavior: reduceMotion ? "auto" : "smooth" }); }
-    prev.addEventListener("click", function () { step(-1); });
-    next.addEventListener("click", function () { step(1); });
+    var grid = h("div", { "class": "cc-features" });
     var sec = h("section", { "class": "cc-section cc-section--cream cc-events", "aria-labelledby": "cc-events-h" }, [
       h("div", { "class": "cc-wrap" }, [
         h("div", { "class": "cc-head-row" }, [
           h("div", null, [h("p", { "class": "cc-eyebrow", text: CC.home.eventsEyebrow }), h("h2", { "class": "cc-h2 cc-head", id: "cc-events-h", text: CC.home.eventsTitle }), CC.home.eventsLine ? h("p", { "class": "cc-lede", text: CC.home.eventsLine }) : null]),
-          h("div", { "class": "cc-events__nav" }, [prev, next, h("a", { "class": "cc-btn cc-btn--ghost", href: CC.eventsUrl, text: "All events" })])
+          h("div", { "class": "cc-events__nav" }, [h("a", { "class": "cc-btn cc-btn--ghost", href: CC.eventsUrl, text: CC.home.eventsAll })])
         ]),
-        track
+        grid
       ])
     ]);
-    // 1) Calendar items already on the page (native "Upcoming Events" feed) as a quick first paint
-    // Titles are compared loosely ("JLI: Kabbalah..." = "Kabbalah...") so a course shows once
-    function evKey(t) { return String(t || "").toLowerCase().replace(/^\s*jli\s*:?\s*/, "").replace(/[^a-z0-9]+/g, ""); }
-    var nativeSeen = {};
-    var native = qa(".upcoming_events .widget_content li", root).map(function (li) {
-      // The title link sits in the heading; a separate icon-only link (.register_link) may come first
+    // Dated sessions from the native "Upcoming Events" feed on the homepage
+    var sessions = qa(".upcoming_events .widget_content li", root).map(function (li) {
+      // The title link sits in the heading; an icon-only .register_link may come first
       var a = q("h6 a, h5 a, h4 a, h3 a", li) || q("a:not(.register_link)", li);
-      var reg = q("a.register_link", li);
-      var title = a ? txt(a) : "";
-      if (!title || nativeSeen[evKey(title)]) { return null; }   // next session of each class only
-      nativeSeen[evKey(title)] = 1;
-      return { title: title, href: (reg || a).getAttribute("href"), date: txt(q("small", li)), cta: reg ? "Register" : "Details" };
+      var reg = q("a.register_link", li), title = a ? txt(a) : "", when = parseWhen(txt(q("small", li)));
+      if (!title || !when) { return null; }
+      when.title = title; when.k = evKey(title); when.href = (reg || a).getAttribute("href"); when.reg = !!reg;
+      return when;
     }).filter(Boolean);
-    function render(list) {
-      track.textContent = "";
-      if (!list.length) {
-        track.appendChild(h("div", { "class": "cc-card" }, [h("h3", { text: "New events are on the way" }), h("p", { text: "Check the full calendar or join our weekly email to hear first." })]));
+    function render(courses) {
+      var used = {}, cards = [];
+      courses.forEach(function (c) {
+        c.sessions = sessions.filter(function (x) { return x.k === evKey(c.title); });
+        if (c.sessions.length) { c.when = c.sessions[0]; }
+        used[evKey(c.title)] = 1;
+        cards.push(c);
+      });
+      sessions.forEach(function (x) {   // calendar items without a registration page: one card each (next date)
+        if (used[x.k]) { return; }
+        used[x.k] = 1;
+        cards.push({ title: x.title, href: x.href, cta: x.reg ? "Register" : "Details", desc: "", when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
+      });
+      grid.textContent = "";
+      if (!cards.length) {
+        grid.appendChild(h("div", { "class": "cc-card" }, [h("h3", { text: "New classes are on the way" }), h("p", { text: "Check the full calendar or join our weekly email to hear first." })]));
         return;
       }
-      list.slice(0, 12).forEach(function (ev) { track.appendChild(eventCard(ev)); });
+      cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : 1); });
+      cards.slice(0, 6).forEach(function (c) { grid.appendChild(featureCard(c)); });
     }
-    render(native);
-    // 2) Registration events (richer: description + image) fetched from the Events page
+    render([]);   // first paint from the calendar feed
     fetch(CC.eventsSource, { credentials: "same-origin" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
       if (!t) { return; }
       var doc = new DOMParser().parseFromString(t, "text/html");
-      var evs = qa(".event", doc).map(function (e) {
+      var courses = qa(".event", doc).map(function (e) {
         var a = q("h2 a", e); if (!a) { return null; }
-        var im = q(".event__image img", e);
         var desc = q(".bottom_padding", e);
         var descText = desc ? desc.innerHTML.replace(/<br\s*\/?>/gi, " · ").replace(/<[^>]+>/g, " ") : "";
         var tmp = d.createElement("textarea"); tmp.innerHTML = descText;
         return {
-          title: txt(a), href: a.getAttribute("href"),
-          date: txt(q(".performance__date", e)),
-          desc: tmp.value.replace(/\s+/g, " ").replace(/(\s*\u00b7\s*)+/g, " \u00b7 ").replace(/^\s*\u00b7\s*|\s*\u00b7\s*$/g, "").trim(),
-          img: im ? im.getAttribute("src") : "", cta: "Register"
+          title: txt(a), href: a.getAttribute("href"), cta: "Register",
+          when: parseWhen(txt(q(".performance__date", e))),
+          desc: tmp.value.replace(/\s+/g, " ").replace(/(\s*·\s*)+/g, " · ").replace(/^\s*·\s*|\s*·\s*$/g, "").trim()
         };
       }).filter(Boolean);
-      if (evs.length) {
-        var seen = {};
-        evs.forEach(function (e) { seen[evKey(e.title)] = 1; });
-        render(evs.concat(native.filter(function (n) { return !seen[evKey(n.title)]; })));
-      }
-    }).catch(function () { /* keep the native list */ });
+      if (courses.length) { render(courses); }
+    }).catch(function () { /* keep the calendar cards */ });
     return sec;
   }
 
@@ -476,16 +488,17 @@
     if (!hp || q("#cc-home")) { return; }
     addClass(html, "cc-home-page");
     var shell = h("div", { id: "cc-home" });
-    [
-      heroSection(readSlides(q(".promo_slider", hp) || hp)),
-      quickSection(hp),
-      introSection(hp),
-      eventsSection(hp),
-      programsSection(hp),
-      testimonialsSection(),
-      partnerSection(),
-      subscribeSection(hp)
-    ].forEach(function (s) { if (s) { shell.appendChild(s); } });
+    var build = {
+      hero: function () { return heroSection(readSlides(q(".promo_slider", hp) || hp)); },
+      quick: function () { return quickSection(hp); },
+      intro: function () { return introSection(hp); },
+      events: function () { return eventsSection(hp); },
+      programs: function () { return programsSection(hp); },
+      testimonials: function () { return testimonialsSection(); },
+      partner: partnerSection,
+      subscribe: function () { return subscribeSection(hp); }
+    };
+    CC.home.sections.forEach(function (k) { var s = build[k] && build[k](); if (s) { shell.appendChild(s); } });
     hp.parentNode.insertBefore(shell, hp);
     addClass(hp, "cc-native-parked");
     addClass(html, "cc-shell-ready");
