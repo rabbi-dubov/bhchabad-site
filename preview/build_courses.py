@@ -37,6 +37,24 @@ TOPIC_OF = {  # by title keyword -> topic key
 }
 REC_LABEL = {"youtube": "Watch the classes", "spotify": "Listen on the podcast", "wix-audio": "Audio"}
 import base64
+from PIL import Image, ImageStat
+
+
+def cover_of(c):
+    """Cover thumbnail (data/covers-thumb/<stem>.webp) as a data URI, plus the colour of its edges,
+    used to fill the frame around covers that aren't 16:9."""
+    f = ROOT / "data/covers-thumb" / (pathlib.Path(c.get("coverFile") or "").stem + ".webp")
+    if not c.get("coverFile") or not f.exists():
+        return None
+    im = Image.open(f).convert("RGB")
+    w, h = im.size
+    k = max(2, w // 40)
+    strips = [im.crop((0, 0, w, k)), im.crop((0, h - k, w, h)), im.crop((0, 0, k, h)), im.crop((w - k, 0, w, h))]
+    rgb = [round(sum(ImageStat.Stat(x).mean[i] for x in strips) / 4) for i in range(3)]
+    return {"src": "data:image/webp;base64," + base64.b64encode(f.read_bytes()).decode(),
+            "bg": "#%02x%02x%02x" % tuple(rgb), "square": w / h < 1.3}
+
+
 PHOTOS = {pth.stem: "data:image/jpeg;base64," + base64.b64encode(pth.read_bytes()).decode() for pth in (ROOT / "preview/photos").glob("*.jpg")}
 
 
@@ -60,6 +78,7 @@ for c in DATA["courses"]:
         "key": f'{c["year"]}-{SEASON_ORDER.get(season, 4)}{"b" if women else "a"}', "year": str(c["year"]),
         "topic": topic_of(c["title"]), "women": women, "series": c["series"], "desc": c.get("description") or "",
         "lessons": c.get("lessons") or [], "recs": c.get("recordings") or [], "current": c.get("status") == "current",
+        "cover": cover_of(c),
     })
 PAST = [c for c in COURSES if not c["current"]]
 
@@ -72,8 +91,11 @@ def card(i, c):
         link = '<span>Audio available</span>'
     who = "Women's series with Mushky Dubov" if c["women"] else ""
     when = c["season"]
-    return (f'<article class="cc-course cc-topic-{cls[1]}" data-topic="{c["topic"]}" data-rec="{1 if c["recs"] else 0}" data-women="{1 if c["women"] else 0}">'
-            f'<p class="cc-course__when">{e(when)}</p>'
+    cv = c["cover"]
+    cover = (f'<div class="cc-course__cover" style="background-color:{cv["bg"]}"><img src="{cv["src"]}" alt="" loading="lazy" decoding="async" /></div>'
+             if cv else "")
+    return (f'<article class="cc-course cc-topic-{cls[1]}{" cc-course--cover" if cv else ""}" data-topic="{c["topic"]}" data-rec="{1 if c["recs"] else 0}" data-women="{1 if c["women"] else 0}">'
+            f'{cover}<p class="cc-course__when">{e(when)}</p>'
             f'<h3 class="cc-course__title cc-head"><button type="button" class="cc-course__open" data-i="{i}">{e(c["title"])}</button></h3>'
             f'<p class="cc-course__desc">{e(c["desc"])}</p>'
             f'<div class="cc-course__foot"><span><i class="cc-dot"></i>{e(who or label)}</span>{link}</div></article>')
@@ -145,6 +167,7 @@ d.querySelectorAll('.cc-course').forEach(function(k){k.hidden=!(f==='all'||(f===
 var dlg=d.getElementById('cc-course'),body=d.getElementById('cc-course-body'),L={youtube:'Watch the classes',spotify:'Listen on the podcast','wix-audio':'Audio (moving from the old site)'};
 function el(t,c,x){var n=d.createElement(t);if(c){n.className=c;}if(x){n.textContent=x;}return n;}
 d.querySelectorAll('.cc-course__open').forEach(function(b){b.addEventListener('click',function(){var c=window.CC_COURSES[+b.dataset.i];body.textContent='';
+var ci=b.closest('.cc-course').querySelector('.cc-course__cover');if(ci){var fig=ci.cloneNode(true);fig.className='cc-dialog__cover';body.appendChild(fig);}
 body.appendChild(el('p','cc-eyebrow',c.s));body.appendChild(el('h2','cc-h2 cc-head',c.t));if(c.d){body.appendChild(el('p','cc-lede',c.d));}
 if(c.l.length){body.appendChild(el('h3','cc-dialog__h','Lessons'));var ol=el('ol','cc-dialog__lessons');c.l.forEach(function(x){ol.appendChild(el('li','',x));});body.appendChild(ol);}
 if(c.r.length){var r=el('div','cc-hero__ctas');c.r.forEach(function(x){if(x.t==='wix-audio'){r.appendChild(el('span','cc-chip',L[x.t]));}else{var a=el('a','cc-btn',L[x.t]);a.href=x.u;a.target='_blank';a.rel='noopener';r.appendChild(a);}});body.appendChild(r);}

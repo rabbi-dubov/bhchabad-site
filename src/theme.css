@@ -755,6 +755,15 @@ html body.cco_body .cc-course__foot { margin-top: auto; padding-top: 10px; displ
 html body.cco_body .cc-course__foot a { color: var(--cc-primary) !important; font-weight: 700; text-decoration: none !important; }
 html body.cco_body .cc-course__foot a:hover { text-decoration: underline !important; }
 html body.cco_body .cc-course[hidden] { display: none !important; }
+/* Course cover (optional, first child of .cc-course). Frame is 16:9; the inline background colour fills around covers of other shapes. */
+html body.cco_body .cc-course__cover {
+  margin: -22px -22px 8px; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  background: var(--cc-tint); border-bottom: 1px solid var(--cc-line); border-radius: var(--cc-radius) var(--cc-radius) 0 0;
+}
+html body.cco_body .cc-course__cover img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .35s ease; }
+html body.cco_body .cc-course:hover .cc-course__cover img { transform: scale(1.03); }
+html body.cco_body .cc-dialog__cover { margin: -40px -36px 24px; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--cc-tint); }
+html body.cco_body .cc-dialog__cover img { display: block; width: 100%; height: 100%; object-fit: contain; }
 html body.cco_body .cc-topic-1 { --topic: var(--cc-book-1); }
 html body.cco_body .cc-topic-2 { --topic: var(--cc-book-2); }
 html body.cco_body .cc-topic-3 { --topic: var(--cc-book-3); }
@@ -773,6 +782,12 @@ html body.cco_body .cc-dialog__h { font-family: var(--cc-font-body) !important; 
 html body.cco_body .cc-dialog__lessons { margin: 0 0 24px; padding-left: 22px; line-height: 1.7; }
 @media (max-width: 640px) {
   html body.cco_body .cc-courses { grid-template-columns: 1fr; gap: 12px; }
+  html body.cco_body .cc-course--cover { display: grid; grid-template-columns: 120px 1fr; column-gap: 14px; row-gap: 4px; align-content: start; padding: 14px; }
+  html body.cco_body .cc-course--cover > * { grid-column: 2; }
+  html body.cco_body .cc-course--cover > .cc-course__cover { grid-column: 1; grid-row: 1 / span 4; margin: 0; aspect-ratio: 4 / 3; align-self: start; border: 1px solid var(--cc-line); border-radius: var(--cc-radius-sm, 6px); }
+  html body.cco_body .cc-course--cover .cc-course__title { font-size: 19px !important; }
+  html body.cco_body .cc-course--cover .cc-course__desc { -webkit-line-clamp: 2; font-size: 14px; }
+  html body.cco_body .cc-course--cover .cc-course__foot { padding-top: 4px; }
   html body.cco_body .cc-photo-strip { grid-template-columns: 1fr 1fr; }
   html body.cco_body .cc-photo-strip > :nth-child(3) { display: none; }
   html body.cco_body .cc-stats strong { font-size: 34px; }

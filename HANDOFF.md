@@ -1,4 +1,4 @@
-# BH Chabad website: handoff (Oct 23, 2026)
+# BH Chabad website: handoff (Oct 23, 2026, evening)
 
 Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 
@@ -8,8 +8,11 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 - **Not deployed yet**: the `cachedPage()` localStorage caching and `testimonialsUrl: null` in theme.js.
 - **Homepage layout**: Layout 1 is still PENDING with demo content. The live homepage still shows the old "under construction" slide. Filling it was blocked by the Cloudflare "Verify you are human" check in the browser pane.
 - **JLI registration** (`/tools/events/register.asp?eventid=23504&new=true`) was tested after the last deploy and works. Re-test after every deploy, never submit, and clear the stored progress.
-- **GitHub**: the repo github.com/rabbi-dubov/bhchabad-site exists, is public and is EMPTY. The Claude GitHub App is installed. The old session could not push because the repo was not attached to it. The plan is to start a new task with the repo attached and push this tree.
-- **Repo snapshot**: a full copy of the working git repo (with history) is in Levi's folder `Shlichus\Website\bhchabad-site-repo.zip`. Stage and unzip it in a new session to continue, then push it to GitHub.
+- **GitHub**: the repo github.com/rabbi-dubov/bhchabad-site exists, is public and is still EMPTY. A second Cowork task (evening Oct 23) also could not push: the git proxy answered "rabbi-dubov/bhchabad-site is not in this session's authorized repository set". Cowork tasks can't attach a repo from inside; a Claude Code task started with the repo selected (claude.ai/code?repositories=rabbi-dubov/bhchabad-site) can.
+- **Repo snapshot**: the full working git repo (with history) is in Levi's folder `Shlichus\Website\bhchabad-site-repo.zip` (updated evening Oct 23). It is ready to push as is: `git remote add origin https://github.com/rabbi-dubov/bhchabad-site.git && git push -u origin main`.
+  - `live/` = exactly the deployed v20261023.1230 (same CSS/JS as dist/, hashes 7e80923a8d53 / fd9ecd201292 for the inline snippets).
+  - `test/` = current src: caching update, testimonialsUrl null, course-cover card styles.
+  - `build.py test | promote | snippets` (see README).
 
 ## Open tasks, in order
 
@@ -19,10 +22,10 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
    - Publish only with Levi's OK.
    - NEXT GENesis event: set dates to Nov 17 2026–May 18 2027 and remove the all-caps "A MONTHLY LEARNING SERIES FOR WOMEN: NEXT GENises" line. Levi approved this.
    - Deploy the caching update.
-3. **Courses page**: add the cover thumbnails (`data/covers-thumb/*.webp`) to the light cards, then republish the preview artifact.
-   - The covers in `Shlichus\Website\course-covers\` are 1200px jpg. `coverFile` in courses.json is the original name; use the same stem with `.jpg`.
-   - Check: the 2020 Pirkei Avot cover is the same image as 2023 Cultivating Character.
-   - Check: the 2018 "Heaven on Earth" cover reads "Extreme Makeover: Divine Edition".
+3. **Courses page**: DONE in preview v4 (covers on every card, 16:9 frame filled with the cover's edge colour; phones show a 120px thumbnail beside the text; the dialog shows the cover on top). Still to ask Levi:
+   - The 2020 Pirkei Avot cover IS the Cultivating Character artwork (square social version). Did the 2020 series have that name too, or is it the wrong image?
+   - The 2018 "Heaven on Earth" cover reads "Extreme Makeover: Divine Edition" (Temple artwork). Which title should the card use?
+   - Production: covers need a public home. Plan: serve `data/covers-thumb/*.webp` from the GitHub repo via jsDelivr (or upload to ChabadOne media) once the repo is pushed.
 4. **Photos**: curate real event photos from `Shlichus\` (Shain Park menorah 2019–23, Purim in the Jungle, First Fridays, JLI\Pictures, Limmud) for the homepage and inner pages. Levi will download his Google Photos albums into the Shlichus folder; there is no Google Photos connector.
 5. **About page**: waiting on Levi's doc comments and his answers to the open questions (children count, dedication wording, photos).
 6. **Testimonials**: Levi is collecting these himself, via ChatGPT. Do not search his email for them, and never invent any. When the page exists, set `testimonialsUrl: "/testimonials"`.
@@ -36,7 +39,7 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 ## Links
 
 - Homepage preview: https://claude.ai/artifact/EjwrS9wc8Codpdi7hKA5cy
-- Courses preview (v3): https://claude.ai/artifact/V3ZntNNdSu2JGDjCdNpndu
+- Courses preview (v4, with covers): https://claude.ai/artifact/V3ZntNNdSu2JGDjCdNpndu
 - About Us draft doc: https://claude.ai/artifact/DTttWxjpMj7r3NW2GunmV7
 - Homepage content draft doc: https://claude.ai/artifact/U11tdhcy8JVz9HEceuhvCq
 - Old Wix sitemap (all course pages, including hidden ones): https://www.bhchabad.org/pages-sitemap.xml
