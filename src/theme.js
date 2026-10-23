@@ -37,7 +37,7 @@
     subscribeUrl: "/tools/subscribe/default.htm",
     // Testimonials live on an ordinary ChabadOne page. Each one = a Quote (blockquote) whose last line
     // starts with a dash: "— Name, context". The homepage reads them; no quotes = no section.
-    testimonialsUrl: "/testimonials",
+    testimonialsUrl: null,   // set to "/testimonials" once that page exists
     shabbatPlace: "Bloomfield Hills",
     home: {
       // Homepage sections, in order. Also available: "quick" (icon links strip), "intro" (message widget).
@@ -101,6 +101,17 @@
     return "";
   }
   function addClass(n, c) { if (n && (" " + n.className + " ").indexOf(" " + c + " ") < 0) { n.className += " " + c; } }
+  // Fetch a same-site page at most once per `ttl` per visitor: the parsed result (or the lack of one)
+  // is kept in localStorage, so ordinary browsing does not send extra requests to ChabadOne.
+  function cachedPage(key, ttl, url, parse, done) {
+    var now = Date.now();
+    try { var c = JSON.parse(localStorage.getItem(key) || "null"); if (c && now - c.at < ttl) { done(c.d); return; } } catch (e) {}
+    if (!url || !window.fetch || !window.DOMParser) { done(null); return; }
+    function save(v) { try { localStorage.setItem(key, JSON.stringify({ at: Date.now(), d: v })); } catch (e) {} done(v); }
+    fetch(url, { credentials: "same-origin" }).then(function (r) { return r.ok ? r.text() : ""; })
+      .then(function (t) { save(t ? parse(new DOMParser().parseFromString(t, "text/html")) : null); })
+      .catch(function () { save(null); });
+  }
   function onReady(fn) { if (d.readyState === "loading") { d.addEventListener("DOMContentLoaded", fn); } else { fn(); } }
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -304,10 +315,8 @@
       show(0);
     }
     if (list) { build(list); return sec; }
-    if (!CC.testimonialsUrl || !window.fetch || !window.DOMParser) { return null; }
-    fetch(CC.testimonialsUrl, { credentials: "same-origin" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
-      build(t ? parseTestimonials(new DOMParser().parseFromString(t, "text/html")) : []);
-    }).catch(function () { build([]); });
+    if (!CC.testimonialsUrl) { return null; }
+    cachedPage("cc-testimonials-v1", 6 * 3600 * 1000, CC.testimonialsUrl, parseTestimonials, function (v) { build(v || []); });
     return sec;
   }
 
@@ -409,22 +418,19 @@
       cards.slice(0, 6).forEach(function (c) { grid.appendChild(featureCard(c)); });
     }
     render([]);   // first paint from the calendar feed
-    fetch(CC.eventsSource, { credentials: "same-origin" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
-      if (!t) { return; }
-      var doc = new DOMParser().parseFromString(t, "text/html");
-      var courses = qa(".event", doc).map(function (e) {
+    cachedPage("cc-courses-v1", 3600 * 1000, CC.eventsSource, function (doc) {
+      return qa(".event", doc).map(function (e) {
         var a = q("h2 a", e); if (!a) { return null; }
         var desc = q(".bottom_padding", e);
-        var descText = desc ? desc.innerHTML.replace(/<br\s*\/?>/gi, " · ").replace(/<[^>]+>/g, " ") : "";
+        var descText = desc ? desc.innerHTML.replace(/<br\s*\/?>/gi, " \u00b7 ").replace(/<[^>]+>/g, " ") : "";
         var tmp = d.createElement("textarea"); tmp.innerHTML = descText;
         return {
           title: txt(a), href: a.getAttribute("href"), cta: "Register",
           when: parseWhen(txt(q(".performance__date", e))),
-          desc: tmp.value.replace(/\s+/g, " ").replace(/(\s*·\s*)+/g, " · ").replace(/^\s*·\s*|\s*·\s*$/g, "").trim()
+          desc: tmp.value.replace(/\s+/g, " ").replace(/(\s*\u00b7\s*)+/g, " \u00b7 ").replace(/^\s*\u00b7\s*|\s*\u00b7\s*$/g, "").trim()
         };
       }).filter(Boolean);
-      if (courses.length) { render(courses); }
-    }).catch(function () { /* keep the calendar cards */ });
+    }, function (courses) { if (courses && courses.length) { render(courses); } });
     return sec;
   }
 
