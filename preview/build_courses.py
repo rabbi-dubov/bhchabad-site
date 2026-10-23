@@ -18,58 +18,86 @@ TOPICS = [  # key, label, cover class
 ]
 T = {k: (label, cls) for k, label, cls in TOPICS}
 
-# season, sort key, title, tagline, topic, video playlist id, audio (on the old site, being moved)
-COURSES = [
-    ("Summer 2026", "2026-3", "Sinai and Civics", "How Jewish values helped shape American ideals", "law", None, False),
-    ("Spring 2026", "2026-2", "For All Humankind", "Your Judaism holds a message the world wants to hear", "big", None, False),
-    ("Winter 2026", "2026-1", "Captivating Cases in Rabbinic Responsa", "The surprising questions your ancestors asked their rabbis", "law", None, False),
-    ("Fall 2025", "2025-4", "The Kabbalah of Meaning", "Finding the purpose that connects all parts of life", "soul", None, False),
-    ("Summer 2021", "2021-3", "Judaism Decoded", "The logic behind Torah law and Talmudic debate", "law", None, False),
-    ("Spring 2021", "2021-2", "This Can Happen", "A credible case for feeling good about the future", "big", "PLbHO_Q5DmD_Mrplg7dJW0resJH-m432Xq", False),
-    ("Winter 2021", "2021-1", "Journey of the Soul", "A fresh look at life, death and the rest, in peace", "soul", "PLbHO_Q5DmD_OYo3Hi1VkTcC7NrH0q2ijY", False),
-    ("Fall 2020", "2020-5", "Secrets of the Bible", "Iconic stories, mystical meanings and lessons for life", "torah", "PLbHO_Q5DmD_NTBpY5gkghY7worBkSyZKJ", False),
-    ("Fall 2020", "2020-4", "High Holidays: Making It Meaningful", "Making these special days meaningful at home", "torah", "PLbHO_Q5DmD_PjdtLUb8LcJigU5pAKPFXE", False),
-    ("Summer 2020", "2020-3", "Pirkei Avot Studies", "Life wisdom from the Ethics of Our Fathers", "life", None, True),
-    ("Spring 2020", "2020-2b", "Judaism at Home", "For when the only place Judaism can thrive is at home", "life", None, True),
-    ("Spring 2020", "2020-2a", "The Jewish Course of Why", "50 of the biggest questions about Jews and Judaism", "big", None, True),
-    ("Winter 2020", "2020-1", "Judaism's Gifts to the World", "How major Jewish ideas became universal values", "law", None, True),
-    ("Fall 2019", "2019-4", "Worrier to Warrior", "Jewish secrets to feeling good however you feel", "life", None, True),
-    ("Summer 2019", "2019-3", "Paradigm Shift", "Transformational life teachings of the Lubavitcher Rebbe", "soul", None, True),
-    ("Spring 2019", "2019-2", "With All My Heart", "The Jewish art of prayer and spiritual experience", "torah", None, True),
-    ("Winter 2019", "2019-1", "Crime and Consequence", "A Jewish look at conviction, sentencing and rehabilitation", "law", None, True),
-    ("Fall 2018", "2018-4", "Wrestling with Faith", "Tackling the biggest questions and challenges to faith", "big", None, False),
-    ("Summer 2018", "2018-3", "Heaven on Earth", "A virtual tour of our Holy Temple", "torah", None, False),
-    ("Spring 2018", "2018-2", "What Is?", "Rethinking everything we know about our universe", "soul", None, False),
-    ("Winter 2018", "2018-1", "Communication: Its Art and Soul", "Reclaim the lost art of human connection", "life", None, False),
-    ("Fall 2017", "2017-4", "Great Debates in Jewish History", "Six epic debates that rocked the Jewish world", "law", None, False),
-]
+DATA = json.loads((ROOT / "data/courses.json").read_text())
+SEASON_ORDER = {"Winter": 1, "Spring": 2, "Summer": 3, "Fall": 4}
+TOPIC_OF = {  # by title keyword -> topic key
+    "Kabbalah": "soul", "Jewpernatural": "soul", "Meditation from Sinai": "soul", "Journey of the Soul": "soul",
+    "Paradigm Shift": "soul", "What Is?": "soul", "Lift Your Life": "soul",
+    "For All Humankind": "big", "My G-d": "big", "This Can Happen": "big", "Course of Why": "big",
+    "Wrestling with Faith": "big", "To Believe": "big",
+    "Sinai and Civics": "law", "Responsa": "law", "Decoding the Talmud": "law", "Judaism Decoded": "law",
+    "Crime and Consequence": "law", "Great Debates": "law", "Gifts to the World": "law", "Beyond Right": "law",
+    "Survival of a Nation": "law", "Outsmarting Antisemitism": "law", "Decisions of Fate": "law",
+    "Colorful Profiles": "law", "Book Smart": "law",
+    "Happiness": "life", "Advice for Life": "life", "Nurturing Relationships": "life", "Communication": "life",
+    "Worrier to Warrior": "life", "Judaism at Home": "life", "Pirkei Avot": "life", "Well-Connected": "life",
+    "One Wow Moment": "life",
+    "Secrets of the Bible": "torah", "High Holidays": "torah", "With All My Heart": "torah", "Heaven on Earth": "torah",
+    "Read it in Hebrew": "torah", "A Work of Heart": "torah", "NEXT GENesis": "torah",
+}
+REC_LABEL = {"youtube": "&#9654; Watch", "spotify": "&#127911; Listen", "wix-audio": "&#9835; Audio"}
 
 
-def book(c):
-    season, _, title, tag, topic, yt, audio = c
-    label, cls = T[topic]
+def topic_of(title):
+    for k, v in TOPIC_OF.items():
+        if k.lower() in title.lower():
+            return v
+    return "big"
+
+
+def short_title(t):
+    return t.split(":")[0] if t.startswith("Sinai and Civics") else t
+
+
+COURSES = []
+for c in DATA["courses"]:
+    season = c["season"].split()[0] if c["season"][0].isalpha() else "Fall"   # women's series run Nov-May
+    women = c["series"] == "RCS"
+    COURSES.append({
+        "title": short_title(c["title"]), "season": (season if not women else "Women's series") + " " + (str(c["year"]) if not women else c["season"]),
+        "key": f'{c["year"]}-{SEASON_ORDER.get(season, 4)}{"b" if women else "a"}', "year": str(c["year"]),
+        "topic": topic_of(c["title"]), "women": women, "series": c["series"], "desc": c.get("description") or "",
+        "lessons": c.get("lessons") or [], "recs": c.get("recordings") or [], "current": c.get("status") == "current",
+    })
+PAST = [c for c in COURSES if not c["current"]]
+
+
+def book(i, c):
+    label, cls = T[c["topic"]]
     foot = []
-    if yt:
-        foot.append(f'<a href="{YT}{yt}" target="_blank" rel="noopener">&#9654; Watch</a>')
-    if audio:
-        foot.append('<span title="Audio recordings are being moved from the old site">&#9835; Audio</span>')
-    rec = "1" if (yt or audio) else "0"
-    return (f'<article class="cc-book cc-book--{cls}" data-topic="{topic}" data-rec="{rec}" aria-label="{e(title)}, {e(season)}">'
-            f'<span class="cc-book__season">{e(season)}</span><h3 class="cc-book__title">{e(title)}</h3>'
-            f'<p class="cc-book__tag">{e(tag)}</p><div class="cc-book__foot">{"".join(foot)}</div></article>')
+    for r in c["recs"]:
+        if r["type"] == "wix-audio":
+            foot.append('<span title="Audio recordings are being moved from the old site">&#9835; Audio</span>')
+        else:
+            foot.append(f'<a href="{e(r["url"])}" target="_blank" rel="noopener">{REC_LABEL[r["type"]]}</a>')
+    kind = "with Mushky Dubov" if c["women"] else ("JLI course" if c["series"] == "JLI" else "Course")
+    return (f'<article class="cc-book cc-book--{cls}" data-topic="{c["topic"]}" data-rec="{1 if c["recs"] else 0}" data-women="{1 if c["women"] else 0}">'
+            f'<span class="cc-book__season">{e(c["season"])}</span><h3 class="cc-book__title">'
+            f'<button type="button" class="cc-book__open" data-i="{i}">{e(c["title"])}</button></h3>'
+            f'<p class="cc-book__tag">{e(kind)}</p><div class="cc-book__foot">{"".join(foot)}</div></article>')
 
 
 def page():
+    order = sorted(range(len(PAST)), key=lambda i: PAST[i]["key"], reverse=True)
     years = {}
-    for c in sorted(COURSES, key=lambda c: c[1], reverse=True):
-        years.setdefault(c[1][:4], []).append(c)
-    n = len(COURSES)
-    n_rec = sum(1 for c in COURSES if c[5] or c[6])
-    first = min(c[1][:4] for c in COURSES)
+    for i in order:
+        years.setdefault(PAST[i]["year"], []).append(i)
+    n = len(PAST)
+    n_rec = sum(1 for c in PAST if c["recs"])
+    n_women = sum(1 for c in PAST if c["women"])
+    first = min(c["year"] for c in PAST)
     chips = '<button type="button" aria-pressed="true" data-f="all">All courses</button>'
     chips += "".join(f'<button type="button" aria-pressed="false" data-f="{k}"><i style="background: var(--cc-book-{cls[1]})"></i>{e(label)}</button>' for k, label, cls in TOPICS)
+    chips += """<button type="button" aria-pressed="false" data-f="women">Women's series</button>"""
     chips += '<button type="button" aria-pressed="false" data-f="rec">With recordings</button>'
-    shelves = '<div class="cc-shelf">' + "".join(f'<div class="cc-shelf__year" role="heading" aria-level="2"><strong>{y}</strong><span>{len(cs)} course{"s" if len(cs) > 1 else ""}</span></div>' + "".join(book(c) for c in cs) for y, cs in years.items()) + '</div>'
+    shelves = '<div class="cc-shelf">' + "".join(f'<div class="cc-shelf__year" role="heading" aria-level="2"><strong>{y}</strong><span>{len(ix)} course{"s" if len(ix) > 1 else ""}</span></div>' + "".join(book(i, PAST[i]) for i in ix) for y, ix in years.items()) + '</div>'
+    data_js = json.dumps([{"t": c["title"], "s": c["season"], "d": c["desc"], "l": c["lessons"],
+                           "r": [{"t": r["type"], "u": r["url"]} for r in c["recs"]]} for c in PAST]).replace("</", "<\\/")
+    listen = """<section class="cc-section cc-section--ink"><div class="cc-wrap cc-split">
+<div><p class="cc-eyebrow">Listen anywhere</p><h2 class="cc-h2 cc-head">Classes on the go</h2>
+<p class="cc-lede">Rabbi Dubov's weekly classes, and the full lessons of recent courses, are free on your favorite podcast app and YouTube.</p></div>
+<div class="cc-partner__ctas"><a class="cc-btn cc-btn--light" href="https://podcasters.spotify.com/pod/show/torah-deep-dive" target="_blank" rel="noopener">Torah Deep Dive podcast</a>
+<a class="cc-btn cc-btn--ghost" style="color: var(--cc-white) !important" href="https://podcasts.apple.com/podcast/id1600754756" target="_blank" rel="noopener">Tanya podcast</a></div></div></section>"""
     now = f'''<div class="cc-features" style="margin-top:8px">
 <article class="cc-feature"><div class="cc-feature__date" aria-hidden="true"><span class="cc-feature__m">Oct</span><span class="cc-feature__d">28</span><span class="cc-feature__w">Wed</span></div>
 <div class="cc-feature__body"><p class="cc-feature__kicker">Now enrolling · JLI course</p><h3 class="cc-feature__title cc-head">Kabbalah and the hidden architecture of you</h3>
@@ -83,8 +111,8 @@ def page():
 <section class="cc-section cc-section--cream" style="padding-top:72px;padding-bottom:64px;border-bottom:1px solid var(--cc-line)"><div class="cc-wrap">
 <p class="cc-eyebrow">Adult education</p>
 <h1 class="cc-h2 cc-head" style="font-size:clamp(40px,5.4vw,64px)">Years of learning together</h1>
-<p class="cc-lede">Since {first}, our courses have explored everything from Kabbalah and the soul to Talmudic law and the art of prayer. Browse every course we've offered, and watch or listen to the recordings.</p>
-<ul class="cc-stats"><li><strong>{n}</strong><span>courses taught</span></li><li><strong>{first}</strong><span>teaching since</span></li><li><strong>{n_rec}</strong><span>with recordings</span></li></ul>
+<p class="cc-lede">Since {first}, we've offered a new course nearly every season, from Kabbalah and the soul to Talmudic law, Jewish history and the art of prayer. Browse them all, and watch or listen to the recordings.</p>
+<ul class="cc-stats"><li><strong>{n}</strong><span>courses taught</span></li><li><strong>{first}</strong><span>teaching since</span></li><li><strong>{n_women}</strong><span>women's series</span></li><li><strong>{n_rec}</strong><span>with recordings</span></li></ul>
 </div></section>
 <section class="cc-section" style="padding-top:56px;padding-bottom:40px"><div class="cc-wrap">
 <p class="cc-eyebrow">Join a course now</p>
@@ -95,11 +123,22 @@ def page():
 <div class="cc-chips" role="group" aria-label="Filter courses">{chips}</div>
 {shelves}
 </div></section>
-</div>'''
+{listen}
+</div>
+<dialog class="cc-dialog" id="cc-course"><form method="dialog"><button class="cc-dialog__x" aria-label="Close">&#215;</button></form><div id="cc-course-body"></div></dialog>
+<script>window.CC_COURSES = {data_js};</script>'''
     js = '''<script>(function(){var d=document,bs=d.querySelectorAll('.cc-chips button');
 bs.forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f;bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
-d.querySelectorAll('.cc-book').forEach(function(k){k.hidden=!(f==='all'||(f==='rec'?k.dataset.rec==='1':k.dataset.topic===f));});
+d.querySelectorAll('.cc-book').forEach(function(k){k.hidden=!(f==='all'||(f==='rec'?k.dataset.rec==='1':f==='women'?k.dataset.women==='1':k.dataset.topic===f));});
 d.querySelectorAll('.cc-shelf__year').forEach(function(y){var n=y.nextElementSibling,any=false;while(n&&n.classList.contains('cc-book')){if(!n.hidden){any=true;}n=n.nextElementSibling;}y.hidden=!any;});});});
+var dlg=d.getElementById('cc-course'),body=d.getElementById('cc-course-body'),L={youtube:'Watch the recordings',spotify:'Listen on the podcast','wix-audio':'Audio (moving from the old site)'};
+function el(t,c,x){var n=d.createElement(t);if(c){n.className=c;}if(x){n.textContent=x;}return n;}
+d.querySelectorAll('.cc-book__open').forEach(function(b){b.addEventListener('click',function(){var c=window.CC_COURSES[+b.dataset.i];body.textContent='';
+body.appendChild(el('p','cc-eyebrow',c.s));body.appendChild(el('h2','cc-h2 cc-head',c.t));if(c.d){body.appendChild(el('p','cc-lede',c.d));}
+if(c.l.length){body.appendChild(el('h3','cc-dialog__h','Lessons'));var ol=el('ol','cc-dialog__lessons');c.l.forEach(function(x){ol.appendChild(el('li','',x));});body.appendChild(ol);}
+if(c.r.length){var r=el('div','cc-hero__ctas');c.r.forEach(function(x){if(x.t==='wix-audio'){r.appendChild(el('span','cc-chip',L[x.t]));}else{var a=el('a','cc-btn',L[x.t]);a.href=x.u;a.target='_blank';a.rel='noopener';r.appendChild(a);}});body.appendChild(r);}
+dlg.showModal();});});
+dlg.addEventListener('click',function(ev){if(ev.target===dlg){dlg.close();}});
 d.getElementById('pv-menu-open').addEventListener('click',function(){d.getElementById('pv-nav').classList.add('is-open');});
 d.getElementById('pv-menu-close').addEventListener('click',function(){d.getElementById('pv-nav').classList.remove('is-open');});
 d.querySelectorAll('a[href="#"]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();});});})();</script>'''

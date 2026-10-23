@@ -758,6 +758,21 @@ html body.cco_body .cc-book__foot a, html body.cco_body .cc-book__foot span {
   background: rgba(255, 255, 255, .14); color: var(--cc-white) !important;
 }
 html body.cco_body .cc-book__foot a:hover { background: var(--cc-white); color: var(--cc-ink) !important; }
+html body.cco_body .cc-book__open { all: unset; cursor: pointer; font: inherit; color: inherit; }
+html body.cco_body .cc-book__open::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+html body.cco_body .cc-book__open:focus-visible::after { outline: 3px solid var(--cc-focus); outline-offset: 2px; }
+html body.cco_body .cc-book__foot { position: relative; z-index: 1; }
+html body.cco_body .cc-dialog {
+  width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 64px); box-sizing: border-box; overflow: auto;
+  border: 0; border-radius: var(--cc-radius); padding: 40px 36px 36px; background: var(--cc-white); color: var(--cc-text);
+  box-shadow: var(--cc-shadow-lg);
+}
+html body.cco_body .cc-dialog::backdrop { background: rgba(47, 6, 25, .55); }
+html body.cco_body .cc-dialog .cc-h2 { font-size: clamp(28px, 4vw, 40px); }
+html body.cco_body .cc-dialog .cc-lede { font-size: 17px; }
+html body.cco_body .cc-dialog__x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--cc-cream); color: var(--cc-ink); font-size: 22px; cursor: pointer; }
+html body.cco_body .cc-dialog__h { font-family: var(--cc-font-body) !important; font-size: 12px !important; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-text); margin: 24px 0 8px; }
+html body.cco_body .cc-dialog__lessons { margin: 0 0 24px; padding-left: 22px; line-height: 1.7; }
 html body.cco_body .cc-book[hidden], html body.cco_body .cc-shelf__year[hidden] { display: none !important; }
 html body.cco_body .cc-book--t1 { --book: var(--cc-book-1); }
 html body.cco_body .cc-book--t2 { --book: var(--cc-book-2); }

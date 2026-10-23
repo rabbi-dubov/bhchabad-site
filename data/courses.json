@@ -1,0 +1,1313 @@
+{
+  "courses": [
+    {
+      "title": "NEXT GENesis",
+      "season": "2026-27",
+      "year": 2026,
+      "series": "RCS",
+      "description": "In Bereshit the story began. In us, it continues. A seven-part Rosh Chodesh Society course that reads the early narratives of Genesis as a mirror of the human soul: longing, choice, fracture and renewal.",
+      "lessons": [
+        "Generating a Universe",
+        "Engendering Evil",
+        "Emergent Shame",
+        "Divergence",
+        "Degeneration",
+        "Regenerating Society",
+        "Convergence"
+      ],
+      "cover": "https://static.wixstatic.com/media/0f0f55_6a4484ff876c4c7999d1d1f41104b1e3~mv2.png",
+      "page": "https://www.bhchabad.org/rcs",
+      "eventId": 23481,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/rcs"
+      ],
+      "dates": "Monthly, third Tuesday, from Nov 17, 2026",
+      "status": "current"
+    },
+    {
+      "title": "Kabbalah and the Hidden Architecture of You",
+      "season": "Fall",
+      "year": 2026,
+      "series": "JLI",
+      "description": "Reincarnation, soulmates, dreams, names: what these and other mysteries reveal about the hidden design of your life. A six-week course on the mystical backstory that explains the mysteries you never understood about yourself.",
+      "lessons": [
+        "Echoes of Your Soul in Everyday Life",
+        "Traces of the Sefirot in Your Body and Soul",
+        "The Mystical Backstory of Your Soul",
+        "Signals from Heaven in Your Daily Life",
+        "The Ripples of Your Thoughts and Words",
+        "How You Can Touch Infinity in a Finite World"
+      ],
+      "cover": "https://static.wixstatic.com/media/0f0f55_5258828e728d42a386c204aeb129c54d~mv2.jpg",
+      "page": "https://www.bhchabad.org/kabbalah",
+      "eventId": 23504,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/kabbalah",
+        "https://www.bhchabad.org/try"
+      ],
+      "dates": "6 sessions from Tue Oct 27 / Wed Oct 28, 2026",
+      "status": "current"
+    },
+    {
+      "title": "Sinai and Civics: How Jewish Values Helped Shape American Ideals",
+      "season": "Summer",
+      "year": 2026,
+      "series": "JLI",
+      "description": "Timed to the 250th anniversary of the Declaration of Independence, a four-session course on the Jewish ethics, ideas and values that influenced America's founders and still shape American government and society.",
+      "lessons": [
+        "The Founders of the Covenant",
+        "The Roots of Equality",
+        "In G-d We Trust",
+        "The Separation of Powers"
+      ],
+      "cover": "https://static.wixstatic.com/media/0f0f55_2816aecaf9194cd1a8b1234bf29d92bb~mv2.jpg",
+      "page": "https://www.bhchabad.org/sinai",
+      "eventId": 22861,
+      "recordings": [
+        {
+          "type": "spotify",
+          "url": "https://podcasters.spotify.com/pod/show/torah-deep-dive"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/sinai",
+        "https://anchor.fm/s/ebbbe2fc/podcast/rss"
+      ],
+      "dates": "Wednesdays July 8 - Aug 5, 2026"
+    },
+    {
+      "title": "For All Humankind",
+      "season": "Spring",
+      "year": 2026,
+      "series": "JLI",
+      "description": "Your Judaism holds a message the world wants to hear. It's time to unlock it. A four-part course tracing Judaism's universal message from Abraham to today.",
+      "lessons": [
+        "The Message of Abraham",
+        "Is Morality Obvious?",
+        "Educating Children",
+        "It Will Get Better"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_cc8cf4c83eb24c29a78ddf55c8e6f7c0~mv2.jpg",
+      "page": "https://www.bhchabad.org/jli",
+      "eventId": 22109,
+      "recordings": [
+        {
+          "type": "spotify",
+          "url": "https://podcasters.spotify.com/pod/show/torah-deep-dive"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/jli",
+        "https://www.bhchabad.org/copy-of-for-all-humankind-new-jli-c",
+        "https://anchor.fm/s/ebbbe2fc/podcast/rss"
+      ],
+      "dates": "4 Wednesdays from Apr 29, 2026"
+    },
+    {
+      "title": "Captivating Cases of Rabbinic Responsa",
+      "season": "Winter",
+      "year": 2026,
+      "series": "JLI",
+      "description": "Listen in on the surprising, practical questions your ancestors asked rabbis across Jewish history. A six-session tour of real-life questions and the answers rabbis wrote, balancing law, ethics, lived reality and survival.",
+      "lessons": [
+        "The Questions and the People Who Asked Them",
+        "The Quest for Facts",
+        "Precedent in Practice",
+        "Counterweights Considered",
+        "The Fifth Factor",
+        "Forging Forward"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_71a93841df6b46fea0a642f36cc927ec~mv2.jpg",
+      "page": "https://www.bhchabad.org/responsa",
+      "eventId": 21301,
+      "recordings": [
+        {
+          "type": "spotify",
+          "url": "https://podcasters.spotify.com/pod/show/torah-deep-dive"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/responsa",
+        "https://anchor.fm/s/ebbbe2fc/podcast/rss"
+      ],
+      "dates": "6 Wednesdays from Jan 28, 2026"
+    },
+    {
+      "title": "Lift Your Life",
+      "season": "2025-26",
+      "year": 2025,
+      "series": "RCS",
+      "description": "Kabbalistic teachings that will elevate your daily reality. Re-examine your basic activities and life features in the light of Jewish wisdom. It's time for an upgrade!",
+      "lessons": [
+        "Sublimated Slumber: Harnessing the Secrets of Sleep",
+        "Reframing Rage: Dousing Anger and Deflecting Upset",
+        "Art of Eat: Managing Food and Munching for Meaning",
+        "Elated Living: Reaching and Reaping Genuine Joy",
+        "Lip Syncing: Working Wonders With Words",
+        "Living G-d: Logic and Faith in Our Divine Relationship",
+        "Divine Image Projection: Freeing and Implementing Our Potential"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_bed8fed73e7c4e8da622dc474d49ba1e~mv2.jpg",
+      "page": "https://www.bhchabad.org/liftyourlife",
+      "eventId": 20623,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/liftyourlife"
+      ],
+      "dates": "Monthly Tuesdays, Nov 18 (2025) - June 2 (2026)"
+    },
+    {
+      "title": "The Kabbalah of Meaning",
+      "season": "Fall",
+      "year": 2025,
+      "series": "JLI",
+      "description": "Jewish wisdom for finding the purpose that connects all parts of life: what meaning is, where it comes from, and how to find it in daily routines, relationships, the rhythms of the calendar, and the circumstances we did not choose.",
+      "lessons": [
+        "The Meaning We Seek",
+        "To Make or Not to Make Meaning",
+        "Meaning in the Mundane",
+        "Meaning in the Rhythms of Time",
+        "Meaning in the Unchosen",
+        "I Mean Something, Therefore I Am"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_11ad2eb90d244dabb19973b0d8ee3f09~mv2.jpg",
+      "page": "https://www.bhchabad.org/meaning",
+      "eventId": 20473,
+      "recordings": [
+        {
+          "type": "spotify",
+          "url": "https://podcasters.spotify.com/pod/show/torah-deep-dive"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/meaning",
+        "https://anchor.fm/s/ebbbe2fc/podcast/rss"
+      ],
+      "dates": "6 Wednesdays from Oct 29, 2025"
+    },
+    {
+      "title": "Heaven on Earth",
+      "season": "Summer",
+      "year": 2025,
+      "series": "JLI",
+      "description": "A virtual tour of our Holy Temple. Join us for a three-week virtual tour of the Holy Temple, the home we shared with G-d, because envisioning the Temple and longing for it are the first steps toward rebuilding it.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/ced623_3a1ad4feacfd43639a2d795799ebef6e~mv2.jpg",
+      "page": "https://www.bhchabad.org/heavenonearth",
+      "eventId": 20065,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/heavenonearth"
+      ],
+      "dates": "3 sessions from Tue Aug 5, 2025"
+    },
+    {
+      "title": "Colorful Profiles",
+      "season": "Spring",
+      "year": 2025,
+      "series": "JLI",
+      "description": "Short stories of extraordinary lives from Jewish history. A four-week journey to encounter twelve stories of Jewish history's most fascinating men and women: converts, captives, royal advisors, philosophers, philanthropists, and more.",
+      "lessons": [
+        "Courageous Converts",
+        "Influential Jews",
+        "Unsung Heroines",
+        "Heroes and Hostages"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_4841a8eacd754fb1a1e7cc6e8ebb17c0~mv2.jpg",
+      "page": "https://www.bhchabad.org/profiles",
+      "eventId": 19284,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/profiles"
+      ],
+      "dates": "4 Wednesdays from May 14, 2025"
+    },
+    {
+      "title": "Decoding the Talmud",
+      "season": "Winter",
+      "year": 2025,
+      "series": "JLI",
+      "description": "Inside the story, substance, and significance of the book that defines Judaism. Learn the key terms, logical principles, and historical context required to decode every part of the Talmudic page.",
+      "lessons": [
+        "The Jewish People and the Talmud",
+        "The Mishnah",
+        "Decrypting the Mishnah",
+        "To Create the Talmud",
+        "How the Talmud Thinks",
+        "The Talmud until Today"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_d1b5f6aa5a664b69b014d7c50c522659~mv2.jpg",
+      "page": "https://www.bhchabad.org/decodingthetalmud",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/decodingthetalmud"
+      ],
+      "dates": "6 Wednesdays from Feb 5, 2025"
+    },
+    {
+      "title": "A Work of Heart",
+      "season": "2024-25",
+      "year": 2024,
+      "series": "RCS",
+      "description": "Between Me and G-d: How Jewish prayer unites Heaven and Earth. A monthly lunch-and-learn series for women that flings the cover off the Jewish prayer book, the prayer services, and the synagogue.",
+      "lessons": [
+        "A Work of Soul: A New Paradigm for Prayer",
+        "A Work of Pleas: Understanding the Mechanics of Petition",
+        "A Work of Ascent: Making Sense of Liturgy, One Step at a Time",
+        "A Work of Praise: Finding G-d in Our World",
+        "A Work of Transcendence: Achieving True Transcendence in Prayer",
+        "A Work of Synthesis: Synthesizing Divinity and Materiality in the Amidah",
+        "A Work of Alliance: Finding Meaning in Communal Prayer"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_d270bfed261248beacd923bb3e58eb0a~mv2.png",
+      "page": "https://www.bhchabad.org/heart",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/heart"
+      ],
+      "dates": "Monthly Tuesdays, Dec 10 (2024) - June 10 (2025)"
+    },
+    {
+      "title": "Nurturing Relationships",
+      "season": "Fall",
+      "year": 2024,
+      "series": "JLI",
+      "description": "Relationships don't just happen; they're nurtured. Jewish wisdom for building deeper, richer connection in all your relationships, at home, at work, and beyond.",
+      "lessons": [
+        "Empathy and deep friendships (Lesson 1)",
+        "Attentive, active listening (Lesson 2)",
+        "Direct communication on hard topics and handling conflict (Lesson 3)",
+        "Seeing goodness in flawed people (Lesson 4)",
+        "Offering critique and guidance with care (Lesson 5)",
+        "Forgiveness and rebuilding relationships (Lesson 6)"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_0db95c8c7d2b4888ba38809450cdfcb0~mv2.jpg",
+      "page": "https://www.bhchabad.org/relationships",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/relationships"
+      ],
+      "dates": "6 Wednesdays from Nov 13, 2024"
+    },
+    {
+      "title": "Decisions of Fate",
+      "season": "Summer",
+      "year": 2024,
+      "series": "JLI",
+      "description": "Your Jewish compass for navigating questions of medical ethics. Explore the guiding Jewish values that help inform choices in four areas: experimental treatments, extending life, pregnancy questions, and caring for a body.",
+      "lessons": [
+        "Experimental Treatments",
+        "Extending Life",
+        "Pregnancy Questions",
+        "A Body's Dignity"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_b46a2a17a4dc4e6dae6d2a1b3ad2dfd8~mv2.jpg",
+      "page": "https://www.bhchabad.org/decisions",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/decisions",
+        "https://myjli.com/dof"
+      ],
+      "dates": "4 Wednesdays from Aug 7, 2024 (page labels it 'Spring 2024 course')"
+    },
+    {
+      "title": "Read it in Hebrew",
+      "season": "Winter",
+      "year": 2024,
+      "series": "other",
+      "description": "A five-session Hebrew reading crash course, guaranteed to be effective in only five sessions, using interactive flashcards and its own app. For all levels, from beginners to those who want a refresher.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/ced623_8f1c6ea9f24345b19ae6ee6be3f2cd84~mv2.jpg",
+      "page": "https://www.bhchabad.org/hebrew",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/hebrew"
+      ],
+      "dates": "5 Thursdays from Feb 15 (year inferred as 2024)"
+    },
+    {
+      "title": "Advice for Life",
+      "season": "Winter",
+      "year": 2024,
+      "series": "JLI",
+      "description": "The Rebbe's advice for leading a more purposeful life. A multimedia journey through the Lubavitcher Rebbe's practical wisdom on work, family, health, and well-being.",
+      "lessons": [
+        "Meaning at Work",
+        "Family Bliss",
+        "Wholesome Health",
+        "Healthy at Heart",
+        "Above Adversity",
+        "Spiritual Heights"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_60bc5e580bbd421598fe4e3b8f306858~mv2.jpg",
+      "page": "https://www.bhchabad.org/adviceforlife",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/adviceforlife"
+      ],
+      "dates": "6 Wednesdays from Jan 31, 2024"
+    },
+    {
+      "title": "One Wow Moment",
+      "season": "2023-24",
+      "year": 2023,
+      "series": "RCS",
+      "description": "How do we empower ourselves to make courageous and meaningful decisions? A peek at pivotal moments of personal decision in the lives of seven women of biblical fame. (Third annual women's lunch-and-learn series.)",
+      "lessons": [
+        "Sarah: Two Views of You",
+        "Rebecca: Desirable Duplicity",
+        "Rachel: Mother of Devotion",
+        "Abigail: Affection in Direction",
+        "Esther: Resource-fullness",
+        "Batya: Against the Tide",
+        "Ruth: Stepping Up"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_fc5752c0e1c44e0d814699ebb179e9c2~mv2.jpg",
+      "page": "https://www.bhchabad.org/women",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/women"
+      ],
+      "dates": "Monthly Tuesdays, Nov 14 (2023) - May 14 (2024)"
+    },
+    {
+      "title": "The World of Kabbalah",
+      "season": "Fall",
+      "year": 2023,
+      "series": "JLI",
+      "description": "Revealing how its mystical secrets relate to you. Discover the core mystical and spiritual teachings of Kabbalah and their relevance to everyday life, and learn to think like a Jewish mystic.",
+      "lessons": [
+        "The Evolution of Ego",
+        "The Dawn of Limitation",
+        "The Infinite Light",
+        "The World of Chaos",
+        "The Great Concealment",
+        "The Essence of Everything"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_cbe7e1a1da104a7bb1eb02a02178facf~mv2.jpg",
+      "page": "https://www.bhchabad.org/world",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/world"
+      ],
+      "dates": "6 Wednesdays from Nov 1, 2023"
+    },
+    {
+      "title": "How Happiness Thinks",
+      "season": "Summer",
+      "year": 2023,
+      "series": "JLI",
+      "description": "The world's happiest kept secret. An exciting journey into your own mind and psyche, drawing on classical Jewish and mystical teachings, and how positive psychology now corroborates what Judaism has always known about what makes us happy.",
+      "lessons": [
+        "How to Feel Good About Yourself Without Becoming Self-Absorbed",
+        "How to Remain Happy Through Times of Stress",
+        "The Art of Gratitude: Why Aren't We Happy with What We Have?",
+        "How Our Shortcomings Can Become Sources of Joy",
+        "How to Cope Through Times of Loss",
+        "Why Spirituality Makes Us Happy"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_d9f22edebf9b40528b625ee6b18bca16~mv2.jpg",
+      "page": "https://www.bhchabad.org/happiness",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/happiness"
+      ],
+      "dates": "6 Wednesdays from July 19, 2023"
+    },
+    {
+      "title": "Cultivating Character: Pirkei Avot",
+      "season": "Summer",
+      "year": 2023,
+      "series": "other",
+      "description": "Imagine you can go out for coffee with Judaism's greatest sages... A six-week study series on Pirkei Avot (Ethics of Our Fathers), a beloved compilation of timeless sayings from the sages of old.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/ced623_d5948ce8056042eea7c6ecfe01232c56~mv2.jpg",
+      "page": "https://www.bhchabad.org/pirkeiavot",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/pirkeiavot"
+      ],
+      "dates": "6 Fridays from June 16 (year inferred as 2023), on Zoom"
+    },
+    {
+      "title": "Jewpernatural",
+      "season": "Spring",
+      "year": 2023,
+      "series": "JLI",
+      "description": "Signs, spirits and superstition in Jewish belief. Delve into the mystical and mysterious world of dreams, angels, demons, and extraterrestrials through the Talmud, Jewish philosophy, and Kabbalah.",
+      "lessons": [
+        "Dreams & Direction",
+        "Stars & Signs",
+        "Jinx & The Evil Eye",
+        "Para & Normal"
+      ],
+      "cover": "https://static.wixstatic.com/media/b988f4_0c6dc90f2b0e476e805ab7c0fca4fcc9~mv2.jpg",
+      "page": "https://www.bhchabad.org/jewpernatural",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_N0cqormK__WFjIKOvGkY4N"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/jewpernatural",
+        "https://www.bhchabad.org/jewpernatural-recording"
+      ],
+      "dates": "4 Wednesdays from May 3, 2023"
+    },
+    {
+      "title": "Book Smart",
+      "season": "Winter",
+      "year": 2023,
+      "series": "JLI",
+      "description": "A grand tour through the vast sea of Jewish wisdom and learning: a panoramic overview of 3000 years of Jewish learning, from Tanach and Midrash to Talmud, Halachah, philosophy, Kabbalah, Musar and Chasidism.",
+      "lessons": [
+        "The Torah",
+        "The Midrash",
+        "The Talmud",
+        "Halachah",
+        "Musar and Jewish Philosophy",
+        "Kabbalah and Chasidism"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_7edc7a36d12246cb82071c6fca2cca19~mv2.jpg",
+      "page": "https://www.bhchabad.org/booksmart",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_N0cqormK__WFjIKOvGkY4N"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/booksmart",
+        "https://www.bhchabad.org/booksmart-recording"
+      ],
+      "dates": "6 Wednesdays from Feb 8, 2023"
+    },
+    {
+      "title": "To Believe or Not to Believe in Yourself",
+      "season": "2022-23",
+      "year": 2022,
+      "series": "RCS",
+      "description": "How do we navigate our inner complexity and chart a clear path for ourselves? A monthly lunch-and-learn series for women, created and taught by women for women. (Second annual series.)",
+      "lessons": [
+        "Know Thyself. Know Thyself.",
+        "Living on the Ledge of the In-Between",
+        "The Long and Short of It. The Short and Long of It.",
+        "Worst Case Scenario? Best Case Scenario?",
+        "Do Happy. Be Happy!",
+        "Wheeling and Dealing to Feeling the Healing",
+        "If You Mind, It Matters"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_d531777bf2a742f3882d6942480c2e45~mv2.jpg",
+      "page": "https://www.bhchabad.org/tobeornottobe",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/tobeornottobe"
+      ],
+      "dates": "Monthly Tuesdays, Dec 6 (2022) - June 13 (2023)"
+    },
+    {
+      "title": "My G-d",
+      "season": "Fall",
+      "year": 2022,
+      "series": "JLI",
+      "description": "Nothing is off-limits as this refreshingly open course asks piercing questions about G-d: His nature, His purpose for creation, how we experience Him, and the role of religion, miracles and prayer.",
+      "lessons": [
+        "The Basics",
+        "His Nature",
+        "His Reasons",
+        "His Expectations",
+        "His Paradoxes",
+        "Our Relationship"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_d68500d6d1c046679499a66eb44fde5e~mv2.jpg",
+      "page": "https://www.bhchabad.org/mygod",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_MEMu-AC-XWC_Ic10KIAhWl"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/mygod",
+        "https://www.bhchabad.org/mygod-recording"
+      ],
+      "dates": "6 Wednesdays from Nov 9, 2022"
+    },
+    {
+      "title": "Survival of a Nation",
+      "season": "Summer",
+      "year": 2022,
+      "series": "JLI",
+      "description": "One fateful week in June 1967 redrew the map of the Middle East. A course on the Six-Day War and Israel today that confronts the impossible yet important questions our nation faces from a unique Jewish perspective.",
+      "lessons": [
+        "Jewish Homeland",
+        "Anti-Israel Sentiment",
+        "Preemptive Strikes",
+        "Civilian Casualties",
+        "Captured Territories",
+        "Land for Peace"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_788e44edca8a42339a86e72df6e2d389~mv2.png",
+      "page": "https://www.bhchabad.org/survival",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_M0exftld1uCz-NXapOBYy0"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/survival",
+        "https://www.bhchabad.org/survival-recordings"
+      ],
+      "dates": "From Wed July 20 / Thu July 21, 2022"
+    },
+    {
+      "title": "Beyond Right",
+      "season": "Spring",
+      "year": 2022,
+      "series": "JLI",
+      "description": "The values that shape Judaism's civil code. Beneath the Talmudic discussion and legalese lie the core Jewish values that fuel the debate; explore fascinating legal and ethical issues and uncover the values that make us who we are.",
+      "lessons": [
+        "Beyond Good Neighbors",
+        "Beyond Restitution",
+        "Beyond Taking Offense",
+        "Beyond Personal Freedom",
+        "Beyond Lawful Ownership",
+        "Beyond Presumption of Innocence"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_c13ebb13468f4ee3935e1645c773c8e0~mv2.jpg",
+      "page": "https://www.bhchabad.org/beyondright",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_NvVniVB6DdRRQGmPAPTIAn"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/beyondright",
+        "https://www.bhchabad.org/beyond-right-recording"
+      ],
+      "dates": "6 Wednesdays from May 25, 2022"
+    },
+    {
+      "title": "Meditation from Sinai",
+      "season": "Winter",
+      "year": 2022,
+      "series": "JLI",
+      "description": "The Torah was given at Sinai. So were the meditative tools to help us open up, see more, and live more deeply. Jewish teachings on mindful awareness, spirituality, and meditative practice for new and experienced meditators.",
+      "lessons": [
+        "Mind Control: I Think Therefore I Can",
+        "Spiritual Awakening: Tune In, Play On",
+        "Divine Animation: Joy Vey",
+        "Here and Wow: Free Every Moment",
+        "Club Med: Eat Better, Sleep Deeper, Work Higher",
+        "Act Natural: Climb the Mountain Do"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_8251e46f3e1a434b908954cef5cfe178~mv2.jpg",
+      "page": "https://www.bhchabad.org/meditation",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_PV7RER45apVEJ08D7SITDW"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/meditation",
+        "https://www.bhchabad.org/meditationrecording"
+      ],
+      "dates": "6 sessions from Wed Feb 2 / Thu Feb 3, 2022"
+    },
+    {
+      "title": "Well-Connected",
+      "season": "2021-22",
+      "year": 2021,
+      "series": "RCS",
+      "description": "Judaism is less a system of belief than a system of action. Well-Connected reveals the soul of Jewish ritual life by showing how to make each mitzvah personal, and a way to connect to something beyond ourselves. (A new monthly lunch-and-learn series for women.)",
+      "lessons": [
+        "Unroll the Scroll",
+        "Soul Food",
+        "Endlessly Blessed",
+        "A Slice of Life",
+        "Pray It Forward",
+        "The Kinds of Kindness",
+        "To Live in Deed"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_868a4c10dad3434e91862fe200a78eae~mv2.jpg",
+      "page": "https://www.bhchabad.org/connected",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/connected"
+      ],
+      "dates": "Monthly Tuesdays, Nov 9, 2021 - May 10, 2022"
+    },
+    {
+      "title": "Outsmarting Antisemitism",
+      "season": "Fall",
+      "year": 2021,
+      "series": "JLI",
+      "description": "We cannot let antisemitism define our Judaism, but we cannot ignore it either. The course takes this dark subject on squarely, with illuminating source texts and captivating case studies, to fight hate with hope.",
+      "lessons": [
+        "The Eternal People",
+        "No Apologies",
+        "The Promised Land",
+        "Change of Heart"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_841cab1969b443e19577cb73b96c77a1~mv2.jpg",
+      "page": "https://www.bhchabad.org/antisemitism",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_NV2vzqY9uddLGQGQ4lue1d"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/antisemitism",
+        "https://www.bhchabad.org/antisemitism-recording",
+        "https://www.bhchabad.org/copy-of-outmsarting-antisemitism-re"
+      ],
+      "dates": "4 sessions from Wed Nov 3 / Thu Nov 4, 2021"
+    },
+    {
+      "title": "Judaism Decoded",
+      "season": "Summer",
+      "year": 2021,
+      "series": "JLI",
+      "description": "Judaism Decoded is a unique exploration of the inner workings of Judaism, shedding light on the logic behind Torah law and the Talmudic debate.",
+      "lessons": [
+        "The Dynamic Duo",
+        "A Formula for Eternity",
+        "Rabbis Making Rules",
+        "Debating the Divine",
+        "Laws that Expire",
+        "Evidence for Sinai"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_fab8831ab81a46f19453ea5e2b5eb5c7~mv2.jpg",
+      "page": "https://www.bhchabad.org/decoded",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_PldVTMDU-gjfcicO4dD80H"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/decoded",
+        "https://www.bhchabad.org/decodedaudio",
+        "https://www.bhchabad.org/past-courses"
+      ],
+      "dates": "6 Wednesdays from July 7, 2021"
+    },
+    {
+      "title": "This Can Happen",
+      "season": "Spring",
+      "year": 2021,
+      "series": "JLI",
+      "description": "For thousands of years, the prophecies of a “messianic age” stretched the imaginations of even the most fervent believers. Not anymore. A credible case for feeling good about the future.",
+      "lessons": [
+        "Start with the Science",
+        "Who Needs a Redemption?",
+        "Superhuman vs. Super Humans",
+        "We're Getting There",
+        "Out of the Blues",
+        "And Then…"
+      ],
+      "cover": "https://static.wixstatic.com/media/b988f4_143825e4d2a44d58b6df2b465c34c4c7~mv2.jpg",
+      "page": "https://www.bhchabad.org/canhappen",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_Mrplg7dJW0resJH-m432Xq"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/canhappen",
+        "https://www.bhchabad.org/canhappenaudio",
+        "https://www.bhchabad.org/jliaudio"
+      ],
+      "dates": "From Wed Apr 28 / Thu Apr 29, 2021"
+    },
+    {
+      "title": "Journey of the Soul",
+      "season": "Winter",
+      "year": 2021,
+      "series": "JLI",
+      "description": "Who hasn't wondered what happens when we die? A fresh look at life, death and the rest—in peace: the soul's journey before birth and after death.",
+      "lessons": [
+        "Demystifying Death",
+        "Taking Leave",
+        "The Mourning After",
+        "Where We Go",
+        "Where We Go Again",
+        "Life Is Short(ish)"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_4f03b648734e4343834290c68d9fdf7e~mv2.jpg",
+      "page": "https://www.bhchabad.org/journey",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_OYo3Hi1VkTcC7NrH0q2ijY"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/journey",
+        "https://www.bhchabad.org/journeyaudio",
+        "https://www.bhchabad.org/past-courses"
+      ],
+      "dates": "From Wed Feb 3 / Thu Feb 4, 2021, on Zoom"
+    },
+    {
+      "title": "Secrets of the Bible",
+      "season": "Fall",
+      "year": 2020,
+      "series": "JLI",
+      "description": "Revisit six seemingly absurd biblical stories you likely remember from Hebrew school. Iconic stories, mystical meanings, and lessons for life.",
+      "lessons": [
+        "Would you choose knowledge over paradise?",
+        "How do you see past another's failures?",
+        "Will the real you please stand up?",
+        "Your life and its goals: are they compatible?",
+        "Why is inspiration so short-lived?",
+        "Does a higher station make you a better person?"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_2c4af9b20a58429f92c9f89e522abf06~mv2.jpg",
+      "page": "https://www.bhchabad.org/secrets",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_NTBpY5gkghY7worBkSyZKJ"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/secrets",
+        "https://www.bhchabad.org/secretsaudio",
+        "https://www.bhchabad.org/past-courses"
+      ],
+      "dates": "From Wed Nov 11, 2020, on Zoom"
+    },
+    {
+      "title": "High Holidays: Making it Meaningful at Home",
+      "season": "Fall",
+      "year": 2020,
+      "series": "other",
+      "description": "This year don't just zoom by the High Holidays, learn how to experience them in a special way at home. A four-part series exploring these special days.",
+      "lessons": [
+        "Rosh Hashanah: Making it Meaningful",
+        "Yom Kippur: Making it Soulful",
+        "Sukkot: Making it Joyful",
+        "Simchas Torah: Making it Super Joyful"
+      ],
+      "cover": "https://static.wixstatic.com/media/ced623_3dba79fa99fe41dbba8a57465ab10426~mv2.jpg",
+      "page": "https://www.bhchabad.org/highholidays",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "youtube",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_PjdtLUb8LcJigU5pAKPFXE"
+        },
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/highholidaysaudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/highholidays",
+        "https://www.bhchabad.org/highholidaysaudio",
+        "https://www.bhchabad.org/jliaudio"
+      ],
+      "dates": "4 Wednesdays from Sept 16, 2020"
+    },
+    {
+      "title": "Pirkei Avot Studies",
+      "season": "Summer",
+      "year": 2020,
+      "series": "other",
+      "description": "Life wisdom from the Ethics of our Fathers.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_2f159cdec63444bca40d9d8177959b76~mv2.jpg",
+      "page": "https://www.bhchabad.org/pirkeiavotaudio",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/pirkeiavotaudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/pirkeiavotaudio",
+        "https://www.bhchabad.org/jliaudio"
+      ],
+      "dates": "Summer 2020, virtual"
+    },
+    {
+      "title": "Judaism at Home",
+      "season": "Spring",
+      "year": 2020,
+      "series": "other",
+      "description": "Don't let social distancing get in the way of spiritual connection and exciting learning! How to imbue beauty, purpose, and spirituality into our daily mundane activities while living in quarantine.",
+      "lessons": [
+        "A Fresh Start",
+        "Food for Thought",
+        "Hear O Israel",
+        "Rest Assured",
+        "Shabbat Symbols"
+      ],
+      "cover": "https://static.wixstatic.com/media/b988f4_c98285af978544fc8f90528a98917d7f~mv2.jpg",
+      "page": "https://www.bhchabad.org/athome",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/jahaudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/athome",
+        "https://www.bhchabad.org/jahaudio",
+        "https://www.bhchabad.org/jliaudio"
+      ],
+      "dates": "5 Wednesdays from May 13, 2020, on Zoom"
+    },
+    {
+      "title": "The Jewish Course of Why",
+      "season": "Spring",
+      "year": 2020,
+      "series": "JLI",
+      "description": "Ever wondered why there are so many Jews in Hollywood? 50 of the biggest questions about Jews and Judaism, from a survey of 30,000 people, in twelve 45-minute online classes.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_743f1d7c23704fea88ecdcef9938ae22~mv2.jpg",
+      "page": "https://www.bhchabad.org/why",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/whyaudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/why",
+        "https://www.bhchabad.org/whyaudio",
+        "https://www.bhchabad.org/past-courses"
+      ],
+      "dates": "Twice weekly from Mon March 23, 2020, online"
+    },
+    {
+      "title": "Judaism's Gifts to the World",
+      "season": "Winter",
+      "year": 2020,
+      "series": "JLI",
+      "description": "Unpack six of the world’s most cherished values and how they were delivered to humankind by the Torah. How major Jewish ideas evolved into universal values.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_fea71c6b48b547f79c359b6ab7596b66~mv2_d_1679_1679_s_2.jpg",
+      "page": "https://www.bhchabad.org/gifts",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/giftsaudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/gifts",
+        "https://www.bhchabad.org/giftsaudio",
+        "https://www.bhchabad.org/past-courses"
+      ]
+    },
+    {
+      "title": "Worrier to Warrior",
+      "season": "Fall",
+      "year": 2019,
+      "series": "JLI",
+      "description": "We yearn to feel happy, self-assured, and enthusiastic, yet we’re consumed by feelings of doubt, regret and worry. Jewish secrets to feeling good however you feel: a six-week course blending Torah and psychology.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_0dccf9d3ebf9474aab2b7ccc47a18e17~mv2_d_1667_1667_s_2.jpg",
+      "page": "https://www.bhchabad.org/warrior",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/warrioraudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/warrior",
+        "https://www.bhchabad.org/warrioraudio",
+        "https://www.bhchabad.org/past-courses"
+      ]
+    },
+    {
+      "title": "Paradigm Shift",
+      "season": "Summer",
+      "year": 2019,
+      "series": "JLI",
+      "description": "Paradigm Shift offers a revolutionary and empowering outlook on life, culled from the wisdom of the Lubavitcher Rebbe, marking his 25th yahrzeit: an elevator ride to the heights of what is possible.",
+      "lessons": [
+        "A Beautiful Garden",
+        "Realizing Your Potential",
+        "This Is Mission Control",
+        "Follower or Leader",
+        "The Upside of Failure",
+        "Opening Our Eyes"
+      ],
+      "cover": "https://static.wixstatic.com/media/b988f4_a779ea3903404c5da13afaac4232ab5e~mv2.jpg",
+      "page": "https://www.bhchabad.org/paradigm",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/shift-audio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/paradigm",
+        "https://www.bhchabad.org/shift-audio",
+        "https://www.bhchabad.org/past-courses"
+      ],
+      "dates": "From Wed July 17 / Thu July 18, 2019"
+    },
+    {
+      "title": "With All My Heart",
+      "season": "Spring",
+      "year": 2019,
+      "series": "JLI",
+      "description": "Discover the Jewish art of prayer and spirituality in our newest six-session course, whether you’re seeking relief from stress or hoping for focus, clarity, and connection.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_48ced39e8e1141b4a19e0fe428c49c33~mv2_d_2048_2048_s_2.png",
+      "page": "https://www.bhchabad.org/prayer",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/copy-of-the-jewish-course-of-why-au"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/prayer",
+        "https://www.bhchabad.org/copy-of-the-jewish-course-of-why-au",
+        "https://www.bhchabad.org/past-courses"
+      ]
+    },
+    {
+      "title": "Crime and Consequence",
+      "season": "Winter",
+      "year": 2019,
+      "series": "JLI",
+      "description": "In Crime and Consequence, we explore 3000 years of Jewish law and wisdom concerning criminal convictions, sentencing, and rehabilitation.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_02994eaafecc4c9b80b1672c0fd3ddf4~mv2.png",
+      "page": "https://www.bhchabad.org/crime",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/crimeaudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/crime",
+        "https://www.bhchabad.org/crimeaudio",
+        "https://www.bhchabad.org/past-courses"
+      ]
+    },
+    {
+      "title": "Wrestling with Faith",
+      "season": "Fall",
+      "year": 2018,
+      "series": "JLI",
+      "description": "Where is the evidence for G-d? Tackling the biggest questions and challenges to faith, from Jewish practice to science and religion.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_e3043ee18cea43d4a8f1fa32b9f1c4e5~mv2.jpg",
+      "page": "https://www.bhchabad.org/faith",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/faith",
+        "https://www.bhchabad.org/past-courses",
+        "https://www.bhchabad.org/jliaudio"
+      ]
+    },
+    {
+      "title": "Heaven on Earth",
+      "season": "Summer",
+      "year": 2018,
+      "series": "JLI",
+      "description": "A three-week virtual tour of the Holy Temple, the home we shared with G-d. Discover the marvels of architecture and design that were integral to this sacred site.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_6eb451163a4346ccbb61855073db9323~mv2_d_3228_2883_s_4_2.jpg",
+      "page": "https://www.bhchabad.org/heaven-on-earth",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/heaven-on-earth",
+        "https://www.bhchabad.org/past-courses"
+      ],
+      "dates": "Wednesdays July 11, 18, 25, 2018, at 3805 Quarton Rd"
+    },
+    {
+      "title": "What Is?",
+      "season": "Spring",
+      "year": 2018,
+      "series": "JLI",
+      "description": "Rethink everything you know about our universe. Jewish mysticism on the building blocks of existence and the human condition.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_c0df8bb6c4db4bf7abd19e2c288fde2c~mv2.png",
+      "page": "https://www.bhchabad.org/whatis",
+      "eventId": null,
+      "recordings": [
+        {
+          "type": "wix-audio",
+          "url": "https://www.bhchabad.org/whatisaudio"
+        }
+      ],
+      "sources": [
+        "https://www.bhchabad.org/whatis",
+        "https://www.bhchabad.org/whatisaudio",
+        "https://www.bhchabad.org/past-courses"
+      ]
+    },
+    {
+      "title": "Communication: Its Art and Soul",
+      "season": "Winter",
+      "year": 2018,
+      "series": "JLI",
+      "description": "In the era of social media, the value of healthy communication among family members and associates is widely recognized. Reclaim the lost art of human connection.",
+      "lessons": [],
+      "cover": "https://static.wixstatic.com/media/b988f4_e3a588bef41741df942a0141eb14166a~mv2_d_2048_2048_s_2.png",
+      "page": "https://www.bhchabad.org/communication",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/communication",
+        "https://www.bhchabad.org/past-courses",
+        "https://www.bhchabad.org/jliaudio"
+      ]
+    },
+    {
+      "title": "Great Debates in Jewish History",
+      "season": "Fall",
+      "year": 2017,
+      "series": "JLI",
+      "description": "Debate and disputation are not only encouraged within Judaism but reside at the very heart of Jewish history and theology. Six of the biggest debates that rocked the Jewish world, then and today.",
+      "lessons": [
+        "Rabbis and the Divine Word",
+        "To Be or Not To Be",
+        "Reason and Religion",
+        "Forcing Redemption",
+        "The To-Do About Chassidism",
+        "The Commercialization of Religion"
+      ],
+      "cover": "https://static.wixstatic.com/media/b988f4_8a764c74f50a4e0b8094b372e60346ae~mv2.png",
+      "page": "https://www.bhchabad.org/greatdebates",
+      "eventId": null,
+      "recordings": [],
+      "sources": [
+        "https://www.bhchabad.org/greatdebates",
+        "https://www.bhchabad.org/landing",
+        "https://www.bhchabad.org/jli-course-outline",
+        "https://www.bhchabad.org/debate",
+        "https://www.bhchabad.org/past-courses"
+      ],
+      "dates": "6 Monday evenings, Oct 30 - Dec 4, 2017, at Bloomfield Hills High School"
+    }
+  ],
+  "channels": {
+    "youtube": {
+      "owner": "Rabbi Levi Dubov",
+      "channelUrl": null,
+      "note": "Channel URL/ID could not be read: YouTube pages fetched via WebFetch returned a generic page (every playlist URL came back as 'Secrets of the Bible (JLI)', 6 videos, owner 'Rabbi Levi Dubov'). Titles below come from the Wix page that links each playlist; video counts are unverified except Secrets of the Bible (6).",
+      "playlists": [
+        {
+          "title": "Book Smart (Winter 2023); also linked from the Jewpernatural recording page",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_N0cqormK__WFjIKOvGkY4N",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/booksmart-recording",
+            "https://www.bhchabad.org/jewpernatural-recording"
+          ]
+        },
+        {
+          "title": "My G-d (Fall 2022)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_MEMu-AC-XWC_Ic10KIAhWl",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/mygod-recording"
+          ]
+        },
+        {
+          "title": "Survival of a Nation (Summer 2022)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_M0exftld1uCz-NXapOBYy0",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/survival-recordings"
+          ]
+        },
+        {
+          "title": "Beyond Right (Spring 2022)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_NvVniVB6DdRRQGmPAPTIAn",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/beyond-right-recording"
+          ]
+        },
+        {
+          "title": "Meditation from Sinai (Winter 2022)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_PV7RER45apVEJ08D7SITDW",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/meditationrecording"
+          ]
+        },
+        {
+          "title": "Outsmarting Antisemitism (Fall 2021)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_NV2vzqY9uddLGQGQ4lue1d",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/antisemitism-recording",
+            "https://www.bhchabad.org/copy-of-outmsarting-antisemitism-re"
+          ]
+        },
+        {
+          "title": "Judaism Decoded (Summer 2021)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_PldVTMDU-gjfcicO4dD80H",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/decodedaudio"
+          ]
+        },
+        {
+          "title": "This Can Happen (Spring 2021)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_Mrplg7dJW0resJH-m432Xq",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/canhappenaudio"
+          ]
+        },
+        {
+          "title": "Journey of the Soul (Winter 2021)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_OYo3Hi1VkTcC7NrH0q2ijY",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/journeyaudio"
+          ]
+        },
+        {
+          "title": "Secrets of the Bible (JLI) (Fall 2020)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_NTBpY5gkghY7worBkSyZKJ",
+          "videoCount": 6,
+          "linkedFrom": [
+            "https://www.bhchabad.org/secretsaudio"
+          ]
+        },
+        {
+          "title": "High Holidays: Making it Meaningful (Fall 2020)",
+          "url": "https://youtube.com/playlist?list=PLbHO_Q5DmD_PjdtLUb8LcJigU5pAKPFXE",
+          "videoCount": null,
+          "linkedFrom": [
+            "https://www.bhchabad.org/highholidaysaudio"
+          ]
+        }
+      ],
+      "singleVideos": [
+        {
+          "title": "The Jewish Course of Why promo",
+          "url": "https://www.youtube.com/watch?v=GC4wlCGTpZA",
+          "page": "https://www.bhchabad.org/why"
+        },
+        {
+          "title": "Secrets of the Bible trailer",
+          "url": "https://www.youtube.com/watch?v=msmdKXr3eXA",
+          "page": "https://www.bhchabad.org/secrets"
+        },
+        {
+          "title": "To Believe or Not to Believe in Yourself promo (thumbnail only on page)",
+          "url": "https://www.youtube.com/watch?v=j4oy9-AGeX4",
+          "page": "https://www.bhchabad.org/tobeornottobe"
+        }
+      ]
+    },
+    "podcasts": [
+      {
+        "title": "Torah Deep-Dive with Rabbi Levi Dubov",
+        "host": "Spotify for Creators (Anchor)",
+        "spotifyCreatorsUrl": "https://podcasters.spotify.com/pod/show/torah-deep-dive",
+        "appleUrl": "https://podcasts.apple.com/us/podcast/torah-deep-dive-a-weekly-exploration-of/id1713396006",
+        "rss": "https://anchor.fm/s/ebbbe2fc/podcast/rss",
+        "episodes": 36,
+        "range": "2023-10-24 to 2026-08-07",
+        "contents": "Weekly Torah Deep-Dive parsha classes (Oct 2023 - Mar 2024) plus full JLI course lessons: The Kabbalah of Meaning (6), Captivating Cases in Rabbinic Responsa (6), For All Humankind (4), Sinai and Civics (4), and one talk 'What is Kabbalah, the Tanya, and Jewish Spirituality?' (Jun 2026)."
+      },
+      {
+        "title": "Tanya: The Kabbalah of You | with Rabbi Levi Dubov",
+        "appleUrl": "https://podcasts.apple.com/il/podcast/tanya-the-kabbalah-of-you-with-rabbi-levi-dubov/id1600754756",
+        "podbeanUrl": "https://www.podbean.com/podcast-detail/94b7a-2488e2/Tanya-The-Kabbalah-of-You-%7C-with-Rabbi-Levi-Dubov-Podcast",
+        "episodes": 97,
+        "range": "2021 to 2026 (latest: Tanya Ch. 40 (3), Oct 2026)",
+        "contents": "Recordings of the weekly Tanya class; includes 'The Tanya: A Conversation with Tzvi Freeman'. Spotify URL not found."
+      }
+    ]
+  },
+  "photos": [
+    {
+      "url": "https://static.wixstatic.com/media/ced623_8d93aa6de022429896f7084653076b6f~mv2.jpg",
+      "page": "https://www.bhchabad.org/",
+      "desc": "Homepage hero photo. Original filename '5510-IMG_20230503_111841467_edited.jpg': a phone photo taken 3 May 2023 at 11:18, the first morning session of Jewpernatural (Wed May 3, 2023, 11:00). Probably a class photo; not visually verified."
+    },
+    {
+      "url": "https://static.wixstatic.com/media/b988f4_e2c552e26e3b4e8cb2abde599f728b15~mv2.jpg",
+      "page": "https://www.bhchabad.org/landing",
+      "desc": "Camera photo '20170503_171241~01.jpg' (taken 3 May 2017) on the old Great Debates landing page. Content not visually verified."
+    },
+    {
+      "url": "https://static.wixstatic.com/media/b988f4_0bc07214a1b84801bb4693fb72eefc41~mv2.jpeg",
+      "page": "https://www.bhchabad.org/landing",
+      "desc": "'WhatsApp Image 2018-08-05 at 9.33.27 PM' on the old landing page (shown small, 153x220). Could be a photo or a forwarded flyer; not verified."
+    }
+  ],
+  "notes": [
+    "Source of the full page list: https://www.bhchabad.org/pages-sitemap.xml (97 URLs, all lastmod 2026-10-14). The sitemap index also lists booking-services-sitemap.xml (Wix Bookings only). The sitemap revealed 22 course pages that are not in the menu, /past-courses or /jliaudio: Well-Connected, Outsmarting Antisemitism, Meditation from Sinai, Beyond Right, Survival of a Nation, My G-d, To Believe or Not to Believe, Book Smart, Jewpernatural, Cultivating Character (Pirkei Avot), How Happiness Thinks, The World of Kabbalah, One Wow Moment, Advice for Life, Read it in Hebrew, Decisions of Fate, Nurturing Relationships, A Work of Heart, Decoding the Talmud, Colorful Profiles, Heaven on Earth 2025, Lift Your Life. It also revealed detail pages /athome and /highholidays, and 10 more recording pages (9 of them link a YouTube playlist).",
+    "Years for pages that print only month/day were worked out from the weekday (e.g. 'Wednesday, Nov 1' is 2023) together with the season label on the page. Each course's 'dates' field records the result.",
+    "Women's series: all six (2021-22 to 2026-27) are monthly Rosh Chodesh Society lunch-and-learns taught by Mrs. Mushky Dubov. Well-Connected and Lift Your Life name the RCS. To Believe and A Work of Heart use 'RCS83'/'RCS85' asset filenames. The pages call One Wow Moment the 'third annual' series and To Believe the 'second annual'. The 'year' field is the year the series started.",
+    "Decisions of Fate: the page calls it a 'SPRING 2024 COURSE' (JLI's spring 2024 release), but the sessions began Wednesday Aug 7, 2024, so it is filed as Summer 2024.",
+    "Read it in Hebrew: no year on the page. Thursday Feb 15 fits 2024 (and 2018). The newer ced623 assets, the Federation venue and the info@bhchabad.org contact all point to 2024. It is not a JLI course (series 'other'); taught by Mrs. Mushky Dubov.",
+    "Cultivating Character: Pirkei Avot (/pirkeiavot): no year on the page. Friday June 16 fits 2023, and the format (Fridays 11:00-11:45 on Zoom, Paperform) matches the later Torah Deep Dive. The Summer 2020 'Pirkei Avot Studies' audio card uses an image named 'Cultivating Character_Social Media_Square', so the 2020 series may have had the same title. The /highholidays page's meta description, copied from a 2020 Pirkei Avot page, calls it a 6-session series. Confirm with Rabbi Dubov whether this ran in 2020, 2023 or both.",
+    "JLI vs other: High Holidays: Making it Meaningful, Judaism at Home, Pirkei Avot Studies/Cultivating Character and Read it in Hebrew are marked 'other' because their pages don't say JLI. Judaism at Home and Pirkei Avot appear in the 'JLI audio archive', so they may have used JLI material.",
+    "Recordings: Book Smart and Jewpernatural recording pages both link the same playlist PLbHO_Q5DmD_N0cqormK__WFjIKOvGkY4N. One of them is probably a copy-paste error, so the right playlist for the other course needs checking in YouTube Studio.",
+    "Recordings marked 'wix-audio' (/whyaudio, /shift-audio, /pirkeiavotaudio, /giftsaudio, /copy-of-the-jewish-course-of-why-au, /jahaudio, /warrioraudio, /crimeaudio, /whatisaudio): these pages exist and are titled as audio recordings, but the player is JavaScript-rendered and was not visible to WebFetch. Export the MP3s from the Wix Media Manager. /whatisaudio (Spring 2018) is not linked from the /jliaudio grid.",
+    "No recording page or playlist was found for: Great Debates, Communication, Heaven on Earth (2018), Wrestling with Faith, Well-Connected and later women's series, World of Kabbalah, How Happiness Thinks, Advice for Life, Decisions of Fate, Nurturing Relationships, Decoding the Talmud, Colorful Profiles, Heaven on Earth (2025). Fall 2025 onward is on the Torah Deep-Dive podcast instead. They may exist as unlisted YouTube playlists on the channel.",
+    "YouTube: the channel URL/handle could not be retrieved (WebFetch got a generic YouTube response, and oEmbed/RSS were blocked). Playlist owner shows as 'Rabbi Levi Dubov'. All playlist IDs share the PLbHO_Q5DmD_ prefix, so they are from one channel.",
+    "Spotify: the RSS feed links episodes at podcasters.spotify.com/pod/show/torah-deep-dive. The public open.spotify.com/show/ URL was not found (the podcasters.spotify.com fetch was not approved).",
+    "Course pages with lightbhchabad.org event IDs: 19284 (Colorful Profiles), 20065 (Heaven on Earth 2025), 20473 (Kabbalah of Meaning), 20623 (Lift Your Life), 21301 (Responsa), 22109 (For All Humankind), 22861 (Sinai & Civics), 23481 (NEXT GENesis), 23504 (Kabbalah Hidden Architecture). Earlier courses used Paperform, Google Forms or myjli.com registration.",
+    "Responsa and Sinai & Civics lesson titles come from the Torah Deep-Dive podcast episode titles. The Wix /responsa page shows only lesson descriptions and /sinai shows only icons.",
+    "Nurturing Relationships: the page shows lesson topics but no titles, so the topic summaries are used. The official titles are on myjli.com if wanted.",
+    "Descriptions combine the site's own sentences, trimmed and lightly joined. WebFetch limits verbatim quotes, so some clauses are close paraphrases of the page text. None were taken from myjli.com.",
+    "Cover URLs are the original Wix files with /v1/... transforms removed. Some legacy b988f4 assets keep Wix's old '~mv2_d_W_H_s_N' filename form; that is the real file id, not a transform.",
+    "Courses marked status 'current' (Kabbalah Fall 2026, NEXT GENesis 2026-27) are included for completeness. Leave them off a 'Past courses' page until they finish.",
+    "Possible gaps: no course found for Winter/Spring/Summer 2017 (the site starts at Fall 2017; a camera photo dated May 3, 2017 suggests earlier activity) or for a separate spring 2024 slot. The JLI location page (http://www.myjli.com/index.html?task=location&lid=12258, linked from /landing) may list the full JLI history; not fetched.",
+    "Photos: /pictures is a JavaScript Pro Gallery, and none of its images reached WebFetch. Only 3 candidate real photos were found in page HTML, and none could be looked at (the image fetch failed). Export the gallery from the Wix dashboard.",
+    "Non-course hidden pages found in the sitemap: /purim-in-the-stadium, /purim-in-the-jungle (Sun Mar 12 = 2023), /mezuzah (order form), /blank-2 (empty), /heaven-on-earth-registration (empty), /landing (2017 Great Debates landing), /jli-course-outline, /debate (shell), /try (duplicate of /kabbalah), /copy-of-for-all-humankind-new-jli-c (duplicate of /jli)."
+  ]
+}
