@@ -39,6 +39,12 @@ SLIDES = [
 ]
 
 SHIM = """
+/* ---- preview only: the earlier (straight brand) palette, for side-by-side comparison ---- */
+html.pv-original {
+  --cc-ink: #5D0B30; --cc-ink-deep: #5D0B30; --cc-primary: #871A39; --cc-primary-2: #6E1530;
+  --cc-accent-text: #A8461A; --cc-accent-on-dark: #F27730; --cc-cream: #FAF6F3; --cc-text: #2E2E2D;
+  --cc-muted: #555555; --cc-on-dark: #F7EEF1; --cc-on-dark-muted: #E4C7D1; --cc-line: #E8E1DC; --cc-line-dark: #7A2A4B;
+}
 /* ---- preview shim: stands in for ChabadOne's own stylesheets ---- */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -76,15 +82,12 @@ e = html.escape
 
 
 def hero():
-    s = SLIDES[0]
-    dots = "".join(f'<button type="button" aria-label="Show: {e(x["title"])}" aria-current="{"true" if i == 0 else "false"}" data-i="{i}"></button>' for i, x in enumerate(SLIDES))
     return f'''<section class="cc-hero" aria-label="Welcome"><div class="cc-wrap">
-<div class="cc-hero__text"><p class="cc-eyebrow">Chabad Jewish Center of Bloomfield Hills</p>
-<h1 class="cc-hero__title cc-head" id="pv-h-title">{e(s["title"])}</h1>
-<p class="cc-hero__sub" id="pv-h-sub">{e(s["sub"])}</p>
-<div class="cc-hero__ctas"><a class="cc-btn cc-btn--accent" id="pv-h-cta" href="{s["cta"][1]}">{e(s["cta"][0])}</a><a class="cc-btn cc-btn--ghost" href="#about" style="color: var(--cc-white) !important">About us</a></div></div>
-<div class="cc-hero__media"><div class="cc-hero__img" id="pv-h-img" role="img" aria-label="Featured photo" style="background-image:url('{IMG[s["img"]]}')"></div>
-<div class="cc-hero__dots" role="group" aria-label="Featured items">{dots}</div></div>
+<div class="cc-hero__text"><p class="cc-eyebrow">Shalom and welcome</p>
+<h1 class="cc-hero__title cc-head">Your Jewish home in Bloomfield Hills</h1>
+<p class="cc-hero__sub">Whether you're new to Jewish life or looking to go deeper, there's a place for you here: classes, holidays and good company, whatever your background.</p>
+<div class="cc-hero__ctas"><a class="cc-btn cc-btn--light" href="#events">See what's coming up</a><a class="cc-btn cc-btn--ghost" href="#" style="color: var(--cc-white) !important">About us</a></div></div>
+<div class="cc-hero__media"><div class="cc-hero__img" role="img" aria-label="Challah on a Shabbat table" style="background-image:url('{IMG["hero1"]}')"></div></div>
 </div></section>'''
 
 
@@ -102,20 +105,22 @@ def intro():
 
 
 def events():
-    evs = [
-        ("Wed, Oct 28, 2026 - Thu, Dec 3, 2026", "JLI: Kabbalah and the hidden architecture of you",
-         "Reincarnation, soulmates, dreams, names: what these and other mysteries reveal about the hidden design of your life · Join this six-week course on concepts from kabbalah and how they come together to answer some of life's biggest questions."),
-        ("Tue, Nov 17, 2026", "RCS: NEXT GENesis",
-         "Seven monthly evenings reading the first stories of Genesis as a mirror of the soul, with Mushky Dubov. Dinner served."),
+    feats = [
+        ("Oct", "28", "Wed", "JLI course · 6 weeks", "Kabbalah and the hidden architecture of you",
+         "Reincarnation, soulmates, dreams, names: what these and other mysteries reveal about the hidden design of your life. Six weeks of kabbalah that answer some of life's biggest questions.",
+         "<strong>Next class:</strong> Wed, Oct 28 · 11:00 am or 7:00 pm"),
+        ("Nov", "17", "Tue", "Rosh Chodesh Society", "NEXT GENesis",
+         "Seven monthly evenings reading the first stories of Genesis as a mirror of the soul, with Mushky Dubov. Dinner served.",
+         "<strong>First evening:</strong> Tue, Nov 17"),
     ]
-    cards = "".join(f'''<article class="cc-event"><div class="cc-event__body"><p class="cc-event__date">{e(d)}</p>
-<h3 class="cc-event__title cc-head">{e(t)}</h3><p class="cc-event__desc">{e(x)}</p>
-<div class="cc-event__cta"><a class="cc-btn" href="#">Register</a></div></div></article>''' for d, t, x in evs)
+    cards = "".join(f'''<article class="cc-feature"><div class="cc-feature__date" aria-hidden="true"><span class="cc-feature__m">{m}</span><span class="cc-feature__d">{dd}</span><span class="cc-feature__w">{w}</span></div>
+<div class="cc-feature__body"><p class="cc-feature__kicker">{e(k)}</p><h3 class="cc-feature__title cc-head">{e(t)}</h3><p class="cc-feature__desc">{e(x)}</p>
+<p class="cc-feature__meta">{meta}</p><div class="cc-feature__cta"><a class="cc-btn" href="#">Register</a></div></div></article>''' for m, dd, w, k, t, x, meta in feats)
     return f'''<section class="cc-section cc-section--cream cc-events" id="events" aria-labelledby="cc-events-h"><div class="cc-wrap">
-<div class="cc-head-row"><div><p class="cc-eyebrow">Upcoming classes and events</p><h2 class="cc-h2 cc-head" id="cc-events-h">Discover the joy and meaning in Judaism</h2>
-<p class="cc-lede">Everything is open to everyone, and the first class of every course is yours to try, commitment-free.</p></div>
-<div class="cc-events__nav"><button type="button" aria-label="Previous events" data-dir="-1">&#8592;</button><button type="button" aria-label="More events" data-dir="1">&#8594;</button><a class="cc-btn cc-btn--ghost" href="#">All events</a></div></div>
-<div class="cc-events__track" tabindex="0" aria-label="Upcoming events, scroll sideways for more">{cards}</div></div></section>'''
+<div class="cc-head-row"><div><p class="cc-eyebrow">Coming up</p><h2 class="cc-h2 cc-head" id="cc-events-h">Discover the joy and meaning in Judaism</h2>
+<p class="cc-lede">The first class of every course is yours to try, commitment-free.</p></div>
+<div class="cc-events__nav"><a class="cc-btn cc-btn--ghost" href="#">Full calendar</a></div></div>
+<div class="cc-features">{cards}</div></div></section>'''
 
 
 def programs():
@@ -177,35 +182,26 @@ def footer():
 
 SITE_JS = """
 (function(){
-  var S = %s, T = [
+  var T = [
     {q:"\\u201cPlaceholder: your community's real words will appear here, one quote at a time, in this large type.\\u201d", n:"Name of the person", c:"Context line, for example JLI student since 2019"},
     {q:"\\u201cPlaceholder: a second quote. Real testimonials come from the Testimonials page you will fill in.\\u201d", n:"Another name", c:"Context line, for example Shabbat dinner guest"}];
-  var d = document, hi = 0, ti = 0;
+  var d = document, ti = 0;
   function $(id){ return d.getElementById(id); }
-  var hdots = d.querySelectorAll('.cc-hero__dots:not(.cc-testimonials__dots) button');
-  function showHero(i){ hi = (i + S.length) %% S.length; var s = S[hi];
-    $('pv-h-title').textContent = s.title; $('pv-h-sub').textContent = s.sub; $('pv-h-cta').textContent = s.cta;
-    $('pv-h-img').style.backgroundImage = "url('" + s.img + "')";
-    hdots.forEach(function(b, k){ b.setAttribute('aria-current', k === hi ? 'true' : 'false'); }); }
-  hdots.forEach(function(b, k){ b.addEventListener('click', function(){ showHero(k); clearInterval(auto); }); });
-  var auto = setInterval(function(){ showHero(hi + 1); }, 7000);
   var tdots = d.querySelectorAll('.cc-testimonials__dots button');
-  function showT(i){ ti = (i + T.length) %% T.length; var t = T[ti];
+  function showT(i){ ti = (i + T.length) % T.length; var t = T[ti];
     $('pv-t-q').textContent = t.q; $('pv-t-by').innerHTML = '';
     var st = d.createElement('strong'); st.textContent = t.n; var sp = d.createElement('span'); sp.textContent = t.c;
     $('pv-t-by').appendChild(st); $('pv-t-by').appendChild(sp);
     tdots.forEach(function(b, k){ b.setAttribute('aria-current', k === ti ? 'true' : 'false'); }); }
   tdots.forEach(function(b, k){ b.addEventListener('click', function(){ showT(k); }); });
   d.querySelectorAll('.cc-testimonials__nav .cc-round').forEach(function(b){ b.addEventListener('click', function(){ showT(ti + (+b.dataset.dir)); }); });
-  var track = d.querySelector('.cc-events__track');
-  d.querySelectorAll('.cc-events__nav button').forEach(function(b){ b.addEventListener('click', function(){ track.scrollBy({left: (+b.dataset.dir) * track.clientWidth * 0.8, behavior: 'smooth'}); }); });
   $('pv-menu-open').addEventListener('click', function(){ $('pv-nav').classList.add('is-open'); });
   $('pv-menu-close').addEventListener('click', function(){ $('pv-nav').classList.remove('is-open'); });
   d.querySelectorAll('a[href="#"]').forEach(function(a){ a.addEventListener('click', function(ev){ ev.preventDefault(); }); });
   $('pv-sub').addEventListener('submit', function(ev){ ev.preventDefault(); });
   window.addEventListener('scroll', function(){ d.body.classList.toggle('cc-scrolled', window.scrollY > 10); }, {passive: true});
 })();
-""" % json.dumps([{"title": s["title"], "sub": s["sub"], "cta": s["cta"][0], "img": IMG[s["img"]]} for s in SLIDES])
+"""
 
 site = f'''<!doctype html>
 <html lang="en" class="cc-on cc-home-page cc-shell-ready"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -216,8 +212,6 @@ site = f'''<!doctype html>
 {header()}
 <div id="content"><div id="cc-home">
 {hero()}
-{quick()}
-{intro()}
 {events()}
 {programs()}
 {testimonials()}

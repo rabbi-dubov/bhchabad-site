@@ -54,7 +54,11 @@
     <button type="button" id="view-desktop" aria-pressed="true">Desktop</button>
     <button type="button" id="view-phone" aria-pressed="false">Phone</button>
   </div>
-  <p>Draft for review, not the live site. Photos are ChabadOne sample photos until yours arrive; testimonials are placeholders. Buttons don't go anywhere yet.</p>
+  <div class="seg" role="group" aria-label="Colors">
+    <button type="button" id="pal-refined" aria-pressed="true">Refined colors</button>
+    <button type="button" id="pal-original" aria-pressed="false">Original brand</button>
+  </div>
+  <p>Draft for review, not the live site. Photos are samples until yours arrive; testimonials are placeholders. Buttons don't go anywhere yet.</p>
 </header>
 <main class="stage" id="stage">
   <iframe id="site" title="BH Chabad homepage preview"></iframe>
@@ -73,6 +77,15 @@
       bD.setAttribute('aria-pressed', String(!phone));
       bP.setAttribute('aria-pressed', String(phone));
     }
+    var pR = document.getElementById('pal-refined'), pO = document.getElementById('pal-original'), original = false;
+    function applyPal() {
+      try { frame.contentDocument.documentElement.classList.toggle('pv-original', original); } catch (e) {}
+      pR.setAttribute('aria-pressed', String(!original));
+      pO.setAttribute('aria-pressed', String(original));
+    }
+    pR.addEventListener('click', function () { original = false; applyPal(); });
+    pO.addEventListener('click', function () { original = true; applyPal(); });
+    frame.addEventListener('load', applyPal);
     bD.addEventListener('click', function () { set(false); });
     bP.addEventListener('click', function () { set(true); });
   })();
