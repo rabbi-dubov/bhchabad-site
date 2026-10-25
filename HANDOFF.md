@@ -17,6 +17,11 @@ Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), 
 
 ## Open tasks, in order
 
+0. **Go live with the round-2 homepage** (Levi said "ready to publish live" on Oct 25; preview v17 is the model). Steps:
+   1. **Claude**: port the preview's design into `src/theme.css` and `src/theme.js` and build to `test/` only. That covers the rotating hero (eyebrow, date line, arrows, compact on desktop and mobile), the events carousel with tags, the split welcome with a photo slideshow, the photo strip, testimonials with a photo per quote, the donate band, the signup card, Shabbat times moved from the top bar to the footer, and the Instrument Serif quote font. Today's live theme shows only the first slide.
+   2. **Rivka (or Levi)**: enter the content in ChabadOne Site Control › Home Page. That means the slides in the promo slider, uploading the photos to ChabadOne (they can't go in this public repo), the message, the programs, the photos widget and the Testimonials page. Claude gives paste-ready text.
+   3. **Levi**: test on the real site with `?cc=test` (desktop and phone), then OK the promote of `test/` to `live/`. Re-test the JLI registration page.
+
 1. **Levi**: pick photos on the shortlist page; send Tanya listener numbers (sign in to Spotify for Creators and YouTube Studio in the Claude app's browser, or send screenshots); answer the About page draft's questions.
 2. **Levi**: share the plan doc, the photo shortlist, the homepage draft and the About draft with Rivka (Share menu on each page), and give her access to the GitHub repo and the Shlichus folder.
 3. **Rivka + Claude**: clean up the ChabadOne top menu to the six items (first get a screenshot of today's menu).
