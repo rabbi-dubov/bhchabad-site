@@ -42,6 +42,8 @@ Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), 
 - **Photo shortlist, round 2 from Google Drive** (Use / Skip): https://claude.ai/artifact/9VUY1ojDsn51WcDfd8RRHp. Picks in collection `picks` (doc id = `p` + photo id, e.g. `pa2704`, field `choice`) plus `notes/general`. Files: `Shlichus\Website\site-photos\new from Levi\from-drive\` (1600px); `_shortlist-ids.json` there maps photo id to file name.
 - **Photo shortlist, round 3** (younger families, one-on-one moments, newer family photos; same `picks` / `notes/general` layout): https://claude.ai/artifact/FCcZsbEw98dZFyGVCwGSJH. Files: `site-photos
 - **Photo shortlist, round 4** (the Chanukah photographer's Shain Park sets 2022-2025; same `picks` layout): https://claude.ai/artifact/LZWXi7CQXBrvUxebzZFWbo. Files: `site-photos
+- **Photo shortlist, round 5** (Levi's newest phone photos, mostly Sukkot 2026; same `picks` layout): https://claude.ai/artifact/2tiifPCHNeXGJVXoyZx8vG. Files: `site-photos
+ew from Levirom-drive-round5` with `_shortlist-ids.json`.
 ew from Levirom-drive-round4` with `_shortlist-ids.json`.
 ew from Levirom-drive-round3` with `_shortlist-ids.json`.
 - Homepage content draft doc: https://claude.ai/artifact/U11tdhcy8JVz9HEceuhvCq
@@ -77,3 +79,4 @@ See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwo
 - 2026-10-25 · Levi · Round 3 reviewed: 28 use, 29 skip, 2 undecided. Used: Sukkah Mobile photos of parents with kids, one-on-one moments with adults, women's baking and lunch, and all 5 Shain Park photos by the Chanukah photographer. Skipped: every casual phone photo of the Dubov family for About (needs a professional portrait), every kids' program photo, and shots of children alone.
 - 2026-10-25 · Levi · Round 4 published: 39 photos from the photographer's four Shain Park Chanukah sets (about 210 of ~400 reviewed; people together, children only with adults): https://claude.ai/artifact/LZWXi7CQXBrvUxebzZFWbo. Suggested to Levi: hire the same photographer for a Shabbat dinner, a women's evening and a class.
 - 2026-10-25 · Levi · Round 4 reviewed: 11 use, 1 skip, 27 left undecided (treat as not chosen). Used: families at the lighting, dancing with kids, the crowd with the flag, the lighting, a boy at toppings, singing at the mic, tefillin with a young man, three group photos by the menorah, children lighting with adults. Levi is uploading his recent phone photos to Drive "Phone photos" for another look.
+- 2026-10-25 · Levi · Levi uploaded 463 new phone photos (Aug 28 to Oct 22, 2026) to Drive "Phone photos". Claude reviewed all of them and published round 5 with 26 picks (Sukkah Mobile 2026 families, a meeting with officials, tefillin at an office): https://claude.ai/artifact/2tiifPCHNeXGJVXoyZx8vG.
