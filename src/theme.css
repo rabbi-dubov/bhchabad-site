@@ -1179,3 +1179,29 @@ html body.cco_body .cc-notice a { color: var(--cc-primary) !important; font-weig
 html body.cco_body .cc-notice__close { flex: none; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: var(--cc-ink); font-size: 22px; line-height: 1; cursor: pointer; padding: 0; }
 html body.cco_body .cc-notice__close:hover { background: rgba(0, 0, 0, .06); }
 @media (max-width: 760px) { html body.cco_body .cc-notice { font-size: 13px; } html body.cco_body .cc-notice p { text-align: left; } html body.cco_body .cc-notice a { white-space: normal; } }
+
+/* ChabadOne's "Shalom! We're glad you're here!" signup popup, in the site's look */
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) { width: min(460px, calc(100vw - 32px)) !important; border: 0 !important; border-radius: 16px !important; overflow: hidden; box-shadow: 0 30px 80px rgba(30, 6, 18, .35) !important; background: var(--cc-white) !important; }
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .b_inside { border: 0 !important; background: var(--cc-white) !important; border-radius: 0 !important; }
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .b_header { background: var(--cc-primary) !important; border: 0 !important; padding: 22px 28px 20px !important; border-bottom: 4px solid var(--cc-accent) !important; }
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .b_header .small_header { display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between; gap: 12px; background: transparent !important; padding: 0 !important; height: auto !important; }
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .header_text { font-family: var(--cc-font-head) !important; font-size: 26px !important; line-height: 1.15; color: var(--cc-white) !important; padding: 0 !important; font-weight: 400 !important; }
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .b_header .float_right { float: none !important; margin: 0 !important; padding: 0 !important; color: var(--cc-white) !important; opacity: .8; font-size: 18px; }
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .b_header .float_right:hover { opacity: 1; }
+html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .co_dialog_content { width: auto !important; }
+html body.cco_body #PopupSubscribeMessage { padding: 24px 28px 26px !important; }
+html body.cco_body #PopupSubscribeMessage .subscribe-title { font-size: 12px !important; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-text) !important; padding-top: 0 !important; }
+html body.cco_body #PopupSubscribeMessage .message-wrapper { font-size: 15px !important; line-height: 1.55; color: var(--cc-muted) !important; margin: 8px 0 18px; }
+html body.cco_body #PopupSubscribeMessage .co_global_input_container { display: flex; gap: 10px; margin: 0 0 10px !important; }
+html body.cco_body #PopupSubscribeMessage .co_global_input_container::before, html body.cco_body #PopupSubscribeMessage .co_global_input_container::after { display: none !important; }
+html body.cco_body #PopupSubscribeMessage input.co_global_input { float: none !important; flex: 1 1 0; width: auto !important; min-width: 0; height: 48px !important; padding: 0 14px !important; border: 1px solid var(--cc-field-border) !important; border-radius: var(--cc-radius-sm) !important; font-size: 16px !important; color: var(--cc-text) !important; background: var(--cc-white) !important; box-shadow: none !important; }
+html body.cco_body #PopupSubscribeMessage input.co_global_input:focus { border-color: var(--cc-primary) !important; outline: 2px solid var(--cc-accent-soft); }
+html body.cco_body #PopupSubscribeMessage .grey { font-size: 13px !important; color: var(--cc-muted) !important; margin: 2px 0 18px !important; }
+html body.cco_body #PopupSubscribeMessage .subscribe-buttons-wrapper { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+html body.cco_body #PopupSubscribeMessage .co_global_button { margin: 0 !important; float: none !important; }
+html body.cco_body #PopupSubscribeMessage #CoButton { background: var(--cc-primary) !important; color: var(--cc-white) !important; border: 0 !important; border-radius: var(--cc-radius-sm) !important; height: 48px; padding: 0 28px !important; font-size: 16px !important; font-weight: 700 !important; }
+html body.cco_body #PopupSubscribeMessage #CoButton:hover { background: var(--cc-ink) !important; }
+html body.cco_body #PopupSubscribeMessage #CoButton span { color: var(--cc-white) !important; }
+html body.cco_body #PopupSubscribeMessage #CancelButton { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; height: auto !important; min-height: 0 !important; color: var(--cc-muted) !important; text-decoration: underline; font-size: 15px !important; }
+html body.cco_body #PopupSubscribeMessage #CancelButton .normal { color: var(--cc-muted) !important; font-weight: 400 !important; }
+@media (max-width: 480px) { html body.cco_body #PopupSubscribeMessage .co_global_input_container { flex-direction: column; } html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .header_text { font-size: 22px !important; } }
