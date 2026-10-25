@@ -40,7 +40,8 @@
     testimonialsUrl: null,   // set to "/testimonials" once that page exists
     // Homepage photos live on an ordinary ChabadOne page: pictures under a heading containing "Welcome"
     // rotate beside the welcome text, under "Strip" they scroll in the photo strip, under "Donate" the
-    // first one is the donate background. No headings: the first 4 pictures = welcome, all = strip.
+    // first one is the donate background, under "Cards" they replace the program-card pictures in order.
+    // No headings: the first 4 pictures = welcome, all = strip.
     photosUrl: null,         // set to e.g. "/homepage-photos" once that page exists
     shabbatPlace: "Bloomfield Hills",
     quoteFont: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap",
@@ -433,7 +434,7 @@
   /* Homepage photos page (CC.photosUrl): groups pictures by the heading above them */
   function parsePhotos(doc) {
     var root = q(".article-body", doc) || q(".co_body", doc) || q("#BodyContainer", doc) || doc.body;
-    var g = { welcome: [], strip: [], donate: [] }, all = [], cur = null, headed = false;
+    var g = { welcome: [], strip: [], donate: [], cards: [] }, all = [], cur = null, headed = false;
     qa("h1, h2, h3, h4, h5, h6, strong, b, img", root).forEach(function (el) {
       if (el.tagName === "IMG") {
         var src = imgSrc(el);
@@ -446,6 +447,7 @@
       if (/welcome/.test(t)) { cur = "welcome"; headed = true; }
       else if (/strip|gallery|community/.test(t)) { cur = "strip"; headed = true; }
       else if (/donat|partner/.test(t)) { cur = "donate"; headed = true; }
+      else if (/card|program/.test(t)) { cur = "cards"; headed = true; }
     });
     if (!headed) { g.welcome = all.slice(0, 4); g.strip = all; }
     return g;
@@ -662,6 +664,14 @@
       ]);
     }).filter(Boolean).slice(0, CC.home.programsMax);
     if (!cards.length) { return null; }
+    // ChabadOne shrinks Programs pictures to 350px; full-size ones under a "Cards" heading on the
+    // photos page replace them, in order
+    withPhotos(function (g) {
+      (g && g.cards || []).forEach(function (p, i) {
+        var im = cards[i] && q(".cc-program__img", cards[i]);
+        if (im) { im.style.backgroundImage = "url(\"" + String(p.src).replace(/"/g, "%22") + "\")"; }
+      });
+    });
     return h("section", { "class": "cc-section cc-programs", "aria-labelledby": "cc-programs-h" }, [
       h("div", { "class": "cc-wrap" }, [
         h("div", { "class": "cc-head-row" }, [h("div", null, [
