@@ -8,7 +8,7 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 - **Not deployed yet**: the `cachedPage()` localStorage caching and `testimonialsUrl: null` in theme.js.
 - **Homepage layout**: Layout 1 is still PENDING with demo content. The live homepage still shows the old "under construction" slide. Filling it was blocked by the Cloudflare "Verify you are human" check in the browser pane.
 - **JLI registration** (`/tools/events/register.asp?eventid=23504&new=true`) was tested after the last deploy and works. Re-test after every deploy, never submit, and clear the stored progress.
-- **GitHub**: github.com/rabbi-dubov/bhchabad-site `main` has the full history (pushed Oct 24 from a local Claude Code session on Levi's PC, merged with the cloud session's earlier one-commit publish). Local working copy: `ShlichusWebsitebhchabad-site`. `gh` there is logged in as rabbi-dubov. Python is NOT installed on the PC yet, so `build.py` can't run there until it is.
+- **GitHub**: github.com/rabbi-dubov/bhchabad-site `main` has the full history (pushed Oct 24 from a local Claude Code session on Levi's PC, merged with the cloud session's earlier one-commit publish). Local working copy: `Shlichus\Website\bhchabad-site`. `gh` there is logged in as rabbi-dubov. Python is NOT installed on the PC yet, so `build.py` can't run there until it is.
   - `live/` = exactly the deployed v20261023.1230 (same CSS/JS as dist/, hashes 7e80923a8d53 / fd9ecd201292 for the inline snippets).
   - `test/` = current src: caching update, testimonialsUrl null, course-cover card styles.
   - `build.py test | promote | snippets` (see README).
