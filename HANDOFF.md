@@ -1,62 +1,55 @@
-# BH Chabad website: handoff (Oct 23, 2026, evening)
+# BH Chabad website: handoff
 
-Read this first in any new session, then `claude/04-chabadone-playbook.md`.
+Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), then this file, then `PLAYBOOK.md`.
 
 ## Where things stand
 
-- **Live theme**: since Oct 24, 2026 the ChabadOne Custom Header/Footer boxes hold only the GitHub loader (`loader/header.html`, `loader/footer.html`). Visitors get `live/` from jsDelivr = v20261023.1230 (refined palette, new hero, "Coming up" cards). Levi checked the homepage and JLI registration in Edge after the switch: unchanged. Deploys no longer need ChabadOne: push to GitHub, purge jsDelivr. Backup of the old inline code: `Shlichus\Website\chabadone-code-backup-2026-10-24.txt` (paste back + Save + Publish to undo).
-- **Released Oct 24 (v20261023.2047)**: `test/` promoted to `live/` after Levi tested with `?cc=test` (homepage + JLI registration fine). Adds the `cachedPage()` localStorage caching, `testimonialsUrl: null` and the course-cover card styles. jsDelivr purged and confirmed serving 2047. Nothing is waiting in `test/` now.
-- **Homepage layout**: Layout 1 is still PENDING with demo content. The live homepage still shows the old "under construction" slide. Filling it was blocked by the Cloudflare "Verify you are human" check in the browser pane.
-- **JLI registration** (`/tools/events/register.asp?eventid=23504&new=true`) was tested after the last deploy and works. Re-test after every deploy, never submit, and clear the stored progress.
-- **GitHub**: github.com/rabbi-dubov/bhchabad-site `main` has the full history (pushed Oct 24 from a local Claude Code session on Levi's PC, merged with the cloud session's earlier one-commit publish). Local working copy: `Shlichus\Website\bhchabad-site`. `gh` there is logged in as rabbi-dubov. Python is NOT installed on the PC yet, so `build.py` can't run there until it is.
-  - `live/` = `test/` = v20261023.2047. `dist/header.html` + `dist/footer.html` are still the older inline v20261023.1230 (rebuild with `build.py snippets` before using them as a fallback).
-  - `test/` = current src: caching update, testimonialsUrl null, course-cover card styles.
-  - `build.py test | promote | snippets` (see README).
+- **Phase**: planning with Levi is done for the site structure. Next is implementation, which Rivka carries out with Claude, while Levi reviews wording, design and photos.
+- **Master plan**: the "BH Chabad website plan" doc (link below). Levi went through it with comments on Oct 24 and answered all its open questions. It holds the top menu, site map, homepage changes, Adult education landing page, Tanya section, Shul, testimonials (with privacy rules), where the old Wix pages go, and the build order.
+- **Menu (decided)**: About · Learn · Tanya · Events & Holidays · Shul · Contact, plus a Donate button. Clicking Learn opens an "Adult education" landing page. No Chabad.org content, except the Tanya Project chapters on our own domain.
+- **Live theme**: the ChabadOne Custom Header/Footer boxes hold only the GitHub loader (`loader/`). Visitors get `live/` from jsDelivr: v20261023.2047 (released Oct 24 after Levi tested `?cc=test`). Deploys need no ChabadOne step: push to GitHub, then purge jsDelivr. Backup of the old inline code: `Shlichus\Website\chabadone-code-backup-2026-10-24.txt` (paste back, Save, Publish to undo).
+- **Homepage content**: ChabadOne's Layout 1 is still pending with demo content; the live homepage still shows the old "under construction" slide. Cloudflare blocks Claude's browser on chabadone.org and lightbhchabad.org from Levi's PC, so a person enters content in their own browser with text from Claude.
+- **Photos**: Claude reviewed about 1,100 photos in `Shlichus\` and published a 40-photo shortlist page with Use / Skip buttons (link below). Levi's picks save there; read them with ArtifactData `list` on collection `picks` (doc id = `p` + photo id, e.g. `p2-4`, field `choice`), plus `notes/general`. Photo ids map to files through the contact-sheet indexes, which live only in that session's scratchpad: if needed, find files by the captions on the shortlist page. Missing: Shabbat Day, people at Shabbat dinners, High Holidays, Simchas Torah, Passover, Shavuos, the Tanya class, Lunch and Learn, a larger photo of Mushky, and the originals behind the 2024–25 campaign graphics.
+- **Testimonials**: chosen from Levi's two Google Docs ("Chabad Programming Feedback and Testimonials", 627 entries, and "Chabad Homepage Testimonials"). The picks, with the privacy rules, are in the plan doc. The site's `testimonialsUrl` stays `null` until the "In their words" page exists.
+- **Tanya**: podcast "Tanya: The Kabbalah of You" (weekly since 2021, up to chapter 40, 5.0 on Apple). Apple: podcasts.apple.com/us/podcast/id1600754756 · Spotify: open.spotify.com/show/6YoFpK5kK4l4735AvqZWmO · YouTube channel UCM-rStPmmK15hS3weLTbPgg. The Chabad.org Tanya Project (with Rabbi Tzvi Freeman) has no book title or date yet ("in several years").
+- **JLI registration** (`/tools/events/register.asp?eventid=23504&new=true`): works; re-test after every deploy, never submit.
+- **Repo**: github.com/rabbi-dubov/bhchabad-site, local copy `Shlichus\Website\bhchabad-site` on Levi's PC (`gh` logged in as rabbi-dubov). Python is not installed there, so `build.py` can't run yet; promoting `test/` to `live/` is a plain copy of three files.
 
 ## Open tasks, in order
 
-1. ~~Push the repo to GitHub; Levi pastes the loader into ChabadOne~~ DONE Oct 24. After every push, purge jsDelivr.
-2. **ChabadOne content** (needs a browser that can pass Cloudflare; try Claude in Chrome in Levi's Edge):
-   - Fill Layout 1: slide 1 welcome copy and 4 programs, and remove the Demo Ad.
-   - Publish only with Levi's OK.
-   - NEXT GENesis event: set dates to Nov 17 2026–May 18 2027 and remove the all-caps "A MONTHLY LEARNING SERIES FOR WOMEN: NEXT GENises" line. Levi approved this.
-   - ~~Deploy the caching update.~~ Done Oct 24 via GitHub.
-3. **Courses page**: DONE in preview v4 (covers on every card, 16:9 frame filled with the cover's edge colour; phones show a 120px thumbnail beside the text; the dialog shows the cover on top). Levi answered both cover questions Oct 24, so no changes:
-   - 2020 Pirkei Avot Studies: keep the Cultivating Character artwork on that card.
-   - 2018 "Heaven on Earth": keep the title "Heaven on Earth" with the Temple ("Extreme Makeover: Divine Edition") artwork.
-   - Production: covers are public now at `https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/data/covers-thumb/<file>.webp` (checked, 200 image/webp). Next: point the courses page build at those URLs and create the page in ChabadOne.
-4. **Photos**: curate real event photos from `Shlichus\` (Shain Park menorah 2019–23, Purim in the Jungle, First Fridays, JLI\Pictures, Limmud) for the homepage and inner pages. Levi will download his Google Photos albums into the Shlichus folder; there is no Google Photos connector.
-5. **About page**: waiting on Levi's doc comments and his answers to the open questions (children count, dedication wording, photos).
-6. **Testimonials**: Levi is collecting these himself, via ChatGPT. Do not search his email for them, and never invent any. When the page exists, set `testimonialsUrl: "/testimonials"`.
-7. **Ask Levi** about two things:
-   - Book Smart and Jewpernatural share a single YouTube playlist.
-   - 10 courses only have audio hosted on Wix, which needs exporting.
-8. **Later**: the remaining pages, SEO, then the domain switch.
-   - Preserve Google Workspace MX/SPF/DKIM records.
-   - Tell ChabadOne support before switching.
+1. **Levi**: pick photos on the shortlist page; send Tanya listener numbers (sign in to Spotify for Creators and YouTube Studio in the Claude app's browser, or send screenshots); answer the About page draft's questions.
+2. **Levi**: share the plan doc, the photo shortlist, the homepage draft and the About draft with Rivka (Share menu on each page), and give her access to the GitHub repo and the Shlichus folder.
+3. **Rivka + Claude**: clean up the ChabadOne top menu to the six items (first get a screenshot of today's menu).
+4. **Rivka + Claude**: homepage content in ChabadOne (slides, quick links, welcome, program cards), using the homepage draft plus the plan's changes and the chosen photos. Publish only with Levi's OK.
+5. **Chanukah at Shain Park** page and hero slide (Chanukah begins Friday, December 4, 2026): needs date, time and sponsors from Levi.
+6. **Learn**: Adult education landing page, past courses page (preview v4 ready; covers are public at `https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/data/covers-thumb/<file>.webp`), weekly classes, Lunch and Learn, women's learning and events, CE/CME credits.
+7. **Tanya section**: overview with numbers and quotes, weekly class (Zoom link only after sign-up), podcast and YouTube by chapter, the Tanya book page.
+8. **About** (with In their words, How we can help, Photo albums), **Shul** (Shabbat Day on the 2nd Shabbat of each month, "contact us for the next date", an interest button), the other holiday pages, Contact.
+9. **Event fixes** (Rivka): NEXT GENesis dates to Nov 17 2026 – May 18 2027, and remove the all-caps "A MONTHLY LEARNING SERIES FOR WOMEN: NEXT GENises" line (Levi approved).
+10. **Wix audio**: 10 courses' recordings live only on Wix; download them before Wix ends. Also: Book Smart and Jewpernatural share one YouTube playlist.
+11. **Later**: SEO, then the domain switch (only when 100% ready; tell ChabadOne support first; keep the Google Workspace MX/SPF/DKIM records). Ask ChabadOne whether old Wix addresses can forward to the new pages.
 
-## Links
+## Links (private claude.ai pages; Levi shares them with Rivka)
 
-- **Website plan (Oct 24, the current master plan)**: https://claude.ai/artifact/Sv4YuH9GCoRwJHsPABTEvT (top menu, site map, homepage changes, testimonials, old Wix page mapping, build order, open questions). Specific event fixes (e.g. NEXT GENesis dates) are delegated to Levi's assistant Rivka, who works with Claude separately.
+- **Website plan (master plan)**: https://claude.ai/artifact/Sv4YuH9GCoRwJHsPABTEvT
+- **Photo shortlist** (Use / Skip): https://claude.ai/artifact/85fJaS5LdYV8ENYCNj974z
+- Homepage content draft doc: https://claude.ai/artifact/U11tdhcy8JVz9HEceuhvCq
+- About Us draft doc: https://claude.ai/artifact/DTttWxjpMj7r3NW2GunmV7
 - Homepage preview: https://claude.ai/artifact/EjwrS9wc8Codpdi7hKA5cy
 - Courses preview (v4, with covers): https://claude.ai/artifact/V3ZntNNdSu2JGDjCdNpndu
-- About Us draft doc: https://claude.ai/artifact/DTttWxjpMj7r3NW2GunmV7
-- Homepage content draft doc: https://claude.ai/artifact/U11tdhcy8JVz9HEceuhvCq
-- Old Wix sitemap (all course pages, including hidden ones): https://www.bhchabad.org/pages-sitemap.xml
-- myjli Resource Library: Levi logs in himself. The library is an ajax tree at `/desktop/reslibrary/ajax/testResLib.php?showAcord=1&test=1&view=&dir=N`.
-  - Year folders: 5787=821, 5786=811, 5785=802, 5784=788, 5783=722, 5782=716, 5781=712, 5780=707.
+- Old Wix sitemap: https://www.bhchabad.org/pages-sitemap.xml
+- myjli Resource Library: Levi logs in himself. Ajax tree at `/desktop/reslibrary/ajax/testResLib.php?showAcord=1&test=1&view=&dir=N`; year folders 5787=821, 5786=811, 5785=802, 5784=788, 5783=722, 5782=716, 5781=712, 5780=707.
 
-## Hard rules (Levi's instructions)
+## Hard rules
 
-- **Scope**: only touch BH Chabad (Site ID 10077, "Bloomfield" in `title2`). Never touch PrincetonChabad, which shares the same login.
-- **No credentials or bot checks**: never enter passwords; Levi logs in. Never complete CAPTCHAs or Cloudflare checks.
-- **Ask first**: no publishing, sending or saving settings without Levi's OK. Leave the pending "Blue/Yellow" color scheme unpublished.
-- **Rate limits**: avoid them on ChabadOne. Make one check per change, don't poll, don't reload in loops, and don't re-fetch `/tools/` pages repeatedly.
-- **Styling**: global styles only, never per-page tweaks. The CSS may not contain `&` or `<`.
-- **Domain switch**: only when the site is 100 percent ready.
+See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwords for anyone; no publishing without Levi's OK; one check per change on ChabadOne; global styles only, and the CSS may not contain `&` or `<`; this repo is public, so no private data in it; leave the pending "Blue/Yellow" color scheme unpublished.
 
 ## Environment notes
 
-- **Container network**: reaches static.wixstatic.com, www.bhchabad.org and resources.myjli.com. It cannot reach chabad.org, lightbhchabad.org or YouTube.
-- **Levi's PC folders**: `C:\Users\rabbi\OneDrive\Documents\Shlichus` and its `Website` subfolder are connected. ImageMagick is available there.
-- **OneDrive**: a new file shows as "hardlinked" while it syncs. Wait about 45 seconds before staging it.
+- Cloudflare challenges both Claude's in-app browser and plain downloads on lightbhchabad.org and chabadone.org from Levi's PC. Checks there are done by a person in Edge (Ctrl+F5), with screenshots pasted into the chat.
+- The Shlichus folder syncs to the cloud, and the sync drops `desktop.ini` icon files into `.git`, which breaks `git pull`. Delete them (see `CLAUDE.md`).
+- ImageMagick is not installed; Windows' own imaging (PowerShell `System.Drawing`) works for contact sheets and resizing.
+
+## Session log
+
+- 2026-10-24 · Levi · First local session: repo pushed to GitHub, loader switched in ChabadOne, v20261023.2047 released, website plan written and reviewed (menu, site map, testimonials, Tanya, Shul), photo shortlist published, shared `CLAUDE.md` added for Levi and Rivka.
