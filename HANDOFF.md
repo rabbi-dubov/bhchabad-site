@@ -5,11 +5,11 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 ## Where things stand
 
 - **Live theme**: since Oct 24, 2026 the ChabadOne Custom Header/Footer boxes hold only the GitHub loader (`loader/header.html`, `loader/footer.html`). Visitors get `live/` from jsDelivr = v20261023.1230 (refined palette, new hero, "Coming up" cards). Levi checked the homepage and JLI registration in Edge after the switch: unchanged. Deploys no longer need ChabadOne: push to GitHub, purge jsDelivr. Backup of the old inline code: `Shlichus\Website\chabadone-code-backup-2026-10-24.txt` (paste back + Save + Publish to undo).
-- **Not deployed yet**: the `cachedPage()` localStorage caching and `testimonialsUrl: null` in theme.js.
+- **Released Oct 24 (v20261023.2047)**: `test/` promoted to `live/` after Levi tested with `?cc=test` (homepage + JLI registration fine). Adds the `cachedPage()` localStorage caching, `testimonialsUrl: null` and the course-cover card styles. jsDelivr purged and confirmed serving 2047. Nothing is waiting in `test/` now.
 - **Homepage layout**: Layout 1 is still PENDING with demo content. The live homepage still shows the old "under construction" slide. Filling it was blocked by the Cloudflare "Verify you are human" check in the browser pane.
 - **JLI registration** (`/tools/events/register.asp?eventid=23504&new=true`) was tested after the last deploy and works. Re-test after every deploy, never submit, and clear the stored progress.
 - **GitHub**: github.com/rabbi-dubov/bhchabad-site `main` has the full history (pushed Oct 24 from a local Claude Code session on Levi's PC, merged with the cloud session's earlier one-commit publish). Local working copy: `Shlichus\Website\bhchabad-site`. `gh` there is logged in as rabbi-dubov. Python is NOT installed on the PC yet, so `build.py` can't run there until it is.
-  - `live/` = exactly the deployed v20261023.1230 (same CSS/JS as dist/, hashes 7e80923a8d53 / fd9ecd201292 for the inline snippets).
+  - `live/` = `test/` = v20261023.2047. `dist/header.html` + `dist/footer.html` are still the older inline v20261023.1230 (rebuild with `build.py snippets` before using them as a fallback).
   - `test/` = current src: caching update, testimonialsUrl null, course-cover card styles.
   - `build.py test | promote | snippets` (see README).
 
@@ -20,7 +20,7 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
    - Fill Layout 1: slide 1 welcome copy and 4 programs, and remove the Demo Ad.
    - Publish only with Levi's OK.
    - NEXT GENesis event: set dates to Nov 17 2026–May 18 2027 and remove the all-caps "A MONTHLY LEARNING SERIES FOR WOMEN: NEXT GENises" line. Levi approved this.
-   - Deploy the caching update.
+   - ~~Deploy the caching update.~~ Done Oct 24 via GitHub.
 3. **Courses page**: DONE in preview v4 (covers on every card, 16:9 frame filled with the cover's edge colour; phones show a 120px thumbnail beside the text; the dialog shows the cover on top). Still to ask Levi:
    - The 2020 Pirkei Avot cover IS the Cultivating Character artwork (square social version). Did the 2020 series have that name too, or is it the wrong image?
    - The 2018 "Heaven on Earth" cover reads "Extreme Makeover: Divine Edition" (Temple artwork). Which title should the card use?
