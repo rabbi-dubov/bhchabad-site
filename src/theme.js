@@ -592,6 +592,16 @@
       when.title = title; when.k = evKey(title); when.href = (reg || a).getAttribute("href"); when.reg = !!reg; when.page = a ? a.getAttribute("href") : "";
       return when;
     }).filter(Boolean);
+    // An event with no picture of its own borrows the picture of the hero slide with the same name
+    var slidePics = readSlides(q(".promo_slider", root) || root).map(function (s) { return { k: evKey(s.title), img: s.img }; });
+    function slidePic(title) {
+      var k = evKey(title);
+      for (var i = 0; i < slidePics.length; i++) {
+        var s = slidePics[i];
+        if (s.img && s.k && k && (s.k.indexOf(k) >= 0 || k.indexOf(s.k) >= 0)) { return s.img; }
+      }
+      return "";
+    }
     function render(courses) {
       var used = {}, cards = [];
       courses.forEach(function (c) {
@@ -612,7 +622,7 @@
         return;
       }
       cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : 1); });
-      cards.slice(0, 8).forEach(function (c) { grid.appendChild(eventCard(c)); });
+      cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(c)); });
       upd();
     }
     render([]);   // first paint from the calendar feed
