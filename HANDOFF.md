@@ -54,3 +54,4 @@ See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwo
 
 - 2026-10-24 · Levi · First local session: repo pushed to GitHub, loader switched in ChabadOne, v20261023.2047 released, website plan written and reviewed (menu, site map, testimonials, Tanya, Shul), photo shortlist published, shared `CLAUDE.md` added for Levi and Rivka.
 - 2026-10-24 · Levi · Tanya numbers read in the app browser (Levi signed in to Spotify for Creators, YouTube Studio and his chabad.org Gmail/Drive himself); Tanya Project quotes added to the plan doc.
+- 2026-10-24 · Levi · Photo shortlist reviewed: 25 use, 15 skip (summary table under "Homepage" in the plan doc). Open: Events & Holidays card photo, Shul and Purim photos, family photo for About (Levi will send). Levi feels there are many more good photos than the 40 shown: next round widens beyond the "Chosen" folders and whatever he points to.
