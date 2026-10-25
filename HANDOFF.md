@@ -17,7 +17,7 @@ Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), 
 
 ## Open tasks, in order
 
-0. **Go live with the round-2 homepage** (Levi said "ready to publish live" on Oct 25; preview v17 is the model). Steps:
+0. **Go live with the round-2 homepage** (step 1 DONE Oct 25: test/ = v20261025.1106; Rivka's checklist: "Homepage go-live: content checklist for Rivka", https://claude.ai/artifact/5ZB6voHQCTisMdQGTrKSFb) (Levi said "ready to publish live" on Oct 25; preview v17 is the model). Steps:
    1. **Claude**: port the preview's design into `src/theme.css` and `src/theme.js` and build to `test/` only. That covers the rotating hero (eyebrow, date line, arrows, compact on desktop and mobile), the events carousel with tags, the split welcome with a photo slideshow, the photo strip, testimonials with a photo per quote, the donate band, the signup card, Shabbat times moved from the top bar to the footer, and the Instrument Serif quote font. Today's live theme shows only the first slide.
    2. **Rivka (or Levi)**: enter the content in ChabadOne Site Control › Home Page. That means the slides in the promo slider, uploading the photos to ChabadOne (they can't go in this public repo), the message, the programs, the photos widget and the Testimonials page. Claude gives paste-ready text.
    3. **Levi**: test on the real site with `?cc=test` (desktop and phone), then OK the promote of `test/` to `live/`. Re-test the JLI registration page.
@@ -36,6 +36,7 @@ Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), 
 
 ## Links (private claude.ai pages; Levi shares them with Rivka)
 
+- **Homepage go-live checklist for Rivka** (slide texts, widgets, photos page, testimonials page): https://claude.ai/artifact/5ZB6voHQCTisMdQGTrKSFb
 - **Website plan (master plan)**: https://claude.ai/artifact/Sv4YuH9GCoRwJHsPABTEvT
 - **Photo shortlist** (Use / Skip): https://claude.ai/artifact/85fJaS5LdYV8ENYCNj974z
 - Homepage content draft doc: https://claude.ai/artifact/U11tdhcy8JVz9HEceuhvCq
@@ -63,3 +64,4 @@ See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwo
 - 2026-10-24 · Levi · Photo shortlist reviewed: 25 use, 15 skip (summary table under "Homepage" in the plan doc). Open: Events & Holidays card photo, Shul and Purim photos, family photo for About (Levi will send). Levi feels there are many more good photos than the 40 shown: next round widens beyond the "Chosen" folders and whatever he points to.
 - 2026-10-25 · Levi · Homepage preview round 2 iterated through Levi's comments (now v15): course art on course slides (Kabbalah uses JLI's lesson-1 collage, which fits the 5:4 frame), events carousel with tags and Learn more, fixed-height hero with text centered beside the picture, split welcome with a tefillin photo, a scrolling strip of 16 real photos from Levi's picks, last name in signup, "names changed" note removed. Still open: better women's learning photos (waiting for Levi to say where they are).
 - 2026-10-24 · Levi · Homepage preview round 2 published (link above). Family photo for About: a Marla Michele Must portrait (credit "Photo: Marla Michele Must, Portrait Artist"); Levi pasted it in chat, the file still needs saving to Shlichus\Website\site-photos. More photo sources for the next round: the Chabad Facebook page and Levi's personal Facebook page (he signs in himself in the app browser).
+- 2026-10-25 · Levi · Round-2 homepage built into the theme and pushed to test/ only (v20261025.1106; live/ still v20261023.2047). Rotating hero from all promo-slider slides, event cards with tags in a sideways carousel, split welcome with photo slideshow, photo strip, testimonials with a photo per quote, donate band with photo, signup card, Shabbat times moved from the top bar to the footer. New photos/testimonials pages are read once CC.photosUrl / CC.testimonialsUrl are set. Added tools/build.mjs (Node twin of build.py). Next: Rivka enters content per the checklist, Levi tests ?cc=test, then promote. A separate session is collecting more photos from Levi's Google Drive.

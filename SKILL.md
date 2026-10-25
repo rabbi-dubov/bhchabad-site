@@ -109,11 +109,13 @@ The goal is that every page, form and block looks right automatically.
 
   | Widget | Shell section |
   |---|---|
-  | promo slider | hero |
+  | promo slider | hero (all slides rotate; "Label | Title", "Text | Date line") |
   | icons | quick links |
   | candle-lighting | This week |
-  | events page/feed | events carousel |
-  | message | intro |
+  | events page/feed | event cards (photo, tag, date) rolling sideways |
+  | message | intro (split with Welcome photos from CC.photosUrl) |
+  | photos page (CC.photosUrl) | photo strip, donate background |
+  | testimonials page (CC.testimonialsUrl) | testimonials with a photo per quote |
   | programs | cards |
   | photos | photos |
   | subscribe | subscribe |
