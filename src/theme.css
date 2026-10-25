@@ -558,17 +558,10 @@ html body.cco_body .cc-quick img { width: 34px; height: 34px; border-radius: 50%
 html body.cco_body .cc-quick a:hover { color: var(--cc-accent-on-dark) !important; }
 
 /* This-week band (Shabbat, Parshah, holiday) */
-/* Slim Shabbat bar at the very top of every page (JS fills it from the candle-lighting feed) */
-html body.cco_body .cc-shabbat-bar { background: var(--cc-ink-deep); color: var(--cc-on-dark); font-size: 13px; line-height: 1.3; }
-html body.cco_body .cc-shabbat-bar .cc-wrap { padding-top: 7px; padding-bottom: 7px; text-align: center; }
-html body.cco_body .cc-shabbat-bar a { color: var(--cc-on-dark) !important; text-decoration: none !important; }
-html body.cco_body .cc-shabbat-bar a:hover .cc-shabbat-bar__full, html body.cco_body .cc-shabbat-bar a:hover .cc-shabbat-bar__short { text-decoration: underline; }
-html body.cco_body .cc-shabbat-bar strong { color: var(--cc-accent-on-dark); font-weight: 700; }
-html body.cco_body .cc-shabbat-bar__short { display: none; }
-@media (max-width: 760px) {
-  html body.cco_body .cc-shabbat-bar__full { display: none; }
-  html body.cco_body .cc-shabbat-bar__short { display: inline; }
-}
+/* Shabbat times in the footer (JS fills it from the candle-lighting widget) */
+html body.cco_body .cc-footer__shabbat { margin: 0 0 20px; font-size: 14px; line-height: 1.7; color: var(--cc-on-dark-muted); border-left: 2px solid var(--cc-accent); padding-left: 12px; }
+html body.cco_body .cc-footer__shabbat[hidden] { display: none !important; }
+html body.cco_body .cc-footer__shabbat-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
 
 /* Events carousel */
 html body.cco_body .cc-events__track {
@@ -599,27 +592,25 @@ html body.cco_body .cc-events__nav button {
 html body.cco_body .cc-events__nav button:hover { border-color: var(--cc-primary); }
 @media (max-width: 760px) { html body.cco_body .cc-events__track { grid-auto-columns: 86%; } }
 
-/* Featured courses ("Coming up"): registration events as date-led cards; calendar sessions fold in as "Next class" */
-html body.cco_body .cc-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 24px; }
-html body.cco_body .cc-feature { display: grid; grid-template-columns: 112px minmax(0, 1fr); background: var(--cc-white); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); overflow: hidden; }
-html body.cco_body .cc-feature__date { background: var(--cc-ink); color: var(--cc-on-dark); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 26px 8px; text-align: center; }
-html body.cco_body .cc-feature__m { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
-html body.cco_body .cc-feature__d { font-family: var(--cc-font-head) !important; font-size: 54px; line-height: 1; color: var(--cc-white); }
-html body.cco_body .cc-feature__w { font-size: 13px; color: var(--cc-on-dark-muted); }
-html body.cco_body .cc-feature__body { padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-html body.cco_body .cc-feature__kicker { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-text); }
-html body.cco_body .cc-feature__title { margin: 0; font-size: 30px !important; line-height: 1.1; color: var(--cc-ink); text-wrap: balance; }
-html body.cco_body .cc-feature__desc { margin: 0; color: var(--cc-muted) !important; font-size: 16px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-html body.cco_body .cc-feature__meta { margin: 4px 0 0; padding-top: 12px; border-top: 1px solid var(--cc-line); font-size: 14px; line-height: 1.5; color: var(--cc-text); }
-html body.cco_body .cc-feature__meta strong { color: var(--cc-ink); }
-html body.cco_body .cc-feature__cta { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-@media (max-width: 560px) {
-  html body.cco_body .cc-feature { grid-template-columns: 76px minmax(0, 1fr); }
-  html body.cco_body .cc-feature__date { padding: 20px 4px; }
-  html body.cco_body .cc-feature__d { font-size: 38px; }
-  html body.cco_body .cc-feature__body { padding: 20px 18px 22px; }
-  html body.cco_body .cc-feature__title { font-size: 24px !important; }
-}
+/* "Coming up": event cards (photo + category tag, date, title, text, Learn more / Register) rolling sideways */
+html body.cco_body .cc-evs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, calc((100% - 72px) / 4)); gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 16px; margin: 0 -4px; scrollbar-width: thin; }
+html body.cco_body .cc-evs > * { scroll-snap-align: start; }
+@media (max-width: 760px) { html body.cco_body .cc-evs { grid-auto-columns: 82%; } }
+html body.cco_body .cc-events__nav { align-items: center; }
+html body.cco_body .cc-events__nav .cc-round:disabled { opacity: .35; cursor: default; }
+html body.cco_body .cc-events__nav .cc-round[hidden] { display: none !important; }
+html body.cco_body .cc-ev { display: flex; flex-direction: column; background: var(--cc-white); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); overflow: hidden; }
+html body.cco_body .cc-ev__img { position: relative; aspect-ratio: 16 / 10; background: var(--cc-ink) center / cover no-repeat; }
+html body.cco_body .cc-ev__tag { position: absolute; top: 12px; left: 12px; font-size: 11px; font-weight: 700; line-height: 1; letter-spacing: .1em; text-transform: uppercase; padding: 7px 10px; border-radius: 4px; color: var(--cc-white); background: var(--cc-primary); }
+html body.cco_body .cc-ev--women .cc-ev__tag { background: var(--cc-accent-text); }
+html body.cco_body .cc-ev--shabbat .cc-ev__tag { background: var(--cc-ink-deep); box-shadow: 0 0 0 1px var(--cc-line-dark); }
+html body.cco_body .cc-ev--holiday .cc-ev__tag { background: var(--cc-accent); color: var(--cc-ink); }
+html body.cco_body .cc-ev__body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+html body.cco_body .cc-ev__when { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--cc-accent-text); }
+html body.cco_body .cc-ev__title { margin: 0; font-size: 24px !important; line-height: 1.12; color: var(--cc-ink); text-wrap: balance; }
+html body.cco_body .cc-ev__desc { margin: 0; color: var(--cc-muted) !important; font-size: 15px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+html body.cco_body .cc-ev__cta { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+html body.cco_body .cc-ev__cta .cc-btn { padding: 10px 14px; min-height: 42px; font-size: 14px; }
 
 /* Intro / message */
 html body.cco_body .cc-intro { text-align: center; }
@@ -1084,3 +1075,98 @@ html body.cco_body #ValidationNotice {
 }
 html body.cco_body #ValidationNotice:empty { display: none !important; }
 html body.cco_body #RegisterSinglePage .co_global_button.disabled { opacity: 1 !important; }
+
+/* ==========================================================================
+   Homepage round 2 (Oct 25, 2026): reviewed by Levi in the homepage preview
+   ========================================================================== */
+/* Stacked layers: every slide sits in the same grid cell, so slideshows never change height */
+html body.cco_body .cc-stack { display: grid; }
+html body.cco_body .cc-stack > .cc-slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s; }
+html body.cco_body .cc-stack > .cc-slide.is-on { opacity: 1; visibility: visible; }
+html body.cco_body .cc-stack > .cc-slide[role="img"] { background-position: center; background-size: cover; background-repeat: no-repeat; border-radius: inherit; }
+
+/* Hero: rotating slides, date line, arrows; compact so the picture shows without scrolling */
+html body.cco_body .cc-hero__text > .cc-slide { align-self: center; }
+html body.cco_body .cc-hero .cc-hero__sub { margin-bottom: 20px; }
+html body.cco_body .cc-hero__info { margin: 0 0 28px; font-size: 15px; font-weight: 700; line-height: 1.4; letter-spacing: .02em; color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-hero__nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; }
+html body.cco_body .cc-hero__nav .cc-hero__dots { margin: 0; }
+html body.cco_body .cc-hero__nav .cc-round { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--cc-line-dark); background: transparent; color: var(--cc-white); cursor: pointer; font-size: 16px; line-height: 1; padding: 0; }
+html body.cco_body .cc-hero__nav .cc-round:hover { border-color: var(--cc-accent-on-dark); color: var(--cc-accent-on-dark); }
+@media (min-width: 900px) {
+  :root { --cc-section: 72px; }
+  html body.cco_body .cc-hero .cc-wrap { gap: 48px; padding-top: 44px; padding-bottom: 48px; flex-wrap: nowrap; }
+  html body.cco_body .cc-hero__text { flex: 1 1 56%; }
+  html body.cco_body .cc-hero__media { flex: 0 1 460px; }
+  html body.cco_body .cc-hero__title { font-size: clamp(40px, 4.2vw, 56px); line-height: 1.02; margin-bottom: 14px; }
+  html body.cco_body .cc-hero .cc-hero__sub { font-size: 18px; line-height: 1.55; margin-bottom: 16px; }
+  html body.cco_body .cc-hero .cc-eyebrow { margin-bottom: 12px; }
+  html body.cco_body .cc-hero__info { margin-bottom: 20px; }
+}
+@media (max-width: 760px) {
+  html body.cco_body .cc-hero .cc-wrap { gap: 18px; padding-top: 20px; padding-bottom: 32px; }
+  html body.cco_body .cc-hero__media { order: -1; flex-basis: 100%; }
+  html body.cco_body .cc-hero__img { aspect-ratio: 16 / 10; }
+  html body.cco_body .cc-hero__title { font-size: 32px; line-height: 1.06; margin-bottom: 10px; }
+  html body.cco_body .cc-hero .cc-hero__sub { font-size: 16px; line-height: 1.5; margin-bottom: 12px; }
+  html body.cco_body .cc-hero .cc-eyebrow { margin-bottom: 8px; }
+  html body.cco_body .cc-hero__info { margin-bottom: 16px; font-size: 14px; }
+  html body.cco_body .cc-hero__nav { margin-top: 10px; }
+  html body.cco_body .cc-hero__nav .cc-round { width: 34px; height: 34px; }
+}
+
+/* Welcome: words beside a crossfading photo (centered text when there are no photos) */
+html body.cco_body .cc-welcome { text-align: left; padding-bottom: 56px; }
+html body.cco_body .cc-welcome .cc-lede { margin: 0; }
+html body.cco_body .cc-welcome__img { aspect-ratio: 3 / 2; border-radius: var(--cc-radius); background: var(--cc-cream); box-shadow: var(--cc-shadow-lg); overflow: hidden; }
+html body.cco_body .cc-welcome__img > .cc-slide, html body.cco_body .cc-tm__photo > .cc-slide { transition-duration: .9s; }
+
+/* Photo strip: real photos drifting sideways, paused on hover */
+html body.cco_body .cc-strip { overflow: hidden; padding: 0 0 72px; }
+html body.cco_body .cc-strip__track { display: flex; width: max-content; animation: cc-strip 80s linear infinite; }
+html body.cco_body .cc-strip:hover .cc-strip__track { animation-play-state: paused; }
+html body.cco_body .cc-strip__row { display: flex; gap: 16px; padding-right: 16px; }
+html body.cco_body .cc-strip img { height: 220px; width: auto; max-width: none; border-radius: var(--cc-radius-sm); display: block; }
+@keyframes cc-strip { to { transform: translateX(-50%); } }
+@media (max-width: 760px) { html body.cco_body .cc-strip img { height: 150px; } html body.cco_body .cc-strip { padding-bottom: 48px; } }
+
+/* Testimonials with a photo per quote; quotes in a lighter italic serif */
+html body.cco_body .cc-tm { text-align: left; }
+html body.cco_body .cc-tm__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center; }
+html body.cco_body .cc-tm__photo { aspect-ratio: 1 / 1; border-radius: var(--cc-radius); background: var(--cc-ink); box-shadow: 18px 18px 0 var(--cc-accent-soft), var(--cc-shadow-lg); overflow: hidden; }
+html body.cco_body .cc-tm__mark { display: block; font-family: var(--cc-font-head) !important; font-size: 120px; line-height: .6; color: var(--cc-accent); margin: 20px 0 6px; height: 48px; }
+html body.cco_body .cc-testimonial__quote { font-family: "Instrument Serif", Georgia, serif !important; font-style: italic; font-size: clamp(24px, 2.4vw, 31px); line-height: 1.38; }
+html body.cco_body .cc-tm .cc-testimonial { margin: 0; max-width: none; }
+html body.cco_body .cc-tm .cc-testimonial__quote { min-height: 5.6em; margin-bottom: 14px; }
+html body.cco_body .cc-tm .cc-testimonial__by strong { font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body .cc-tm .cc-testimonials__nav { justify-content: flex-start; }
+@media (max-width: 900px) {
+  html body.cco_body .cc-tm__grid { grid-template-columns: 1fr; gap: 36px; }
+  html body.cco_body .cc-tm__photo { aspect-ratio: 3 / 2; box-shadow: var(--cc-shadow-lg); }
+  html body.cco_body .cc-tm .cc-testimonial__quote { min-height: 0; }
+}
+
+/* Partner with us: bigger, over a dimmed photo */
+html body.cco_body .cc-partner .cc-eyebrow { color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-partner .cc-h2 { font-size: clamp(40px, 4.6vw, 60px); }
+html body.cco_body .cc-partner .cc-lede { color: var(--cc-on-dark-muted); max-width: 520px; }
+html body.cco_body .cc-partner .cc-btn--accent { padding: 18px 34px; font-size: 17px; }
+html body.cco_body .cc-partner .cc-partner__ctas { flex-direction: column; align-items: flex-end; }
+@media (max-width: 900px) { html body.cco_body .cc-partner .cc-partner__ctas { align-items: flex-start; } }
+html body.cco_body .cc-partner--photo { padding: 104px 0; background-image: linear-gradient(90deg, rgba(58, 8, 30, .96) 0%, rgba(58, 8, 30, .88) 45%, rgba(58, 8, 30, .55) 100%), var(--cc-partner-img); background-size: cover; background-position: center 40%; }
+
+/* Stay in the loop: a raised card */
+html body.cco_body .cc-subscribe { background: var(--cc-cream); border-top: 0; }
+html body.cco_body .cc-sub__card { background: var(--cc-white); border-radius: calc(var(--cc-radius) * 1.5); padding: 48px 56px; box-shadow: var(--cc-shadow-lg); border-top: 5px solid var(--cc-accent); }
+html body.cco_body .cc-sub__icon { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: var(--cc-primary); color: var(--cc-white); margin-bottom: 18px; }
+html body.cco_body .cc-sub__list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 8px; color: var(--cc-text); font-size: 15px; }
+html body.cco_body .cc-sub__list li { padding-left: 26px; position: relative; }
+html body.cco_body .cc-sub__list li::before { content: ""; position: absolute; left: 0; top: .45em; width: 14px; height: 8px; border-left: 2px solid var(--cc-accent-text); border-bottom: 2px solid var(--cc-accent-text); transform: rotate(-45deg); }
+@media (max-width: 760px) { html body.cco_body .cc-sub__card { padding: 32px 22px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html body.cco_body .cc-stack > .cc-slide { transition: none; }
+  html body.cco_body .cc-strip { overflow-x: auto; }
+  html body.cco_body .cc-strip__track { animation: none; }
+  html body.cco_body .cc-strip__row[aria-hidden] { display: none; }
+}
