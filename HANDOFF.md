@@ -27,7 +27,7 @@ Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), 
 8. **About** (with In their words, How we can help, Photo albums), **Shul** (Shabbat Day on the 2nd Shabbat of each month, "contact us for the next date", an interest button), the other holiday pages, Contact.
 9. **Event fixes** (Rivka): NEXT GENesis dates to Nov 17 2026 – May 18 2027, and remove the all-caps "A MONTHLY LEARNING SERIES FOR WOMEN: NEXT GENises" line (Levi approved).
 10. **Wix audio**: 10 courses' recordings live only on Wix; download them before Wix ends. Also: Book Smart and Jewpernatural share one YouTube playlist.
-11. **Later**: SEO, then the domain switch (only when 100% ready; tell ChabadOne support first; keep the Google Workspace MX/SPF/DKIM records). Ask ChabadOne whether old Wix addresses can forward to the new pages.
+11. **Later**: replace the site favicon with the official one from the Chabad brand site (chabadbrand.com; Levi asked Oct 24, not urgent). SEO, then the domain switch (only when 100% ready; tell ChabadOne support first; keep the Google Workspace MX/SPF/DKIM records). Ask ChabadOne whether old Wix addresses can forward to the new pages.
 
 ## Links (private claude.ai pages; Levi shares them with Rivka)
 
