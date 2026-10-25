@@ -21,10 +21,10 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
    - Publish only with Levi's OK.
    - NEXT GENesis event: set dates to Nov 17 2026–May 18 2027 and remove the all-caps "A MONTHLY LEARNING SERIES FOR WOMEN: NEXT GENises" line. Levi approved this.
    - ~~Deploy the caching update.~~ Done Oct 24 via GitHub.
-3. **Courses page**: DONE in preview v4 (covers on every card, 16:9 frame filled with the cover's edge colour; phones show a 120px thumbnail beside the text; the dialog shows the cover on top). Still to ask Levi:
-   - The 2020 Pirkei Avot cover IS the Cultivating Character artwork (square social version). Did the 2020 series have that name too, or is it the wrong image?
-   - The 2018 "Heaven on Earth" cover reads "Extreme Makeover: Divine Edition" (Temple artwork). Which title should the card use?
-   - Production: covers need a public home. Plan: serve `data/covers-thumb/*.webp` from the GitHub repo via jsDelivr (or upload to ChabadOne media) once the repo is pushed.
+3. **Courses page**: DONE in preview v4 (covers on every card, 16:9 frame filled with the cover's edge colour; phones show a 120px thumbnail beside the text; the dialog shows the cover on top). Levi answered both cover questions Oct 24, so no changes:
+   - 2020 Pirkei Avot Studies: keep the Cultivating Character artwork on that card.
+   - 2018 "Heaven on Earth": keep the title "Heaven on Earth" with the Temple ("Extreme Makeover: Divine Edition") artwork.
+   - Production: covers are public now at `https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/data/covers-thumb/<file>.webp` (checked, 200 image/webp). Next: point the courses page build at those URLs and create the page in ChabadOne.
 4. **Photos**: curate real event photos from `Shlichus\` (Shain Park menorah 2019–23, Purim in the Jungle, First Fridays, JLI\Pictures, Limmud) for the homepage and inner pages. Levi will download his Google Photos albums into the Shlichus folder; there is no Google Photos connector.
 5. **About page**: waiting on Levi's doc comments and his answers to the open questions (children count, dedication wording, photos).
 6. **Testimonials**: Levi is collecting these himself, via ChatGPT. Do not search his email for them, and never invent any. When the page exists, set `testimonialsUrl: "/testimonials"`.
