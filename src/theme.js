@@ -44,6 +44,13 @@
     // No headings: the first 4 pictures = welcome, all = strip.
     photosUrl: null,         // set to e.g. "/homepage-photos" once that page exists
     shabbatPlace: "Bloomfield Hills",
+    // Slim notice bar at the top of every page; a visitor's × hides it for them. Set to null to remove it.
+    notice: {
+      id: "new-site-2026",   // change the id to show a new message to visitors who closed the old one
+      text: "Welcome to our new website! We're still building it, so some pages are on the way.",
+      linkText: "Can't find something? Let us know",
+      linkHref: "/tools/feedback.asp"
+    },
     quoteFont: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap",
     home: {
       // Homepage sections, in order.
@@ -156,6 +163,24 @@
       if (sub) { sub.style.display = "none"; t.appendChild(sub); }
       t.setAttribute("aria-label", CC.org + " home");
     }
+  }
+
+  /* ---------- 1b. Notice bar ("new website, still building") ---------- */
+  function noticeBar() {
+    var n = CC.notice;
+    if (!n || q(".cc-notice")) { return; }
+    var key = "cc-notice-closed-" + n.id;
+    try { if (localStorage.getItem(key)) { return; } } catch (e) {}
+    var close = h("button", { type: "button", "class": "cc-notice__close", "aria-label": "Close this message", text: "×" });
+    var bar = h("div", { "class": "cc-notice", role: "note" }, [h("div", { "class": "cc-wrap" }, [
+      h("p", null, [h("span", { text: n.text + " " }), n.linkText ? h("a", { href: n.linkHref, text: n.linkText }) : null]),
+      close
+    ])]);
+    close.addEventListener("click", function () {
+      try { localStorage.setItem(key, "1"); } catch (e) {}
+      if (bar.parentNode) { bar.parentNode.removeChild(bar); }
+    });
+    d.body.insertBefore(bar, d.body.firstChild);
   }
 
   /* ---------- 2. Footer: rich multi-column footer ---------- */
@@ -798,7 +823,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, footer, shabbatTimes, homeShell, registration].forEach(function (fn) {
+    [header, noticeBar, footer, shabbatTimes, homeShell, registration].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }

@@ -1170,3 +1170,12 @@ html body.cco_body .cc-sub__list li::before { content: ""; position: absolute; l
   html body.cco_body .cc-strip__track { animation: none; }
   html body.cco_body .cc-strip__row[aria-hidden] { display: none; }
 }
+
+/* Notice bar: "new website, still building" (top of every page, dismissible) */
+html body.cco_body .cc-notice { background: var(--cc-accent-soft); color: var(--cc-ink); font-size: 14px; line-height: 1.45; border-bottom: 1px solid var(--cc-line); }
+html body.cco_body .cc-notice .cc-wrap { display: flex; align-items: center; gap: 12px; padding-top: 8px; padding-bottom: 8px; }
+html body.cco_body .cc-notice p { margin: 0; flex: 1; text-align: center; color: var(--cc-ink) !important; }
+html body.cco_body .cc-notice a { color: var(--cc-primary) !important; font-weight: 700; text-decoration: underline; white-space: nowrap; }
+html body.cco_body .cc-notice__close { flex: none; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: var(--cc-ink); font-size: 22px; line-height: 1; cursor: pointer; padding: 0; }
+html body.cco_body .cc-notice__close:hover { background: rgba(0, 0, 0, .06); }
+@media (max-width: 760px) { html body.cco_body .cc-notice { font-size: 13px; } html body.cco_body .cc-notice p { text-align: left; } html body.cco_body .cc-notice a { white-space: normal; } }
