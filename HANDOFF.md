@@ -4,19 +4,18 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 
 ## Where things stand
 
-- **Live theme**: v20261023.1230 is deployed into ChabadOne custom code (Site ID 10077, lightbhchabad.org). It includes the refined palette, the new hero and the "Coming up" event cards. Header hash 7e80923a8d53, footer hash fd9ecd201292.
+- **Live theme**: since Oct 24, 2026 the ChabadOne Custom Header/Footer boxes hold only the GitHub loader (`loader/header.html`, `loader/footer.html`). Visitors get `live/` from jsDelivr = v20261023.1230 (refined palette, new hero, "Coming up" cards). Levi checked the homepage and JLI registration in Edge after the switch: unchanged. Deploys no longer need ChabadOne: push to GitHub, purge jsDelivr. Backup of the old inline code: `ShlichusWebsiteabadone-code-backup-2026-10-24.txt` (paste back + Save + Publish to undo).
 - **Not deployed yet**: the `cachedPage()` localStorage caching and `testimonialsUrl: null` in theme.js.
 - **Homepage layout**: Layout 1 is still PENDING with demo content. The live homepage still shows the old "under construction" slide. Filling it was blocked by the Cloudflare "Verify you are human" check in the browser pane.
 - **JLI registration** (`/tools/events/register.asp?eventid=23504&new=true`) was tested after the last deploy and works. Re-test after every deploy, never submit, and clear the stored progress.
-- **GitHub**: the repo github.com/rabbi-dubov/bhchabad-site exists, is public and is still EMPTY. A second Cowork task (evening Oct 23) also could not push: the git proxy answered "rabbi-dubov/bhchabad-site is not in this session's authorized repository set". Cowork tasks can't attach a repo from inside; a Claude Code task started with the repo selected (claude.ai/code?repositories=rabbi-dubov/bhchabad-site) can.
-- **Repo snapshot**: the full working git repo (with history) is in Levi's folder `Shlichus\Website\bhchabad-site-repo.zip` (updated evening Oct 23). It is ready to push as is: `git remote add origin https://github.com/rabbi-dubov/bhchabad-site.git && git push -u origin main`.
+- **GitHub**: github.com/rabbi-dubov/bhchabad-site `main` has the full history (pushed Oct 24 from a local Claude Code session on Levi's PC, merged with the cloud session's earlier one-commit publish). Local working copy: `ShlichusWebsitebhchabad-site`. `gh` there is logged in as rabbi-dubov. Python is NOT installed on the PC yet, so `build.py` can't run there until it is.
   - `live/` = exactly the deployed v20261023.1230 (same CSS/JS as dist/, hashes 7e80923a8d53 / fd9ecd201292 for the inline snippets).
   - `test/` = current src: caching update, testimonialsUrl null, course-cover card styles.
   - `build.py test | promote | snippets` (see README).
 
 ## Open tasks, in order
 
-1. **Push the repo to GitHub** from a session that has it attached. Publish `live/` and `test/` folders containing `theme.min.css` and `theme.min.js`. Then Levi pastes `loader/header.html` and `loader/footer.html` into ChabadOne once (with OK). After every push, purge jsDelivr.
+1. ~~Push the repo to GitHub; Levi pastes the loader into ChabadOne~~ DONE Oct 24. After every push, purge jsDelivr.
 2. **ChabadOne content** (needs a browser that can pass Cloudflare; try Claude in Chrome in Levi's Edge):
    - Fill Layout 1: slide 1 welcome copy and 4 programs, and remove the Demo Ad.
    - Publish only with Levi's OK.
