@@ -70,6 +70,7 @@
       tagDefault: { label: "Event", tone: "event" },
       programsEyebrow: "Our programs",
       programsTitle: "Programs for the whole community",
+      programsMax: 4,   // the ChabadOne Programs widget always holds 6 items; show the first 4
       testimonialsEyebrow: "Testimonials",
       testimonialsTitle: "In their words",
       partner: {
@@ -263,14 +264,31 @@
     return sec;
   }
 
+  // Quick-link icons drawn in the theme's own line style, picked by the link's words;
+  // a link with no match keeps the icon chosen in ChabadOne.
+  function svgIcon(body) {
+    return "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#7E1735" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + body + "</svg>");
+  }
+  var QUICK_ICONS = [
+    { match: /event|calendar/i, svg: '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>' },
+    { match: /tanya|listen|podcast/i, svg: '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3.5" y="14" width="4.5" height="6" rx="1.5"/><rect x="16" y="14" width="4.5" height="6" rx="1.5"/>' },
+    { match: /educat|learn|class|course/i, svg: '<path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/>' },
+    { match: /donat|give|support/i, svg: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>' },
+    { match: /contact|email|connect/i, svg: '<rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="m4 7 8 6 8-6"/>' }
+  ];
+  function quickIcon(label, fallback) {
+    for (var i = 0; i < QUICK_ICONS.length; i++) { if (QUICK_ICONS[i].match.test(label)) { return svgIcon(QUICK_ICONS[i].svg); } }
+    return fallback;
+  }
   function quickSection(root) {
     var w = q(".widget-4.icon, .icon.custom", root);
     if (!w) { return null; }
     var items = qa(".widget_content .item", w).map(function (it) {
       var a = q(".title a", it) || q("a", it), im = q(".icon img", it);
       if (!a) { return null; }
+      var src = quickIcon(txt(a), im ? im.getAttribute("src") : "");
       return h("li", null, [h("a", { href: a.getAttribute("href"), target: a.getAttribute("target") || null }, [
-        im ? h("img", { src: im.getAttribute("src"), alt: "" }) : null, txt(a)
+        src ? h("img", { src: src, alt: "" }) : null, txt(a)
       ])]);
     }).filter(Boolean);
     if (!items.length) { return null; }
@@ -642,7 +660,7 @@
         h("div", { "class": "cc-program__img", style: th ? "background-image:url('" + bgUrl(th).replace(/'/g, "%27") + "')" : null }),
         h("div", { "class": "cc-program__label" }, [h("h3", { "class": "cc-program__title cc-head", text: txt(a) }), h("span", { "class": "cc-program__more", text: "Learn more →" })])
       ]);
-    }).filter(Boolean);
+    }).filter(Boolean).slice(0, CC.home.programsMax);
     if (!cards.length) { return null; }
     return h("section", { "class": "cc-section cc-programs", "aria-labelledby": "cc-programs-h" }, [
       h("div", { "class": "cc-wrap" }, [
