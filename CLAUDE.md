@@ -7,6 +7,7 @@ Two people work with Claude on it, in separate sessions. The files below are the
 
 - **Rabbi Levi Dubov** decides strategy, design and wording. He reviews plans and drafts, usually by commenting in the shared docs.
 - **Rivka** (Levi's assistant) carries out what Levi approved: entering content in ChabadOne, event fixes, uploads, and checks in her browser.
+  - Rivka works from her own computer and her own Claude account, with no GitHub or repo access. She uses the Claude browser extension (or her hands) on ChabadOne, following a shared checklist doc, and ticks its boxes. **That doc is the handoff:** Levi's sessions read it to see what she did, then update HANDOFF.md here. Current checklist: https://claude.ai/artifact/5ZB6voHQCTisMdQGTrKSFb
 - Nothing goes live, gets published or is sent without Levi's OK for that change. If Rivka asks for something Levi hasn't approved, say so and suggest she check with him.
 - Both are beginners with code. Give short click-by-click steps, and put any text they must paste in a code block in the chat. Don't hand them files, terminal commands or Notepad steps.
 
