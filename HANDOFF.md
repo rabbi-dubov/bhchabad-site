@@ -35,7 +35,8 @@ Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), 
 - **Photo shortlist** (Use / Skip): https://claude.ai/artifact/85fJaS5LdYV8ENYCNj974z
 - Homepage content draft doc: https://claude.ai/artifact/U11tdhcy8JVz9HEceuhvCq
 - About Us draft doc: https://claude.ai/artifact/DTttWxjpMj7r3NW2GunmV7
-- Homepage preview: https://claude.ai/artifact/EjwrS9wc8Codpdi7hKA5cy
+- **Homepage preview, round 2** (Levi's photos and quotes, new menu): https://claude.ai/artifact/DuocnSajNyxXwiNDE8PDEJ. Built by `ShlichusWebsitepreview-buildbuild_homepage.mjs` (Node; kept outside this repo because it holds testimonial names) from `src/theme.css` and the photos in `ShlichusWebsitesite-photos`. Rebuild: `node preview-build/build_homepage.mjs` from the Website folder, then republish `preview-build/homepage-preview.html`.
+- Homepage preview, round 1 (sample photos): https://claude.ai/artifact/EjwrS9wc8Codpdi7hKA5cy
 - Courses preview (v4, with covers): https://claude.ai/artifact/V3ZntNNdSu2JGDjCdNpndu
 - Old Wix sitemap: https://www.bhchabad.org/pages-sitemap.xml
 - myjli Resource Library: Levi logs in himself. Ajax tree at `/desktop/reslibrary/ajax/testResLib.php?showAcord=1&test=1&view=&dir=N`; year folders 5787=821, 5786=811, 5785=802, 5784=788, 5783=722, 5782=716, 5781=712, 5780=707.
@@ -55,3 +56,4 @@ See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwo
 - 2026-10-24 · Levi · First local session: repo pushed to GitHub, loader switched in ChabadOne, v20261023.2047 released, website plan written and reviewed (menu, site map, testimonials, Tanya, Shul), photo shortlist published, shared `CLAUDE.md` added for Levi and Rivka.
 - 2026-10-24 · Levi · Tanya numbers read in the app browser (Levi signed in to Spotify for Creators, YouTube Studio and his chabad.org Gmail/Drive himself); Tanya Project quotes added to the plan doc.
 - 2026-10-24 · Levi · Photo shortlist reviewed: 25 use, 15 skip (summary table under "Homepage" in the plan doc). Open: Events & Holidays card photo, Shul and Purim photos, family photo for About (Levi will send). Levi feels there are many more good photos than the 40 shown: next round widens beyond the "Chosen" folders and whatever he points to.
+- 2026-10-24 · Levi · Homepage preview round 2 published (link above). Family photo for About: a Marla Michele Must portrait (credit "Photo: Marla Michele Must, Portrait Artist"); Levi pasted it in chat, the file still needs saving to Shlichus\Website\site-photos. More photo sources for the next round: the Chabad Facebook page and Levi's personal Facebook page (he signs in himself in the app browser).
