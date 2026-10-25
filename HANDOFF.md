@@ -4,7 +4,7 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 
 ## Where things stand
 
-- **Live theme**: since Oct 24, 2026 the ChabadOne Custom Header/Footer boxes hold only the GitHub loader (`loader/header.html`, `loader/footer.html`). Visitors get `live/` from jsDelivr = v20261023.1230 (refined palette, new hero, "Coming up" cards). Levi checked the homepage and JLI registration in Edge after the switch: unchanged. Deploys no longer need ChabadOne: push to GitHub, purge jsDelivr. Backup of the old inline code: `ShlichusWebsiteabadone-code-backup-2026-10-24.txt` (paste back + Save + Publish to undo).
+- **Live theme**: since Oct 24, 2026 the ChabadOne Custom Header/Footer boxes hold only the GitHub loader (`loader/header.html`, `loader/footer.html`). Visitors get `live/` from jsDelivr = v20261023.1230 (refined palette, new hero, "Coming up" cards). Levi checked the homepage and JLI registration in Edge after the switch: unchanged. Deploys no longer need ChabadOne: push to GitHub, purge jsDelivr. Backup of the old inline code: `Shlichus\Website\chabadone-code-backup-2026-10-24.txt` (paste back + Save + Publish to undo).
 - **Not deployed yet**: the `cachedPage()` localStorage caching and `testimonialsUrl: null` in theme.js.
 - **Homepage layout**: Layout 1 is still PENDING with demo content. The live homepage still shows the old "under construction" slide. Filling it was blocked by the Cloudflare "Verify you are human" check in the browser pane.
 - **JLI registration** (`/tools/events/register.asp?eventid=23504&new=true`) was tested after the last deploy and works. Re-test after every deploy, never submit, and clear the stored progress.
