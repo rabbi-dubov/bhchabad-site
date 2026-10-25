@@ -30,7 +30,7 @@ Two people work with Claude on it, in separate sessions. The files below are the
 - The JLI registration page is live and used: re-test it after every deploy without submitting.
 - Global styles only, never per-page tweaks. Every page is about this Chabad and its programs: no Chabad.org content on the menu, except the Tanya Project pages by choice.
 - This repo is **public**. Never commit names or details of community members, testimonial writers' names, emails, phone numbers of private people, donation data or anything from Levi's inbox. Personal photos and private notes stay in the Shlichus folder or the private claude.ai docs.
-- Testimonials: shown as first name and last initial only ("David R."), with no program or year. A rare first name becomes "A community member"; never invent a name. Light edits only; each must still sound like the person.
+- Testimonials: shown as first name and last initial only ("David R."), with no program or year. Where a name is missing or too recognizable, use a plain pseudonym (Levi's decision, Oct 24) and show "Some names have been changed for privacy." under the quotes. Light edits only; each must still sound like the person.
 - Avoid rate limits on ChabadOne: one check per change, no reload loops.
 
 ## Where things live
