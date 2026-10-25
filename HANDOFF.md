@@ -37,6 +37,7 @@ Read this first in any new session, then `claude/04-chabadone-playbook.md`.
 
 ## Links
 
+- **Website plan (Oct 24, the current master plan)**: https://claude.ai/artifact/Sv4YuH9GCoRwJHsPABTEvT (top menu, site map, homepage changes, testimonials, old Wix page mapping, build order, open questions). Specific event fixes (e.g. NEXT GENesis dates) are delegated to Levi's assistant Rivka, who works with Claude separately.
 - Homepage preview: https://claude.ai/artifact/EjwrS9wc8Codpdi7hKA5cy
 - Courses preview (v4, with covers): https://claude.ai/artifact/V3ZntNNdSu2JGDjCdNpndu
 - About Us draft doc: https://claude.ai/artifact/DTttWxjpMj7r3NW2GunmV7
