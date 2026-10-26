@@ -1,5 +1,14 @@
 <!-- BH CHABAD THEME LOADER (header). Paste once into ChabadOne > Settings > General Settings > Custom Header Code. -->
 <!-- The design itself lives in github.com/rabbi-dubov/bhchabad-site (live/ folder). Preview mode: add ?cc=test to any page URL; ?cc=off turns the theme off for you; ?cc=live returns to normal. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<!-- No flash of the old design: the page stays invisible until our CSS has loaded (on the homepage, until the
+     new layout is built), at most 4 seconds. cc-hold is set and cleared by the script below. -->
+<style type="text/css">
+html.cc-hold body { opacity: 0 !important; }
+html.cc-hold.cc-css body { opacity: 1 !important; }
+html.cc-hold.cc-home-wait.cc-css body { opacity: 0 !important; }
+html.cc-hold.cc-home-wait.cc-css.cc-shell-ready body, html.cc-hold.cc-shell-failed body { opacity: 1 !important; }
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap" />
@@ -15,13 +24,20 @@
   window.ccBase = base;
   // hourly cache-buster: jsDelivr tells browsers to keep files 7 days, so updates would otherwise reach visitors late
   window.ccV = "?v=" + Math.floor(Date.now() / 3600000);
-  var h = document.documentElement; h.className += " cc-on";
+  var h = document.documentElement, home = location.pathname === "/" || /default\.asp$/i.test(location.pathname);
+  h.className += " cc-on cc-hold" + (home ? " cc-home-wait" : "");
+  function release() { h.className = h.className.replace(/\bcc-hold\b/g, ""); }
   var l = document.createElement("link"); l.rel = "stylesheet"; l.href = base + "theme.min.css" + window.ccV;
-  l.onerror = function () { h.className = h.className.replace(/\bcc-on\b/, ""); };
+  l.onload = function () { h.className += " cc-css"; };
+  l.onerror = function () { h.className = h.className.replace(/\bcc-on\b/, ""); release(); };
   document.head.appendChild(l);
-  if (location.pathname === "/" || /default\.asp$/i.test(location.pathname)) {
+  // start downloading the theme script now; the footer loader runs it from the browser cache
+  var p = document.createElement("link"); p.rel = "preload"; p.as = "script"; p.href = base + "theme.min.js" + window.ccV;
+  document.head.appendChild(p);
+  if (home) {
     setTimeout(function () { if (h.className.indexOf("cc-shell-ready") < 0) { h.className += " cc-shell-failed"; } }, 4000);
   }
+  setTimeout(release, 4000);   // never leave a visitor looking at a blank page
 })();
 //]]></script>
 <!-- /BH CHABAD THEME LOADER -->

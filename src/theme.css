@@ -256,8 +256,14 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
     color: var(--cc-on-dark) !important;
     font-weight: 700;
   }
-  html body.cco_body .site-nav-wrapper .donate_link span.parent a {
-    color: var(--cc-accent-on-dark) !important;
+  /* Donate in the drawer: the same orange button as on desktop (the platform gives it Muli and a yellow outline) */
+  html body.cco_body .site-nav-wrapper #tabContentMain .co_menu_item.donate_link span.parent a, html body.cco_body .site-nav-wrapper .donate_link span.parent a {
+    font-family: var(--cc-font-body) !important;
+    background: var(--cc-accent) !important;
+    color: var(--cc-ink) !important;
+    border: 0 !important;
+    border-radius: var(--cc-pill) !important;
+    padding: 11px 26px !important;
   }
   html body.cco_body .site-nav-wrapper .cs-mobile-menu-close i { color: var(--cc-white) !important; }
   html body.cco_body #header_branding { --cc-logo-h: 36px; padding: 10px 0 !important; }
@@ -606,6 +612,8 @@ html body.cco_body .cc-events__nav button:hover { border-color: var(--cc-primary
 /* "Coming up": event cards (photo + category tag, date, title, text, Learn more / Register) rolling sideways */
 html body.cco_body .cc-evs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, calc((100% - 72px) / 4)); gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 16px; margin: 0 -4px; scrollbar-width: thin; }
 html body.cco_body .cc-evs > * { scroll-snap-align: start; }
+/* Fewer than four events: three across, so two or three cards fill the row instead of leaving half of it empty */
+@media (min-width: 761px) { html body.cco_body .cc-evs:not(:has(> :nth-child(4))) { grid-auto-columns: minmax(240px, calc((100% - 48px) / 3)); } }
 @media (max-width: 760px) { html body.cco_body .cc-evs { grid-auto-columns: 82%; } }
 html body.cco_body .cc-events__nav { align-items: center; }
 html body.cco_body .cc-events__nav .cc-round:disabled { opacity: .35; cursor: default; }
@@ -626,6 +634,8 @@ html body.cco_body .cc-ev__cta .cc-btn { padding: 10px 14px; min-height: 42px; f
 /* Intro / message */
 html body.cco_body .cc-intro { text-align: center; }
 html body.cco_body .cc-intro .cc-lede { margin: 0 auto; }
+/* Phones: eight centered lines are hard to read; align the welcome to the left like the other sections */
+@media (max-width: 600px) { html body.cco_body .cc-intro { text-align: left; } }
 
 /* Program / department cards */
 html body.cco_body .cc-program { position: relative; display: block; border-radius: var(--cc-radius); overflow: hidden; text-decoration: none !important; background: var(--cc-ink); aspect-ratio: 4 / 5; }
@@ -1104,6 +1114,9 @@ html body.cco_body .cc-stack > .cc-slide[role="img"] { background-position: cent
 
 /* Hero: rotating slides, date line, arrows; compact so the picture shows without scrolling */
 html body.cco_body .cc-hero__text > .cc-slide { align-self: center; }
+/* Slide texts never overlap: the old one fades out first, then the new one fades in (pictures still cross-fade) */
+html body.cco_body .cc-hero__text > .cc-slide { transition: opacity .25s ease, visibility 0s linear .25s; }
+html body.cco_body .cc-hero__text > .cc-slide.is-on { transition: opacity .35s ease .25s, visibility 0s linear .25s; }
 html body.cco_body .cc-hero .cc-hero__sub { margin-bottom: 20px; }
 html body.cco_body .cc-hero__info { margin: 0 0 28px; font-size: 15px; font-weight: 700; line-height: 1.4; letter-spacing: .02em; color: var(--cc-accent-on-dark); }
 html body.cco_body .cc-hero__nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; }
