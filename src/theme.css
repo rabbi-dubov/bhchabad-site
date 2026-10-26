@@ -140,6 +140,9 @@ html body.cco_body #header .branding-search { height: auto !important; }
   html body.cco_body #header .site-nav-wrapper,
   html body.cco_body #header #co_menu_container,
   html body.cco_body #header .main_menu_container { height: auto !important; }
+  /* Phone-browser devices with a wide screen (Android tablets sideways) get the platform's mobile CSS, which
+     squeezes the menu table to 61.5% and pushes it off-screen */
+  html body.cco_body #co_menu_container_wrapper .main_menu_container.first { width: auto !important; }
 }
 
 /* Branding */
