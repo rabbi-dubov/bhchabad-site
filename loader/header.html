@@ -13,8 +13,10 @@
   if (mode === "off") { return; }
   var base = "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/" + (mode === "test" ? "test/" : "live/");
   window.ccBase = base;
+  // hourly cache-buster: jsDelivr tells browsers to keep files 7 days, so updates would otherwise reach visitors late
+  window.ccV = "?v=" + Math.floor(Date.now() / 3600000);
   var h = document.documentElement; h.className += " cc-on";
-  var l = document.createElement("link"); l.rel = "stylesheet"; l.href = base + "theme.min.css";
+  var l = document.createElement("link"); l.rel = "stylesheet"; l.href = base + "theme.min.css" + window.ccV;
   l.onerror = function () { h.className = h.className.replace(/\bcc-on\b/, ""); };
   document.head.appendChild(l);
   if (location.pathname === "/" || /default\.asp$/i.test(location.pathname)) {
