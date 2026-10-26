@@ -562,6 +562,11 @@ html body.cco_body .cc-quick ul { display: flex; flex-wrap: wrap; justify-conten
 html body.cco_body .cc-quick a { display: inline-flex; align-items: center; gap: 12px; color: var(--cc-white) !important; text-decoration: none; font-weight: 700; font-size: 15px; min-height: 44px; }
 html body.cco_body .cc-quick img { width: 34px; height: 34px; border-radius: 50%; background: var(--cc-white); padding: 5px; box-sizing: border-box; object-fit: contain; }
 html body.cco_body .cc-quick a:hover { color: var(--cc-accent-on-dark) !important; }
+/* Phones: two even columns instead of a ragged 1 + 2 + 1 wrap */
+@media (max-width: 600px) {
+  html body.cco_body .cc-quick ul { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; padding: 16px var(--cc-gutter); }
+  html body.cco_body .cc-quick a { font-size: 14px; gap: 10px; }
+}
 
 /* This-week band (Shabbat, Parshah, holiday) */
 /* Shabbat times in the footer (JS fills it from the candle-lighting widget) */
@@ -683,6 +688,12 @@ html body.cco_body .cc-subscribe #formContainer input[type="submit"] {
   font-weight: 700 !important; font-size: 16px; cursor: pointer; margin: 0 !important; width: auto !important;
 }
 html body.cco_body .cc-subscribe #formContainer small { flex-basis: 100%; color: var(--cc-muted) !important; }
+/* the list's own description ("Weekly articles in your inbox") repeats the card's text */
+html body.cco_body .cc-subscribe #formContainer small:not(#response) { display: none; }
+/* Placeholders read as hints, not as typed text (the platform makes them black, bold capitals) */
+html body.cco_body .cc-subscribe input::placeholder, html body.cco_body #PopupSubscribeMessage input::placeholder {
+  color: #8A8F98 !important; opacity: 1; text-transform: none !important; font-weight: 400 !important; letter-spacing: 0 !important;
+}
 html body.cco_body .cc-subscribe #response { color: var(--cc-text) !important; height: auto !important; }
 
 /* Photos strip */
@@ -1200,6 +1211,8 @@ html body.cco_body #PopupSubscribeMessage .subscribe-title { font-size: 12px !im
 html body.cco_body #PopupSubscribeMessage .message-wrapper { font-size: 15px !important; line-height: 1.55; color: var(--cc-muted) !important; margin: 8px 0 18px; }
 html body.cco_body #PopupSubscribeMessage .co_global_input_container { display: flex; gap: 10px; margin: 0 0 10px !important; }
 html body.cco_body #PopupSubscribeMessage .co_global_input_container::before, html body.cco_body #PopupSubscribeMessage .co_global_input_container::after { display: none !important; }
+/* Elements.css fixes each field row at 30px with overflow hidden, which cut the taller fields off */
+html body.cco_body #PopupSubscribeMessage .co_global_input_container { height: auto !important; overflow: visible !important; }
 html body.cco_body #PopupSubscribeMessage input.co_global_input { float: none !important; flex: 1 1 0; width: auto !important; min-width: 0; height: 48px !important; padding: 0 14px !important; border: 1px solid var(--cc-field-border) !important; border-radius: var(--cc-radius-sm) !important; font-size: 16px !important; color: var(--cc-text) !important; background: var(--cc-white) !important; box-shadow: none !important; }
 html body.cco_body #PopupSubscribeMessage input.co_global_input:focus { border-color: var(--cc-primary) !important; outline: 2px solid var(--cc-accent-soft); }
 html body.cco_body #PopupSubscribeMessage .grey { font-size: 13px !important; color: var(--cc-muted) !important; margin: 2px 0 18px !important; }
@@ -1210,4 +1223,11 @@ html body.cco_body #PopupSubscribeMessage #CoButton:hover { background: var(--cc
 html body.cco_body #PopupSubscribeMessage #CoButton span { color: var(--cc-white) !important; }
 html body.cco_body #PopupSubscribeMessage #CancelButton { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; height: auto !important; min-height: 0 !important; color: var(--cc-muted) !important; text-decoration: underline; font-size: 15px !important; }
 html body.cco_body #PopupSubscribeMessage #CancelButton .normal { color: var(--cc-muted) !important; font-weight: 400 !important; }
-@media (max-width: 480px) { html body.cco_body #PopupSubscribeMessage .co_global_input_container { flex-direction: column; } html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .header_text { font-size: 22px !important; } }
+@media (max-width: 480px) {
+  /* stacked fields: flex-basis 0 would override the 48px height in a column */
+  html body.cco_body #PopupSubscribeMessage .co_global_input_container { flex-direction: column; }
+  html body.cco_body #PopupSubscribeMessage input.co_global_input { flex: 0 0 auto; width: 100% !important; }
+  html body.cco_body #PopupSubscribeMessage { padding: 20px 20px 22px !important; }
+  html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .b_header { padding: 18px 20px 16px !important; }
+  html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .header_text { font-size: 22px !important; }
+}
