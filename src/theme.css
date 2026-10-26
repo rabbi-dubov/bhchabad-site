@@ -72,6 +72,10 @@
    This beats it while leaving icon fonts (.fa / i) alone. */
 html body.cco_body { background: var(--cc-white); color: var(--cc-text); }
 html body.cco_body { font-family: var(--cc-font-body); }
+/* The platform makes body exactly one screen tall, so the sticky header let go after the first screen */
+html body.cco_body { height: auto !important; min-height: 100%; }
+/* In-page links (e.g. "See what's coming up") stop below the sticky header */
+html { scroll-padding-top: 96px; }
 /* Everything inherits (beats the platform's Muli list), so text inside a serif heading stays serif.
    Head-font declarations below carry !important because this rule is very specific. */
 html body.cco_body *:not(i):not(.fa):not([class*="fa-"]) { font-family: inherit; }
@@ -257,6 +261,8 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   }
   html body.cco_body .site-nav-wrapper .cs-mobile-menu-close i { color: var(--cc-white) !important; }
   html body.cco_body #header_branding { --cc-logo-h: 36px; padding: 10px 0 !important; }
+  /* the platform hides the logo under 460px; keep the emblem on phones */
+  html body.cco_body #header_branding .site-logo-wrapper { display: block !important; }
   html body.cco_body #header_branding .site-logo-wrapper { padding-right: 12px !important; margin-right: 12px !important; }
   html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title { font-size: 19px; }
   html body.cco_body #header_branding a.site_title .cc-title-sub { font-size: 10px; letter-spacing: .16em; margin-top: 4px; }
