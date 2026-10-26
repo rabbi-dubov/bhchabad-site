@@ -16,6 +16,26 @@ Updated Oct 24, 2026. Read `CLAUDE.md` first (roles, start and end of session), 
 - **Learn page**: draft 1 published (link below). Sections: hero "Learn. Connect. Enjoy.", a figures band (46 courses since 2017, 6 women's series, 40,000+ Tanya plays, 95 countries), Coming up (Kabbalah, NEXT GENesis, weekly Tanya, Lunch and Learn), six "Ways to learn" cards, six student quotes, a class photo strip, and a "Try a class, on us" signup. Waiting on Levi's comments and answers (Tanya class time, Lunch and Learn photo, which professions get credits, Zoom for courses, student count, two pseudonyms).
 - **Repo**: github.com/rabbi-dubov/bhchabad-site, local copy `Shlichus\Website\bhchabad-site` on Levi's PC (`gh` logged in as rabbi-dubov). Python is not installed there, so `build.py` can't run yet; promoting `test/` to `live/` is a plain copy of three files.
 
+## Homepage audit, Oct 26 (live v20261025.2341 JS / .2329 CSS)
+
+Works well: all 7 sections build on desktop and phone with no sideways scroll; hero slides, arrows and dots work (3 → 1 wraps), and the picture fits a 1366×700 laptop screen; event cards now show the course art; program cards have real photos (4 across, 2×2 on phones); partner band, signup card, footer with this week's Shabbat times; notice bar; JLI registration renders.
+
+Fixed in **test/ v20261026.1112** (waiting for Levi's OK to promote CSS to live/):
+- Signup popup ("Shalom! We're glad you're here!"): ChabadOne's `Elements.css` fixes each field row at 30px with `overflow:hidden`, which cut the text off; on phones `flex: 1 1 0` in a column also squashed the fields to 21px. Now 48px fields, stacked on phones.
+- The sticky header let go after the first screen (the platform makes `body` exactly one screen tall). Now it stays on top, and in-page links stop below it.
+- Phones: ChabadOne hides the logo under 460px; the emblem is back.
+- Signup card: placeholders were black bold capitals (looked like typed text) and a stray "Weekly articles in your inbox" line; now grey hints, line hidden.
+- Phones: quick links in a 2×2 grid instead of a ragged 1 + 2 + 1.
+
+Still open:
+- **"About us" (hero) and "Get to know us" (welcome) go to /about, which redirects to Chabad.org's "About Chabad-Lubavitch" article**; the phone menu's bottom "About" link goes there too. Needs our About page at /about (Rivka, from the About draft) or, until then, Levi's call on where they point.
+- Menu: desktop menu, phone menu and the footer's Explore column still list Chabad.org items (Rivka, menu cleanup).
+- Events: only 2 cards (the preview had 4: add Shabbat Day and Chanukah at Shain Park); the Tuesday Kabbalah sessions were added to the calendar today, so check the course card now says "Next: Tue, Oct 27"; NEXT GENesis description opens with the all-caps "A MONTHLY LEARNING SERIES FOR WOMEN: NEXT GENises" line; the course's event name is lower case ("Kabbalah and the hidden architecture of you") while the slide is title case (Rivka).
+- Photos page and testimonials page (Rivka Steps 4-5): until then no welcome photo, photo strip, testimonials, or photo and figures in the donate band.
+- Program cards say "Learn more →" where the preview had a line per card ("Courses, classes and credits →"); theme could read a line from each Programs item.
+- Minor theme polish: slide texts overlap for a moment while the hero cross-fades; the phone menu uses ChabadOne's font and a yellow-outlined Donate.
+- Levi to decide: keep ChabadOne's signup popup (shows from a visitor's 2nd visit, on every page) or turn it off, since the homepage already has the signup card.
+
 ## Open tasks, in order
 
 0. **Go live with the round-2 homepage** (step 1 DONE Oct 25: test/ = v20261025.1106; Rivka's checklist: "Homepage go-live: content checklist for Rivka", https://claude.ai/artifact/5ZB6voHQCTisMdQGTrKSFb) (Levi said "ready to publish live" on Oct 25; preview v17 is the model). Steps:
@@ -90,3 +110,4 @@ See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwo
 - 2026-10-25 · Levi · Event cards with no picture now borrow the matching hero slide's picture (live JS 20261025.2341; live CSS still 2329 because test CSS has the unfinished popup restyle: promote CSS only after the popup is fixed). jsDelivr @main lagged several minutes after purges today.
 - 2026-10-26 · Levi · Loader v2 published in ChabadOne (hourly ?v= cache-buster; jsDelivr sends browsers max-age 7 days, so releases reached returning visitors up to a week late). Verified live: event cards now show pictures (fallback from matching slide). Added Tuesday Kabbalah series to the calendar (copy of the Wed 11:00 series: Tue Oct 27-Dec 1, 11:00-12:30, Jewish Federation). Note: the registration page still lists only 'Oct 28 - Dec 3'. Audit session started separately (owns the popup fix).
 - 2026-10-26 · Levi · JLI Kabbalah registration already offers 'Tuesdays at 11:00 AM' in its per-person question ('Please select when you will be attending this course'), next to the two Wednesday sessions; only the page's date line still reads 'Oct 28 - Dec 3, 2026' (event start date). Not changed yet.
+- 2026-10-26 · Levi · Homepage audit (desktop 1366×700 and phone 375×812, section by section; findings above under "Homepage audit, Oct 26"). Popup field cut-off solved (ChabadOne Elements.css row height + phone flex) plus sticky header, phone logo, signup placeholders and phone quick links, all in test/ v20261026.1112 (commit afaeb96). Verified with ?cc=test on desktop and phone; JLI registration renders under test (not submitted). NEXT: Levi OKs → `node tools/build.mjs promote`, push, purge live/, re-check JLI page.
