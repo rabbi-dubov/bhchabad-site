@@ -279,6 +279,41 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   html body.cco_body #header_branding a.site_title .cc-title-sub { font-size: 10px; letter-spacing: .16em; margin-top: 4px; }
 }
 
+/* Phone menu drawer, in the site's own look (Levi, Oct 27: the platform's drawer felt like old ChabadOne):
+   big serif items with hairlines, the current page in apricot, a full-width Donate, a dimmed page behind it.
+   The platform slides the drawer in by animating "right", so the closed position follows the new width. */
+@media (max-width: 1024px) {
+  html body.cco_body { --cc-drawer-w: min(340px, 88vw); }
+  html body.cco_body #header .site-nav-wrapper { width: var(--cc-drawer-w) !important; right: calc(-1 * var(--cc-drawer-w) - 48px) !important; background: var(--cc-ink-deep) !important; box-shadow: -24px 0 48px rgba(30, 6, 18, .35); overflow-y: auto; }
+  html body.cco_body.menu-open #header .site-nav-wrapper { right: 0 !important; }
+  html body.cco_body.menu-open .cs-mobile-menu-close-back { display: block !important; position: fixed !important; top: 0; bottom: 0; left: 0; right: var(--cc-drawer-w); width: auto !important; height: auto !important; margin: 0; padding: 0; border: 0; background: rgba(30, 6, 18, .45) !important; cursor: pointer; }
+  html body.cco_body .site-nav-wrapper #co_menu_container_wrapper, html body.cco_body .site-nav-wrapper #co_menu_container { width: auto !important; }
+  html body.cco_body .site-nav-wrapper #co_menu_container { padding: 72px 0 120px !important; }
+  html body.cco_body .site-nav-wrapper #co_menu_container::before { content: "Menu"; position: absolute; top: 28px; left: 28px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
+  html body.cco_body .site-nav-wrapper .menu_logo { display: none !important; }
+  html body.cco_body .site-nav-wrapper .cs-mobile-menu-close { position: absolute !important; top: 14px !important; right: 16px !important; width: 44px !important; height: 44px !important; border-radius: 50% !important; border: 1.5px solid var(--cc-line-dark) !important; background: transparent !important; display: flex !important; align-items: center; justify-content: center; padding: 0 !important; }
+  html body.cco_body .site-nav-wrapper .cs-mobile-menu-close i { font-size: 18px !important; line-height: 1; }
+  html body.cco_body .site-nav-wrapper .main_menu_container, html body.cco_body .site-nav-wrapper .main_menu_container tbody, html body.cco_body .site-nav-wrapper #tabContentMain { display: block !important; width: 100% !important; margin: 0 !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.home, html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item_divider { display: none !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item { display: block !important; width: auto !important; margin: 0 28px !important; padding: 0 !important; border-bottom: 1px solid var(--cc-line-dark); }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item span.parent, html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item span.parent div { display: block !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item:not(.donate_link) span.parent a {
+    display: flex !important; align-items: center; justify-content: space-between; min-height: 60px; padding: 0 !important;
+    font-family: var(--cc-font-head) !important; font-size: 26px !important; font-weight: 400 !important; line-height: 1.1; letter-spacing: -.01em; color: var(--cc-white) !important; text-decoration: none !important;
+  }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item:not(.donate_link) span.parent a::after { content: "\2192"; font-family: var(--cc-font-body); font-size: 18px; color: var(--cc-accent-on-dark); opacity: .7; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.selected span.parent a { color: var(--cc-accent-on-dark) !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.selected span.parent a::after { opacity: 1; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link { border-bottom: 0; margin-top: 28px !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link span.parent a { display: flex !important; align-items: center; justify-content: center; width: 100%; min-height: 54px; padding: 0 !important; font-size: 17px !important; box-sizing: border-box; }
+  html body.cco_body .site-nav-wrapper .co_menu_content { display: none !important; }
+  /* bottom links: Search and Contact (the platform's "About" goes to a Chabad.org article) */
+  html body.cco_body.menu-open .site-nav-wrapper .mobile-menu-bottom-links { width: var(--cc-drawer-w) !important; left: auto !important; right: 0; box-sizing: border-box; display: flex !important; gap: 24px; padding: 18px 28px 0 !important; border-top: 1px solid var(--cc-line-dark); text-align: left; }
+  html body.cco_body .site-nav-wrapper .mobile-menu-bottom-links a { font-size: 14px !important; font-weight: 600 !important; color: var(--cc-on-dark-muted) !important; text-decoration: none; }
+  html body.cco_body .site-nav-wrapper .mobile-menu-bottom-links a::before, html body.cco_body .site-nav-wrapper .mobile-menu-bottom-links a::after { display: none !important; }
+  html body.cco_body .site-nav-wrapper .mobile-menu-bottom-links a[href="/36226"] { display: none !important; }
+}
+
 /* ---------- 4. BUTTONS AND LINKS (native) ---------- */
 html body.cco_body .co_global_button .button, html body.cco_body .co_global_button button, html body.cco_body input.buttonStyle1, html body.cco_body input[type="submit"].co_global_submit, html body.cco_body a.cc-btn, html body.cco_body .cc-btn {
   background: var(--cc-primary) !important;
