@@ -52,7 +52,11 @@
       linkHref: "/tools/feedback.asp"
     },
     quoteFont: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap",
+    // Hebrew serif for the homepage B"H, loaded for just those letters
+    bhFont: "https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500&text=%D7%91%D7%94%D7%B4&display=swap",
     home: {
+      // B"H in the top corner of the homepage hero only (Levi, Oct 27); "" removes it
+      bh: "ב״ה",
       // Homepage sections, in order.
       sections: ["hero", "quick", "intro", "strip", "events", "programs", "testimonials", "partner", "subscribe"],
       // Hero = every slide of the ChabadOne promo slider. In a slide's title, "Eyebrow | Title" adds the
@@ -762,6 +766,11 @@
       subscribe: function () { return subscribeSection(hp); }
     };
     CC.home.sections.forEach(function (k) { var s = build[k] && build[k](); if (s) { shell.appendChild(s); } });
+    var heroWrap = CC.home.bh && q(".cc-hero .cc-wrap", shell);
+    if (heroWrap) {
+      if (CC.bhFont && !q("link[data-cc-bh-font]")) { d.head.appendChild(h("link", { rel: "stylesheet", href: CC.bhFont, "data-cc-bh-font": "1" })); }
+      heroWrap.appendChild(h("span", { "class": "cc-bh", lang: "he", "aria-hidden": "true", text: CC.home.bh }));
+    }
     hp.parentNode.insertBefore(shell, hp);
     addClass(hp, "cc-native-parked");
     addClass(html, "cc-shell-ready");

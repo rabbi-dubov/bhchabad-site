@@ -441,17 +441,14 @@ html body.cco_body .co_body .article-body:not(:has(.cc-landing)) blockquote {
   color: var(--cc-ink);
 }
 
-/* B"H marker that ChabadOne shows on phones: keep it small and out of the way */
-/* default-theme.css draws it as a white-on-black badge (body_wrapper::before) over the top of the page (Levi: "really ugly"):
-   keep the words, drop the badge; light over our dark heroes, grey over light pages */
-@media (max-width: 1024px) {
-  html body.cco_body #BodyContainer > .body_wrapper::before { background: none !important; padding: 0 !important; border-radius: 0 !important; top: 6px !important; inset-inline-end: 12px !important; font-size: 11px !important; letter-spacing: .04em; color: var(--cc-muted) !important; opacity: .85; }
-  html.cc-home-page body.cco_body #BodyContainer > .body_wrapper::before, html body.cco_body:has(.cc-landing) #BodyContainer > .body_wrapper::before { color: rgba(255, 255, 255, .6) !important; }
-}
-html body.cco_body .bh.mobile-only {
-  background: transparent !important; color: var(--cc-muted) !important;
-  font-size: 12px; padding: 4px var(--cc-gutter) 0; margin: 0; text-align: right; box-shadow: none !important;
-}
+/* B"H: Levi, Oct 27: only on the homepage, designed into the page. The platform's own marks go everywhere:
+   default-theme.css draws a white-on-black badge on phones (body_wrapper::before) and keeps a .bh div;
+   theme.js puts our .cc-bh into the homepage hero instead (CC.home.bh). */
+html body.cco_body #BodyContainer > .body_wrapper::before { content: none !important; display: none !important; }
+html body.cco_body .cc-hero .cc-wrap { position: relative; }
+html body.cco_body .cc-bh { position: absolute; top: 14px; right: var(--cc-gutter); font-family: "Frank Ruhl Libre", "Times New Roman", serif !important; font-weight: 500; font-size: 16px; line-height: 1; letter-spacing: .02em; color: var(--cc-accent-on-dark); opacity: .9; direction: rtl; pointer-events: none; }
+@media (max-width: 760px) { html body.cco_body .cc-bh { top: 9px; font-size: 14px; } }
+html body.cco_body .bh { display: none !important; }
 
 /* ---------- 5b. NATIVE POPUP DIALOGS (e.g. "Shalom! We're glad you're here" subscribe prompt) ---------- */
 html body.cco_body .co_dialog.rounded_box,
