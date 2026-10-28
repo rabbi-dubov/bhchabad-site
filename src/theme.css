@@ -287,7 +287,9 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   html body.cco_body #header .site-nav-wrapper { width: var(--cc-drawer-w) !important; right: calc(-1 * var(--cc-drawer-w) - 48px) !important; background: var(--cc-ink-deep) !important; box-shadow: -24px 0 48px rgba(30, 6, 18, .35); overflow-y: auto; }
   html body.cco_body.menu-open #header .site-nav-wrapper { right: 0 !important; }
   html body.cco_body.menu-open .cs-mobile-menu-close-back { display: block !important; position: fixed !important; top: 0; bottom: 0; left: 0; right: var(--cc-drawer-w); width: auto !important; height: auto !important; margin: 0; padding: 0; border: 0; background: rgba(30, 6, 18, .45) !important; cursor: pointer; }
-  html body.cco_body .site-nav-wrapper #co_menu_container_wrapper, html body.cco_body .site-nav-wrapper #co_menu_container { width: auto !important; }
+  html body.cco_body #header .site-nav-wrapper { display: block !important; }
+  html body.cco_body #header .wrapper .site-nav-wrapper #co_menu_container_wrapper, html body.cco_body #header .wrapper .site-nav-wrapper #co_menu_container_wrapper #co_menu_container { width: 100% !important; max-width: none !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain { padding: 0 !important; }
   html body.cco_body .site-nav-wrapper #co_menu_container { padding: 72px 0 120px !important; }
   html body.cco_body .site-nav-wrapper #co_menu_container::before { content: "Menu"; position: absolute; top: 28px; left: 28px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
   html body.cco_body .site-nav-wrapper .menu_logo { display: none !important; }
