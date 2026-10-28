@@ -305,6 +305,7 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   }
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item:not(.donate_link) span.parent a::after { content: "\2192"; font-family: var(--cc-font-body); font-size: 18px; color: var(--cc-accent-on-dark); opacity: .7; }
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.selected span.parent a { color: var(--cc-accent-on-dark) !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item span.parent a::after { display: inline !important; }
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.selected span.parent a::after { opacity: 1; }
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link { border-bottom: 0; margin-top: 28px !important; }
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link span.parent a { display: flex !important; align-items: center; justify-content: center; width: 100%; min-height: 54px; padding: 0 !important; font-size: 17px !important; box-sizing: border-box; }
@@ -1182,14 +1183,16 @@ html body.cco_body .cc-hero__nav .cc-round:hover { border-color: var(--cc-accent
   html body.cco_body .cc-hero__info { margin-bottom: 20px; }
 }
 @media (max-width: 760px) {
-  html body.cco_body .cc-hero .cc-wrap { gap: 18px; padding-top: 20px; padding-bottom: 32px; }
+  /* more air on phones (Levi, Oct 27: the hero felt cramped) */
+  html body.cco_body .cc-hero .cc-wrap { gap: 28px; padding-top: 32px; padding-bottom: 48px; }
   html body.cco_body .cc-hero__media { order: -1; flex-basis: 100%; }
   html body.cco_body .cc-hero__img { aspect-ratio: 16 / 10; }
-  html body.cco_body .cc-hero__title { font-size: 32px; line-height: 1.06; margin-bottom: 10px; }
-  html body.cco_body .cc-hero .cc-hero__sub { font-size: 16px; line-height: 1.5; margin-bottom: 12px; }
-  html body.cco_body .cc-hero .cc-eyebrow { margin-bottom: 8px; }
-  html body.cco_body .cc-hero__info { margin-bottom: 16px; font-size: 14px; }
-  html body.cco_body .cc-hero__nav { margin-top: 10px; }
+  html body.cco_body .cc-hero__title { font-size: 36px; line-height: 1.08; margin-bottom: 16px; }
+  html body.cco_body .cc-hero .cc-hero__sub { font-size: 17px; line-height: 1.65; margin-bottom: 22px; }
+  html body.cco_body .cc-hero .cc-eyebrow { margin-bottom: 14px; }
+  html body.cco_body .cc-hero__info { margin-bottom: 24px; font-size: 14px; line-height: 1.5; }
+  html body.cco_body .cc-hero__ctas { gap: 12px; }
+  html body.cco_body .cc-hero__nav { margin-top: 20px; }
   html body.cco_body .cc-hero__nav .cc-round { width: 34px; height: 34px; }
 }
 
@@ -1329,7 +1332,7 @@ html body.cco_body .cc-hero .cc-stats strong { color: var(--cc-white); font-size
 html body.cco_body .cc-hero .cc-stats span { color: var(--cc-accent-on-dark); }
 @media (max-width: 760px) {
   html body.cco_body .cc-hero__media > img { aspect-ratio: 16 / 10; }
-  html body.cco_body .cc-hero .cc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 8px 0 24px; padding-top: 18px; }
+  html body.cco_body .cc-hero .cc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 4px; padding-top: 22px; }
   html body.cco_body .cc-hero .cc-stats strong { font-size: 30px; }
   html body.cco_body .cc-hero .cc-stats span { font-size: 11px; letter-spacing: .08em; }
 }
