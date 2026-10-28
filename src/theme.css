@@ -1259,7 +1259,10 @@ html body.cco_body:has(.cc-landing) #BodyContainer, html body.cco_body:has(.cc-l
 html body.cco_body:has(.cc-landing) #co_content_container, html body.cco_body:has(.cc-landing) #co_content_container > .clearfix, html body.cco_body:has(.cc-landing) .master-content-wrapper,
 html body.cco_body:has(.cc-landing) .co_body, html body.cco_body:has(.cc-landing) .co_body .article-body {
   width: auto !important; max-width: none !important; padding: 0 !important; margin: 0 !important; float: none !important; background: transparent !important;
+  min-width: 0 !important;   /* .body_wrapper is a flex row: without this the photo strip stretches the page */
 }
+/* the platform keeps 130px free above the content for a fixed header; ours is sticky */
+html body.cco_body:has(.cc-landing) #content { margin-top: 0 !important; }
 html body.cco_body:has(.cc-landing) header.article-header, html body.cco_body:has(.cc-landing) .content_title_container, html body.cco_body:has(.cc-landing) .breadcrumbs { display: none !important; }
 html body.cco_body .cc-landing { font-size: 17px; line-height: 1.6; color: var(--cc-text); overflow: hidden; }
 html body.cco_body .cc-landing p { margin-top: 0; }
