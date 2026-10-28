@@ -44,6 +44,21 @@ Still open:
 - Minor theme polish: slide texts overlap for a moment while the hero cross-fades; the phone menu uses ChabadOne's font and a yellow-outlined Donate.
 - Levi to decide: keep ChabadOne's signup popup (shows from a visitor's 2nd visit, on every page) or turn it off, since the homepage already has the signup card.
 
+## Phone header and menu audit, Oct 28 (live v20261028.0118)
+
+Checked at 375×812, 320×568, 812×375 (sideways) and 768×1024 on the homepage and the Tanya page. No sideways scroll anywhere; logo, title and menu button share one centre line; the drawer's current-page highlight works.
+Found (nothing built yet; waiting for Levi's go-ahead and his two calls):
+- Menu button is 33×31px (needs 44×44) and its icon sits 26px from the edge while the logo sits at 20px. No label for screen readers ("Menu"), no open/closed state; the logo link has no name either.
+- The drawer's X sits 65px higher than the menu button it replaces (top 14 vs. header row at 86), so the thumb has to hunt for it.
+- About 290px of empty drawer between Donate and the Search/Contact bar on a normal phone; Search and Contact are small 14px links (17px tall targets) pinned to the bottom.
+- Sideways or on short screens only 3½ items show, Donate needs scrolling inside a 300px box, and the fixed bottom bar leaves a dead band.
+- The page behind the drawer still scrolls; Escape doesn't close it; focus doesn't move into it.
+- 320px phones: the title wraps to two lines and touches the menu button (0px gap); notice bar + header take 167px of a 568px screen.
+- Phones and tablets have no visible Donate until the drawer opens.
+- Inner-page hero buttons on phones have mismatched widths (202px / 130px).
+Proposed fix (one global CSS/JS release to test/): 44×44 labelled menu button on the 20px gutter; drawer top row the same height as the header with "Menu" and the X on the button's line; Search and Contact as real rows under Donate (no fixed bar); one scroll area with compact rows when the screen is short; page scroll locked, Escape closes, focus handled; title one size smaller under 360px; phone hero buttons full width. Levi's calls: (a) a small Donate pill in the phone header beside the menu button, (b) full-screen drawer on phones instead of the 45px dimmed strip.
+Also found: jsDelivr was serving live JS v0011 next to CSS v0118 (no homepage ב״ה for visitors); purged Oct 28, all live files now v0118.
+
 ## Learn page go-live (Levi approved Oct 27: "ready to start pushing this online")
 
 The approved design is the preview (version 17+, https://claude.ai/artifact/Sa1sZakwbxbdxf2npyiArD), built by `Shlichus\Website\preview-build\build_learn.mjs`. Steps:
@@ -157,3 +172,4 @@ See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwo
 - 2026-10-27 · Levi (side session) · Donate page redesign: mapped the live ChabadOne donate form once (two screens, classes and texts; notes in the shared side-session notes folder), studied the same template on Chabad of Hackensack and donate-page practice (impact-tied amounts, monthly giving, trust lines), built the preview against the platform's real donate CSS and published draft 1 for Levi. No theme files changed (test/ = live/ = v20261028.0056 at that time).
 - 2026-10-27 · Levi (side session) · Levi liked the Donate page look but wants no added words or elements for now: shipped the general design update only (CSS, the page's own words and picture) to test/ v20261028.0118 and, with his OK, to live (e213a47); checked at 1366px and phone, JLI registration re-tested on live, nothing submitted. Additional copy for the page is open task 12. jsDelivr's @main returned different live files at different versions for a while after the purges (CSS 0118 after a second purge; JS came back as 0011 or 0047): see PLAYBOOK.
 - 2026-10-28 · Levi · Checked live after jsDelivr caught up (v20261028.0118, which carries the homepage-only ב״ה and the donate restyle): ב״ה shows in the homepage hero corner (Frank Ruhl Libre, apricot, right-aligned with the photo); the platform badge is gone on every page. If a browser still shows the old look, it is its own cache for that hour.
+- 2026-10-28 · Levi · Phone header and menu UI/UX audit on live v20261028.0118 (findings and proposed fix under "Phone header and menu audit"); nothing built yet. Found jsDelivr serving live JS v0011 beside CSS v0118 and purged it; all live files now v0118.
