@@ -372,7 +372,7 @@ html body.cco_body .breadcrumbs, html body.cco_body .breadcrumbs a {
 }
 
 /* Readable article body */
-html body.cco_body .co_body .article-body {
+html body.cco_body .co_body .article-body:not(:has(.cc-landing)) {
   font-size: 18px;
   line-height: 1.75;
   color: var(--cc-text);
@@ -380,17 +380,17 @@ html body.cco_body .co_body .article-body {
 html body.cco_body.sites-article:not(.form) .co_body .article-body > p, html body.cco_body.sites-article:not(.form) .co_body .article-body > ul, html body.cco_body.sites-article:not(.form) .co_body .article-body > ol, html body.cco_body.sites-article:not(.form) .co_body .article-body > h2, html body.cco_body.sites-article:not(.form) .co_body .article-body > h3, html body.cco_body.sites-article:not(.form) .co_body .article-body > blockquote {
   max-width: 760px;
 }
-html body.cco_body .co_body .article-body h2 { font-size: 34px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.6em 0 .5em; line-height: 1.2; }
-html body.cco_body .co_body .article-body h3 { font-size: 25px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.4em 0 .4em; }
-html body.cco_body .co_body .article-body a:not(.cc-btn):not(.cc-card) {
+html body.cco_body .co_body .article-body:not(:has(.cc-landing)) h2 { font-size: 34px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.6em 0 .5em; line-height: 1.2; }
+html body.cco_body .co_body .article-body:not(:has(.cc-landing)) h3 { font-size: 25px !important; font-weight: 400; color: var(--cc-ink) !important; margin: 1.4em 0 .4em; }
+html body.cco_body .co_body .article-body:not(:has(.cc-landing)) a:not(.cc-btn):not(.cc-card) {
   color: var(--cc-primary);
   text-decoration: underline;
   text-decoration-color: var(--cc-accent);
   text-underline-offset: 3px;
   text-decoration-thickness: 2px;
 }
-html body.cco_body .co_body .article-body img { border-radius: var(--cc-radius-sm); max-width: 100%; height: auto; }
-html body.cco_body .co_body .article-body blockquote {
+html body.cco_body .co_body .article-body:not(:has(.cc-landing)) img { border-radius: var(--cc-radius-sm); max-width: 100%; height: auto; }
+html body.cco_body .co_body .article-body:not(:has(.cc-landing)) blockquote {
   border: 0;
   margin: 2em 0;
   padding: 0 0 0 24px;
@@ -1247,3 +1247,96 @@ html body.cco_body #PopupSubscribeMessage #CancelButton .normal { color: var(--c
   html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .b_header { padding: 18px 20px 16px !important; }
   html body.cco_body .co_dialog:has(#PopupSubscribeMessage) .header_text { font-size: 22px !important; }
 }
+
+/* ==========================================================================
+   Landing pages (Oct 27, 2026; first one: Adult education / Learn, approved by Levi)
+   A landing page is an ordinary ChabadOne web document whose whole body is one
+   <div class="cc-landing">, filled with full-width sections built from the cc-* pieces below.
+   Set the document to "Expand Body to full width of page" in Advanced Options.
+   ========================================================================== */
+/* The article frame steps aside: full width, no page title band or breadcrumb (the hero is the title) */
+html body.cco_body:has(.cc-landing) #BodyContainer, html body.cco_body:has(.cc-landing) .body_wrapper, html body.cco_body:has(.cc-landing) .g960, html body.cco_body:has(.cc-landing) .main,
+html body.cco_body:has(.cc-landing) #co_content_container, html body.cco_body:has(.cc-landing) #co_content_container > .clearfix, html body.cco_body:has(.cc-landing) .master-content-wrapper,
+html body.cco_body:has(.cc-landing) .co_body, html body.cco_body:has(.cc-landing) .co_body .article-body {
+  width: auto !important; max-width: none !important; padding: 0 !important; margin: 0 !important; float: none !important; background: transparent !important;
+}
+html body.cco_body:has(.cc-landing) header.article-header, html body.cco_body:has(.cc-landing) .content_title_container, html body.cco_body:has(.cc-landing) .breadcrumbs { display: none !important; }
+html body.cco_body .cc-landing { font-size: 17px; line-height: 1.6; color: var(--cc-text); overflow: hidden; }
+html body.cco_body .cc-landing p { margin-top: 0; }
+html body.cco_body .cc-landing a { text-decoration: none; }
+html body.cco_body .cc-landing img { max-width: 100%; }
+html body.cco_body .cc-section--white { background: var(--cc-white); }
+html body.cco_body .cc-section.cc-section--flush { padding-top: 0; }
+
+/* Show one of two pictures by screen size (a frame that changes shape gets a portrait and a landscape version) */
+html body.cco_body .cc-show-phone { display: none !important; }
+@media (max-width: 760px) {
+  html body.cco_body .cc-show-phone { display: block !important; }
+  html body.cco_body .cc-show-wide { display: none !important; }
+}
+
+/* Hero: a calm opening; the picture can be a plain img, and a row of up to three figures under the text */
+html body.cco_body .cc-hero__media > img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--cc-radius); background: var(--cc-primary); box-shadow: var(--cc-shadow-lg); }
+html body.cco_body .cc-hero .cc-stats { margin: 12px 0 0; padding-top: 22px; border-top: 1px solid var(--cc-line-dark); gap: 12px 44px; }
+html body.cco_body .cc-hero .cc-stats strong { color: var(--cc-white); font-size: 38px; }
+html body.cco_body .cc-hero .cc-stats span { color: var(--cc-accent-on-dark); }
+@media (max-width: 760px) {
+  html body.cco_body .cc-hero__media > img { aspect-ratio: 16 / 10; }
+  html body.cco_body .cc-hero .cc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 8px 0 24px; padding-top: 18px; }
+  html body.cco_body .cc-hero .cc-stats strong { font-size: 30px; }
+  html body.cco_body .cc-hero .cc-stats span { font-size: 11px; letter-spacing: .08em; }
+}
+
+/* Jump links as outlined pills (at most four) */
+html body.cco_body .cc-quick--pills ul { gap: 12px; padding-top: 20px; padding-bottom: 20px; }
+html body.cco_body .cc-quick--pills li { margin: 0; padding: 0; list-style: none; }
+html body.cco_body .cc-quick--pills a { min-height: 42px; padding: 0 18px; border: 1.5px solid rgba(255, 255, 255, .45); border-radius: 999px; font-size: 14px; transition: background .2s, border-color .2s; }
+html body.cco_body .cc-quick--pills a:hover, html body.cco_body .cc-quick--pills a:focus-visible { background: var(--cc-white); border-color: var(--cc-white); color: var(--cc-primary) !important; }
+@media (max-width: 760px) {
+  html body.cco_body .cc-quick--pills ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 16px var(--cc-gutter); }
+  html body.cco_body .cc-quick--pills a { min-height: 38px; padding: 0 14px; font-size: 13px; }
+}
+
+/* "Now enrolling" strip: one course in a slim card (portrait art beside the text; landscape art above it on phones) */
+html body.cco_body .cc-nowbar { background: var(--cc-cream); padding: 40px 0; }
+html body.cco_body .cc-nowbar__card { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 36px; align-items: center; background: var(--cc-white); border: 1px solid var(--cc-line); border-radius: var(--cc-radius); padding: 20px 36px 20px 20px; box-shadow: var(--cc-shadow); }
+html body.cco_body .cc-nowbar__art img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--cc-radius-sm); background: #E0DCD5; }
+html body.cco_body .cc-nowbar__kicker { margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body .cc-nowbar__title { margin: 0 0 10px; font-size: 32px !important; line-height: 1.1; color: var(--cc-ink); text-wrap: balance; }
+html body.cco_body .cc-nowbar__blurb { margin: 0 0 12px; font-size: 17px; line-height: 1.6; color: var(--cc-text); max-width: 640px; }
+html body.cco_body .cc-nowbar__meta { margin: 0 0 20px; font-size: 15px; font-weight: 700; color: var(--cc-accent-text); }
+@media (max-width: 760px) {
+  html body.cco_body .cc-nowbar { padding: 28px 0; }
+  html body.cco_body .cc-nowbar__card { grid-template-columns: 1fr; gap: 18px; padding: 14px 14px 20px; }
+  html body.cco_body .cc-nowbar__art img { aspect-ratio: 16 / 9; }
+  html body.cco_body .cc-nowbar__title { font-size: 25px !important; }
+  html body.cco_body .cc-nowbar__blurb { font-size: 16px; }
+}
+
+/* Cards: the picture can be a plain img; three per row on computers, one per row on phones */
+html body.cco_body .cc-ev__img > img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; display: block; }
+html body.cco_body .cc-ev__tag { z-index: 1; }
+html body.cco_body .cc-grid--3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+@media (min-width: 900px) { html body.cco_body .cc-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) { html body.cco_body .cc-grid--3 { grid-template-columns: 1fr; gap: 16px; } }
+/* People photos: the tag sits at the bottom so it never covers a face (Levi, Oct 27) */
+html body.cco_body .cc-grid--3 .cc-ev__tag { top: auto; bottom: 12px; }
+
+/* Callout box under a grid (e.g. continuing education credits) */
+html body.cco_body .cc-callout { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; margin-top: 32px; padding: 24px 28px; background: var(--cc-cream); border-left: 4px solid var(--cc-accent); border-radius: var(--cc-radius-sm); }
+html body.cco_body .cc-callout h3 { margin: 0 0 4px; font-size: 22px !important; color: var(--cc-ink); }
+html body.cco_body .cc-callout p { margin: 0; color: var(--cc-text); max-width: 640px; }
+
+/* Quotes typed on the page (blockquotes inside .cc-quotes): JS turns them into a centered, text-only rotator */
+html body.cco_body .cc-testimonials .cc-tm__mark { margin: 24px auto 0; }
+html body.cco_body .cc-quotes blockquote { max-width: 820px; margin: 28px auto 0; padding: 0; border: 0; box-shadow: none; font-family: "Instrument Serif", Georgia, serif !important; font-style: italic; font-size: 24px; line-height: 1.4; color: var(--cc-ink); }
+html body.cco_body .cc-quotes blockquote p:last-child { font-family: var(--cc-font-body) !important; font-style: normal; font-size: 15px; font-weight: 700; color: var(--cc-accent-text); }
+
+/* Photo strip typed on the page: one row of pictures; JS adds the copy that makes the loop seamless */
+html body.cco_body .cc-strip.cc-strip--gap { padding-top: var(--cc-section); }
+html body.cco_body .cc-strip__track:not(:has(> .cc-strip__row + .cc-strip__row)) { animation: none; }
+html body.cco_body .cc-strip:not(:has(.cc-strip__row + .cc-strip__row)) { overflow-x: auto; }
+
+/* Signup card with a link to ChabadOne's own subscribe page (page bodies can't hold forms) */
+html body.cco_body .cc-sub__action { display: flex; justify-content: center; }
+html body.cco_body .cc-sub__action .cc-btn { padding: 18px 34px; font-size: 17px; }

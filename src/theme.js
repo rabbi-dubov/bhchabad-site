@@ -400,15 +400,37 @@
     if (!CC.quoteFont || q("link[data-cc-quote-font]")) { return; }
     d.head.appendChild(h("link", { rel: "stylesheet", href: CC.quoteFont, "data-cc-quote-font": "1" }));
   }
+  // One quote at a time with arrows and dots; onShow(i) lets a caller follow along (e.g. a photo per quote)
+  function quoteRotator(items, onShow) {
+    var idx = 0;
+    var quote = h("p", { "class": "cc-testimonial__quote" });
+    var by = h("p", { "class": "cc-testimonial__by" });
+    var dots = h("div", { "class": "cc-hero__dots cc-testimonials__dots", role: "group", "aria-label": "Choose a testimonial" });
+    function show(i) {
+      idx = (i + items.length) % items.length; var t = items[idx];
+      quote.textContent = "“" + t.quote + "”";
+      by.textContent = "";
+      if (t.by) { by.appendChild(h("strong", { text: t.by })); }
+      if (t.ctx) { by.appendChild(h("span", { text: t.ctx })); }
+      if (onShow) { onShow(idx); }
+      qa("button", dots).forEach(function (b, j) { b.setAttribute("aria-current", j === idx ? "true" : "false"); });
+    }
+    var nav = null;
+    if (items.length > 1) {
+      items.forEach(function (t, i) { var b = h("button", { type: "button", "aria-label": "Testimonial " + (i + 1) }); b.addEventListener("click", function () { show(i); }); dots.appendChild(b); });
+      var prev = h("button", { type: "button", "class": "cc-round", "aria-label": "Previous testimonial", text: "←" });
+      var next = h("button", { type: "button", "class": "cc-round", "aria-label": "Next testimonial", text: "→" });
+      prev.addEventListener("click", function () { show(idx - 1); });
+      next.addEventListener("click", function () { show(idx + 1); });
+      nav = h("div", { "class": "cc-testimonials__nav" }, [prev, dots, next]);
+    }
+    return { figure: h("figure", { "class": "cc-testimonial", "aria-live": "polite" }, [quote, by]), nav: nav, show: show };
+  }
   function testimonialsSection(list) {
     var sec = h("section", { "class": "cc-section cc-section--cream cc-testimonials", "aria-labelledby": "cc-tm-h" });
     function build(items) {
       if (!items || !items.length) { if (sec.parentNode) { sec.parentNode.removeChild(sec); } return; }
       loadQuoteFont();
-      var idx = 0;
-      var quote = h("p", { "class": "cc-testimonial__quote" });
-      var by = h("p", { "class": "cc-testimonial__by" });
-      var dots = h("div", { "class": "cc-hero__dots cc-testimonials__dots", role: "group", "aria-label": "Choose a testimonial" });
       // One photo layer per distinct picture; a quote without its own picture keeps the one before it
       var photos = [], layerOf = [], last = -1;
       items.forEach(function (t, i) {
@@ -416,30 +438,14 @@
         layerOf[i] = last < 0 ? 0 : last;
       });
       var photoBox = photos.length ? stack("cc-tm__photo", photos.map(function (p) { return photoLayer(p, ""); })) : null;
-      function show(i) {
-        idx = (i + items.length) % items.length; var t = items[idx];
-        quote.textContent = "\u201c" + t.quote + "\u201d";
-        by.textContent = "";
-        if (t.by) { by.appendChild(h("strong", { text: t.by })); }
-        if (t.ctx) { by.appendChild(h("span", { text: t.ctx })); }
-        if (photoBox) { photoBox.show(layerOf[idx]); }
-        qa("button", dots).forEach(function (b, j) { b.setAttribute("aria-current", j === idx ? "true" : "false"); });
-      }
-      var nav = null;
-      if (items.length > 1) {
-        items.forEach(function (t, i) { var b = h("button", { type: "button", "aria-label": "Testimonial " + (i + 1) }); b.addEventListener("click", function () { show(i); }); dots.appendChild(b); });
-        var prev = h("button", { type: "button", "class": "cc-round", "aria-label": "Previous testimonial", text: "\u2190" });
-        var next = h("button", { type: "button", "class": "cc-round", "aria-label": "Next testimonial", text: "\u2192" });
-        prev.addEventListener("click", function () { show(idx - 1); });
-        next.addEventListener("click", function () { show(idx + 1); });
-        nav = h("div", { "class": "cc-testimonials__nav" }, [prev, dots, next]);
-      }
+      var rot = quoteRotator(items, photoBox ? function (i) { photoBox.show(layerOf[i]); } : null);
+      var show = rot.show;
       var body = [
         h("p", { "class": "cc-eyebrow", text: CC.home.testimonialsEyebrow }),
         h("h2", { "class": "cc-h2 cc-head", id: "cc-tm-h", text: CC.home.testimonialsTitle }),
         photoBox ? h("span", { "class": "cc-tm__mark", "aria-hidden": "true", text: "“" }) : null,
-        h("figure", { "class": "cc-testimonial", "aria-live": "polite" }, [quote, by]),
-        nav
+        rot.figure,
+        rot.nav
       ];
       sec.textContent = "";
       if (photoBox) {
@@ -761,6 +767,34 @@
     addClass(html, "cc-shell-ready");
   }
 
+  /* ---------- Landing pages ----------
+     A ChabadOne web document whose body is one <div class="cc-landing"> (the CSS does the layout).
+     Quotes typed as blockquotes inside .cc-quotes become a rotator; a photo strip's single row gets
+     the copy that lets it loop. */
+  function landingPage() {
+    var root = q(".cc-landing");
+    if (!root) { return; }
+    addClass(html, "cc-landing-page");
+    qa(".cc-quotes", root).forEach(function (box) {
+      var items = parseTestimonials(box);
+      if (!items.length) { return; }
+      loadQuoteFont();
+      qa("blockquote", box).forEach(function (bq) { bq.parentNode.removeChild(bq); });
+      var rot = quoteRotator(items);
+      var wrap = q(".cc-wrap", box) || box;
+      [h("span", { "class": "cc-tm__mark", "aria-hidden": "true", text: "“" }), rot.figure, rot.nav].forEach(function (n) { if (n) { wrap.appendChild(n); } });
+      rot.show(0);
+    });
+    qa(".cc-strip__track", root).forEach(function (track) {
+      var rows = qa(".cc-strip__row", track);
+      if (rows.length !== 1) { return; }
+      var copy = rows[0].cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      qa("img", copy).forEach(function (im) { im.setAttribute("alt", ""); });
+      track.appendChild(copy);
+    });
+  }
+
   /* ---------- Event registration page ----------
      Only adds conveniences on top of ChabadOne's own form logic; never submits anything. */
   function registration() {
@@ -833,7 +867,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, noticeBar, footer, shabbatTimes, homeShell, registration].forEach(function (fn) {
+    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, registration].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
