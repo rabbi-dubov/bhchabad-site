@@ -404,6 +404,12 @@ html body.cco_body .co_body .article-body:not(:has(.cc-landing)) blockquote {
 }
 
 /* B"H marker that ChabadOne shows on phones: keep it small and out of the way */
+/* default-theme.css draws it as a white-on-black badge (body_wrapper::before) over the top of the page (Levi: "really ugly"):
+   keep the words, drop the badge; light over our dark heroes, grey over light pages */
+@media (max-width: 1024px) {
+  html body.cco_body #BodyContainer > .body_wrapper::before { background: none !important; padding: 0 !important; border-radius: 0 !important; top: 6px !important; inset-inline-end: 12px !important; font-size: 11px !important; letter-spacing: .04em; color: var(--cc-muted) !important; opacity: .85; }
+  html.cc-home-page body.cco_body #BodyContainer > .body_wrapper::before, html body.cco_body:has(.cc-landing) #BodyContainer > .body_wrapper::before { color: rgba(255, 255, 255, .6) !important; }
+}
 html body.cco_body .bh.mobile-only {
   background: transparent !important; color: var(--cc-muted) !important;
   font-size: 12px; padding: 4px var(--cc-gutter) 0; margin: 0; text-align: right; box-shadow: none !important;
