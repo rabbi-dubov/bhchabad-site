@@ -37,7 +37,7 @@
     subscribeUrl: "/tools/subscribe/default.htm",
     // Testimonials live on an ordinary ChabadOne page. Each one = a Quote (blockquote) whose last line
     // starts with a dash: "— Name, context". The homepage reads them; no quotes = no section.
-    testimonialsUrl: null,   // set to "/testimonials" once that page exists
+    testimonialsUrl: "/7617013", // "In their words" page (hidden, under About)
     // Homepage photos live on an ordinary ChabadOne page: pictures under a heading containing "Welcome"
     // rotate beside the welcome text, under "Strip" they scroll in the photo strip, under "Donate" the
     // first one is the donate background, under "Cards" they replace the program-card pictures in order.
