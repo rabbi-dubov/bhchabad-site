@@ -42,7 +42,7 @@
     // rotate beside the welcome text, under "Strip" they scroll in the photo strip, under "Donate" the
     // first one is the donate background, under "Cards" they replace the program-card pictures in order.
     // No headings: the first 4 pictures = welcome, all = strip.
-    photosUrl: null,         // set to e.g. "/homepage-photos" once that page exists
+    photosUrl: "/7603881",   // "Homepage photos" page (hidden, under About)
     shabbatPlace: "Bloomfield Hills",
     // Slim notice bar at the top of every page; a visitor's × hides it for them. Set to null to remove it.
     notice: {
