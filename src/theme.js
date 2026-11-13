@@ -804,6 +804,59 @@
     });
   }
 
+  /* ---------- Course library (any page with a .cc-library block) ----------
+     Page markup: links in .cc-chips (href "#all" or "#<tag>") filter the .cc-course cards by their
+     cc-tag-<tag> class; each card's .cc-course__open link opens a pop-up with the card's cover,
+     season, title, description, recording link and its hidden .cc-course__more (lessons).
+     A link to #<card id> opens that course straight away. */
+  function courseLibrary() {
+    qa(".cc-library").forEach(function (lib) {
+      var cards = qa(".cc-course", lib), chips = qa(".cc-chips a", lib);
+      if (!cards.length) { return; }
+      function filter(tag) {
+        chips.forEach(function (a) { a.setAttribute("aria-pressed", (a.getAttribute("href") || "") === "#" + tag ? "true" : "false"); });
+        cards.forEach(function (c) { c.hidden = !(tag === "all" || (" " + c.className + " ").indexOf(" cc-tag-" + tag + " ") >= 0); });
+      }
+      chips.forEach(function (a) {
+        a.setAttribute("role", "button");
+        a.addEventListener("click", function (ev) { ev.preventDefault(); filter((a.getAttribute("href") || "#all").slice(1)); });
+      });
+      if (chips.length) { filter("all"); }
+
+      var body = h("div", { "class": "cc-dialog__body" });
+      var close = h("button", { type: "button", "class": "cc-dialog__x", "aria-label": "Close", text: "×" });
+      var dlg = h("dialog", { "class": "cc-dialog", "aria-label": "Course details" }, [close, body]);
+      d.body.appendChild(dlg);
+      if (typeof dlg.showModal !== "function") { return; } // very old browsers: cards stay plain links
+      close.addEventListener("click", function () { dlg.close(); });
+      dlg.addEventListener("click", function (ev) { if (ev.target === dlg) { dlg.close(); } });
+      dlg.addEventListener("close", function () { if (history.replaceState && /^#c-/.test(location.hash)) { history.replaceState(null, "", location.pathname + location.search); } });
+      function open(card) {
+        body.textContent = "";
+        var cover = q(".cc-course__cover", card);
+        if (cover) { var fig = cover.cloneNode(true); fig.className = "cc-dialog__cover"; body.appendChild(fig); }
+        var when = q(".cc-course__when", card), title = q(".cc-course__title", card), desc = q(".cc-course__desc", card);
+        if (when) { body.appendChild(h("p", { "class": "cc-eyebrow", text: txt(when) })); }
+        body.appendChild(h("h2", { "class": "cc-h2 cc-head", text: txt(title) }));
+        if (desc) { body.appendChild(h("p", { "class": "cc-lede", text: txt(desc) })); }
+        var more = q(".cc-course__more", card);
+        if (more) { qa(":scope > *", more).forEach(function (n) { body.appendChild(n.cloneNode(true)); }); }
+        var rec = q(".cc-course__foot a", card);
+        if (rec) { var b = rec.cloneNode(true); b.className = "cc-btn"; body.appendChild(h("p", { "class": "cc-dialog__cta" }, [b])); }
+        dlg.showModal();
+        if (card.id && history.replaceState) { history.replaceState(null, "", "#" + card.id); }
+      }
+      cards.forEach(function (card) {
+        var o = q(".cc-course__open", card);
+        if (o) { o.addEventListener("click", function (ev) { ev.preventDefault(); open(card); }); }
+      });
+      if (/^#c-/.test(location.hash)) {
+        var hit = d.getElementById(location.hash.slice(1));
+        if (hit && lib.contains(hit)) { open(hit); }
+      }
+    });
+  }
+
   /* ---------- Event registration page ----------
      Only adds conveniences on top of ChabadOne's own form logic; never submits anything. */
   function registration() {
@@ -876,7 +929,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, registration].forEach(function (fn) {
+    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }

@@ -907,6 +907,21 @@ html body.cco_body .cc-dialog .cc-lede { font-size: 17px; }
 html body.cco_body .cc-dialog__x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--cc-cream); color: var(--cc-ink); font-size: 22px; cursor: pointer; }
 html body.cco_body .cc-dialog__h { font-family: var(--cc-font-body) !important; font-size: 12px !important; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-text); margin: 24px 0 8px; }
 html body.cco_body .cc-dialog__lessons { margin: 0 0 24px; padding-left: 22px; line-height: 1.7; }
+/* Course library on a ChabadOne page (.cc-library): chips are links (the editor keeps no buttons), the
+   lesson list sits hidden in each card until the pop-up shows it, the topic dot is drawn by CSS. */
+html body.cco_body .cc-library .cc-chips a {
+  font: 600 14px var(--cc-font-body); padding: 9px 16px; border-radius: 999px; cursor: pointer; text-decoration: none !important;
+  border: 1px solid var(--cc-line); background: var(--cc-white); color: var(--cc-text) !important; transition: border-color .2s, background .2s;
+}
+html body.cco_body .cc-library .cc-chips a:hover { border-color: var(--cc-primary); }
+html body.cco_body .cc-library .cc-chips a[aria-pressed="true"] { background: var(--cc-ink); border-color: var(--cc-ink); color: var(--cc-white) !important; }
+html body.cco_body .cc-library .cc-course__title a { text-decoration: none !important; }
+html body.cco_body .cc-course__more { display: none; }
+html body.cco_body .cc-course__topic::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--topic, var(--cc-primary)); margin-right: 8px; vertical-align: 1px; }
+html body.cco_body .cc-dialog .cc-eyebrow { margin: 0 0 8px; }
+html body.cco_body .cc-dialog__cta { margin: 8px 0 0; }
+html body.cco_body .cc-dialog__cover + .cc-eyebrow { margin-top: 0; }
+html body.cco_body .cc-library .cc-course { scroll-margin-top: 110px; }
 @media (max-width: 640px) {
   html body.cco_body .cc-courses { grid-template-columns: 1fr; gap: 12px; }
   html body.cco_body .cc-course--cover { display: grid; grid-template-columns: 120px 1fr; column-gap: 14px; row-gap: 4px; align-content: start; padding: 14px; }
