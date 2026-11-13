@@ -65,7 +65,7 @@ function card(c) {
   const t = T[c.topic];
   const tags = ['cc-tag-' + c.topic, c.women ? 'cc-tag-women' : '', c.rec ? 'cc-tag-rec' : ''].filter(Boolean).join(' ');
   const cover = c.cover ? `<div class="cc-course__cover"><img src="${c.cover}" alt="" loading="lazy" /></div>\n` : '';
-  const link = c.rec ? `<a href="${e(c.rec.url)}" target="_blank" rel="noopener">${REC[c.rec.type]}</a>` : '';
+  const link = c.rec ? `<a href="${e(c.rec.url)}" target="_blank" rel="noopener"><span>${REC[c.rec.type]}</span></a>` : ''; // span: ChabadOne's save splits bare link text
   const more = c.lessons.length
     ? `\n<div class="cc-course__more"><p class="cc-dialog__h">${c.lessons.length} lessons</p><ol class="cc-dialog__lessons">${c.lessons.map(l => `<li>${e(l)}</li>`).join('')}</ol></div>` : '';
   return `<div class="cc-course${c.cover ? ' cc-course--cover' : ''} cc-topic-${t.n} ${tags}" id="${c.id}">
