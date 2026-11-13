@@ -231,9 +231,10 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   }
   /* Dropdowns → floating card in the site's look (Levi, Nov 12: the hover list still looked like old ChabadOne).
      The platform's default-theme.css forces Muli 12px !important, a blue top line and yellow dividers on these,
-     so every property here needs !important. The card hangs 10px below the item; that gap is padding on
-     .co_menu_content (inside the menu cell), so moving the mouse down never closes it. */
-  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_menu_content { padding-top: 10px !important; }
+     so every property here needs !important. The card hangs just under the header (10px below the menu cell;
+     that gap is padding on .co_menu_content, inside the cell, so moving the mouse down never closes it),
+     and shifts 11px left so its first letters line up with the menu label. */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_menu_content { top: 100% !important; left: -11px !important; padding-top: 10px !important; }
   html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container {
     width: auto !important; min-width: 240px; height: auto !important; padding: 8px !important;
     background: var(--cc-white) !important;
@@ -259,11 +260,15 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item:hover, html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item:focus-visible {
     background: var(--cc-tint) !important; color: var(--cc-primary) !important;
   }
-  /* a small chevron after menu items that open a list */
-  html body.cco_body #tabContentMain .co_menu_item.multi_level:not(.donate_link) span.parent a::after {
-    content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 0 3px 7px;
-    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); opacity: .55;
+  /* a small chevron after menu items that open a list (on the label's wrapper div: the platform uses a::after
+     of the current page's item for its underline) */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level:not(.donate_link) span.parent > div { display: inline-flex !important; align-items: center; }
+  html body.cco_body #tabContentMain .co_menu_item.multi_level:not(.donate_link) span.parent > div::after {
+    content: ""; display: block; flex: none; width: 6px; height: 6px; margin: -4px 0 0 7px; pointer-events: none;
+    border-right: 2px solid var(--cc-ink); border-bottom: 2px solid var(--cc-ink); transform: rotate(45deg); opacity: .5;
   }
+  /* the platform's blue speech-bubble tail under a hovered item (the cell's ::before/::after) */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level::before, html body.cco_body #tabContentMain .co_menu_item.multi_level::after { display: none !important; }
 }
 
 /* Narrow desktops (1025-1240px): long menu labels may wrap to two lines; the logo title never does */
