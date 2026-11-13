@@ -229,22 +229,40 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent a:hover {
     background: var(--cc-accent-2) !important;
   }
-  /* Dropdowns → floating card */
-  html body.cco_body #tabContentMain .co_submenu_container {
+  /* Dropdowns → floating card in the site's look (Levi, Nov 12: the hover list still looked like old ChabadOne).
+     The platform's default-theme.css forces Muli 12px !important, a blue top line and yellow dividers on these,
+     so every property here needs !important. The card hangs 10px below the item; that gap is padding on
+     .co_menu_content (inside the menu cell), so moving the mouse down never closes it. */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_menu_content { padding-top: 10px !important; }
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container {
+    width: auto !important; min-width: 240px; height: auto !important; padding: 8px !important;
     background: var(--cc-white) !important;
-    border: 1px solid var(--cc-line);
-    border-radius: var(--cc-radius-sm);
-    box-shadow: var(--cc-shadow-lg);
+    border: 1px solid var(--cc-line) !important;
+    border-radius: var(--cc-radius) !important;
+    box-shadow: var(--cc-shadow-lg) !important;
     overflow: hidden;
   }
-  html body.cco_body #tabContentMain .co_submenu_container a.item, html body.cco_body #tabContentMain .co_submenu_container a.item span, html body.cco_body #tabContentMain .co_submenu_container .co_column a {
-    color: var(--cc-text) !important;
-    font-size: 15px;
-    font-weight: 600;
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container .wrapper, html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container .column_wrapper { height: auto !important; background: transparent !important; border: 0 !important; }
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container .co_column { float: none !important; width: auto !important; max-width: 300px; height: auto !important; background: transparent !important; border: 0 !important; }
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container .menu_child, html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item img.arrow { display: none !important; }
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item {
+    display: block !important; width: auto !important; margin: 0 !important; padding: 11px 14px !important;
+    background: transparent !important; border: 0 !important; border-radius: var(--cc-radius-sm); box-shadow: none !important;
+    color: var(--cc-text) !important; text-align: left !important; text-decoration: none !important;
+    transition: background-color .15s, color .15s;
   }
-  html body.cco_body #tabContentMain .co_submenu_container .co_column a:hover, html body.cco_body #tabContentMain .co_submenu_container a.item:hover span {
-    color: var(--cc-primary) !important;
-    background: var(--cc-cream);
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item span {
+    display: block !important; max-width: none !important; padding: 0 !important;
+    font-family: var(--cc-font-body) !important; font-size: 15px !important; font-weight: 600 !important; line-height: 1.35 !important;
+    color: inherit !important; letter-spacing: 0; text-transform: none; white-space: normal;
+  }
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item:hover, html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item:focus-visible {
+    background: var(--cc-tint) !important; color: var(--cc-primary) !important;
+  }
+  /* a small chevron after menu items that open a list */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level:not(.donate_link) span.parent a::after {
+    content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 0 3px 7px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); opacity: .55;
   }
 }
 
@@ -311,7 +329,40 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.selected span.parent a::after { opacity: 1; }
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link { border-bottom: 0; margin-top: 28px !important; }
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link span.parent a { display: flex !important; align-items: center; justify-content: center; width: 100%; min-height: 54px; padding: 0 !important; font-size: 17px !important; box-sizing: border-box; }
+  /* Sub-pages (About › Contact, Learn › JLI ...): the platform's toggle button (.cs-menu-item-toggle) adds
+     .item-open to the menu cell. We draw it as an apricot chevron at the end of the row and open the list
+     under the label. The list comes first in the markup, so the cell becomes a column and the list moves down. */
   html body.cco_body .site-nav-wrapper .co_menu_content { display: none !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level { display: flex !important; flex-direction: column; position: relative; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level span.parent { order: 1; padding-right: 52px !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level span.parent a::after { display: none !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .cs-menu-item-toggle {
+    position: absolute !important; top: 0 !important; right: -12px !important; width: 60px !important; height: 60px !important;
+    padding: 0 !important; margin: 0 !important; border: 0 !important; background: transparent !important;
+    display: flex !important; align-items: center; justify-content: center; font-size: 0 !important; color: var(--cc-accent-on-dark) !important; cursor: pointer;
+  }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .cs-menu-item-toggle::before, html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level.item-open .cs-menu-item-toggle::before {
+    content: "" !important; display: block; width: 9px; height: 9px; margin-top: -5px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .2s;
+  }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level.item-open .cs-menu-item-toggle::before { transform: rotate(-135deg); margin-top: 5px; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level.item-open .co_menu_content { display: block !important; order: 2; position: static !important; top: auto !important; width: auto !important; padding: 0 0 16px !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container {
+    position: static !important; top: auto !important; width: auto !important; height: auto !important; min-width: 0; padding: 0 !important; margin: 0 !important;
+    background: transparent !important; border: 0 !important; border-left: 1px solid var(--cc-line-dark) !important; border-radius: 0 !important; box-shadow: none !important; opacity: 1 !important;
+  }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container .wrapper, html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container .column_wrapper, html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container .co_column { float: none !important; width: auto !important; height: auto !important; background: transparent !important; border: 0 !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container .menu_child, html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container a.item img.arrow, html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container .break_floats { display: none !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container a.item {
+    display: block !important; width: auto !important; margin: 0 !important; padding: 10px 0 10px 18px !important;
+    background: transparent !important; border: 0 !important; box-shadow: none !important; text-align: left !important; text-decoration: none !important;
+  }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container a.item span {
+    display: block !important; max-width: none !important; padding: 0 !important;
+    font-family: var(--cc-font-body) !important; font-size: 17px !important; font-weight: 500 !important; line-height: 1.35 !important;
+    color: var(--cc-on-dark-muted) !important; white-space: normal;
+  }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container a.item:active span { color: var(--cc-white) !important; }
   /* bottom links: Search and Contact (the platform's "About" goes to a Chabad.org article) */
   html body.cco_body.menu-open .site-nav-wrapper .mobile-menu-bottom-links { width: var(--cc-drawer-w) !important; left: auto !important; right: 0; box-sizing: border-box; display: flex !important; gap: 24px; padding: 18px 28px 0 !important; border-top: 1px solid var(--cc-line-dark); text-align: left; }
   html body.cco_body .site-nav-wrapper .mobile-menu-bottom-links a { font-size: 14px !important; font-weight: 600 !important; color: var(--cc-on-dark-muted) !important; text-decoration: none; }
@@ -787,7 +838,10 @@ html body.cco_body .cc-cta p { color: var(--cc-on-dark-muted) !important; }
 /* Course library ("Courses" page) and photo mosaic. Light cards; topic shown by a colored top edge and dot.
    theme.js builds the cards from a plain table on a ChabadOne page (Season | Course | Description | Topic | Video | Audio). */
 html body.cco_body .cc-stats { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 32px 0 0; padding: 0; list-style: none; }
-html body.cco_body .cc-stats li { display: flex; flex-direction: column; gap: 2px; }
+/* Figure on top, label under it. ChabadOne's server splits a label like "since 2021" into one span per word on save,
+   so the label spans flow side by side on one line (wrapping only when they must) instead of stacking. */
+html body.cco_body .cc-stats li { display: flex; flex-flow: row wrap; align-content: flex-start; gap: 2px 0; }
+html body.cco_body .cc-stats li strong { flex: 0 0 100%; }
 html body.cco_body .cc-stats strong { font-family: var(--cc-font-head) !important; font-weight: 400; font-size: 44px; line-height: 1; color: var(--cc-ink); }
 html body.cco_body .cc-stats span { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-accent-text); }
 html body.cco_body .cc-mosaic { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; aspect-ratio: 5 / 4; max-width: 100%; }
