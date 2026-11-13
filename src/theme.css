@@ -1390,6 +1390,30 @@ html body.cco_body .cc-strip:not(:has(.cc-strip__row + .cc-strip__row)) { overfl
 html body.cco_body .cc-sub__action { display: flex; justify-content: center; }
 html body.cco_body .cc-sub__action .cc-btn { padding: 18px 34px; font-size: 17px; }
 
+/* Tanya page pieces (global): wide cover art in the hero, jump targets, small print, cards with buttons, a short prose block */
+/* Hero picture that is wide art (a podcast or course cover): keep its own 16:9 shape, never crop its lettering */
+html body.cco_body .cc-hero__media--wide > img { aspect-ratio: 16 / 9; object-fit: cover; }
+/* In-page jump targets stop below the sticky header */
+html body.cco_body .cc-anchor { scroll-margin-top: 110px; }
+/* A short prose block (e.g. about a book): one readable column, paragraphs spaced */
+html body.cco_body .cc-about-book { max-width: 760px; }
+html body.cco_body .cc-about-book .cc-lede { max-width: none; margin: 0 0 18px; }
+html body.cco_body .cc-about-book .cc-h2 { margin-bottom: 18px; }
+/* Small print under a button */
+html body.cco_body .cc-note { margin: 14px 0 0; font-size: 15px; color: var(--cc-muted); }
+/* A split section's picture: a plain img in a 4:3 frame */
+html body.cco_body .cc-split > .cc-media { align-self: center; box-shadow: var(--cc-shadow); }
+/* Cards that carry an eyebrow and buttons */
+html body.cco_body .cc-card .cc-eyebrow { margin-bottom: 8px; font-size: 12px; color: var(--cc-accent-text) !important; }
+html body.cco_body .cc-card .cc-hero__ctas { margin-top: 22px; gap: 10px; }
+html body.cco_body .cc-card .cc-hero__ctas .cc-btn { padding: 10px 16px; font-size: 15px; }
+html body.cco_body .cc-split .cc-info { margin: 24px 0 28px; padding: 20px 22px; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); }
+@media (max-width: 760px) {
+  html body.cco_body .cc-hero__media--wide > img { aspect-ratio: 16 / 9; }
+  html body.cco_body .cc-split { gap: 32px; }
+  html body.cco_body .cc-hero__ctas .cc-btn { flex: 1 1 auto; justify-content: center; text-align: center; }
+}
+
 /* ---------- DONATE PAGE (ChabadOne donation form, template donate_cdo) ----------
    The form's HTML can't be edited, so everything here targets the platform's own donate classes and
    works on any donate page of the site. Pure CSS: the words, amounts and picture stay as set in ChabadOne.
