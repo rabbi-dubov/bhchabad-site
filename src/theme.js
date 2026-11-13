@@ -846,8 +846,13 @@
         if (desc) { body.appendChild(h("p", { "class": "cc-lede", text: txt(desc) })); }
         var more = q(".cc-course__more", card);
         if (more) { qa(":scope > *", more).forEach(function (n) { body.appendChild(n.cloneNode(true)); }); }
-        var rec = q(".cc-course__foot a", card);
-        if (rec) { var b = rec.cloneNode(true); b.className = "cc-btn"; body.appendChild(h("p", { "class": "cc-dialog__cta" }, [b])); }
+        // recording link; ChabadOne's save can split one link into two ("Listen" + " on the podcast"), so rejoin by href
+        var recs = qa(".cc-course__foot a", card);
+        if (recs.length) {
+          var href = recs[0].getAttribute("href");
+          var label = recs.filter(function (a) { return a.getAttribute("href") === href; }).map(txt).join(" ").replace(/\s+/g, " ").trim();
+          body.appendChild(h("p", { "class": "cc-dialog__cta" }, [h("a", { "class": "cc-btn", href: href, target: "_blank", rel: "noopener", text: label })]));
+        }
         dlg.showModal();
         if (card.id && history.replaceState) { history.replaceState(null, "", "#" + card.id); }
       }

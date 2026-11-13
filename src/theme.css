@@ -926,7 +926,8 @@ html body.cco_body .cc-dialog__cover + .cc-eyebrow { margin-top: 0; }
 html body.cco_body .cc-library .cc-course { scroll-margin-top: 110px; }
 /* ChabadOne's save can split a label into two spans ("Law, ethics and " + "history"): flow them inline, one dot. */
 html body.cco_body .cc-library .cc-course__foot { display: block; line-height: 1.6; }
-html body.cco_body .cc-library .cc-course__foot a { display: inline-block; margin-left: 12px; }
+html body.cco_body .cc-library .cc-course__foot a { display: inline; margin-left: 12px; }
+html body.cco_body .cc-library .cc-course__foot a + a { margin-left: 0; }
 html body.cco_body .cc-library .cc-course__topic + .cc-course__topic::before { content: none; }
 @media (max-width: 640px) {
   /* phones: one row of chips that swipes sideways instead of seven rows */
