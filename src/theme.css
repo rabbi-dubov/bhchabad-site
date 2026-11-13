@@ -923,6 +923,11 @@ html body.cco_body .cc-dialog__cta { margin: 8px 0 0; }
 html body.cco_body .cc-dialog__cover + .cc-eyebrow { margin-top: 0; }
 html body.cco_body .cc-library .cc-course { scroll-margin-top: 110px; }
 @media (max-width: 640px) {
+  /* phones: one row of chips that swipes sideways instead of seven rows */
+  html body.cco_body .cc-library .cc-chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--cc-gutter)) 20px; padding: 0 var(--cc-gutter) 4px; scrollbar-width: none; }
+  html body.cco_body .cc-library .cc-chips a { flex: 0 0 auto; white-space: nowrap; }
+}
+@media (max-width: 640px) {
   html body.cco_body .cc-courses { grid-template-columns: 1fr; gap: 12px; }
   html body.cco_body .cc-course--cover { display: grid; grid-template-columns: 120px 1fr; column-gap: 14px; row-gap: 4px; align-content: start; padding: 14px; }
   html body.cco_body .cc-course--cover > * { grid-column: 2; }
