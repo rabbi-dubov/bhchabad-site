@@ -51,6 +51,23 @@ Nothing changed yet; these are suggestions for Levi.
 - **Course data, FIXED later Nov 12 (commit 9f5a53e)**: 10 older square or blurry covers replaced by JLI's wide Facebook event art (Great Debates, Communication, What Is?, Wrestling with Faith, Crime and Consequence, With All My Heart, Worrier to Warrior, Judaism's Gifts, Secrets of the Bible, This Can Happen; full-size copies in `Shlichus\Website\site-photos\jli-covers`). Lesson lists added for 7 courses (from catalog.myjli.com course pages). Checked in Levi's email: Pirkei Avot ran in June 2020 ("Cultivating Character", so the shared cover is right) and again June 16 to Aug 4, 2023; the Jewish Course of Why was 16 lessons, March 23 to May 22, 2020; Judaism at Home from May 13, 2020; Read it in Hebrew was a JLI course, Feb 2024; the 2018 Holy Temple tour was real (its "Extreme Makeover: Divine Edition" art shows the Temple, probably right; ask Levi). Still without lessons: both Heaven on Earth, Read it in Hebrew, both Pirkei Avot, Jewish Course of Why (lessons were question sets). Still square covers: Paradigm Shift, Judaism Decoded, Journey of the Soul, Jewish Course of Why, Judaism at Home, High Holidays at Home (summer/special courses are not in the flagship library). 21 courses have no recordings; 10 have audio only on Wix (open task 10).
 - **Next JLI course** (from the library): Winter 5787 = "The Missing Piece", Spring = "Chew on This". The JLI page 7593397 loads the Missing Piece minisite stylesheet.
 
+### Learn page: problem list for the next round (Levi, Nov 13: "keep a list of problems to deal with in another round")
+
+Quick fixes, ready to paste (need Levi's OK for each, since saving a page publishes it at once). Exact old → new text in the body of page 7581757:
+1. Kabbalah date line `<p class="cc-nowbar__meta">`: "Starts Tue, Oct 27 or Wed, Oct 28 · 6 weekly classes · Join anytime" → "Now in session · Tuesdays and Wednesdays · You can still join" (same words as the homepage slide Levi approved Nov 12).
+2. Women's card `<p class="cc-ev__when">`: "NEXT GENesis starts Tue, Nov 17 · monthly" → "NEXT GENesis · monthly from Tue, Nov 17" (stays true after Nov 17).
+3. "See the six lessons" and "This season's course" (both `href="/7593397"`, the broken JLI page) → `/tools/events/register.asp?eventid=23504` until the JLI page is fixed (Oct 27 plan had "See the six lessons" on the registration page too).
+
+Bigger items:
+4. Fix the JLI page 7593397 (unstyled; also in the Learn dropdown). Find who set it up and with which JLI minisite code; check JLI's current setup instructions.
+5. Build the Past courses page from `data/courses.json` (preview v4 is the design) and point "Browse past courses" there instead of old page 6963453.
+6. After Dec 2 (Kabbalah ends): switch the Learn strip and homepage slide to The Missing Piece (winter course) once its dates and registration exist.
+7. A short "How to get CE credits" page (who qualifies, how to apply), then point "How to get credits" there; a Lunch and Learn page or section for its "Learn more".
+8. Torah Deep Dive: link the public Spotify show page; decide whether it stays in the Learn dropdown while not running.
+9. Levi to confirm: "Also a podcast and a new book" on the Tanya card; "The first class of every course is free"; the 2018 Heaven on Earth art ("Extreme Makeover: Divine Edition").
+10. Course data leftovers: lessons for 6 courses, square covers for 6 summer/special courses, Journey of the Soul folder in the library didn't open, 10 courses' audio only on Wix (open task 10).
+11. Re-check the Learn page on a phone (not done this round).
+
 ## Homepage audit, Oct 26 (live v20261025.2341 JS / .2329 CSS)
 
 Works well: all 7 sections build on desktop and phone with no sideways scroll; hero slides, arrows and dots work (3 → 1 wraps), and the picture fits a 1366×700 laptop screen; event cards now show the course art; program cards have real photos (4 across, 2×2 on phones); partner band, signup card, footer with this week's Shabbat times; notice bar; JLI registration renders.
@@ -212,3 +229,4 @@ See `CLAUDE.md`. In short: only site 10077, never Princeton; nobody types passwo
 - 2026-11-12 · Levi (late) · In the myjli Resource Library (Levi signed in, his Edge) and Levi's email: replaced 10 old course covers with JLI's wide event art, added lesson lists for 7 courses, confirmed dates of the 2020 COVID-era courses and both Pirkei Avot runs (details in "Learn page audit, Nov 12"). Only `data/` changed; nothing on the live site.
 - 2026-11-12 · Levi (night) · Winter JLI course "The Missing Piece" (Israel) highlighted live on the homepage (new slide 2), the Learn page and the Events & Holidays page (course strip, no buttons until registration exists). Art from the myjli Resource Library, dates from the approved brochure order. Details under "Where things stand".
 - 2026-11-13 · Levi · Menu dropdowns promoted to live with Levi's OK (v20261113.0121, still in v0213). jsDelivr @main lagged and repeated purges got throttled (about 25 min) before a single purge worked; checked live on desktop and phone, JLI registration re-tested (not submitted).
+- 2026-11-13 · Levi · Levi asked to "push live" and list the rest for another round. Nothing of this session needs a theme release (the course data isn't used by the live site yet), and test/ holds another session's unreleased Tanya Project box (v20261113.0213), so test/ was not promoted. The three quick text and link fixes on the Learn page were prepared in the editor but not saved (blocked pending Levi's explicit OK); the list is under "Learn page: problem list for the next round".
