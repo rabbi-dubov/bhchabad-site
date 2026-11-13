@@ -269,6 +269,8 @@ html body.cco_body #header_branding a.site_title .cc-title-sub {
   }
   /* the platform's blue speech-bubble tail under a hovered item (the cell's ::before/::after) */
   html body.cco_body #tabContentMain .co_menu_item.multi_level::before, html body.cco_body #tabContentMain .co_menu_item.multi_level::after { display: none !important; }
+  /* the current page's underline (platform a::after) was ChabadOne blue; orange like the hover line */
+  html body.cco_body #tabContentMain .co_menu_item.selected:not(.donate_link) span.parent a::after { background: var(--cc-accent) !important; }
 }
 
 /* Narrow desktops (1025-1240px): long menu labels may wrap to two lines; the logo title never does */
