@@ -333,7 +333,7 @@
    "title": "Read it in Hebrew",
    "season": "Winter",
    "year": 2024,
-   "series": "other",
+   "series": "JLI",
    "description": "A five-session Hebrew reading crash course, guaranteed to be effective in only five sessions, using interactive flashcards and its own app. For all levels, from beginners to those who want a refresher.",
    "lessons": [],
    "cover": "https://static.wixstatic.com/media/ced623_8f1c6ea9f24345b19ae6ee6be3f2cd84~mv2.jpg",
@@ -343,7 +343,7 @@
    "sources": [
     "https://www.bhchabad.org/hebrew"
    ],
-   "dates": "5 Thursdays from Feb 15 (year inferred as 2024)",
+   "dates": "5 Thursdays from Feb 15, 2024",
    "coverFile": "2024-read-it-in-hebrew.jpg"
   },
   {
@@ -457,7 +457,7 @@
    "sources": [
     "https://www.bhchabad.org/pirkeiavot"
    ],
-   "dates": "6 Fridays from June 16 (year inferred as 2023), on Zoom",
+   "dates": "6 Fridays, June 16 to Aug 4, 2023, on Zoom",
    "coverFile": "2023-cultivating-character-pirkei-avot.jpg"
   },
   {
@@ -777,7 +777,8 @@
     "https://www.bhchabad.org/jliaudio"
    ],
    "dates": "From Wed Apr 28 / Thu Apr 29, 2021",
-   "coverFile": "2021-this-can-happen.jpg"
+   "coverFile": "2021-this-can-happen.jpg",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Journey of the Soul",
@@ -839,7 +840,8 @@
     "https://www.bhchabad.org/past-courses"
    ],
    "dates": "From Wed Nov 11, 2020, on Zoom",
-   "coverFile": "2020-secrets-of-the-bible.jpg"
+   "coverFile": "2020-secrets-of-the-bible.jpg",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "High Holidays: Making it Meaningful at Home",
@@ -879,7 +881,7 @@
    "season": "Summer",
    "year": 2020,
    "series": "other",
-   "description": "Life wisdom from the Ethics of our Fathers.",
+   "description": "Cultivating Character: life wisdom from Pirkei Avot, the Ethics of Our Fathers.",
    "lessons": [],
    "cover": "https://static.wixstatic.com/media/b988f4_2f159cdec63444bca40d9d8177959b76~mv2.jpg",
    "page": "https://www.bhchabad.org/pirkeiavotaudio",
@@ -894,7 +896,7 @@
     "https://www.bhchabad.org/pirkeiavotaudio",
     "https://www.bhchabad.org/jliaudio"
    ],
-   "dates": "Summer 2020, virtual",
+   "dates": "Thursdays from June 4, 2020, on Zoom (morning and evening)",
    "coverFile": "2020-pirkei-avot-studies.jpg"
   },
   {
@@ -948,7 +950,7 @@
     "https://www.bhchabad.org/whyaudio",
     "https://www.bhchabad.org/past-courses"
    ],
-   "dates": "Twice weekly from Mon March 23, 2020, online",
+   "dates": "16 lessons, twice a week, March 23 to May 22, 2020, on Zoom",
    "coverFile": "2020-the-jewish-course-of-why.jpg"
   },
   {
@@ -957,7 +959,14 @@
    "year": 2020,
    "series": "JLI",
    "description": "Unpack six of the world’s most cherished values and how they were delivered to humankind by the Torah. How major Jewish ideas evolved into universal values.",
-   "lessons": [],
+   "lessons": [
+    "The Gift of Social Responsibility",
+    "The Gift of a Guiding Purpose",
+    "The Gift of Respect for Life",
+    "The Gift of Equality and Individuality",
+    "The Gift of Work/Life Balance",
+    "The Gift of Escaping the Cycle"
+   ],
    "cover": "https://static.wixstatic.com/media/b988f4_fea71c6b48b547f79c359b6ab7596b66~mv2_d_1679_1679_s_2.jpg",
    "page": "https://www.bhchabad.org/gifts",
    "eventId": null,
@@ -972,7 +981,8 @@
     "https://www.bhchabad.org/giftsaudio",
     "https://www.bhchabad.org/past-courses"
    ],
-   "coverFile": "2020-judaism-s-gifts-to-the-world.jpg"
+   "coverFile": "2020-judaism-s-gifts-to-the-world.jpg",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Worrier to Warrior",
@@ -980,7 +990,14 @@
    "year": 2019,
    "series": "JLI",
    "description": "We yearn to feel happy, self-assured, and enthusiastic, yet we’re consumed by feelings of doubt, regret and worry. Jewish secrets to feeling good however you feel: a six-week course blending Torah and psychology.",
-   "lessons": [],
+   "lessons": [
+    "Achieving Authenticity",
+    "Embracing Flaws",
+    "Rethinking Regret",
+    "Peering Through Pain",
+    "Living Joyfully",
+    "Refreshing Relationships"
+   ],
    "cover": "https://static.wixstatic.com/media/b988f4_0dccf9d3ebf9474aab2b7ccc47a18e17~mv2_d_1667_1667_s_2.jpg",
    "page": "https://www.bhchabad.org/warrior",
    "eventId": null,
@@ -995,7 +1012,8 @@
     "https://www.bhchabad.org/warrioraudio",
     "https://www.bhchabad.org/past-courses"
    ],
-   "coverFile": "2019-worrier-to-warrior.jpg"
+   "coverFile": "2019-worrier-to-warrior.jpg",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Paradigm Shift",
@@ -1034,7 +1052,14 @@
    "year": 2019,
    "series": "JLI",
    "description": "Discover the Jewish art of prayer and spirituality in our newest six-session course, whether you’re seeking relief from stress or hoping for focus, clarity, and connection.",
-   "lessons": [],
+   "lessons": [
+    "Awakening Our Deepest Selves",
+    "The Kabbalah of Prayer",
+    "Discovering Nature’s Wonderland",
+    "Toward Transcendence",
+    "Total Surrender",
+    "The Power of the Community"
+   ],
    "cover": "https://static.wixstatic.com/media/b988f4_48ced39e8e1141b4a19e0fe428c49c33~mv2_d_2048_2048_s_2.png",
    "page": "https://www.bhchabad.org/prayer",
    "eventId": null,
@@ -1049,7 +1074,8 @@
     "https://www.bhchabad.org/copy-of-the-jewish-course-of-why-au",
     "https://www.bhchabad.org/past-courses"
    ],
-   "coverFile": "2019-with-all-my-heart.png"
+   "coverFile": "2019-with-all-my-heart.png",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Crime and Consequence",
@@ -1057,7 +1083,14 @@
    "year": 2019,
    "series": "JLI",
    "description": "In Crime and Consequence, we explore 3000 years of Jewish law and wisdom concerning criminal convictions, sentencing, and rehabilitation.",
-   "lessons": [],
+   "lessons": [
+    "Lock and Key: What’s the Point of Prison?",
+    "Judge, Jewry, and Execution: Judaism and the Death Penalty",
+    "Justice, Justice Shall You Pursue: Standards of Evidence in the Talmud",
+    "Clean Slate: How Do Criminals Make Amends?",
+    "Moving Forward: Reacceptance and the Criminal Background Check",
+    "An Ounce of Prevention: Addressing Crime Before It Happens"
+   ],
    "cover": "https://static.wixstatic.com/media/b988f4_02994eaafecc4c9b80b1672c0fd3ddf4~mv2.png",
    "page": "https://www.bhchabad.org/crime",
    "eventId": null,
@@ -1072,7 +1105,8 @@
     "https://www.bhchabad.org/crimeaudio",
     "https://www.bhchabad.org/past-courses"
    ],
-   "coverFile": "2019-crime-and-consequence.png"
+   "coverFile": "2019-crime-and-consequence.png",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Wrestling with Faith",
@@ -1080,7 +1114,14 @@
    "year": 2018,
    "series": "JLI",
    "description": "Where is the evidence for G-d? Tackling the biggest questions and challenges to faith, from Jewish practice to science and religion.",
-   "lessons": [],
+   "lessons": [
+    "I Have Trouble Believing in G-d",
+    "Does G-d Really Care?",
+    "Jewish Beliefs Seem Primitive",
+    "A Good G-d Who Does Bad Stuff",
+    "Are Religion and Science at Odds?",
+    "How Can I Relate to a G-d I Cannot See?"
+   ],
    "cover": "https://static.wixstatic.com/media/b988f4_e3043ee18cea43d4a8f1fa32b9f1c4e5~mv2.jpg",
    "page": "https://www.bhchabad.org/faith",
    "eventId": null,
@@ -1090,7 +1131,8 @@
     "https://www.bhchabad.org/past-courses",
     "https://www.bhchabad.org/jliaudio"
    ],
-   "coverFile": "2018-wrestling-with-faith.jpg"
+   "coverFile": "2018-wrestling-with-faith.jpg",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Heaven on Earth",
@@ -1116,7 +1158,14 @@
    "year": 2018,
    "series": "JLI",
    "description": "Rethink everything you know about our universe. Jewish mysticism on the building blocks of existence and the human condition.",
-   "lessons": [],
+   "lessons": [
+    "Is the World Real?",
+    "Is Time Travel Possible?",
+    "Why Does Evil Exist?",
+    "Who Is G-d?",
+    "What Is Consciousness?",
+    "Are We Bound by Fate?"
+   ],
    "cover": "https://static.wixstatic.com/media/b988f4_c0df8bb6c4db4bf7abd19e2c288fde2c~mv2.png",
    "page": "https://www.bhchabad.org/whatis",
    "eventId": null,
@@ -1131,7 +1180,8 @@
     "https://www.bhchabad.org/whatisaudio",
     "https://www.bhchabad.org/past-courses"
    ],
-   "coverFile": "2018-what-is.png"
+   "coverFile": "2018-what-is.png",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Communication: Its Art and Soul",
@@ -1139,7 +1189,14 @@
    "year": 2018,
    "series": "JLI",
    "description": "In the era of social media, the value of healthy communication among family members and associates is widely recognized. Reclaim the lost art of human connection.",
-   "lessons": [],
+   "lessons": [
+    "The Essence of Communication",
+    "Opening Up to New Perspectives",
+    "If Sticks and Stones Can Break Bones, Words Are Atom Bombs",
+    "Context Matters",
+    "Influence",
+    "Conflict Resolution"
+   ],
    "cover": "https://static.wixstatic.com/media/b988f4_e3a588bef41741df942a0141eb14166a~mv2_d_2048_2048_s_2.png",
    "page": "https://www.bhchabad.org/communication",
    "eventId": null,
@@ -1149,7 +1206,8 @@
     "https://www.bhchabad.org/past-courses",
     "https://www.bhchabad.org/jliaudio"
    ],
-   "coverFile": "2018-communication-its-art-and-soul.png"
+   "coverFile": "2018-communication-its-art-and-soul.png",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   },
   {
    "title": "Great Debates in Jewish History",
@@ -1177,7 +1235,8 @@
     "https://www.bhchabad.org/past-courses"
    ],
    "dates": "6 Monday evenings, Oct 30 - Dec 4, 2017, at Bloomfield Hills High School",
-   "coverFile": "2017-great-debates-in-jewish-history.png"
+   "coverFile": "2017-great-debates-in-jewish-history.png",
+   "coverSource": "JLI Resource Library (Facebook event art)"
   }
  ],
  "channels": {
