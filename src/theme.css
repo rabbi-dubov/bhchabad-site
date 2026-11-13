@@ -1476,23 +1476,20 @@ html body.cco_body .cc-split .cc-info { margin: 24px 0 28px; padding: 20px 22px;
 }
 
 /* ---------- TANYA PROJECT BOX ----------
-   Any box about the Chabad.org Tanya Project (labs.chabad.org/tanya) takes that project's own look, so readers
-   recognise it: indigo night gradient, cyan small-caps label, Crimson Pro serif, a white pill button and the book.
-   Markup: div.cc-card.cc-tanya-project > div.cc-tanya-project__text (eyebrow, h3, p, .cc-hero__ctas) + div.cc-tanya-project__book > img.
-   Fonts (Crimson Pro, Rosario) are loaded by theme.js only when such a box is on the page. */
-html body.cco_body .cc-card.cc-tanya-project { display: flex; align-items: center; gap: 28px; background: #141A3C radial-gradient(130% 120% at 70% 44%, #2B3675 0%, #20295C 52%, #141A3C 100%); border-color: #141A3C; color: #FFFFFF; overflow: hidden; }
+   Any box about the Chabad.org Tanya Project (labs.chabad.org/tanya) wears that project's colours (light blue, royal blue,
+   navy) so readers recognise it, with the site's own fonts, spacing and buttons (Levi, Nov 12: colours only, light blue).
+   Markup: div.cc-card.cc-tanya-project > div.cc-tanya-project__text (eyebrow, h3, p, .cc-hero__ctas) + div.cc-tanya-project__book > img. */
+html body.cco_body .cc-card.cc-tanya-project { display: flex; align-items: center; gap: 28px; background: #EAEEF6; border-color: #D3DCEC; }
 html body.cco_body .cc-tanya-project__text { flex: 1 1 auto; min-width: 0; }
-html body.cco_body .cc-tanya-project__book { flex: 0 0 128px; }
-html body.cco_body .cc-tanya-project__book img { display: block; width: 100%; height: auto; filter: drop-shadow(0 14px 20px rgba(0, 0, 0, .45)); }
-html body.cco_body .cc-card.cc-tanya-project .cc-eyebrow { font-family: "Rosario", system-ui, sans-serif !important; font-size: 11px; font-weight: 600; letter-spacing: .14em; color: #5BB7E8 !important; }
-html body.cco_body .cc-card.cc-tanya-project h3.cc-head { font-family: "Crimson Pro", Georgia, serif !important; font-weight: 600; font-size: 30px !important; line-height: 1.1; color: #FFFFFF; }
-html body.cco_body .cc-card.cc-tanya-project p:not(.cc-eyebrow) { font-family: "Crimson Pro", Georgia, serif !important; font-size: 18px; line-height: 1.5; color: rgba(255, 255, 255, .85) !important; }
-html body.cco_body .cc-card.cc-tanya-project .cc-btn { background: #FFFFFF !important; color: #1B2A4A !important; border: 1.5px solid #FFFFFF !important; border-radius: 999px !important; font-family: "Rosario", system-ui, sans-serif !important; font-weight: 600; padding: 10px 22px; }
-html body.cco_body .cc-card.cc-tanya-project .cc-btn:hover, html body.cco_body .cc-card.cc-tanya-project .cc-btn:focus-visible { background: #E8EDF4 !important; border-color: #E8EDF4 !important; }
+html body.cco_body .cc-tanya-project__book { flex: 0 0 120px; }
+html body.cco_body .cc-tanya-project__book img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 14px rgba(27, 42, 74, .28)); }
+html body.cco_body .cc-card.cc-tanya-project .cc-eyebrow { color: #005598 !important; }
+html body.cco_body .cc-card.cc-tanya-project h3 { color: #1B2A4A; }
+html body.cco_body .cc-card.cc-tanya-project .cc-btn { color: #005598 !important; border-color: #005598 !important; }
+html body.cco_body .cc-card.cc-tanya-project .cc-btn:hover, html body.cco_body .cc-card.cc-tanya-project .cc-btn:focus-visible { background: #DCE2F0 !important; }
 @media (max-width: 760px) {
   html body.cco_body .cc-card.cc-tanya-project { flex-direction: column; align-items: flex-start; gap: 20px; }
-  html body.cco_body .cc-tanya-project__book { order: -1; flex-basis: auto; width: 112px; }
-  html body.cco_body .cc-card.cc-tanya-project h3.cc-head { font-size: 26px !important; }
+  html body.cco_body .cc-tanya-project__book { order: -1; flex-basis: auto; width: 104px; }
 }
 
 /* ---------- DONATE PAGE (ChabadOne donation form, template donate_cdo) ----------

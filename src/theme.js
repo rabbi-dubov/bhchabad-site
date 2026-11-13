@@ -52,8 +52,6 @@
       linkHref: "/tools/feedback.asp"
     },
     quoteFont: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap",
-    // The Chabad.org Tanya Project's own type (labs.chabad.org/tanya), loaded only on pages with a .cc-tanya-project box
-    tanyaProjectFont: "https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Rosario:wght@600&display=swap",
     // Hebrew serif for the homepage B"H, loaded for just those letters
     bhFont: "https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500&text=%D7%91%D7%94%D7%B4&display=swap",
     home: {
@@ -782,11 +780,6 @@
      A ChabadOne web document whose body is one <div class="cc-landing"> (the CSS does the layout).
      Quotes typed as blockquotes inside .cc-quotes become a rotator; a photo strip's single row gets
      the copy that lets it loop. */
-  // Boxes about the Chabad.org Tanya Project wear that project's look; fetch its fonts only where one appears
-  function tanyaProjectBoxes() {
-    if (!CC.tanyaProjectFont || !q(".cc-tanya-project") || q("link[data-cc-tanya-font]")) { return; }
-    d.head.appendChild(h("link", { rel: "stylesheet", href: CC.tanyaProjectFont, "data-cc-tanya-font": "1" }));
-  }
   function landingPage() {
     var root = q(".cc-landing");
     if (!root) { return; }
@@ -883,7 +876,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, tanyaProjectBoxes, registration].forEach(function (fn) {
+    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, registration].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
