@@ -54,13 +54,15 @@ const all = DATA.courses.map(c => {
     ? { thumb: CDN + 'covers-thumb/' + stem + '.webp', full: CDN + 'covers/' + stem + '.jpg' } : null;
   return {
     title: c.title.startsWith('Sinai and Civics') ? 'Sinai and Civics' : c.title,
-    when: women ? `Women's series ${c.season}` : `${season} ${c.year}`,
+    when: (women ? `Women's series ${c.season}` : `${season} ${c.year}`) + (c.status === 'current' ? ' · Now in session' : ''),
     sort: `${c.year}-${SEASON[season] || 4}${women ? 'b' : 'a'}`,
     topic: topicOf(c.title), women, desc: c.description || '', lessons: c.lessons || [], rec: recs[0] || null,
     cover, current: c.status === 'current', id: 'c-' + c.year + '-' + slug(c.title),
   };
 });
-const past = all.filter(c => !c.current).sort((a, b) => (a.sort < b.sort ? 1 : -1));
+// Current courses first (Levi, Nov 13: "have the current course listed here"), then the past ones, newest first.
+const bySort = (a, b) => (a.sort < b.sort ? 1 : -1);
+const past = [...all.filter(c => c.current).sort((a, b) => a.women - b.women || bySort(a, b)), ...all.filter(c => !c.current).sort(bySort)];
 const nWomen = all.filter(c => c.women).length;
 const nRec = past.filter(c => c.rec).length;
 const years = new Date().getFullYear() - Math.min(...DATA.courses.map(c => c.year)); // since 2017: 9 in 2026, as on the Learn page
@@ -121,4 +123,4 @@ ${past.map(card).join('\n')}
 
 fs.mkdirSync(path.join(ROOT, 'pages'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'pages/past-courses-body.html'), body);
-console.log(`ok: ${past.length} past courses, ${all.length} total, ${nWomen} women's series, ${nRec} with recordings, ${past.filter(c => !c.cover).length} without cover, ${past.filter(c => !c.lessons.length).length} without lessons; ${body.length} chars`);
+console.log(`ok: ${past.length} courses on the page, ${all.length} total, ${nWomen} women's series, ${nRec} with recordings, ${past.filter(c => !c.cover).length} without cover, ${past.filter(c => !c.lessons.length).length} without lessons; ${body.length} chars`);
