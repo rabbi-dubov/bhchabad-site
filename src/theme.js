@@ -834,7 +834,12 @@
       function open(card) {
         body.textContent = "";
         var cover = q(".cc-course__cover", card);
-        if (cover) { var fig = cover.cloneNode(true); fig.className = "cc-dialog__cover"; body.appendChild(fig); }
+        if (cover) {
+          var fig = cover.cloneNode(true); fig.className = "cc-dialog__cover";
+          // the pop-up is wide: let a srcset pick its large file, and load it now
+          qa("img", fig).forEach(function (im) { im.removeAttribute("loading"); if (im.getAttribute("srcset")) { im.setAttribute("sizes", "(max-width: 700px) 100vw, 640px"); } });
+          body.appendChild(fig);
+        }
         var when = q(".cc-course__when", card), title = q(".cc-course__title", card), desc = q(".cc-course__desc", card);
         if (when) { body.appendChild(h("p", { "class": "cc-eyebrow", text: txt(when) })); }
         body.appendChild(h("h2", { "class": "cc-h2 cc-head", text: txt(title) }));

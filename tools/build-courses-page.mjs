@@ -8,7 +8,9 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/courses.json'), 'utf8'));
-const CDN = 'https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/data/covers-thumb/';
+// Covers, all 16:9: data/covers-thumb/<stem>.webp (640x360, cards) and data/covers/<stem>.jpg (1280x720, pop-up).
+// Pin to the commit that holds the covers (COVERS_REF=<sha>): @main can serve stale copies for days after a cover changes.
+const CDN = `https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@${process.env.COVERS_REF || 'main'}/data/`;
 const HERO_IMG = '/media/images/1393/wBNe13937531.jpg'; // already in My Images (Learn page "past courses" card)
 const LEARN = '/7581757';
 
@@ -47,8 +49,9 @@ const all = DATA.courses.map(c => {
   const women = c.series === 'RCS';
   const season = /^[A-Z]/.test(c.season) ? c.season.split(' ')[0] : 'Fall';
   const recs = (c.recordings || []).filter(r => REC[r.type]);
-  const cover = c.coverFile && fs.existsSync(path.join(ROOT, 'data/covers-thumb', c.coverFile.replace(/\.\w+$/, '.webp')))
-    ? CDN + c.coverFile.replace(/\.\w+$/, '.webp') : null;
+  const stem = c.coverFile ? c.coverFile.replace(/\.\w+$/, '') : '';
+  const cover = stem && fs.existsSync(path.join(ROOT, 'data/covers-thumb', stem + '.webp')) && fs.existsSync(path.join(ROOT, 'data/covers', stem + '.jpg'))
+    ? { thumb: CDN + 'covers-thumb/' + stem + '.webp', full: CDN + 'covers/' + stem + '.jpg' } : null;
   return {
     title: c.title.startsWith('Sinai and Civics') ? 'Sinai and Civics' : c.title,
     when: women ? `Women's series ${c.season}` : `${season} ${c.year}`,
@@ -60,11 +63,12 @@ const all = DATA.courses.map(c => {
 const past = all.filter(c => !c.current).sort((a, b) => (a.sort < b.sort ? 1 : -1));
 const nWomen = all.filter(c => c.women).length;
 const nRec = past.filter(c => c.rec).length;
+const years = new Date().getFullYear() - Math.min(...DATA.courses.map(c => c.year)); // since 2017: 9 in 2026, as on the Learn page
 
 function card(c) {
   const t = T[c.topic];
-  const tags = ['cc-tag-' + c.topic, c.women ? 'cc-tag-women' : '', c.rec ? 'cc-tag-rec' : ''].filter(Boolean).join(' ');
-  const cover = c.cover ? `<div class="cc-course__cover"><img src="${c.cover}" alt="" loading="lazy" /></div>\n` : '';
+  const tags = ['cc-tag-' + c.topic, c.women ? 'cc-tag-women' : ''].filter(Boolean).join(' ');
+  const cover = c.cover ? `<div class="cc-course__cover"><img src="${c.cover.thumb}" srcset="${c.cover.thumb} 640w, ${c.cover.full} 1280w" sizes="(max-width: 640px) 240px, 320px" alt="" loading="lazy" /></div>\n` : '';
   const link = c.rec ? `<a href="${e(c.rec.url)}" target="_blank" rel="noopener"><span>${REC[c.rec.type]}</span></a>` : ''; // span: ChabadOne's save splits bare link text
   const more = c.lessons.length
     ? `\n<div class="cc-course__more"><p class="cc-dialog__h">${c.lessons.length} lessons</p><ol class="cc-dialog__lessons">${c.lessons.map(l => `<li>${e(l)}</li>`).join('')}</ol></div>` : '';
@@ -76,7 +80,7 @@ ${cover}<p class="cc-course__when">${e(c.when)}</p>
 </div>`;
 }
 
-const chips = [['all', 'All courses'], ...TOPICS.map(([k, l]) => [k, l]), ['women', "Women's series"], ['rec', 'With recordings']]
+const chips = [['all', 'All courses'], ...TOPICS.map(([k, l]) => [k, l]), ['women', "Women's series"]]
   .map(([k, l]) => `<a href="#${k}">${e(l)}</a>`).join('\n');
 
 const body = `<div class="cc-landing">
@@ -89,7 +93,7 @@ const body = `<div class="cc-landing">
 <ul class="cc-stats">
 <li><strong>${all.length}</strong><span>courses taught</span></li>
 <li><strong>${nWomen}</strong><span>women's series</span></li>
-<li><strong>${nRec}</strong><span>with recordings</span></li>
+<li><strong>${years}</strong><span>years of classes</span></li>
 </ul>
 </div>
 <div class="cc-hero__media"><img src="${HERO_IMG}" alt="A class from a past course" /></div>

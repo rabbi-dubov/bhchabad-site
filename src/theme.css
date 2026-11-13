@@ -916,6 +916,8 @@ html body.cco_body .cc-library .cc-chips a {
 html body.cco_body .cc-library .cc-chips a:hover { border-color: var(--cc-primary); }
 html body.cco_body .cc-library .cc-chips a[aria-pressed="true"] { background: var(--cc-ink); border-color: var(--cc-ink); color: var(--cc-white) !important; }
 html body.cco_body .cc-library .cc-course__title a { text-decoration: none !important; }
+/* library covers are all made 16:9, so they fill the frame edge to edge */
+html body.cco_body .cc-library .cc-course__cover img, html body.cco_body .cc-dialog__cover img { object-fit: cover; }
 html body.cco_body .cc-course__more { display: none; }
 html body.cco_body .cc-course__topic::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--topic, var(--cc-primary)); margin-right: 8px; vertical-align: 1px; }
 html body.cco_body .cc-dialog .cc-eyebrow { margin: 0 0 8px; }
