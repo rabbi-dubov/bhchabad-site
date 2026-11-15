@@ -2580,7 +2580,46 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "coverFile": "2018-what-is.png",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "Is the World Real?",
+          "text": [
+            "Everything that we experience, we experience inside our heads, leading to the intriguing question: Maybe there is no existence outside of our minds? But perhaps a more fundamental question would be: What practical difference does it make if the world is real or not?"
+          ]
+        },
+        {
+          "title": "Is Time Travel Possible?",
+          "text": [
+            "Is time the engine that drives the whole of existence, or is it just a product of our subjective experience? If the future is impenetrable, the past irretrievable, and the present moment too fleeting to meaningfully inhabit, what part of our lives can we call our own?"
+          ]
+        },
+        {
+          "title": "Why Does Evil Exist?",
+          "text": [
+            "Why do bad things happen to good people? The question has been asked—and answered—for thousands of years. But even if we understood the purpose of evil, would this make it more palatable and acceptable? Would it aid us in our efforts to defeat evil?"
+          ]
+        },
+        {
+          "title": "Who Is G-d?",
+          "text": [
+            "What are we talking about when we talk about G-d? Is “G-d” just a word we use when we can’t explain something? If G-d cannot be explained or described, does this not render the concept of “belief in G-d” completely meaningless?"
+          ]
+        },
+        {
+          "title": "What Is Consciousness?",
+          "text": [
+            "All injustice and strife, and even personal unhappiness, can be traced to selfishness. Yet self-esteem is essential for a healthy psyche and a productive life. To navigate this paradox, we first need to unravel the mystery of self-awareness: Where does our sense of self come from?"
+          ]
+        },
+        {
+          "title": "Are We Bound by Fate?",
+          "text": [
+            "If G-d already knows what we will do tomorrow, is our “free choice” nothing more than an illusion? And with so many powerful influences outside of our control—or even our awareness—influencing our choices, how “free” could they possibly be?"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, what-is_ministe.html"
     },
     {
       "title": "Communication: Its Art and Soul",
