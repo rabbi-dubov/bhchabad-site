@@ -148,7 +148,7 @@
       "series": "JLI",
       "description": "Timed to the 250th anniversary of the Declaration of Independence, a four-session course on the Jewish ethics, ideas and values that influenced America's founders and still shape American government and society.",
       "lessons": [
-        "The Founders of the Covenant",
+        "The Foundations of the Covenant",
         "The Roots of Equality",
         "In G-d We Trust",
         "The Separation of Powers"
@@ -167,7 +167,34 @@
         "https://anchor.fm/s/ebbbe2fc/podcast/rss"
       ],
       "dates": "Wednesdays July 8 - Aug 5, 2026",
-      "coverFile": "2026-sinai-and-civics-how-jewish-values-helped-shape-am.jpg"
+      "coverFile": "2026-sinai-and-civics-how-jewish-values-helped-shape-am.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Foundations of the Covenant",
+          "text": [
+            "From the Pilgrims on, America’s founders drew inspiration from the Hebrew Bible. America was founded, not by conquest, but by a shared promise—a covenant. See how these factors helped make America the most welcoming nation for Jews in our long Diaspora."
+          ]
+        },
+        {
+          "title": "The Roots of Equality",
+          "text": [
+            "It wasn’t always self-evident that all people are created equal. So why did the founders think it was? Discover the story of this foundational American and Jewish value."
+          ]
+        },
+        {
+          "title": "In G-d We Trust",
+          "text": [
+            "What is “The American Dream”? Discover the surprising story of how a Biblical concept came to shape America’s ideal of equal opportunity and mass prosperity."
+          ]
+        },
+        {
+          "title": "The Separation of Powers",
+          "text": [
+            "Three branches of government. The separation of church and state. See how America’s system parallels the Torah’s ancient division of powers—and how they each understand the role morality plays in the public square."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, SAC HTML Minisite.html"
     },
     {
       "title": "For All Humankind",
@@ -2120,7 +2147,46 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "coverFile": "2020-judaism-s-gifts-to-the-world.jpg",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "The Gift of Social Responsibility",
+          "text": [
+            "To the ancients, poverty and suffering were unfortunate facts of life for the unlucky to bear alone. It was the Torah that introduced the radical concept of social responsibility. So, what’s the true nature of that responsibility? Whose is it? And how should I relate to those receiving my help?"
+          ]
+        },
+        {
+          "title": "The Gift of a Guiding Purpose",
+          "text": [
+            "Abraham, the first Jew, discovered something that shook the foundations of the pagan society around him: there was one—only one—G-d, Creator of Heaven and earth. Monotheism drastically changed the way humanity has viewed life, purpose, and progress ever since. Discover how."
+          ]
+        },
+        {
+          "title": "The Gift of Respect for Life",
+          "text": [
+            "It might seem axiomatic that human life is valuable, but a hard look at history reveals that the concept was once considered utterly radical. To discover how respect for life became a universal value, we’ll explore the underlying questions: What makes us human? And what are we here to do?"
+          ]
+        },
+        {
+          "title": "The Gift of Equality and Individuality",
+          "text": [
+            "Mastery over others was long deemed a birthright: some were born to rule; others to be ruled. Today, civil people agree that no one is intrinsically inferior or superior. This shift is thanks to the Torah’s revelation that we are all equally created in G-d’s image: just as G-d cannot be redundant, no human can be."
+          ]
+        },
+        {
+          "title": "The Gift of Work/Life Balance",
+          "text": [
+            "Originally, those who labored did so endlessly. The Torah introduced us to Shabbat, mandating that Jewish people pause from work for a full day each week to focus on life’s purpose, on worship, and on family. As the modern world begins to recognize the benefits of Shabbat, our call to set aside that time of focus is more critical than ever."
+          ]
+        },
+        {
+          "title": "The Gift of Escaping the Cycle",
+          "text": [
+            "Early societies considered human history locked in an endless cycle of war, conquest, peace, and more war. The Torah insists otherwise: we can, must, and will change the world for the better; war will eventually cease; justice and kindness will ultimately prevail. Today’s world is more eager than ever to hear this empowering message. Our closing lesson will suggest ways we can share it."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, JGW_Minisite-editable.html"
     },
     {
       "title": "Worrier to Warrior",
@@ -2151,7 +2217,46 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "coverFile": "2019-worrier-to-warrior.jpg",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "Achieving Authenticity",
+          "text": [
+            "When praised for a good deed, 70% of people admit to squirming because they feel their act lacked authenticity. In this opening session, discover a place of objective authenticity within yourself that can weather any self-doubt and help you build confidence in your genuine goodness."
+          ]
+        },
+        {
+          "title": "Embracing Flaws",
+          "text": [
+            "Wrestling with feelings of overwhelm, procrastination, or general not-enough-ness? This session explores the seemingly senseless feelings of inadequacy and charts a course to transform them from adversary to ally."
+          ]
+        },
+        {
+          "title": "Rethinking Regret",
+          "text": [
+            "We all slip, and it’s natural to feel some regret or guilt when we do. But can we focus on past actions without becoming paralyzed by bad feelings? In Lesson 3, we’ll challenge the negativity associated with regret, finding a catalyst for remarkable growth where it’s least expected."
+          ]
+        },
+        {
+          "title": "Peering Through Pain",
+          "text": [
+            "An optimistic attitude is a noble goal, but the sincere, burning flames of sadness, suffering, or loss can be incredibly difficult to douse. This session embraces the validity of pain while sensitively enhancing our internal perspectives to let the sun peek through despite the reality of our suffering."
+          ]
+        },
+        {
+          "title": "Living Joyfully",
+          "text": [
+            "Things are fine—you've got what you need in health, finances, and relationships. But is “feeling fine” the same as feeling truly, energetically happy? By looking at common patterns in chasing inner contentment, Lesson 5 helps us pave a new path to more dependably enthusiastic living."
+          ]
+        },
+        {
+          "title": "Refreshing Relationships",
+          "text": [
+            "Without a doubt, healthy relationships are key to positive emotions, but they are so much easier said than done. This session explores the triumphs and dysfunctions of human relationships, formulating a steady approach to allowing yours to flourish despite inherent strains."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, W2W-Minisite.html"
     },
     {
       "title": "Paradigm Shift",
@@ -2252,7 +2357,46 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "coverFile": "2019-with-all-my-heart.png",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "Awakening Our Deepest Selves",
+          "text": [
+            "Prayer is not a ritual; it is a contemplative tool that helps us balance urgent or bodily matters with what's meaningful and important. It tunes us in to our deepest beliefs and feeling, giving them expression in our immediate lives."
+          ]
+        },
+        {
+          "title": "The Kabbalah of Prayer",
+          "text": [
+            "What's the secret behind prayer's mystical power? How does it affect the flow of cosmic energy? Can it alter the Divine will? Learn how to engage in this endeavor more effectively, and how to regard your most important wishes as part of your relationship with the Creator."
+          ]
+        },
+        {
+          "title": "Discovering Nature’s Wonderland",
+          "text": [
+            "Guided meditations in prayer transport us from a place of natural indifference to an awestruck, vivid awareness with heartfelt marveling at the rich spiritual meaning in our surroundings."
+          ]
+        },
+        {
+          "title": "Toward Transcendence",
+          "text": [
+            "Moving from the manifest to the transcendent, our meditative journey brings us to realize how, in the grand scheme, we are but negligible dots. Yet, despite our tininess, we serve as agents in a mission of infinite import."
+          ]
+        },
+        {
+          "title": "Total Surrender",
+          "text": [
+            "At the pinnacle of inspiration and intimacy with the Creator, what comes next? More inspiration? No. Letting go. When the ego loses its sense of identity and is absorbed in its greater purpose, it is, paradoxically, best suited to appeal for its needs."
+          ]
+        },
+        {
+          "title": "The Power of the Community",
+          "text": [
+            "Is there a way to bring the exhilarating passion of a secluded hilltop meditation into a synagogue, when praying with a group and prayer book? We explore practical tips for synchronizing a heartfelt spiritual journey with a communal synagogue experience."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, WAMH_Minisite_multi_option.html"
     },
     {
       "title": "Crime and Consequence",
@@ -2283,7 +2427,46 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "coverFile": "2019-crime-and-consequence.png",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "Lock and Key: What’s the Point of Prison?",
+          "text": [
+            "A quick glance at the statistics suggests an uncomfortable truth: modern-day societies imprison people at a rate unparalleled, and indeed unimaginable, in past times. Why is this so? Why do we lock people up, and what do we hope to achieve by doing so? Does the purpose of prison always outweigh the cons of conviction? This lesson considers and contrasts secular and Talmudic theories of criminal justice, before suggesting how to ensure a more just justice system."
+          ]
+        },
+        {
+          "title": "Judge, Jewry, and Execution: Judaism and the Death Penalty",
+          "text": [
+            "Some crimes are irreversible. Everyone makes mistakes. Taken together, these two propositions suggest both the imperative and impediment for the death penalty and point to its central paradox. Can man have the authority to sentence another man to death? How should we respond to the most serious crimes?"
+          ]
+        },
+        {
+          "title": "Justice, Justice Shall You Pursue: Standards of Evidence in the Talmud",
+          "text": [
+            "Justice may be blind, but judges and juries must be clear-sighted. This lesson explores the concept of evidentiary standards as it arises in several overlapping areas of Talmudic and secular law: How can we assess the truth of testimony? Does every criminal confession pass muster, or are some inadmissible? When can informants be considered credible?"
+          ]
+        },
+        {
+          "title": "Clean Slate: How Do Criminals Make Amends?",
+          "text": [
+            "What is the ultimate aim of the criminal justice system? If society seeks restitution for crimes and rehabilitation for criminals, it needs a better plan. It must consider what rehabilitation looks like, for which offenders and offenses it is applicable, and how to ensure sentencing contributes to this end. This class examines the extensive, systematic program of repentance laid out in the Talmud and considers what insights this process holds for the above questions and present-day criminal rehabilitation. Finally, we look at sentencing programs that incorporate some of these elements in their pursuit of real rehabilitative justice."
+          ]
+        },
+        {
+          "title": "Moving Forward: Reacceptance and the Criminal Background Check",
+          "text": [
+            "All of your deeds are recorded in a book: so declares the Rosh Hashanah liturgy, and so it is within the contemporary criminal justice system. Every year, hundreds of thousands of Americans are released from prison and seek to rejoin society, but many are stymied by the public availability of their criminal records. Is it possible to find a balance between the needs of society, prospective employers, and ex-offenders? After surveying the contemporary situation, this class looks for answers in the paradigms of Jewish law."
+          ]
+        },
+        {
+          "title": "An Ounce of Prevention: Addressing Crime Before It Happens",
+          "text": [
+            "The best way to improve the criminal justice system is by keeping people out of it. But before any attempt to prevent crime can be made, its causes and preconditions must be better understood. Judaism has long recognized the role of societal factors in the commission of crime: poverty and unemployment are significant, as are education, values, and personal character. This final lesson discusses the roots of criminality, several specific preventative policy proposals, and the various concerns associated with them."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, CAC_minisite-chabadone.html"
     },
     {
       "title": "Wrestling with Faith",
@@ -2309,7 +2492,46 @@
         "https://www.bhchabad.org/jliaudio"
       ],
       "coverFile": "2018-wrestling-with-faith.jpg",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "I Have Trouble Believing in G-d",
+          "text": [
+            "There are many things about G-d that bother me—for starters, what is G-d? Besides, I can live perfectly well without Him: Why do I need Him in my life?"
+          ]
+        },
+        {
+          "title": "Does G-d Really Care?",
+          "text": [
+            "Many Jewish observances seem petty and burdensome, and they interfere with the way we choose to run our lives. Why can’t G-d just leave me alone?"
+          ]
+        },
+        {
+          "title": "Jewish Beliefs Seem Primitive",
+          "text": [
+            "G-d seems to espouse outdated beliefs such as the notions of a “chosen nation” and designated gender roles. Plus, He interferes with our choice of lifestyle."
+          ]
+        },
+        {
+          "title": "A Good G-d Who Does Bad Stuff",
+          "text": [
+            "How can we understand and relate to G-d’s intimate and caring presence in our lives amid the experience of suffering and tragedy?"
+          ]
+        },
+        {
+          "title": "Are Religion and Science at Odds?",
+          "text": [
+            "How might a scientific person embrace beliefs that cannot be proven in a lab, or reconcile compelling evidence for the theory of evolution and the age of the universe with a literal reading of the Bible?"
+          ]
+        },
+        {
+          "title": "How Can I Relate to a G-d I Cannot See?",
+          "text": [
+            "Can a finite human have an intimate relationship with an infinite G-d? If it is indeed possible, where do I start?"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, WWF_minisite.html"
     },
     {
       "title": "Heaven on Earth",
@@ -2384,7 +2606,46 @@
         "https://www.bhchabad.org/jliaudio"
       ],
       "coverFile": "2018-communication-its-art-and-soul.png",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "The Essence of Communication",
+          "text": [
+            "What is communication? It’s not speech, it’s not a language, it’s not even words. Explore the pros and cons of new digital forms of communication, exploring mystical anthropomorphic references to human communication to get to the essence of what communication is all about, why it is the stuff relationships are made of, and what your communication style reveals about you as a person."
+          ]
+        },
+        {
+          "title": "Opening Up to New Perspectives",
+          "text": [
+            "Communication advice is so often about learning how to listen. Why is it so hard to listen to others? And what do we gain from listening? Is it merely a mutually beneficial arrangement—I’ll listen to you, if you listen to me? Or is there more to be gained from opening ourselves up to new perspectives—viewpoints we may never have considered had we not opened ourselves up to truly listen to others?"
+          ]
+        },
+        {
+          "title": "If Sticks and Stones Can Break Bones, Words Are Atom Bombs",
+          "text": [
+            "What makes silence golden? Why are well-timed words so powerfully constructive, whereas ill-timed words are so fatally destructive? What makes words so powerful? This lesson considers how our words impact people’s impressions of us, as well as our emotions and reality, and how we can learn to unleash the power of words more discerningly."
+          ]
+        },
+        {
+          "title": "Context Matters",
+          "text": [
+            "The simplest messages are often misconstrued in ways we could never predict. Constructing a clear argument is important, but peripherals such as tone, body language, and context can ruin our message, making it sound like static noise, or worse. How do we ensure the listener’s takeaway is the same as the one we intended to communicate?"
+          ]
+        },
+        {
+          "title": "Influence",
+          "text": [
+            "Communication is the tool of great leaders and a powerful way to influence. Is communication meant for self-expression, or do we carry a responsibility to utilize its power to influence others? How do we know when to share, and when to keep to ourselves? And how do we determine when we are being influential, and when we are just projecting our insecurities onto others?"
+          ]
+        },
+        {
+          "title": "Conflict Resolution",
+          "text": [
+            "Surprisingly, conflict isn’t always a bad thing. In adversarial collaboration, conflict broadens horizons to reveal more profound truths. What can we learn from the argumentative style of Talmud study, to shift from an ego-driven, win-lose mentality to one in which all parties are winners? And how can we engage in healthy conflict—and resolution—for the betterment of society?"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI Resource Library, Communication course minisite"
     },
     {
       "title": "Great Debates in Jewish History",
