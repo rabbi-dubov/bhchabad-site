@@ -1399,12 +1399,12 @@
       "series": "JLI",
       "description": "One fateful week in June 1967 redrew the map of the Middle East. A course on the Six-Day War and Israel today that confronts the impossible yet important questions our nation faces from a unique Jewish perspective.",
       "lessons": [
-        "Jewish Homeland",
-        "Anti-Israel Sentiment",
-        "Preemptive Strikes",
-        "Civilian Casualties",
-        "Captured Territories",
-        "Land for Peace"
+        "Our Connection to the Land",
+        "If and When to Strike",
+        "Jerusalem of Gold",
+        "Familiar Territory",
+        "Responses to the War",
+        "Israel and the Nations"
       ],
       "cover": "https://static.wixstatic.com/media/ced623_788e44edca8a42339a86e72df6e2d389~mv2.png",
       "page": "https://www.bhchabad.org/survival",
@@ -1420,7 +1420,62 @@
         "https://www.bhchabad.org/survival-recordings"
       ],
       "dates": "From Wed July 20 / Thu July 21, 2022",
-      "coverFile": "2022-survival-of-a-nation.png"
+      "coverFile": "2022-survival-of-a-nation.png",
+      "courseHighlights": [
+        "Jewish Homeland",
+        "Anti-Israel Sentiment",
+        "Preemptive Strikes",
+        "Civilian Casualties",
+        "Captured Territories",
+        "Land for Peace"
+      ],
+      "lessonDetails": [
+        {
+          "title": "Our Connection to the Land",
+          "text": [
+            "The stated goal of Egyptian President Nasser was the utter annihilation of Israel. He and many others in the Arab world insisted that Israel had no right to exist, and that Israel's Jewish inhabitants were occupying lands stolen from Arabs.",
+            "What is Israel's right to exist? The last Jewish state existed in the region some two millennia ago, and although Jews throughout the ages have yearned to return to their Holy Land, what is the strong association between a particular territory and Judaism—a religion of beliefs and ideas? This lesson explores why Israel is important to Jews today, addressing this topic from both the religious as well as pragmatic perspectives."
+          ]
+        },
+        {
+          "title": "If and When to Strike",
+          "text": [
+            "Israel faced immense international pressure in advance of the war, and it received worldwide censure in its wake. What are the ethics of preemptive strikes? What are the Jewish perspectives on starting a war, and when is war sanctioned or required? To what extent should we recognize political considerations—or should we only consider military ones—as a factor in such decisions?",
+            "Israel faces similar deliberations today as it did in 1967. It faces a host of mortal threats, from Iran, Hezbollah, Hamas, and others. This lesson provides Jewish perspectives on preemptive strikes, and delves into a variety of ethical war-related deliberations, such as collateral damage."
+          ]
+        },
+        {
+          "title": "Jerusalem of Gold",
+          "text": [
+            "A consequence of the Six-Day War was Israel's acquisition of the Old City of Jerusalem, including the Temple Mount and the Western Wall. Jerusalem is of immense historical, cultural, and spiritual import. According to historians, Israel had no intention or even interest in capturing Jerusalem, due to its political sensitivity, until the realities of war resulted in a change of plan. The global Jewish spiritual awakening that followed the war was largely triggered by the reclamation of Judaism's holiest site.",
+            "This lesson discusses the history and significance of Jerusalem, along with the controversy surrounding its disputed status as Israel's capital. The lesson examines the Temple Mount and the Western Wall, and the allure it holds for its millions of annual visitors."
+          ]
+        },
+        {
+          "title": "Familiar Territory",
+          "text": [
+            "Israel's victory in the Six-Day War led to the conquering of the Sinai Peninsula, Gaza, the Golan Heights, and Judea and Samaria.",
+            "Immediately following the war, the Israeli cabinet approved offering all the territories won in battle back to Egypt and Syria in exchange for peace. Abba Eban famously wrote, \"This is the first war in history which has ended with the victors suing for peace, and the vanquished calling for unconditional surrender.\" The original Israeli overture was met with rejection, and numerous subsequent attempts at \"land for peace\" have yet to resolve this thorny issue. This has recently given rise to the global BDS movement that seeks to use diplomatic and financial means to pressure Israel to come to the negotiating table.",
+            "This lesson discusses contemporary Jewish perspectives on these territories: Should Israel hold on to them regardless of the cost? Is there a way to trade land to achieve a lasting and sustainable peace? The lesson also discusses the related theme of displaced Palestinian refugees who seek to return to their ancestral homes."
+          ]
+        },
+        {
+          "title": "Responses to the War",
+          "text": [
+            "The Six-Day War had a profound and instant impact on Jews around the world. The remarkable victory raised the morale of Soviet Jewry and brought a surge of pride to Jewish America. Many Jews immigrated to Israel, while countless others experienced a spiritual reawakening.",
+            "Eventually, the dust settled to reveal extreme diversity in perspective and reaction to the war. Some saw it as a miracle of biblical proportions; for others, it was a chain of fortuitous events. Some experienced relief, while others were plagued by guilt. It was an act of Satan in the eyes of extreme anti-Zionist religious groups, but the beginning of the realization of the messianic dream in the view of religious Zionists.",
+            "This lesson explores the varied responses to the war and the manner in which these perspectives continue to influence Israel's political process as well as its relationship with the Diaspora."
+          ]
+        },
+        {
+          "title": "Israel and the Nations",
+          "text": [
+            "One of Israel's largest dilemmas—even before the Six-Day War, but especially in its aftermath—is its stance toward an often-hostile international community. Israel receives almost constant coverage in international media and foreign forums, greatly disproportionate to its geographical and population size, and the majority of this coverage is uncomplimentary. This lesson explores the roots of anti-Zionism and antisemitism and examines various means of countering these phenomena.",
+            "This lesson also surveys Israel's impressive contributions to humanity in the areas of human rights, technological and scientific advancements, and ethical and moral standards."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "JLI course syllabus for Survival of a Nation (2017 PDF, posted on another Chabad center's site)"
     },
     {
       "title": "Beyond Right",
@@ -2116,7 +2171,60 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "dates": "16 lessons, twice a week, March 23 to May 22, 2020, on Zoom",
-      "coverFile": "2020-the-jewish-course-of-why.jpg"
+      "coverFile": "2020-the-jewish-course-of-why.jpg",
+      "questions": [
+        "Why ask “Why”? Isn’t Judaism a belief system?",
+        "Why are there no miracles today of biblical proportions?",
+        "Why do we pray? Doesn’t G-d know what He is doing? Can we really affect His will?",
+        "Why is there so much fragmentation in Jewish practice?",
+        "Why have the Jews survived millennia while so many other civilizations have vanished?",
+        "Why don’t Jews accept the Christian messiah?",
+        "Why do we kindle yahrtzeit candles to commemorate the dead?",
+        "Why is the Star of David a Jewish symbol?",
+        "Why does a mikveh “purify”?",
+        "Why do people require “purification”?",
+        "Why are there so many dos and don’ts in Judaism?",
+        "Why do many Jews sway when they pray?",
+        "Why do traditional synagogues have separate seating for men and women?",
+        "Why is Israel important to the Jews?",
+        "Why does the Bible call for animal sacrifices?",
+        "Why are there so many Jews in Hollywood?",
+        "Why do we believe that Jews cannot convert out of Judaism?",
+        "Why did our ancestors continue to identify as Jews despite being victims of so much suffering through the ages?",
+        "Why does a mourner recite Kaddish?",
+        "Why do Jews place pebbles on headstones?",
+        "Why is it not customary to leave flowers at the grave?",
+        "Why does Jewish law exempt women from certain ritual obligations that are obligatory for men?",
+        "Why are ten men required for a minyan?",
+        "Why doesn’t G-d respond to my requests?",
+        "Why does G-d give us negative, even harmful inclinations?",
+        "Why doesn’t Judaism seek converts?",
+        "Why does the Torah say that the Jews are the “chosen people”? Isn’t that racist?",
+        "Why do we believe that we have free choice if G-d always knew how we would choose?",
+        "Why does the Torah permit slavery?",
+        "Why does Jewish law obsess over details?",
+        "Why is it permitted to have sexual relations on Shabbat?",
+        "Why does the Bible refer to sexual relations as “knowing”?",
+        "Why aren’t vegan foods and restaurants Kosher by default?",
+        "Why do we say lechayim as a drinking salutation?",
+        "Why are the Jewish holidays always “late” or “early”?",
+        "Why do we say Mazal Tov?",
+        "Why do Jews eat gefilte fish on Shabbat?",
+        "Why do Jews eat cholent on Shabbat?",
+        "Why is a G-d-fearing person praiseworthy? Isn’t fear a negative emotion? Why isn’t love enough?",
+        "Why does Jewish law recognize matrilineal descent as the deciding factor for Jewish identity?",
+        "Why do some Jews wear old-fashioned clothes?",
+        "Why would the Torah state, “Do not cook a kid in its mother’s milk” if the intention—according to the Talmud—is a broader prohibition?",
+        "Why are eggs pareve, though the birds that lay the eggs are fleishig?",
+        "Why have the Jews been singled out for persecution and hate throughout history?",
+        "Why does Jewish adulthood begin at age twelve for girls and thirteen for boys?",
+        "Why do we pour a cup of wine for Elijah at the Passover seder?",
+        "Why is it not forbidden to submit petitions of prayer to a righteous person? Isn’t it true that Judaism forbids using intermediaries to access G-d?",
+        "Why do Chasidim think it is necessary to have a rebbe? Isn’t it true that Jews do not require intermediaries to access G-d?",
+        "Why is Moses’ name absent from the Haggadah?",
+        "Why does Judaism associate so many of its celebrations with food?"
+      ],
+      "questionsSource": "Levi's old Wix page bhchabad.org/why"
     },
     {
       "title": "Judaism's Gifts to the World",

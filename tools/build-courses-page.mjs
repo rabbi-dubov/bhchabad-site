@@ -56,7 +56,7 @@ const all = DATA.courses.map(c => {
     title: c.title.startsWith('Sinai and Civics') ? 'Sinai and Civics' : c.title,
     when: (women ? `Women's series ${c.season}` : `${season} ${c.year}`) + (c.status === 'current' ? ' · Now in session' : ''),
     sort: `${c.year}-${SEASON[season] || 4}${women ? 'b' : 'a'}`,
-    topic: topicOf(c.title), women, desc: c.description || '', lessons: c.lessons || [], details: c.lessonDetails || null, rec: recs[0] || null,
+    topic: topicOf(c.title), women, desc: c.description || '', lessons: c.lessons || [], details: c.lessonDetails || null, questions: c.questions || null, rec: recs[0] || null,
     cover, current: c.status === 'current', id: 'c-' + c.year + '-' + slug(c.title),
   };
 });
@@ -75,12 +75,14 @@ function card(c) {
   // Lessons: full descriptions where we have them (Levi, Nov 14: one-liners are too vague), else titles.
   // Each lesson is block markup (div/p), so ChabadOne's span and link splitting can't touch it.
   const det = c.details && c.details.some(l => l.text.length) ? c.details : null;
+  // Jewish Course of Why: its lessons were sets of questions, so the pop-up lists the 50 questions (Levi, Nov 14).
+  const qs = !det && c.questions && c.questions.length ? c.questions : null;
   const items = det
     ? det.map(l => `<li><p class="cc-lesson__title">${e(l.title)}</p>${l.text.map(t => `<p class="cc-lesson__text">${e(t)}</p>`).join('')}</li>`).join('')
-    : c.lessons.map(l => `<li>${e(l)}</li>`).join('');
-  const n = det ? det.length : c.lessons.length;
+    : (qs || c.lessons).map(l => `<li>${e(l)}</li>`).join('');
+  const n = det ? det.length : qs ? qs.length : c.lessons.length;
   const more = n
-    ? `\n<div class="cc-course__more"><p class="cc-dialog__h">${n} lessons</p><ol class="cc-dialog__lessons${det ? ' cc-dialog__lessons--full' : ''}">${items}</ol></div>` : '';
+    ? `\n<div class="cc-course__more"><p class="cc-dialog__h">${n} ${qs ? 'questions' : 'lessons'}</p><ol class="cc-dialog__lessons${det ? ' cc-dialog__lessons--full' : ''}">${items}</ol></div>` : '';
   return `<div class="cc-course${c.cover ? ' cc-course--cover' : ''} cc-topic-${t.n} ${tags}" id="${c.id}">
 ${cover}<p class="cc-course__when">${e(c.when)}</p>
 <h3 class="cc-course__title cc-head"><a class="cc-course__open" href="#${c.id}">${e(c.title)}</a></h3>
