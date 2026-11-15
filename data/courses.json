@@ -196,7 +196,34 @@
         "https://anchor.fm/s/ebbbe2fc/podcast/rss"
       ],
       "dates": "4 Wednesdays from Apr 29, 2026",
-      "coverFile": "2026-for-all-humankind.jpg"
+      "coverFile": "2026-for-all-humankind.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Message of Abraham",
+          "text": [
+            "Our universal message isn’t “Be Jewish,” so what is it? See how Judaism’s universal concern began with Abraham and what ethical monotheism means in practice."
+          ]
+        },
+        {
+          "title": "Is Morality Obvious?",
+          "text": [
+            "Can logic create morality? Explore the value of innate human dignity, where it comes from, and the trouble with pinning new sources to a timeless moral principle."
+          ]
+        },
+        {
+          "title": "Educating Children",
+          "text": [
+            "Is raising kids all about career-prep? What should we teach our children at school and at home? See the critical purpose that makes family life so central to Judaism’s universal morality."
+          ]
+        },
+        {
+          "title": "It Will Get Better",
+          "text": [
+            "History is a story of purpose and progress, not endless cycles of doom. See how this makes every moral choice a stepping stone to a harmonious future."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "bhchabad.org/jli (Levi's Wix page)"
     },
     {
       "title": "Captivating Cases of Rabbinic Responsa",
@@ -296,7 +323,52 @@
         "https://www.bhchabad.org/liftyourlife"
       ],
       "dates": "Monthly Tuesdays, Nov 18 (2025) - June 2 (2026)",
-      "coverFile": "2025-lift-your-life.jpg"
+      "coverFile": "2025-lift-your-life.jpg",
+      "lessonDetails": [
+        {
+          "title": "Sublimated Slumber: Harnessing the Secrets of Sleep",
+          "text": [
+            "A fascinating exploration into the need for sleep, the actual shut-eye experience, and the keys to peaceful and effective slumber. Jewish wisdom for refreshing nights and inspiring days."
+          ]
+        },
+        {
+          "title": "Reframing Rage: Dousing Anger and Deflecting Upset",
+          "text": [
+            "Anger is damaging, rage is self-harm. Explore Jewish secrets for deflecting upset, tempering temper, and converting the most exasperating situations into goldmines of growth."
+          ]
+        },
+        {
+          "title": "Art of Eat: Managing Food and Munching for Meaning",
+          "text": [
+            "Meals can be ordeals, filled with anxiety and insecurity; healthy eating habits are hard to maintain. Discover satisfying Jewish wisdoms for managing the munch and sublimating lunch."
+          ]
+        },
+        {
+          "title": "Elated Living: Reaching and Reaping Genuine Joy",
+          "text": [
+            "Jobs, relationships, and health thrive in the sunlight of positivism, but lasting happiness is elusive. Jewish wisdom clarifies the way to cultivating a constantly smiling outlook."
+          ]
+        },
+        {
+          "title": "Lip Syncing: Working Wonders With Words",
+          "text": [
+            "Communication is key to relationships. Words can crush or cure. Discover Jewish methods of using words to reshape reality, reform relationships, unlock potential, and help people shine."
+          ]
+        },
+        {
+          "title": "Living G-d: Logic and Faith in Our Divine Relationship",
+          "text": [
+            "A rationalist studies her way to G-d; a believer feels her way. Judaism provides a beautiful blend of both. Discover a game-changing perspective on faith, a marriage of mind and emotion."
+          ]
+        },
+        {
+          "title": "Divine Image Projection: Freeing and Implementing Our Potential",
+          "text": [
+            "Positive intentions collide with reality. We leap mentally but remain rooted in reality. Jewish wisdom provides a doable strategy to glide uninterrupted from well-meaning to well done."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "bhchabad.org/liftyourlife (Levi's Wix page)"
     },
     {
       "title": "The Kabbalah of Meaning",
