@@ -921,7 +921,15 @@ html body.cco_body .cc-library .cc-course__cover img, html body.cco_body .cc-dia
 html body.cco_body .cc-course__more { display: none; }
 html body.cco_body .cc-course__topic::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--topic, var(--cc-primary)); margin-right: 8px; vertical-align: 1px; }
 html body.cco_body .cc-dialog .cc-eyebrow { margin: 0 0 8px; }
-html body.cco_body .cc-dialog__cta { margin: 8px 0 0; }
+html body.cco_body .cc-dialog__cta { margin: 4px 0 20px; }
+/* full lesson descriptions in the course pop-up */
+html body.cco_body .cc-dialog__lessons--full { padding-left: 24px; }
+html body.cco_body .cc-dialog__lessons--full li { margin: 0 0 18px; padding-left: 4px; }
+html body.cco_body .cc-dialog__lessons--full li::marker { font-weight: 700; color: var(--cc-accent-text); }
+html body.cco_body .cc-lesson__title { margin: 0 0 4px; font-family: var(--cc-font-head) !important; font-size: 20px; line-height: 1.25; color: var(--cc-ink); }
+html body.cco_body .cc-lesson__text { margin: 0 0 8px; font-size: 15px; line-height: 1.6; color: var(--cc-text); }
+/* "Want a course back?" sits above the filters */
+html body.cco_body .cc-library .cc-callout--top { margin: 0 0 32px; }
 html body.cco_body .cc-dialog__cover + .cc-eyebrow { margin-top: 0; }
 html body.cco_body .cc-library .cc-course { scroll-margin-top: 110px; }
 /* ChabadOne's save can split a label into two spans ("Law, ethics and " + "history"): flow them inline, one dot. */

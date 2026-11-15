@@ -56,7 +56,7 @@ const all = DATA.courses.map(c => {
     title: c.title.startsWith('Sinai and Civics') ? 'Sinai and Civics' : c.title,
     when: (women ? `Women's series ${c.season}` : `${season} ${c.year}`) + (c.status === 'current' ? ' · Now in session' : ''),
     sort: `${c.year}-${SEASON[season] || 4}${women ? 'b' : 'a'}`,
-    topic: topicOf(c.title), women, desc: c.description || '', lessons: c.lessons || [], rec: recs[0] || null,
+    topic: topicOf(c.title), women, desc: c.description || '', lessons: c.lessons || [], details: c.lessonDetails || null, rec: recs[0] || null,
     cover, current: c.status === 'current', id: 'c-' + c.year + '-' + slug(c.title),
   };
 });
@@ -72,8 +72,15 @@ function card(c) {
   const tags = ['cc-tag-' + c.topic, c.women ? 'cc-tag-women' : ''].filter(Boolean).join(' ');
   const cover = c.cover ? `<div class="cc-course__cover"><img src="${c.cover.thumb}" srcset="${c.cover.thumb} 640w, ${c.cover.full} 1280w" sizes="(max-width: 640px) 240px, 320px" alt="" loading="lazy" /></div>\n` : '';
   const link = c.rec ? `<a href="${e(c.rec.url)}" target="_blank" rel="noopener"><span>${REC[c.rec.type]}</span></a>` : ''; // span: ChabadOne's save splits bare link text
-  const more = c.lessons.length
-    ? `\n<div class="cc-course__more"><p class="cc-dialog__h">${c.lessons.length} lessons</p><ol class="cc-dialog__lessons">${c.lessons.map(l => `<li>${e(l)}</li>`).join('')}</ol></div>` : '';
+  // Lessons: full descriptions where we have them (Levi, Nov 14: one-liners are too vague), else titles.
+  // Each lesson is block markup (div/p), so ChabadOne's span and link splitting can't touch it.
+  const det = c.details && c.details.some(l => l.text.length) ? c.details : null;
+  const items = det
+    ? det.map(l => `<li><p class="cc-lesson__title">${e(l.title)}</p>${l.text.map(t => `<p class="cc-lesson__text">${e(t)}</p>`).join('')}</li>`).join('')
+    : c.lessons.map(l => `<li>${e(l)}</li>`).join('');
+  const n = det ? det.length : c.lessons.length;
+  const more = n
+    ? `\n<div class="cc-course__more"><p class="cc-dialog__h">${n} lessons</p><ol class="cc-dialog__lessons${det ? ' cc-dialog__lessons--full' : ''}">${items}</ol></div>` : '';
   return `<div class="cc-course${c.cover ? ' cc-course--cover' : ''} cc-topic-${t.n} ${tags}" id="${c.id}">
 ${cover}<p class="cc-course__when">${e(c.when)}</p>
 <h3 class="cc-course__title cc-head"><a class="cc-course__open" href="#${c.id}">${e(c.title)}</a></h3>
@@ -103,6 +110,13 @@ const body = `<div class="cc-landing">
 </div>
 <div class="cc-section cc-section--white cc-library" id="library">
 <div class="cc-wrap">
+<div class="cc-callout cc-callout--top">
+<div>
+<h3 class="cc-head">Want a course back?</h3>
+<p>Is there a past course you loved, or one you missed? Tell Rabbi Levi, and he'll look into offering it again.</p>
+</div>
+<a class="cc-btn" href="mailto:rabbi@bhchabad.org?subject=Bring%20back%20a%20past%20course"><span>Ask Rabbi Levi</span></a>
+</div>
 <div class="cc-chips">
 ${chips}
 </div>

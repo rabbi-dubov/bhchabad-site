@@ -142,7 +142,52 @@
         "https://anchor.fm/s/ebbbe2fc/podcast/rss"
       ],
       "dates": "6 Wednesdays from Jan 28, 2026",
-      "coverFile": "2026-captivating-cases-of-rabbinic-responsa.jpg"
+      "coverFile": "2026-captivating-cases-of-rabbinic-responsa.jpg",
+      "lessonDetails": [
+        {
+          "title": "The people who asked the questions",
+          "text": [
+            "What do these questions reveal about our ancestors? What did they think, feel, and value? Explore five fascinating stories to find out.",
+            "Cases / Barcelona, 1300; Algiers, 1450; Modena, 1530; Spain, 1450; Auschwitz, 1944"
+          ]
+        },
+        {
+          "title": "The quest for facts",
+          "text": [
+            "Do sages make assumptions about how reality works, or do they investigate the facts? Follow rabbis as they conduct five fascinating investigations worldwide.",
+            "Cases / Cairo, 1548; Altona, 1709; Hamburg, 1772; Jerusalem, 1866; Brooklyn, 1958"
+          ]
+        },
+        {
+          "title": "How Judaism stays relevant",
+          "text": [
+            "See inside the process that enables the Torah’s ancient code to guide life in an ever-changing world. Witness the precise process of applying Talmudic precedent.",
+            "Cases / Barcelona, 1300; Valencia, 1380; Pavia, 1478; Berezhany, 1908"
+          ]
+        },
+        {
+          "title": "When the exception is the law",
+          "text": [
+            "Explore four unexpected rulings to uncover the hidden fallback mechanisms within Jewish law: these aren’t exceptions to the law. They’re the law revealing its quiet values (like human dignity and peace in the home).",
+            "Cases / Pavia, 1450; Salonika, 1550; Krakow, 1570; Liozna, 1790"
+          ]
+        },
+        {
+          "title": "Answering the whole person",
+          "text": [
+            "Rules don’t always translate into reality easily. See how sages account for the practical, social, and emotional realities around a question to ensure their ruling leads to its intended outcome.",
+            "Cases / Cairo, 1173; Barcelona, 1300; Lodmir, 1615; Lubavitch, 1871; Brooklyn, 1954; Manchester, 1963"
+          ]
+        },
+        {
+          "title": "Responsa from the future",
+          "text": [
+            "Could Artificial Intelligence decide Jewish law? Is lab-grown meat kosher? See how Jewish law is addressing the questions posed by tomorrow’s cutting-edge technology.",
+            "Cases / Jerusalem, 2003; Maaleh Adumim, 2009; New York, 2015; Beit Shemesh, 2022; worldwide, 2026"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/responsa"
     },
     {
       "title": "Lift Your Life",
@@ -197,7 +242,46 @@
         "https://anchor.fm/s/ebbbe2fc/podcast/rss"
       ],
       "dates": "6 Wednesdays from Oct 29, 2025",
-      "coverFile": "2025-the-kabbalah-of-meaning.jpg"
+      "coverFile": "2025-the-kabbalah-of-meaning.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Meaning We Seek",
+          "text": [
+            "When we have it all, we still need something more: purpose. Discover four fundamental human qualities that provide lasting fulfillment."
+          ]
+        },
+        {
+          "title": "To Make or Not to Make Meaning",
+          "text": [
+            "When life lacks luster, should we invent a more meaningful way of seeing things? Or is there already a purpose hiding in plain sight?"
+          ]
+        },
+        {
+          "title": "Meaning in the Mundane",
+          "text": [
+            "Even if it happens every day, daily life needn’t feel ordinary. See how every part of the day can be as significant as your highest aspirations."
+          ]
+        },
+        {
+          "title": "Meaning in the Rhythms of Time",
+          "text": [
+            "As time flies by, is it just more of the same? Discover the rich texture of Jewish time, and how attuning ourselves to each moment’s message enables profound spiritual purpose."
+          ]
+        },
+        {
+          "title": "Meaning in the Unchosen",
+          "text": [
+            "Some things are clearly meaningful, but what if everything is? Explore a vision of life where every event and circumstance catalyzes growth and leads to greater purpose."
+          ]
+        },
+        {
+          "title": "I Mean Something, Therefore I Am",
+          "text": [
+            "Before you do anything, you are worthy. Discover Judaism’s empowering understanding of your inherent worth as an individual and as a Jew, and how it calls us to even greater achievement."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/meaning"
     },
     {
       "title": "Heaven on Earth",
@@ -241,7 +325,34 @@
         "https://www.bhchabad.org/profiles"
       ],
       "dates": "4 Wednesdays from May 14, 2025",
-      "coverFile": "2025-colorful-profiles.jpg"
+      "coverFile": "2025-colorful-profiles.jpg",
+      "lessonDetails": [
+        {
+          "title": "Courageous Converts",
+          "text": [
+            "A Roman prince outwits his uncle to study Torah, an Italian priest studies his way to a new life, and a Polish noble meets an old Jew studying Talmud on a Paris park bench—see their journey to Judaism and what came next."
+          ]
+        },
+        {
+          "title": "Influential Jews",
+          "text": [
+            "Spain’s top Torah scholar leads a Muslim Army, an Amsterdam rabbi with a printshop talks England into readmitting Jews, and a rabbi teaches a Catholic scholar and saves Central Europe’s Jewish books— how did they integrate Judaism into their influence?"
+          ]
+        },
+        {
+          "title": "Unsung Heroines",
+          "text": [
+            "A businesswoman saves thousands from the Inquisition and rebuilds Jewish life across the Mediterranean, and a female Torah scholar shapes Halachic discourse while raising a family, feeding students, and caring for the sick—see the secret ways women shaped Jewish history."
+          ]
+        },
+        {
+          "title": "Heroes and Hostages",
+          "text": [
+            "Four rabbis are captured by 10th-century pirates, Germany’s foremost Jewish leader is held for ransom, and thousands of East European Jews languish in Ottoman slave markets—how did Jewish communities respond?"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/profiles"
     },
     {
       "title": "Decoding the Talmud",
@@ -270,7 +381,52 @@
         "https://www.bhchabad.org/decodingthetalmud"
       ],
       "dates": "6 Wednesdays from Feb 5, 2025",
-      "coverFile": "2025-decoding-the-talmud.jpg"
+      "coverFile": "2025-decoding-the-talmud.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Jewish People and the Talmud",
+          "text": [
+            "Why Jewish life orbits a book of law",
+            "Jewish law’s ultimate record is the Talmud, but what is Jewish law? Explore its nature, scope, and roots in the written Torah and Oral Law—and see learning’s central role in Jewish practice and culture."
+          ]
+        },
+        {
+          "title": "The Mishnah",
+          "text": [
+            "The origins, authors, and contents of Judaism’s first legal code",
+            "See how Jewish law shifted from oral tradition to written code and encounter the Mishnah’s precise style, tight structure, and tolerance for debate—and its spiritual significance in Jewish life."
+          ]
+        },
+        {
+          "title": "Decrypting the Mishnah",
+          "text": [
+            "How the sages studied, debated, and understood the Mishnah",
+            "Discover the tools, methods, and principles the sages employed in the centuries-long effort to unpack the Mishnah’s full practical implications."
+          ]
+        },
+        {
+          "title": "To Create the Talmud",
+          "text": [
+            "How the sages shaped its structure and substance",
+            "Meet the pivotal sages in the Talmud’s story—from Rav and Shmuel’s first academies to Rav Ashi and Ravina’s final text—and see how they wove in stories as well as ethical and philosophical teachings."
+          ]
+        },
+        {
+          "title": "How the Talmud Thinks",
+          "text": [
+            "A unique method of logic—and why it matters",
+            "Understand the Babylonian Talmud’s rigorous mode of legal reasoning, how it balances dueling principles to arrive at clear legal boundaries, and how its elegant logic fuels deeper learning."
+          ]
+        },
+        {
+          "title": "The Talmud until Today",
+          "text": [
+            "Talmudic literature and fifteen centuries of constant study",
+            "See how and why the Talmud became the core of Jewish law and discover the vast literature of responsa, legal codes, and commentaries that continue the conversation until today."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/decodingthetalmud"
     },
     {
       "title": "A Work of Heart",
@@ -352,7 +508,34 @@
         "https://myjli.com/dof"
       ],
       "dates": "4 Wednesdays from Aug 7, 2024 (page labels it 'Spring 2024 course')",
-      "coverFile": "2024-decisions-of-fate.jpg"
+      "coverFile": "2024-decisions-of-fate.jpg",
+      "lessonDetails": [
+        {
+          "title": "Experimental Treatments",
+          "text": [
+            "When emerging treatments offer hope of recovery, when is the risk justified? Discover the Jewish ethics of risking your life in the hope of extending your long-term prospects."
+          ]
+        },
+        {
+          "title": "Extending Life",
+          "text": [
+            "How does Judaism balance the desire to preserve life with concerns of reducing suffering? See how Jewish values inform a dignified approach to end-of-life care and advance medical directives."
+          ]
+        },
+        {
+          "title": "Pregnancy Questions",
+          "text": [
+            "Explore questions of pregnancy through the lens of Jewish texts. Is a fetus a human life, or a part of the mother’s body? When pregnancy endangers a woman’s life, may she, in good conscience, carry the pregnancy to term?"
+          ]
+        },
+        {
+          "title": "A Body’s Dignity",
+          "text": [
+            "Might autopsy violate the dignity of the human body? Learn the Jewish view on the respect to which the deceased is entitled and how the sanctity of human life continues after death."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/decisions"
     },
     {
       "title": "Read it in Hebrew",
@@ -398,7 +581,46 @@
         "https://www.bhchabad.org/adviceforlife"
       ],
       "dates": "6 Wednesdays from Jan 31, 2024",
-      "coverFile": "2024-advice-for-life.jpg"
+      "coverFile": "2024-advice-for-life.jpg",
+      "lessonDetails": [
+        {
+          "title": "Meaning at Work",
+          "text": [
+            "Earning a living can provide meaning beyond the paycheck. Discover a unique understanding of how work and financial decisions connect to life’s purpose."
+          ]
+        },
+        {
+          "title": "Family Bliss",
+          "text": [
+            "How can we create a warm and healthy home? Uncover a gold mine of clarity on family relationships, domestic harmony, education, and creating a healthy home environment."
+          ]
+        },
+        {
+          "title": "Wholesome Health",
+          "text": [
+            "See how patients, physicians, and professors alike gained guidance on questions of health and treatment. Explore how physical health connects to emotional and spiritual well being."
+          ]
+        },
+        {
+          "title": "Healthy at Heart",
+          "text": [
+            "Discover a surprising and effective approach to overcoming anxiety and cultivating emotional health. See how sidestepping emotional distress to focus on life’s meaningful tasks empowers enduring well-being."
+          ]
+        },
+        {
+          "title": "Above Adversity",
+          "text": [
+            "When buckling under the struggles of health, livelihood, relationships, or raising children, thousands turned to the Rebbe for strength to continue. Discover how seeing the inner meaning of challenges can be the key to managing them."
+          ]
+        },
+        {
+          "title": "Spiritual Heights",
+          "text": [
+            "Discover a unique approach to realizing our most profound potential and achieving real spiritual growth that combines lofty goals with remarkably practical guidance."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/adviceforlife"
     },
     {
       "title": "One Wow Moment",
@@ -452,7 +674,46 @@
         "https://www.bhchabad.org/world"
       ],
       "dates": "6 Wednesdays from Nov 1, 2023",
-      "coverFile": "2023-the-world-of-kabbalah.jpg"
+      "coverFile": "2023-the-world-of-kabbalah.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Evolution of Ego",
+          "text": [
+            "Examine the three spiritual worlds linking G-d’s initial plan to our physical universe and how they correspond to human thought, speech, and action. Plus, see how this insight helps us sidestep rash decisions and implement habits for intentional living."
+          ]
+        },
+        {
+          "title": "The Dawn of Limitation",
+          "text": [
+            "Probe the Divine realm of G-d’s ten sefirot and the corresponding powers of the soul. Discover how knowledge of our soul’s root can clarify individual purpose and provide guidance for maximizing strengths and managing weaknesses."
+          ]
+        },
+        {
+          "title": "The Infinite Light",
+          "text": [
+            "Observe how G-d’s infinite light unites diverse sefirot and how we can replicate this phenomenon to overcome human differences and create harmonious relationships. Plus, see how willpower mirrors infinity and enables us to overcome obstacles."
+          ]
+        },
+        {
+          "title": "The World of Chaos",
+          "text": [
+            "Study the primordial spiritual universe of Tohu, its purpose in creation, and its enduring impact on human nature. Discover the roots of inner moral conflict and the key to harnessing our negative natures to achieve fulfillment."
+          ]
+        },
+        {
+          "title": "The Great Concealment",
+          "text": [
+            "Explore the process of tzimtzum, or how G-d conceals His infinity to create space for our reality. See how this translates into guidance for empowering others and seeking growth potential in life’s darkest moments."
+          ]
+        },
+        {
+          "title": "The Essence of Everything",
+          "text": [
+            "Uncover the reality that precedes everything, the essence of the Divine Self, and the surprising purpose of our physical universe. Learn insights into the human self’s deepest motivation and purpose and our capacity to repair wrongs."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/world"
     },
     {
       "title": "How Happiness Thinks",
@@ -481,7 +742,46 @@
         "https://www.bhchabad.org/happiness"
       ],
       "dates": "6 Wednesdays from July 19, 2023",
-      "coverFile": "2023-how-happiness-thinks.jpg"
+      "coverFile": "2023-how-happiness-thinks.jpg",
+      "lessonDetails": [
+        {
+          "title": "HOW TO FEEL GOOD ABOUT YOURSELF WITHOUT BECOMING SELF-ABSORBED",
+          "text": [
+            "How we think changes the way we feel. What thoughts can you think that will make you feel better about yourself without getting self-absorbed and egomaniacal? How do we strike the perfect balance between maintaining healthy humility while, at the same time, building a positive self-image?"
+          ]
+        },
+        {
+          "title": "HOW TO REMAIN HAPPY THROUGH TIMES OF STRESS",
+          "text": [
+            "The soul is not a recessive gene. With every movement of the body, its innate perfection finds expression. Discovering this for yourself will not only boost your self-esteem and improve your relationships, but will also lead you to demand more of yourself and push your limits to redefine what is possible."
+          ]
+        },
+        {
+          "title": "THE ART OF GRATITUDE: WHY AREN'T WE HAPPY WITH WHAT WE HAVE?",
+          "text": [
+            "We've all been there, seduced by the fantasy that fame, wealth, beauty, genius, or power will bring us happiness. We know that it doesn't work, yet we persist in trying anyway. Why aren't we happy with what we have? How can we master the art of experiencing the goodness of our lives?"
+          ]
+        },
+        {
+          "title": "HOW OUR SHORTCOMINGS CAN BECOME SOURCES OF JOY",
+          "text": [
+            "We all make mistakes. And we all have flaws and deficiencies in our characters. Feeling bad about our failings might be laudable, but it can also drain us of the motivation to improve ourselves. In this lesson, we discover how life's greatest joys can be found in meeting our internal challenges and growing from our mistakes."
+          ]
+        },
+        {
+          "title": "HOW TO COPE THROUGH TIMES OF LOSS",
+          "text": [
+            "Even the happiest life has its times of sadness. Consider a time of loss, when we struggle to accept a new reality that will change our lives forever. What can help us cope through these difficult moments of grief, and bring us back to emotional equilibrium?"
+          ]
+        },
+        {
+          "title": "WHY SPIRITUALITY MAKES US HAPPY",
+          "text": [
+            "The verdict is in. Meaning and spirituality do make us happier. Research has demonstrated it. But why? Imagine that you discovered a treasure so valuable that no one has seen anything like it before. How would it make you feel? Spirituality can help us discover treasures far more valuable than anything money can buy, and in this lesson, we'll learn how."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/happiness"
     },
     {
       "title": "Cultivating Character: Pirkei Avot",
@@ -531,7 +831,34 @@
         "https://www.bhchabad.org/jewpernatural-recording"
       ],
       "dates": "4 Wednesdays from May 3, 2023",
-      "coverFile": "2023-jewpernatural.jpg"
+      "coverFile": "2023-jewpernatural.jpg",
+      "lessonDetails": [
+        {
+          "title": "Dreams & Direction",
+          "text": [
+            "When should we follow our dreams, and when do we say it’s “just a dream”? Let’s explore where inspiration from a lifelike dream can take us. Plus: a time-honored Jewish routine for keeping nightmares at bay."
+          ]
+        },
+        {
+          "title": "Stars & Signs",
+          "text": [
+            "Judaism insists we can always influence our destiny for the better. Yet, the popular “Mazel tov” wish literally means “good astrology”! What role does destiny play in a tradition that believes humans have free choice?"
+          ]
+        },
+        {
+          "title": "Jinx & The Evil Eye",
+          "text": [
+            "Can telling someone about my good fortune make it go bad? Can their jealousy create problems for my success? It may sound superstitious, but in Jewish thought, there’s a logical reason to be concerned about “the Evil Eye,” and there’s a practical way to ward it off."
+          ]
+        },
+        {
+          "title": "Para & Normal",
+          "text": [
+            "Most people believe in some version of a soul. Do souls continue to exist after death? Can they see us? Is there other intelligent life out there in the universe? What are angels and demons, do we believe in them, and how concerned should I be of their presence? In this lesson, we will explore what we know about angels, spirits, and extraterrestrial life for insights into our own soul’s nature."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/jewpernatural"
     },
     {
       "title": "Book Smart",
@@ -561,7 +888,52 @@
         "https://www.bhchabad.org/booksmart-recording"
       ],
       "dates": "6 Wednesdays from Feb 8, 2023",
-      "coverFile": "2023-book-smart.jpg"
+      "coverFile": "2023-book-smart.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Torah",
+          "text": [
+            "We begin by addressing the question, “What is the Torah?” We discover how the whole of Jewish teaching (“the Torah” in its broader meaning) derives from the Chumash (“the Torah” in its narrower meaning). We also discuss the relationship between the “Written Torah” and the “Oral Torah,” and how these two components of Torah constitute a “partnership” of Divine revelation and the human toil of the mind.",
+            "We then introduce the twenty-four books of the Tanach. We explain the differences between Torah, Neviim, and Ketuvim, and review the contents of each. We also see how the roots of the different “genres” of Torah—Midrash, Halachah, Kabbalah, Musar, etc.—are all in the “Written Torah,” as will be further demonstrated in each of the next five lessons."
+          ]
+        },
+        {
+          "title": "The Midrash",
+          "text": [
+            "“Midrash” is both a methodology and a body of literature. In this lesson, we explore both aspects of Midrash. We study the various methods by which additional layers of meaning contained within the words—or between the lines—of the Torah are expounded. We also acquaint ourselves with some of the major Midrashic works that record the expositional teachings by the sages of the Talmudic era (approximately 100 BCE to 500 CE).",
+            "Midrash includes Halachic (legal) expositions, which extrapolate the details of the Torah’s laws from the text, as well as Agadic Midrashim—moral, philosophical, and mystical teachings, as well as historical narratives and parables. We study examples from both of these varieties of Midrash, including a number of intricate legal expositions, and an esoteric parable relating to a celestial battle over the creation of the human being and the paradox of goodness and truth."
+          ]
+        },
+        {
+          "title": "The Talmud",
+          "text": [
+            "More than any other work, the Talmud defines “Jewish learning.” In this lesson, we review the history of the Talmud, explore the structure of this intricate and fascinating work, with its 63 volumes of teachings and deliberations by hundreds of sages over a period of six centuries on virtually every subject under the sun. We also engage in the in-depth study of a Talmudic sugya (“subject discussion”) and experience the unique twists and turns of the Talmudic dialectic.",
+            "In the process, we discover how Talmudic learning leverages the “flaws” of the human mind—its circuitous reasoning, its contentiousness, and its inconsistencies—to reveal the multifaceted nature of the Divine wisdom and apply it to the complexities of human life."
+          ]
+        },
+        {
+          "title": "Halachah",
+          "text": [
+            "Halachah is the “bottom line” of Torah, where the biblical commandments, rabbinical ordinances, and Talmudic deliberations translate into the dos and don’ts of daily life. Halachah addresses every part of a Jew’s life, from waking to bedtime, from birth to burial, from everyday activities to the most extraordinary situations.",
+            "In this lesson, we explore the history of Halachah, from its sources in the Written Torah, through the Halachic Midrashim, the Talmud and its commentaries, the various “codes” compiled through the centuries, and the many thousands of Halachic responsa authored through the centuries. We survey the great variety of issues and dilemmas that Halachah addresses. We then bring it all to life via a case study that traces a Halachic issue from its biblical origins through more than a dozen citations across the entire spectrum of Halachic literature."
+          ]
+        },
+        {
+          "title": "Musar and Jewish Philosophy",
+          "text": [
+            "Musar is the body of Torah teachings that deals with ethics, character development, and spiritual self-improvement. The field of Jewish philosophy, also known as “Chakirah,” includes works devoted to discussing the philosophy and ideology of Judaism. While these constitute two distinct areas of Torah literature, there is also a certain degree of overlap between them; indeed, some of the fundamental works of Jewish philosophy are also works of Musar, and vice versa.",
+            "In this lesson, we review the history and the primary authors and works in these two fields. We then study a number of texts covering three related topics in both these fields: the doctrine of creation ex nihilo (“something from nothing”), bitachon (trust in G-d), and the emotion of anger."
+          ]
+        },
+        {
+          "title": "Kabbalah and Chasidism",
+          "text": [
+            "Kabbalah is the Torah’s mystical dimension, containing its most powerful and empowering ideas. But for many centuries, the teachings of Kabbalah were carefully guarded secrets, transcribed only in the guise of esoteric terminology and metaphors, and taught only to a small, exclusive circle of mystics in each generation. Chasidism is both an extension of Kabbalah as well as a field of Torah in its own right, revealing the inner “soul” that unites the Torah’s various components and applying its most abstract spiritual teachings in personally meaningful ways.",
+            "In this lesson, we survey the history of Kabbalah and Chasidism. We address the question of why these teachings were kept secret, and why and how they were eventually revealed. We then explore one of the core subjects of Kabbalah—the doctrine of the “Ten Sefirot”—beginning with a mysterious passage in the Zohar, followed by a series of Kabbalistic and Chasidic texts that examine the great paradox of G-d’s relationship with us, and the body-soul dichotomy that defines our own lives."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/booksmart"
     },
     {
       "title": "To Believe or Not to Believe in Yourself",
@@ -616,7 +988,52 @@
         "https://www.bhchabad.org/mygod-recording"
       ],
       "dates": "6 Wednesdays from Nov 9, 2022",
-      "coverFile": "2022-my-g-d.jpg"
+      "coverFile": "2022-my-g-d.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Basics",
+          "text": [
+            "Let’s become familiar with G-d’s basic bio:",
+            "What is G-d and where is He? Does G-d have a gender? And who created G-d?"
+          ]
+        },
+        {
+          "title": "His Nature",
+          "text": [
+            "Let’s learn a bit about how G-d operates:",
+            "Does G-d have feelings? Does He communicate with us? Does He ever act illogically? Why does He have so many names? And why is it that many write “G-d” with a hyphen?"
+          ]
+        },
+        {
+          "title": "His Reasons",
+          "text": [
+            "Let’s discover why G-d does what he does:",
+            "Why did G-d create me—does He need me? And why did He create evil—does He need evil? Can I question G-d? And why is He described in the Bible as “wrathful” and “jealous”?"
+          ]
+        },
+        {
+          "title": "His Expectations",
+          "text": [
+            "Let’s discuss G-d’s expectations of us:",
+            "Do I have to believe in G-d to be Jewish? What if I have doubts about G-d? Do I need to fear G-d? That doesn’t sound very appealing! Lastly, I’m okay with believing in G-d, but I’m not religious. Can I still have a relationship with Him?"
+          ]
+        },
+        {
+          "title": "His Paradoxes",
+          "text": [
+            "Let’s delve into some of the deeper Divine mysteries and enigmas:",
+            "Can G-d create a rock that He can’t lift? Does His foreknowledge of events preclude my free choice? Is there anything that G-d finds difficult to do? And if G-d has decided to do something, can I change His mind?"
+          ]
+        },
+        {
+          "title": "Our Relationship",
+          "text": [
+            "Let’s deepen our understanding of our relationship with G-d:",
+            "Why can’t we see G-d? Because we can’t see Him, can we reconcile His existence with science? Why is Judaism so obsessed with idolatry—is G-d jealous? Last of all: I’m a spiritual person; do I need to follow the Torah’s “system” to have a relationship with G-d?"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/mygod"
     },
     {
       "title": "Survival of a Nation",
@@ -676,7 +1093,46 @@
         "https://www.bhchabad.org/beyond-right-recording"
       ],
       "dates": "6 Wednesdays from May 25, 2022",
-      "coverFile": "2022-beyond-right.jpg"
+      "coverFile": "2022-beyond-right.jpg",
+      "lessonDetails": [
+        {
+          "title": "Beyond Good Neighbors",
+          "text": [
+            "Most laws are designed to protect the rights of people and their property. But Judaism’s civil code is driven by a different goal. Explore how laws of damages and disputes support a uniquely Jewish view of the human mission."
+          ]
+        },
+        {
+          "title": "Beyond Restitution",
+          "text": [
+            "In seeking to restore the rights of plaintiffs, Jewish courts actively assist offenders in achieving full repentance too. Why? Discover the advantage of properly undoing damage over mere compensation."
+          ]
+        },
+        {
+          "title": "Beyond Taking Offense",
+          "text": [
+            "You may feel a moral urge to speak up against an offensive action. But might you have a legal responsibility to deter someone from certain behaviors? Judaism says: Yes. In this lesson, we discuss why and when."
+          ]
+        },
+        {
+          "title": "Beyond Personal Freedom",
+          "text": [
+            "With 613 commandments in the Torah and myriad rules expounded in the Talmud, can Judaism ever be called “liberating”? Let’s delve into the Exodus, the covenant, and the ways in which laws can lead to the purest human freedom."
+          ]
+        },
+        {
+          "title": "Beyond Lawful Ownership",
+          "text": [
+            "Is the claim of ownership anything more than a subjective social agreement? A foundation of Chassidic thought is that material possessions contain spiritual energy that is specific to their owners. Let’s consider the owner’s rights and responsibilities through this lens."
+          ]
+        },
+        {
+          "title": "Beyond Presumption of Innocence",
+          "text": [
+            "While a presumption of innocence can protect defendants from liability, it is not quite a declaration of uprightness. Jewish law goes so far as to presume every person’s core goodness. See how this view can lead us to a truly upright world."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/beyondright"
     },
     {
       "title": "Meditation from Sinai",
@@ -706,7 +1162,46 @@
         "https://www.bhchabad.org/meditationrecording"
       ],
       "dates": "6 sessions from Wed Feb 2 / Thu Feb 3, 2022",
-      "coverFile": "2022-meditation-from-sinai.jpg"
+      "coverFile": "2022-meditation-from-sinai.jpg",
+      "lessonDetails": [
+        {
+          "title": "MIND CONTROL, I THINK THEREFORE I CAN",
+          "text": [
+            "Mind over matter—when you mind, life matters. The Torah teaches that our brains don't control us, we control our brains. When we harness our awesome gray matter, dreams become a matter of fact."
+          ]
+        },
+        {
+          "title": "SPIRITUAL AWAKENING, TUNE IN, PLAY ON",
+          "text": [
+            "What is spirituality and how do I tune into its song? Meditation is the instrument that allows you to play the spirited music of existence, and the voice that enables you to sing the soul of every experience."
+          ]
+        },
+        {
+          "title": "DIVINE ANIMATION, JOY VEY",
+          "text": [
+            "G-d animates everything, perpetually. Discovering G-d is opening ourselves to life's divine animation. Results include but are not limited to increased joy, more resilience, and deeper purpose."
+          ]
+        },
+        {
+          "title": "HERE AND WOW, FREE EVERY MOMENT",
+          "text": [
+            "Long before living in the moment gained its moment in the spotlight, G-d gifted us the incredible power to live with, live in, live up, and transform every single moment of our lives. It's happening now, at this very moment. All of life is elevated by meditation."
+          ]
+        },
+        {
+          "title": "CLUB MED, EAT BETTER, SLEEP DEEPER, WORK HIGHER",
+          "text": [
+            "Here we zoom in and focus on three of life’s essentials: when we consume, when we repose, when we hustle-bustle."
+          ]
+        },
+        {
+          "title": "ACT NATURAL, CLIMB THE MOUNTAIN DO",
+          "text": [
+            "Those that can't, don't. Those that can, do. And you can. At its core, Mount Sinai is Mountain Do. Physical actions, called Mitzvos by the Creator, engender spiritual and physical change in the universe."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/meditation"
     },
     {
       "title": "Well-Connected",
@@ -731,7 +1226,59 @@
         "https://www.bhchabad.org/connected"
       ],
       "dates": "Monthly Tuesdays, Nov 9, 2021 - May 10, 2022",
-      "coverFile": "2021-well-connected.jpg"
+      "coverFile": "2021-well-connected.jpg",
+      "lessonDetails": [
+        {
+          "title": "Unroll the Scroll",
+          "text": [
+            "A small scroll, wrapped up, placed in a case, and affixed to a door, the mezuzah is so tiny you could miss it if you weren’t looking for it. And yet it contains so much. More than Ring or Nest, the ultimate in home gadgetry has always been the mezuzah.",
+            "Scroll down! Follow the mezuzah from its manufacture to the end user experience by learning what it takes to be a scribe, the process of writing a mezuzah, how it’s actually installed, and the true power of that little piece of parchment."
+          ]
+        },
+        {
+          "title": "Soul Food",
+          "text": [
+            "Is there anything more emblematic of religious dogma than keeping kosher? Kashrut determines not only what we eat, but also where and how we travel, and whom we break bread with. And for what purpose?",
+            "To gain insight into the kosher lifestyle, we survey the basics of the dietary code and weigh whether these laws are really about staying healthy—or staying spiritual. Then, moving from the kitchen to the factory, we’ll hear firsthand from experts in the field to learn just what it is a certification agency does."
+          ]
+        },
+        {
+          "title": "Endlessly Blessed",
+          "text": [
+            "Like some sort of Jewish mantra, berachot are better known as those brief blessings recited over food. As it happens, there are blessings for sighting a rainbow, when on a road trip, and even after visiting the bathroom. Isn’t it all a bit much?",
+            "To learn more, we will go through the various classes of berachot and skim the intricate laws governing which benedictions are said, and when. We’ll discover how reciting a few words at the right time can transform a given activity or event and make it more mindful, focused, and grounded."
+          ]
+        },
+        {
+          "title": "A Slice of Life",
+          "text": [
+            "From baking to breaking to thanking, there is a host of special practices uniquely associated with bread, starting with separating challah—the special mitzvah entrusted to Jewish women—to the special role bread plays on Shabbat and the festivals.",
+            "So, what’s the deal with dough? In this class, we look at the symbolism of bread, take a crash course in the fascinating rituals that surround it, and meditate on the deep significance bread has in our lives."
+          ]
+        },
+        {
+          "title": "Pray It Forward",
+          "text": [
+            "Prayer feels like it should be a genuinely spiritual experience, but the foreign language, the rigid text, and the fixed times for the services can threaten to turn the whole thing into a perfunctory drudgery.",
+            "By studying the various elements of the liturgy, with a special focus on the meditations of Shema, we’ll uncover the possibilities of prayer, and how prayer can be a joyful, soulful, spontaneous experience: open the prayer book, express your spiritual self, and connect!"
+          ]
+        },
+        {
+          "title": "The Kinds of Kindness",
+          "text": [
+            "Sure it’s nice to be nice, but sometimes you need specifics. Rather than relying on vague ethical pronouncements, the Torah gets into the nitty-gritty and ensures that we express our love in the concrete, with commandments like giving charity, hosting guests in the home, comforting the bereaved, and returning lost property.",
+            "Beyond simply studying how to properly perform these action mitzvot, this class presents them in a new light, making us rethink the general nature of the ethical obligations we bear toward our fellow human."
+          ]
+        },
+        {
+          "title": "To Live in Deed",
+          "text": [
+            "From birth, to marriage, to death, and beyond, Jewish traditions mark the contours of our lives. If there isn’t a Kaddish, there’s a Kiddush, bat mitzvah, or chupah...",
+            "Here, we survey the key life cycle rituals so as to more deeply appreciate their significance—that of the rituals, and of the life events they are associated with. Not just an accompaniment, these practices mold our major life steps and give us language to celebrate or to commemorate. Even more, they work to complete the soul’s journey on earth."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/connected"
     },
     {
       "title": "Outsmarting Antisemitism",
@@ -760,7 +1307,34 @@
         "https://www.bhchabad.org/copy-of-outmsarting-antisemitism-re"
       ],
       "dates": "4 sessions from Wed Nov 3 / Thu Nov 4, 2021",
-      "coverFile": "2021-outsmarting-antisemitism.jpg"
+      "coverFile": "2021-outsmarting-antisemitism.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Eternal People",
+          "text": [
+            "By taking another look at the statistics, studying our people’s remarkable perseverance, and exploring the concept of Providence, we can find eternal cause for confidence and optimism while we implement plans to secure ourselves and our communities."
+          ]
+        },
+        {
+          "title": "No Apologies",
+          "text": [
+            "We look at some of the explanations for antisemitism that have been offered throughout the ages to emerge with an important principle: the problem with hating Jews lies not with the Jews but with the haters. Internalizing this hate is not a healthy response."
+          ]
+        },
+        {
+          "title": "The Promised Land",
+          "text": [
+            "Today, hatred of Jews commonly manifests itself as antagonism toward the Jewish State. This class distinguishes all-out antisemitism from some more nuanced sub-strains. It also examines the state of Israel education and the very nature of Jewish nationhood."
+          ]
+        },
+        {
+          "title": "Change of Heart",
+          "text": [
+            "Psychology, neuroscience, and recent history show us that neither friend nor foe should ever be taken for granted. With a bit of subtlety and conviction, and always with trust in G-d, we find that the dark days of the past are no cause for pessimism ahead."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/antisemitism"
     },
     {
       "title": "Judaism Decoded",
@@ -791,7 +1365,46 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "dates": "6 Wednesdays from July 7, 2021",
-      "coverFile": "2021-judaism-decoded.jpg"
+      "coverFile": "2021-judaism-decoded.jpg",
+      "lessonDetails": [
+        {
+          "title": "The Dynamic Duo",
+          "text": [
+            "If we have a written law, why do we need tradition? And if we have a tradition, what's the point of a written law? Discover the brilliance of this binary system, and how it has kept Jewish tradition intact for millennia."
+          ]
+        },
+        {
+          "title": "A Formula for Eternity",
+          "text": [
+            "Circumstances change, and, in most cases, so do the rules--unless, that is, the rules were created as principles with a unique formula to make them apply to any situation that may arise. Explore the systematic formula through which Jewish law is applied to solve new, modern-day dilemmas."
+          ]
+        },
+        {
+          "title": "Rabbis Making Rules",
+          "text": [
+            "Is my rabbi allowed to change the law when he deems it necessary? When do rabbis have the power to legislate new laws? And what prevents a rabbi from unilaterally changing the face of Judaism?"
+          ]
+        },
+        {
+          "title": "Debating the Divine",
+          "text": [
+            "The Talmud is filled with all kinds of debates. If the law is Divine, should there be any room for discussion? When there are differences of opinion, how do we determine the law? And why does the Talmud record opinions that were ultimately overruled?"
+          ]
+        },
+        {
+          "title": "Laws that Expire",
+          "text": [
+            "While most Jewish practices are as relevant today as ever, some laws have reasons that no longer apply. When does a law expire? How is it revoked? And why might we choose to continue a practice even once its rationale is no longer relevant?"
+          ]
+        },
+        {
+          "title": "Evidence for Sinai",
+          "text": [
+            "Judaism encourages us to question. How do we know the Torah is true? Why was Maimonides so convinced about the historic truth of the revelation at Sinai? Is there any empirical evidence to support his claim?"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/decoded"
     },
     {
       "title": "This Can Happen",
@@ -823,7 +1436,46 @@
       ],
       "dates": "From Wed Apr 28 / Thu Apr 29, 2021",
       "coverFile": "2021-this-can-happen.jpg",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "Start with the Science",
+          "text": [
+            "In a society marked by chaos and discord, it’s hard to believe our world is actually better than it’s ever been. Let’s dive into the data of what’s wrong—and what’s right—with the world."
+          ]
+        },
+        {
+          "title": "Who Needs a Redemption?",
+          "text": [
+            "Though it will solve every speck of ill in the world, the idea of Redemption is not a response to strife. Rather, it’s an independent and foundational tenet of Jewish belief. See where it fits into the bigger story of Creation."
+          ]
+        },
+        {
+          "title": "Superhuman vs. Super Humans",
+          "text": [
+            "Waiting for a Messiah to come save humanity feels a little… un-Jewish. But what if Redemption is a natural reaction to humanity’s own cumulative action? Discover the effect you’ve already had on the reality of the world."
+          ]
+        },
+        {
+          "title": "We’re Getting There",
+          "text": [
+            "Judaism sees all of history as one connected journey toward a single desired destiny. In this lesson, we look back to identify four distinct epochs that show us how far we’ve traveled on the way to a truly good world."
+          ]
+        },
+        {
+          "title": "Out of the Blues",
+          "text": [
+            "So, will we wake up one day in a glorious wonderland? Or is the Redemption more of a gradual process? Let’s study the sources on the actual transition from our reality today into a world of revelation."
+          ]
+        },
+        {
+          "title": "And Then…",
+          "text": [
+            "We’ve seen why the Redemption needs to happen and the human role in making it happen. Now peek into that perfect—and perfectly possible—world as the prophets and sages vividly describe it!"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/canhappen"
     },
     {
       "title": "Journey of the Soul",
@@ -854,7 +1506,46 @@
         "https://www.bhchabad.org/past-courses"
       ],
       "dates": "From Wed Feb 3 / Thu Feb 4, 2021, on Zoom",
-      "coverFile": "2021-journey-of-the-soul.jpg"
+      "coverFile": "2021-journey-of-the-soul.jpg",
+      "lessonDetails": [
+        {
+          "title": "Demystifying Death",
+          "text": [
+            "Why are humans so anxious about death and dying? For many, the abrupt finality of death makes life itself seem futile. By exploring how our life force—our immortal soul—never ends but merely shifts roles, we begin to view life and death as two harmonious steps on the same journey."
+          ]
+        },
+        {
+          "title": "Taking Leave",
+          "text": [
+            "Is death painful for souls? Is my presence felt when I visit a grave? Judaism’s pre-burial and burial rituals accompany the soul’s gradual transition from a limiting physical life to a completely spiritual one. We discuss those rituals and how, once freed, the soul’s connection to the living continues in new and powerful ways."
+          ]
+        },
+        {
+          "title": "The Mourning After",
+          "text": [
+            "What is the Jewish grieving process and what is the significance of its various traditions? This lesson provides a meaningful Jewish perspective on grief itself, as well as practical shiva etiquette both for mourners and for those who wish to comfort them."
+          ]
+        },
+        {
+          "title": "Where We Go",
+          "text": [
+            "For centuries, human beings have been motivated by the promise of heaven and frightened by the threat of hell. Discover what Jews believe about where every soul goes and how Kaddish aids a soul in reaching true peace."
+          ]
+        },
+        {
+          "title": "Where We Go Again",
+          "text": [
+            "Reincarnation: more than a fascinating topic, Judaism provides a practical way to imagine this mystical process, and explains why it is important both to departed souls and to our lives today"
+          ]
+        },
+        {
+          "title": "Life Is Short(ish)",
+          "text": [
+            "By now we’ve come to appreciate death as the next phase in our ongoing personal missions. In our final lesson, we use what we’ve learned to revisit our priorities in this current phase and find ways to fill every moment with everlasting significance."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/journey"
     },
     {
       "title": "Secrets of the Bible",
@@ -972,7 +1663,40 @@
         "https://www.bhchabad.org/jliaudio"
       ],
       "dates": "5 Wednesdays from May 13, 2020, on Zoom",
-      "coverFile": "2020-judaism-at-home.jpg"
+      "coverFile": "2020-judaism-at-home.jpg",
+      "lessonDetails": [
+        {
+          "title": "A Fresh Start",
+          "text": [
+            "Can you predict how your day will be based on how you wake up in the morning? If yes, you’re not alone! How you wake up in the morning can set the tone for the entire day. This lesson takes a deep dive into Jewish morning routines to explore their rituals, rationales, and deeper messages to help get your day started on a positive note and make your mornings meaningful."
+          ]
+        },
+        {
+          "title": "Food for Thought",
+          "text": [
+            "Our relationships with food are rather complex. We need to eat to survive, yet so many struggle with obesity, anorexia, and unhealthy eating habits. Unlike pop culture diets that come in and out of fashion, Judaism’s practical wisdom on eating has weathered millennia. By infusing this daily practice with practical insight and purpose, the Jewish rituals introduced in this lesson help us make our eating more mindful, healthful, and spiritually satisfying."
+          ]
+        },
+        {
+          "title": "Hear o Israel",
+          "text": [
+            "Whether deliberate or spontaneous, vocal or mental, we frequently find ourselves praying. Many find the concept of prayer distant and mysterious, and see the prayer book as a volume that’s closed to their intellection. This lesson seeks to bring prayer to the vibrant hearts and inspired minds of Jews everywhere. Participants will discover the philosophy of prayer, build familiarity with the prayer book, and gain an implementable understanding of the elegant structure and sophisticated mechanics that underlie our daily prayers."
+          ]
+        },
+        {
+          "title": "Rest Assured",
+          "text": [
+            "Shabbat is one of Judaism’s greatest gifts. In a society that prizes multitasking and prioritizes urgencies, Shabbat offers a welcome respite from the noise to ponder what is truly important. However, when it comes to the nitty gritty of Shabbat’s dos and don’ts, many find themselves perplexed by their logic and seeming pettiness. This lesson unveils the wisdom and neat construct inherent in the laws of Shabbat, and translates its model into practical guidelines for modern observance, infused with soul and spirituality."
+          ]
+        },
+        {
+          "title": "Shabbat Symbols",
+          "text": [
+            "Why is Kiddush recited on wine? What is the significance of two covered loaves? Is it important to consume fish and meat on Shabbat? Why gefilte fish? Why cholent? This lesson explores the origins and rationales behind each of these customs, rendering what was heretofore a random assortment for the palate a holistic journey for the soul."
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/athome"
     },
     {
       "title": "The Jewish Course of Why",
@@ -1281,7 +2005,46 @@
       ],
       "dates": "6 Monday evenings, Oct 30 - Dec 4, 2017, at Bloomfield Hills High School",
       "coverFile": "2017-great-debates-in-jewish-history.png",
-      "coverSource": "JLI Resource Library (Facebook event art)"
+      "coverSource": "JLI Resource Library (Facebook event art)",
+      "lessonDetails": [
+        {
+          "title": "Rabbis and the Divine Word",
+          "text": [
+            "Contrasting narratives of the Dead Sea scrolls and the Talmud introduce us to two sides of a fundamental historic debate about rabbinic authority and the interpretation of the Divine word. What led the Dead Sea sect to breakaway from Jewish establishment? What were their theological views? And why were they so opposed to rabbinic interpretation?"
+          ]
+        },
+        {
+          "title": "To Be or Not To Be",
+          "text": [
+            "What role does nationalism play in Judaism? What are the Jewish perspectives on taking up arms when defeat is inevitable? Get into the minds of those who gave their lives at Masada. Discover a nationalistic view of Judaism, one that believes it cannot survive without autonomy in Israel and who chooses death over a survival that is subservient to a foreign nation."
+          ]
+        },
+        {
+          "title": "Reason and Religion",
+          "text": [
+            "In the 12th century, Maimonides’ major philosophical work Guide for the Perplexed was banned and even burned. For an observant Jew, Maimonides took a radical of a rationalistic approach. Beginning during his lifetime and continuing for decades after his death, the Maimonidean conflict and condemnation of his works divided the Jewish world. Why was there such fierce opposition to reason? Is rationalism an acceptable approach to Divine worship? What role does reason play in Judaism?"
+          ]
+        },
+        {
+          "title": "Forcing Redemption",
+          "text": [
+            "To witnesses of inquisition, auto-da-fé, and expulsion came the proposal of Rabbi Yaacov Beirav to reinstate the Sanhedrin (Jewish high court), to renew rabbinic ordination, and to force messianic redemption. Mere mention of the idea catapulted the Jewish world into a frenzy; some with jubilation, others with uproar and outrage. Can we force the Divine hand to hasten the redemption? Should we? And what of attempts in our own times at renewing the Sanhedrin?"
+          ]
+        },
+        {
+          "title": "The To-Do About Chassidism",
+          "text": [
+            "Why were Jews of the 1700s opposed to the innocent teachings of the Baal Shem Tov and his preoccupation with prayer, joy, and the simpleton’s relationship with G-d? What historic tensions set the stage for the style of Judaism practiced at that time that incited the widespread aversion to the Chassidic way of life?"
+          ]
+        },
+        {
+          "title": "The Commercialization of Religion",
+          "text": [
+            "In the 1980s, a US Supreme Court ruling permitting public menorah displays deeply divided the Jewish world. What presents a greater challenge to Judaism: The supremacy of a conflicting religion, or the predominance of irreligiosity? Is religion designed to be a personal and private affair, or one to be flaunted in the public domain? Where should Judaism stand on the issues of separation of church and state?"
+          ]
+        }
+      ],
+      "lessonDetailsSource": "https://www.bhchabad.org/jli-course-outline"
     }
   ],
   "channels": {
