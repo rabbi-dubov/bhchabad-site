@@ -1898,6 +1898,8 @@ html body.cco_body .cc-program__more { color: var(--cc-primary); font-size: 14px
 @media (min-width: 1025px) {
   /* the overview line is for the phone drawer only */
   html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item.cc-overview { display: none !important; }
+  /* a list opened by the keyboard (theme.js adds .cc-kb-open; the mouse opens it with inline styles) */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level.cc-kb-open .co_submenu_container { display: block !important; height: auto !important; opacity: 1 !important; clip: auto !important; filter: none !important; visibility: visible !important; }
   /* one orange line under the current page's label, also on hover (the hover line doubled it) */
   html body.cco_body #tabContentMain .co_menu_item.selected:not(.donate_link) span.parent a:hover { box-shadow: none; }
 }

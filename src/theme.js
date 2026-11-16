@@ -255,20 +255,23 @@
       }
       // on phones the whole row is the control, so the small arrow button stays out of the tab order
       if (toggle) { toggle.setAttribute("tabindex", "-1"); toggle.setAttribute("aria-hidden", "true"); }
-      function shown() { return phoneMq.matches ? /\bitem-open\b/.test(li.className) : /\bhover\b/.test(li.className); }
+      function shown() { return phoneMq.matches ? /\bitem-open\b/.test(li.className) : /\b(hover|cc-kb-open)\b/.test(li.className); }
       function sync() { label.setAttribute("aria-expanded", shown() ? "true" : "false"); }
       label.addEventListener("click", function (e) {
         if (!phoneMq.matches || !toggle) { return; }
         e.preventDefault();
         toggle.click();
       });
-      li.addEventListener("focusin", function () { if (!phoneMq.matches && !quiet) { addClass(li, "hover"); } });
+      // ChabadOne opens a list with inline styles on mouse hover; the keyboard gets the class .cc-kb-open
+      // (see the CSS), only for keyboard focus, so a mouse click on a label doesn't pin its list open
+      function byKeyboard(el) { try { return el.matches(":focus-visible"); } catch (x) { return true; } }
+      li.addEventListener("focusin", function (e) { if (!phoneMq.matches && !quiet && byKeyboard(e.target)) { addClass(li, "cc-kb-open"); } });
       li.addEventListener("focusout", function (e) {
-        if (!phoneMq.matches && !(e.relatedTarget && li.contains(e.relatedTarget))) { removeClass(li, "hover"); }
+        if (!(e.relatedTarget && li.contains(e.relatedTarget))) { removeClass(li, "cc-kb-open"); }
       });
       li.addEventListener("keydown", function (e) {
-        if ((e.key === "Escape" || e.key === "Esc") && !phoneMq.matches && /\bhover\b/.test(li.className)) {
-          removeClass(li, "hover"); quiet = true; label.focus(); quiet = false;
+        if ((e.key === "Escape" || e.key === "Esc") && /\bcc-kb-open\b/.test(li.className)) {
+          removeClass(li, "cc-kb-open"); quiet = true; label.focus(); quiet = false;
         }
       });
       if (window.MutationObserver) { new MutationObserver(sync).observe(li, { attributes: true, attributeFilter: ["class"] }); }
