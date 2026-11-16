@@ -37,6 +37,18 @@
     donateUrl: "/4970020",
     contactUrl: "/tools/feedback.asp",
     subscribeUrl: "/tools/subscribe/default.htm",
+    // Menu (Nov 16 review). On phones a row with sub-pages opens its list when tapped; the row's own page
+    // becomes the list's first line, named here (else "<Label> overview"). Hidden on computers.
+    menuOverview: { "About": "About us", "Learn": "All classes and courses" },
+    // Sub-page names in the menus, by page number (the page's own title stays as it is). PROPOSAL in test
+    // only, Nov 16: Levi agreed the Learn list was confusing; wording waits for his OK.
+    menuLabels: {
+      "7593397": "JLI course: Kabbalah",
+      "7620415": "JLI course: The Missing Piece",
+      "7593500": "Women’s learning: NEXT GENesis"
+    },
+    // Sub-pages left out of the menus, by page number (Torah Deep Dive is not running; proposal, as above)
+    menuHide: ["7593547"],
     // Testimonials live on an ordinary ChabadOne page. Each one = a Quote (blockquote) whose last line
     // starts with a dash: "— Name, context". The homepage reads them; no quotes = no section.
     testimonialsUrl: "/7617013", // "In their words" page (hidden, under About)
@@ -137,6 +149,7 @@
     return "";
   }
   function addClass(n, c) { if (n && (" " + n.className + " ").indexOf(" " + c + " ") < 0) { n.className += " " + c; } }
+  function removeClass(n, c) { if (n) { n.className = (" " + n.className + " ").replace(new RegExp(" " + c + "(?= )", "g"), "").replace(/^ +| +$/g, ""); } }
   // Fetch a same-site page at most once per `ttl` per visitor: the parsed result (or the lack of one)
   // is kept in localStorage, so ordinary browsing does not send extra requests to ChabadOne.
   function cachedPage(key, ttl, url, parse, done) {
@@ -176,12 +189,19 @@
       if (a !== t && !txt(a) && !a.getAttribute("aria-label")) { a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); }
     });
     phoneMenu();
+    menus();
   }
 
+  // The phone drawer replaces the desktop menu at this width (the same markup, restyled by the CSS)
+  var phoneMq = window.matchMedia ? window.matchMedia("(max-width: 1024px)") : { matches: false };
+  function onMq(fn) { if (phoneMq.addEventListener) { phoneMq.addEventListener("change", fn); } else if (phoneMq.addListener) { phoneMq.addListener(fn); } }
+
   /* Phone menu (ChabadOne's drawer): names for its two icon buttons, Escape closes it,
-     and the page behind stays still while it is open (html.cc-menu-open, see the CSS). */
+     and the page behind stays still while it is open (html.cc-menu-open, see the CSS).
+     While closed it sits off-screen, so it is made inert (keyboards and screen readers skip its links);
+     opening it moves the focus to its close button, closing it brings the focus back to the menu button. */
   function phoneMenu() {
-    var open = q(".js-mobile-menu-open"), close = q(".js-mobile-menu-close");
+    var open = q(".js-mobile-menu-open"), close = q(".js-mobile-menu-close"), wrap = q(".site-nav-wrapper"), was = false;
     if (!open || open.getAttribute("data-cc-menu")) { return; }
     open.setAttribute("data-cc-menu", "1");
     open.setAttribute("aria-label", "Menu");
@@ -192,7 +212,13 @@
       var on = isOpen();
       open.setAttribute("aria-expanded", on ? "true" : "false");
       if (on) { addClass(html, "cc-menu-open"); } else { html.className = html.className.replace(/\s?cc-menu-open\b/g, ""); }
+      if (wrap) { wrap.inert = phoneMq.matches && !on; }
+      if (on && !was && close) { try { close.focus(); } catch (e) {} }
+      if (!on && was && wrap && wrap.contains(d.activeElement)) { open.focus(); }
+      was = on;
     }
+    sync();
+    onMq(sync);
     if (window.MutationObserver) { new MutationObserver(sync).observe(d.body, { attributes: true, attributeFilter: ["class"] }); }
     d.addEventListener("keydown", function (e) {
       if ((e.key === "Escape" || e.key === "Esc") && isOpen()) {
@@ -200,6 +226,54 @@
         if (isOpen()) { d.body.className = d.body.className.replace(/\s?menu-open\b/g, ""); }
         open.focus();
       }
+    });
+  }
+
+  /* Menus (Levi, Nov 16 review):
+     - computers: a dropdown also opens for the keyboard (focus inside it) and Escape closes it;
+       ChabadOne opened them on mouse hover only, so Tab skipped every sub-page;
+     - phones: tapping a row with sub-pages opens its list (only the small arrow did), and the row's
+       own page is the list's first line (CC.menuOverview);
+     - sub-page names and hidden sub-pages from CC.menuLabels / CC.menuHide. */
+  function menus() {
+    var byId = function (a) { var m = /\/aid\/(\d+)\//.exec(a.getAttribute("href") || "") || /^\/(\d+)$/.exec(a.getAttribute("href") || ""); return m ? m[1] : ""; };
+    qa("#tabContentMain .co_submenu_container a.item").forEach(function (a) {
+      var id = byId(a), s = q("span", a);
+      if (id && (CC.menuHide || []).indexOf(id) >= 0) { a.style.setProperty("display", "none", "important"); a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); return; }
+      if (id && CC.menuLabels && CC.menuLabels[id] && s) { s.textContent = CC.menuLabels[id]; }
+    });
+    qa("#tabContentMain > .co_menu_item.multi_level").forEach(function (li) {
+      if (li.getAttribute("data-cc-menu")) { return; }
+      li.setAttribute("data-cc-menu", "1");
+      var label = q("span.parent a", li), toggle = q(".cs-menu-item-toggle", li), col = q(".co_submenu_container .co_column", li), quiet = false;
+      if (!label) { return; }
+      var name = txt(label);
+      // the extra link ChabadOne lays behind an open dropdown repeats the label: one stop for the keyboard is enough
+      qa("a.bg_extension", li).forEach(function (b) { b.setAttribute("tabindex", "-1"); b.setAttribute("aria-hidden", "true"); });
+      if (col && !q(".cc-overview", col)) {
+        col.insertBefore(h("a", { "class": "item cc-overview", href: label.getAttribute("href") }, [h("span", { text: (CC.menuOverview || {})[name] || name + " overview" })]), col.firstChild);
+      }
+      // on phones the whole row is the control, so the small arrow button stays out of the tab order
+      if (toggle) { toggle.setAttribute("tabindex", "-1"); toggle.setAttribute("aria-hidden", "true"); }
+      function shown() { return phoneMq.matches ? /\bitem-open\b/.test(li.className) : /\bhover\b/.test(li.className); }
+      function sync() { label.setAttribute("aria-expanded", shown() ? "true" : "false"); }
+      label.addEventListener("click", function (e) {
+        if (!phoneMq.matches || !toggle) { return; }
+        e.preventDefault();
+        toggle.click();
+      });
+      li.addEventListener("focusin", function () { if (!phoneMq.matches && !quiet) { addClass(li, "hover"); } });
+      li.addEventListener("focusout", function (e) {
+        if (!phoneMq.matches && !(e.relatedTarget && li.contains(e.relatedTarget))) { removeClass(li, "hover"); }
+      });
+      li.addEventListener("keydown", function (e) {
+        if ((e.key === "Escape" || e.key === "Esc") && !phoneMq.matches && /\bhover\b/.test(li.className)) {
+          removeClass(li, "hover"); quiet = true; label.focus(); quiet = false;
+        }
+      });
+      if (window.MutationObserver) { new MutationObserver(sync).observe(li, { attributes: true, attributeFilter: ["class"] }); }
+      onMq(sync);
+      sync();
     });
   }
 

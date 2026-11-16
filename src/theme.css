@@ -1722,7 +1722,9 @@ html body.cco_body form.feedback_form .co_global_button { margin-top: 24px; }
 @media (max-width: 600px) { html body.cco_body form.feedback_form .name_wrapper { grid-template-columns: 1fr !important; } }
 
 /* Focus ring on dark bands: apricot (maroon would vanish there) */
-html body.cco_body .cc-hero, html body.cco_body .cc-section--ink, html body.cco_body .cc-quick, html body.cco_body #cc-footer, html body.cco_body #footer, html body.cco_body .site-nav-wrapper { --cc-focus: var(--cc-accent-on-dark); }
+html body.cco_body .cc-hero, html body.cco_body .cc-section--ink, html body.cco_body .cc-quick, html body.cco_body #cc-footer, html body.cco_body #footer { --cc-focus: var(--cc-accent-on-dark); }
+/* the phone drawer is dark; the same .site-nav-wrapper is the white desktop menu, so only at phone width (Nov 16) */
+@media (max-width: 1024px) { html body.cco_body .site-nav-wrapper { --cc-focus: var(--cc-accent-on-dark); } }
 /* Inactive slide dots: a light ring on the dark hero (the filled dot stays orange) */
 html body.cco_body .cc-hero .cc-hero__dots button:not([aria-current="true"]) { background: transparent; box-shadow: inset 0 0 0 1.5px var(--cc-on-dark-muted); }
 html body.cco_body .cc-testimonials__dots button[aria-current="true"] { box-shadow: none; }
@@ -1887,4 +1889,32 @@ html body.cco_body .cc-program__more { color: var(--cc-primary); font-size: 14px
 }
 @media (prefers-reduced-motion: reduce) {
   html body.cco_body .cc-ev__img::before, html body.cco_body .cc-ev__img > img, html body.cco_body .cc-program__img { transition: none; transform: none !important; }
+}
+
+/* ==========================================================================
+   21. MENUS, NOV 16 REVIEW (Levi: "strong agree" to tapping the row on phones)
+   theme.js menus(): dropdowns open for the keyboard too, phone rows open their list, an overview line.
+   ========================================================================== */
+@media (min-width: 1025px) {
+  /* the overview line is for the phone drawer only */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item.cc-overview { display: none !important; }
+  /* one orange line under the current page's label, also on hover (the hover line doubled it) */
+  html body.cco_body #tabContentMain .co_menu_item.selected:not(.donate_link) span.parent a:hover { box-shadow: none; }
+}
+/* Narrow laptops: every label on one line, the same space between them ("Events and Holidays" wrapped) */
+@media (min-width: 1025px) and (max-width: 1240px) {
+  html body.cco_body #tabContentMain .co_menu_item span.parent { padding-left: 8px !important; padding-right: 8px !important; }
+  html body.cco_body #tabContentMain .co_menu_item span.parent a, html body.cco_body #header.on-scroll #tabContentMain .co_menu_item span.parent a { white-space: nowrap; max-width: none; text-align: left; }
+}
+@media (max-width: 1024px) {
+  /* the current page's row: its arrow sits at the end of the row like the others (ChabadOne's blue
+     current-page underline is drawn on the same ::after and pulled the arrow under the word) */
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.selected:not(.donate_link) span.parent a::after {
+    position: static !important; inset: auto !important; width: auto !important; height: auto !important;
+    margin: 0 !important; transform: none !important; background: none !important; border: 0 !important;
+  }
+  /* the whole row opens its list */
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level span.parent a { cursor: pointer; }
+  /* the overview line leads the list, a little brighter than the sub-pages */
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container a.item.cc-overview span { color: var(--cc-white) !important; font-weight: 600 !important; }
 }
