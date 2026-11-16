@@ -37,6 +37,9 @@
     donateUrl: "/4970020",
     contactUrl: "/tools/feedback.asp",   // the message form itself
     contactPageUrl: "/7603665",          // our Contact page (phone, email, the form); the phone menu's "Contact" opens it (Levi, Nov 16)
+    // A "Contact" item in the main menu, just before Donate, on every page (Levi, Nov 16: "Yes, add it").
+    // ChabadOne's menu shows only the first 5 pages + Donate, so the theme adds it. "" removes it.
+    menuContact: "Contact",
     subscribeUrl: "/tools/subscribe/default.htm",
     // Menu (Nov 16 review). On phones a row with sub-pages opens its list when tapped; the row's own page
     // becomes the list's first line, named here (else "<Label> overview"). Hidden on computers.
@@ -189,8 +192,31 @@
     qa("#header_branding a").forEach(function (a) {
       if (a !== t && !txt(a) && !a.getAttribute("aria-label")) { a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); }
     });
+    contactItem();
     phoneMenu();
     menus();
+  }
+
+  /* "Contact" in the main menu, just before Donate (getting in touch is the site's goal). It copies the
+     last plain menu item (Shul), so it looks and works like the others on computers and in the phone drawer. */
+  function contactItem() {
+    var row = q("#tabContentMain");
+    if (!CC.menuContact || !CC.contactPageUrl || !row || q(".cc-contact-item", row)) { return; }
+    var kids = Array.prototype.slice.call(row.children), donate = null, model = null, i;
+    for (i = 0; i < kids.length; i++) { if (/\bdonate_link\b/.test(kids[i].className)) { donate = kids[i]; } }
+    for (i = kids.length - 1; i >= 0; i--) {
+      if (/\bco_menu_item\b/.test(kids[i].className) && !/\b(donate_link|multi_level|home)\b/.test(kids[i].className)) { model = kids[i]; break; }
+    }
+    if (!donate || !model) { return; }
+    var id = (/(\d+)$/.exec(CC.contactPageUrl) || [])[1], item = model.cloneNode(true);
+    item.className = "co_menu_item cc-contact-item" + (id && location.pathname.indexOf("/aid/" + id + "/") >= 0 ? " selected" : "");
+    qa("[id]", item).forEach(function (n) { n.removeAttribute("id"); });
+    qa("a", item).forEach(function (a) { a.setAttribute("href", CC.contactPageUrl); });
+    var lab = q("span.parent a", item);
+    if (lab) { lab.textContent = CC.menuContact; }
+    var prev = donate.previousElementSibling, div = prev && /\bco_menu_item_divider\b/.test(prev.className) ? prev.cloneNode(true) : null;
+    row.insertBefore(item, donate);
+    if (div) { row.insertBefore(div, donate); }
   }
 
   // The phone drawer replaces the desktop menu at this width (the same markup, restyled by the CSS)
@@ -213,10 +239,14 @@
     open.setAttribute("aria-expanded", "false");
     if (close) { close.setAttribute("aria-label", "Close menu"); }
     if (back && back !== close) { back.setAttribute("tabindex", "-1"); back.setAttribute("aria-hidden", "true"); back.removeAttribute("aria-label"); }
-    // the drawer's bottom "Contact" opened the bare message form; it opens our Contact page instead
+    // the drawer's bottom "Contact" opened the bare message form: with the Contact row in the menu it goes;
+    // without it, it opens our Contact page
     if (CC.contactPageUrl) {
+      var hasItem = !!q("#tabContentMain .cc-contact-item");
       qa(".mobile-menu-bottom-links a").forEach(function (a) {
-        if (/feedback\.asp/i.test(a.getAttribute("href") || "")) { a.setAttribute("href", CC.contactPageUrl); }
+        if (!/feedback\.asp/i.test(a.getAttribute("href") || "")) { return; }
+        if (hasItem) { a.style.setProperty("display", "none", "important"); a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); }
+        else { a.setAttribute("href", CC.contactPageUrl); }
       });
     }
     function isOpen() { return /\bmenu-open\b/.test(d.body.className); }
@@ -354,7 +384,7 @@
   function footer() {
     var f = q("#footer");
     if (!f || q("#cc-footer")) { return; }
-    var navLinks = qa("#tabContentMain > .co_menu_item:not(.home):not(.donate_link) > span.parent a").map(function (a) {
+    var navLinks = qa("#tabContentMain > .co_menu_item:not(.home):not(.donate_link):not(.cc-contact-item) > span.parent a").map(function (a) {
       return h("li", null, [h("a", { href: a.getAttribute("href"), text: txt(a) })]);
     });
     var social = qa(".cs-f-social-icons a", f).map(function (a) { return a.cloneNode(true); });
