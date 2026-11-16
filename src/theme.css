@@ -1771,3 +1771,42 @@ html body.cco_body #MainSearchForm .co_global_submit .button {
   height: 48px !important; padding: 0 24px !important; font-family: var(--cc-font-body) !important; font-size: 15px !important; font-weight: 700 !important; text-transform: none !important; cursor: pointer;
 }
 html body.cco_body #MainSearchForm .co_global_submit .button:hover { background: var(--cc-primary-2) !important; }
+
+/* ==========================================================================
+   18. LIGHT PAGE TOP ON INNER PAGES (Levi, Nov 16: design proposals 1 and 7, "Go ahead and implement")
+   Our landing pages open on cream with the photo beside the words, the same top as ChabadOne's own
+   pages (their title band, section 17), so every inner page starts alike. Maroon stays for buttons,
+   the donate band and the footer. The homepage hero keeps its own look.
+   ========================================================================== */
+html body.cco_body .cc-landing .cc-hero { --cc-focus: var(--cc-primary); background: var(--cc-cream); color: var(--cc-text); border-bottom: 1px solid var(--cc-line); }
+html body.cco_body .cc-landing .cc-hero .cc-wrap { padding-top: 64px; padding-bottom: 64px; }
+html body.cco_body .cc-landing .cc-hero__title { color: var(--cc-ink); font-size: clamp(40px, 4.6vw, 60px); line-height: 1.04; }
+html body.cco_body .cc-landing .cc-hero__title em { color: var(--cc-accent-text); }
+html body.cco_body .cc-landing .cc-hero .cc-eyebrow, html body.cco_body .cc-landing .cc-hero__info { color: var(--cc-accent-text); }
+html body.cco_body .cc-landing .cc-hero .cc-hero__sub { color: var(--cc-muted) !important; }
+html body.cco_body .cc-landing .cc-hero .cc-stats { border-top-color: var(--cc-line); }
+html body.cco_body .cc-landing .cc-hero .cc-stats strong { color: var(--cc-ink); }
+html body.cco_body .cc-landing .cc-hero .cc-stats span { color: var(--cc-accent-text); }
+html body.cco_body .cc-landing .cc-hero__media > img { box-shadow: none; background: #E9E1DA; }
+/* second button: a maroon outline (the cream "light" button would vanish on cream; the white ghost was for maroon) */
+html body.cco_body .cc-landing .cc-hero .cc-hero__text .cc-btn.cc-btn--light, html body.cco_body .cc-landing .cc-hero .cc-hero__text .cc-btn.cc-btn--ghost {
+  background: transparent !important; color: var(--cc-primary) !important; box-shadow: inset 0 0 0 1.5px var(--cc-primary);
+}
+html body.cco_body .cc-landing .cc-hero .cc-hero__text .cc-btn.cc-btn--light:hover, html body.cco_body .cc-landing .cc-hero .cc-hero__text .cc-btn.cc-btn--ghost:hover { background: var(--cc-white) !important; }
+/* jump pills right under the top: part of the same cream band, on the grid, white pills with a maroon hover */
+html body.cco_body .cc-landing .cc-hero:has(+ .cc-quick) { border-bottom: 0; }
+html body.cco_body .cc-landing .cc-hero:has(+ .cc-quick) .cc-wrap { padding-bottom: 8px; }
+html body.cco_body .cc-landing .cc-quick { --cc-focus: var(--cc-primary); background: var(--cc-cream); border-bottom: 1px solid var(--cc-line); }
+html body.cco_body .cc-landing .cc-quick--pills ul { max-width: var(--cc-max); margin: 0 auto; box-sizing: border-box; justify-content: flex-start; padding: 24px var(--cc-gutter) 56px; }
+html body.cco_body .cc-landing .cc-quick--pills a { color: var(--cc-ink) !important; background: var(--cc-white); border-color: #CFC2BA; }
+html body.cco_body .cc-landing .cc-quick--pills a:hover, html body.cco_body .cc-landing .cc-quick--pills a:focus-visible { background: var(--cc-primary); border-color: var(--cc-primary); color: var(--cc-white) !important; }
+/* ChabadOne's title band: the same title size as our tops */
+html body.cco_body .article-header__title, html body.cco_body .content_title_container h1 { font-size: clamp(40px, 4.6vw, 60px) !important; }
+html body.cco_body.sites-article #BodyContainer header.article-header { padding-bottom: 64px !important; }
+@media (max-width: 760px) {
+  html body.cco_body .cc-landing .cc-hero .cc-wrap { padding-top: 32px; padding-bottom: 44px; }
+  html body.cco_body .cc-landing .cc-hero__title { font-size: 36px; line-height: 1.08; }
+  html body.cco_body .cc-landing .cc-quick--pills ul { justify-content: flex-start; padding: 16px var(--cc-gutter) 36px; }
+  html body.cco_body .article-header__title, html body.cco_body .content_title_container h1 { font-size: 36px !important; line-height: 1.08 !important; }
+  html body.cco_body.sites-article #BodyContainer header.article-header { padding-bottom: 36px !important; }
+}
