@@ -1800,6 +1800,8 @@ html body.cco_body .cc-landing .cc-quick { --cc-focus: var(--cc-primary); backgr
 html body.cco_body .cc-landing .cc-quick--pills ul { max-width: var(--cc-max); margin: 0 auto; box-sizing: border-box; justify-content: flex-start; padding: 24px var(--cc-gutter) 56px; }
 html body.cco_body .cc-landing .cc-quick--pills a { color: var(--cc-ink) !important; background: var(--cc-white); border-color: #CFC2BA; }
 html body.cco_body .cc-landing .cc-quick--pills a:hover, html body.cco_body .cc-landing .cc-quick--pills a:focus-visible { background: var(--cc-primary); border-color: var(--cc-primary); color: var(--cc-white) !important; }
+/* a figure label in two spans ("since" + " 2021") kept its space: a flex item drops leading spaces */
+html body.cco_body .cc-stats li span + span { margin-left: .35em; }
 /* ChabadOne's title band: the same title size as our tops */
 html body.cco_body .article-header__title, html body.cco_body .content_title_container h1 { font-size: clamp(40px, 4.6vw, 60px) !important; }
 html body.cco_body.sites-article #BodyContainer header.article-header { padding-bottom: 64px !important; }
