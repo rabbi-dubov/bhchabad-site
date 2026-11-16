@@ -163,6 +163,7 @@ The approved design is the preview (version 17+, https://claude.ai/artifact/Sa1s
 
 - **Homepage go-live checklist for Rivka** (slide texts, widgets, photos page, testimonials page): https://claude.ai/artifact/5ZB6voHQCTisMdQGTrKSFb
 - **Website plan (master plan)**: https://claude.ai/artifact/Sv4YuH9GCoRwJHsPABTEvT
+- **Whole-site audit report, Nov 15** (fixed list, 10 decisions for Levi, AI-sounding writing with rewrites, 10 design proposals): https://claude.ai/artifact/DHGJoGDknEmz8VQpTqwpun
 - **Photo shortlist** (Use / Skip): https://claude.ai/artifact/85fJaS5LdYV8ENYCNj974z
 - **Photo shortlist, round 2 from Google Drive** (Use / Skip): https://claude.ai/artifact/9VUY1ojDsn51WcDfd8RRHp. Picks in collection `picks` (doc id = `p` + photo id, e.g. `pa2704`, field `choice`) plus `notes/general`. Files: `Shlichus\Website\site-photos\new from Levi\from-drive\` (1600px); `_shortlist-ids.json` there maps photo id to file name.
 - **Photo shortlist, round 3** (younger families, one-on-one moments, newer family photos; same `picks` / `notes/general` layout): https://claude.ai/artifact/FCcZsbEw98dZFyGVCwGSJH. Files: `site-photos\new from Levi\from-drive-round3` with `_shortlist-ids.json`.
