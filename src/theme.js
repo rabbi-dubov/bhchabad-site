@@ -202,12 +202,17 @@
      While closed it sits off-screen, so it is made inert (keyboards and screen readers skip its links);
      opening it moves the focus to its close button, closing it brings the focus back to the menu button. */
   function phoneMenu() {
-    var open = q(".js-mobile-menu-open"), close = q(".js-mobile-menu-close"), wrap = q(".site-nav-wrapper"), was = false;
+    // two elements carry .js-mobile-menu-close: the × button and the dimmed backdrop beside the drawer.
+    // The × is the one to name and focus; the backdrop is for mouse and touch only (Nov 16: the backdrop
+    // got the name and the focus, and its focus ring showed as an orange line along the drawer).
+    var open = q(".js-mobile-menu-open"), wrap = q(".site-nav-wrapper"), was = false;
+    var close = q(".site-nav-wrapper .cs-mobile-menu-close") || q(".js-mobile-menu-close"), back = q(".cs-mobile-menu-close-back");
     if (!open || open.getAttribute("data-cc-menu")) { return; }
     open.setAttribute("data-cc-menu", "1");
     open.setAttribute("aria-label", "Menu");
     open.setAttribute("aria-expanded", "false");
     if (close) { close.setAttribute("aria-label", "Close menu"); }
+    if (back && back !== close) { back.setAttribute("tabindex", "-1"); back.setAttribute("aria-hidden", "true"); back.removeAttribute("aria-label"); }
     // the drawer's bottom "Contact" opened the bare message form; it opens our Contact page instead
     if (CC.contactPageUrl) {
       qa(".mobile-menu-bottom-links a").forEach(function (a) {
