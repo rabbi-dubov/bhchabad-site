@@ -1813,3 +1813,40 @@ html body.cco_body.sites-article #BodyContainer header.article-header { padding-
   html body.cco_body .article-header__title, html body.cco_body .content_title_container h1 { font-size: 36px !important; line-height: 1.08 !important; }
   html body.cco_body.sites-article #BodyContainer header.article-header { padding-bottom: 36px !important; }
 }
+
+/* ==========================================================================
+   19. NEWSLETTER AND DONATE SIDE BY SIDE (homepage; Levi, Nov 16: "make sure they're balanced")
+   Two panels of equal width and height: the same eyebrow, heading and text sizes, the form and the
+   donate buttons on one bottom line, and the donate photo showing through (not an empty maroon box).
+   ========================================================================== */
+html body.cco_body .cc-subscribe.cc-pair { background: var(--cc-white); border-top: 0; }
+html body.cco_body .cc-pair__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+html body.cco_body .cc-pair__panel { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; min-height: 460px; padding: 44px 44px 40px; box-sizing: border-box; border-radius: calc(var(--cc-radius) * 2); }
+html body.cco_body .cc-pair .cc-pair__panel .cc-h2 { font-size: clamp(32px, 3.4vw, 46px); margin: 0 0 12px; }
+html body.cco_body .cc-pair .cc-pair__panel .cc-lede { font-size: 17px; line-height: 1.6; max-width: 34rem; }
+html body.cco_body .cc-pair__action { margin-top: auto; padding-top: 28px; align-self: stretch; }
+html body.cco_body .cc-pair__news { background: var(--cc-white); border: 1px solid var(--cc-line); }
+html body.cco_body .cc-pair__news .cc-h2 { color: var(--cc-ink); }
+html body.cco_body .cc-pair__news .cc-lede { color: var(--cc-muted); }
+/* the form: first and last name side by side, then the email, then the button */
+html body.cco_body .cc-pair #formContainer fieldset { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+html body.cco_body .cc-pair #formContainer fieldset > input[type="email"], html body.cco_body .cc-pair #formContainer fieldset > small { grid-column: 1 / -1; }
+html body.cco_body .cc-pair #formContainer fieldset > input[type="submit"] { grid-column: 1 / -1; justify-self: start; }
+html body.cco_body .cc-pair #formContainer input.co_global_input { min-width: 0; }
+/* the donate panel: the "Donate" photo from the photos page, dark at the top and bottom where the words sit */
+html body.cco_body .cc-pair__give { --cc-focus: var(--cc-accent-on-dark); background: var(--cc-ink); color: var(--cc-on-dark); }
+html body.cco_body .cc-pair__give--photo { background-image: linear-gradient(180deg, rgba(47, 6, 25, .94) 0%, rgba(47, 6, 25, .78) 38%, rgba(47, 6, 25, .4) 64%, rgba(47, 6, 25, .9) 100%), var(--cc-partner-img); background-size: cover; background-position: center 40%; }
+html body.cco_body .cc-pair__give .cc-eyebrow { color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-pair__give .cc-h2 { color: var(--cc-white); }
+html body.cco_body .cc-pair__give .cc-lede { color: var(--cc-on-dark-muted); }
+html body.cco_body .cc-pair__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+html body.cco_body .cc-pair__ctas .cc-btn { height: 52px; padding-top: 0; padding-bottom: 0; }
+html body.cco_body .cc-pair__give .cc-btn.cc-btn--ghost { color: var(--cc-white) !important; }
+html body.cco_body .cc-pair__give .cc-btn.cc-btn--ghost:hover { background: rgba(255, 255, 255, .12) !important; }
+@media (max-width: 860px) {
+  html body.cco_body .cc-pair__grid { grid-template-columns: 1fr; gap: 16px; }
+  html body.cco_body .cc-pair__panel { min-height: 0; padding: 30px 22px 26px; }
+  html body.cco_body .cc-pair__give--photo { min-height: 400px; }
+  html body.cco_body .cc-pair__ctas .cc-btn { flex: 1 1 auto; }
+}
+@media (max-width: 420px) { html body.cco_body .cc-pair #formContainer fieldset { grid-template-columns: 1fr; } }

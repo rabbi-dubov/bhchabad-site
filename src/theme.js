@@ -60,7 +60,8 @@
       // B"H in the top corner of the homepage hero only (Levi, Oct 27); "" removes it
       bh: "ב״ה",
       // Homepage sections, in order.
-      sections: ["hero", "quick", "intro", "strip", "events", "programs", "testimonials", "partner", "subscribe"],
+      // "pair" = newsletter and donate side by side (Levi, Nov 16); "partner" and "subscribe" still work alone.
+      sections: ["hero", "quick", "intro", "strip", "events", "programs", "testimonials", "pair"],
       // Hero = every slide of the ChabadOne promo slider. In a slide's title, "Eyebrow | Title" adds the
       // small label above it; in its text, "Description | Date line" adds the date line under it.
       heroEyebrow: "Shalom and welcome",   // label for the first slide when its title has none
@@ -96,6 +97,7 @@
         dedicate: "Dedicate a class or event",
         dedicateHref: "mailto:rabbi@bhchabad.org?subject=Dedicating%20a%20class%20or%20event"
       },
+      subscribeEyebrow: "Email updates",
       subscribeTitle: "Stay in the loop",
       subscribeText: "Classes, events and holiday celebrations in Bloomfield Hills, straight to your inbox.",
       subscribeList: ["New classes and courses, before they fill up", "Holiday celebrations and Shabbat times", "Easy to unsubscribe anytime"]
@@ -827,6 +829,40 @@
     return sec;
   }
 
+  /* Newsletter and donate side by side, the same size and weight (Levi, Nov 16: "make sure they're balanced"):
+     the same eyebrow, heading and text sizes in both, the form and the buttons along one bottom line,
+     and the donate photo showing through instead of an empty maroon box. */
+  function pairSection(root) {
+    var p = CC.home.partner, s = q(".hp_subscribe .subscribe, .widget-4.subscribe", root);
+    if (!s || !p) { return s ? subscribeSection(root) : partnerSection(); }
+    var news = h("div", { "class": "cc-pair__panel cc-pair__news" }, [
+      CC.home.subscribeEyebrow ? h("p", { "class": "cc-eyebrow", text: CC.home.subscribeEyebrow }) : null,
+      h("h2", { "class": "cc-h2 cc-head", id: "cc-sub-h", text: CC.home.subscribeTitle }),
+      h("p", { "class": "cc-lede", text: CC.home.subscribeText }),
+      h("div", { "class": "cc-subscribe__form cc-pair__action" })
+    ]);
+    q(".cc-subscribe__form", news).appendChild(s);
+    var give = h("div", { "class": "cc-pair__panel cc-pair__give" }, [
+      p.eyebrow ? h("p", { "class": "cc-eyebrow", text: p.eyebrow }) : null,
+      h("h2", { "class": "cc-h2 cc-head", id: "cc-partner-h", text: p.title }),
+      h("p", { "class": "cc-lede", text: p.text }),
+      h("div", { "class": "cc-pair__action cc-pair__ctas" }, [
+        h("a", { "class": "cc-btn cc-btn--accent", href: CC.donateUrl, text: p.donate }),
+        p.dedicate ? h("a", { "class": "cc-btn cc-btn--ghost", href: p.dedicateHref, text: p.dedicate }) : null
+      ])
+    ]);
+    function setBg(src) {
+      if (!src) { return; }
+      addClass(give, "cc-pair__give--photo");
+      give.style.setProperty("--cc-partner-img", "url(\"" + String(src).replace(/"/g, "%22") + "\")");
+    }
+    setBg(p.image);
+    withPhotos(function (g) { if (g && g.donate.length) { setBg(g.donate[0].src); } });
+    return h("section", { "class": "cc-section cc-subscribe cc-pair", "aria-label": "Email updates and donations" }, [
+      h("div", { "class": "cc-wrap" }, [h("div", { "class": "cc-pair__grid" }, [news, give])])
+    ]);
+  }
+
   function homeShell() {
     if (!q(".hp-table") && /\bcc-home-wait\b/.test(html.className)) { addClass(html, "cc-shell-failed"); }
     // Detect the homepage by its widget table, NOT by body.home: ChabadOne adds that class
@@ -844,7 +880,8 @@
       programs: function () { return programsSection(hp); },
       testimonials: function () { return testimonialsSection(); },
       partner: partnerSection,
-      subscribe: function () { return subscribeSection(hp); }
+      subscribe: function () { return subscribeSection(hp); },
+      pair: function () { return pairSection(hp); }
     };
     CC.home.sections.forEach(function (k) { var s = build[k] && build[k](); if (s) { shell.appendChild(s); } });
     var heroWrap = CC.home.bh && q(".cc-hero .cc-wrap", shell);
