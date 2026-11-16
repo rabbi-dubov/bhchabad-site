@@ -201,6 +201,35 @@
     });
   }
 
+  /* Curly quotes and apostrophes everywhere (Levi, Nov 16: straight ones look off, above all in the titles).
+     Pages typed in ChabadOne use typewriter ' and "; visible text gets ’ ‘ “ ” instead.
+     Form fields, code and scripts are never touched, nor are attributes (alt, links). */
+  function curl(v, prev) {
+    var out = "", i, c, b, open = /[\s(\[{—–‘“]/;
+    for (i = 0; i < v.length; i++) {
+      c = v.charAt(i); b = i ? v.charAt(i - 1) : prev;
+      if (c === "\"") { out += (b === "" || open.test(b)) ? "“" : "”"; }
+      else if (c === "'") { out += open.test(b) ? "‘" : "’"; }
+      else { out += c; }
+    }
+    return out;
+  }
+  function smartQuotes(root) {
+    root = root || d.body;
+    if (!root || !d.createTreeWalker) { return; }
+    var skip = /^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|OPTION|CODE|PRE|NOSCRIPT|TITLE)$/;
+    var w = d.createTreeWalker(root, 4 /* text nodes */, null, false), n, v, p, ok, prev = "";
+    while ((n = w.nextNode())) {
+      v = n.nodeValue;
+      if (/['"]/.test(v)) {
+        ok = true;
+        for (p = n.parentNode; p && p !== root.parentNode; p = p.parentNode) { if (skip.test(p.nodeName) || p.isContentEditable) { ok = false; break; } }
+        if (ok) { n.nodeValue = v = curl(v, prev); }
+      }
+      if (v.length) { prev = v.charAt(v.length - 1); }
+    }
+  }
+
   /* ChabadOne reserves some short addresses for Chabad.org articles (/about opens "About Chabad-Lubavitch").
      Content typed in ChabadOne (the homepage message's "Get to know us", for one) still uses them,
      so links to those addresses go to our own page instead. */
@@ -248,15 +277,14 @@
       h("div", null, [h("h4", { text: "Explore" }), h("ul", null, navLinks)]),
       h("div", null, [h("h4", { text: "Get involved" }), h("ul", null, [
         h("li", null, [h("a", { href: CC.eventsUrl, text: "Upcoming events" })]),
-        h("li", null, [h("a", { href: CC.subscribeUrl, text: "Weekly email" })]),
-        h("li", null, [h("a", { href: CC.contactUrl, text: "Contact us" })]),
+        h("li", null, [h("a", { href: CC.subscribeUrl, text: "Email updates" })]),   // the newsletter goes out twice a month
         h("li", null, [h("a", { href: CC.donateUrl, text: "Donate" })])
       ])]),
-      h("div", null, [h("h4", { text: "Find us" }), h("address", null, [
-        h("a", { href: CC.mapUrl, target: "_blank", rel: "noopener", text: CC.street }), h("br"),
-        CC.city, h("br"),
-        h("a", { href: "tel:" + CC.phone.replace(/\D/g, ""), text: CC.phone }), h("br"),
-        h("a", { href: "mailto:" + CC.email, text: CC.email })
+      // The center is the family home (Levi, Nov 15): no street address or map here; ask people to get in touch
+      h("div", null, [h("h4", { text: "Get in touch" }), h("ul", null, [
+        h("li", null, [h("a", { href: "tel:" + CC.phone.replace(/\D/g, ""), text: CC.phone })]),
+        h("li", null, [h("a", { href: "mailto:" + CC.email, text: CC.email })]),
+        h("li", null, [h("a", { href: CC.contactUrl, text: "Send us a message" })])
       ])])
     ]);
     var wrap = h("div", { id: "cc-footer", "class": "cc-footer" }, [grid, h("div", { "class": "cc-footer__bottom" })]);
@@ -461,7 +489,7 @@
     var dots = h("div", { "class": "cc-hero__dots cc-testimonials__dots", role: "group", "aria-label": "Choose a testimonial" });
     function show(i) {
       idx = (i + items.length) % items.length; var t = items[idx];
-      quote.textContent = "“" + t.quote + "”";
+      quote.textContent = "“" + curl(t.quote, " ") + "”";
       by.textContent = "";
       if (t.by) { by.appendChild(h("strong", { text: t.by })); }
       if (t.ctx) { by.appendChild(h("span", { text: t.ctx })); }
@@ -684,6 +712,7 @@
       }
       cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : y.when ? 1 : 0); });
       cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(c)); });
+      smartQuotes(grid);   // the cards can be rebuilt after the page's own pass ran
       setTimeout(upd, 0);
     }
     render([]);   // first paint from the calendar feed
@@ -1003,7 +1032,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, fixLinks].forEach(function (fn) {
+    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
