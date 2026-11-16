@@ -1900,6 +1900,9 @@ html body.cco_body .cc-program__more { color: var(--cc-primary); font-size: 14px
   html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item.cc-overview { display: none !important; }
   /* a list opened by the keyboard (theme.js adds .cc-kb-open; the mouse opens it with inline styles) */
   html body.cco_body #tabContentMain .co_menu_item.multi_level.cc-kb-open .co_submenu_container { display: block !important; height: auto !important; opacity: 1 !important; clip: auto !important; filter: none !important; visibility: visible !important; }
+  /* each sub-page name on one line ("JLI course: The Missing Piece" wrapped in the 240px card) */
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container .co_column { max-width: none !important; }
+  html body.cco_body #tabContentMain .co_menu_item.multi_level .co_submenu_container a.item span { white-space: nowrap !important; }
   /* one orange line under the current page's label, also on hover (the hover line doubled it) */
   html body.cco_body #tabContentMain .co_menu_item.selected:not(.donate_link) span.parent a:hover { box-shadow: none; }
 }
