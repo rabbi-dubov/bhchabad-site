@@ -1718,7 +1718,8 @@ html body.cco_body form.feedback_form .co_optin > div { float: none !important; 
 html body.cco_body form.feedback_form .co_optin input[type="checkbox"] { width: 20px !important; height: 20px !important; flex: 0 0 20px; margin: 2px 0 0 !important; accent-color: var(--cc-primary); }
 html body.cco_body form.feedback_form .co_optin label { font-size: 15px !important; color: var(--cc-muted) !important; cursor: pointer; }
 html body.cco_body form.feedback_form .co_global_button { margin-top: 24px; }
-@media (max-width: 600px) { html body.cco_body form.feedback_form .name_wrapper { grid-template-columns: 1fr; } }
+/* !important: ChabadOne's own grid rule (.feedback_form .medium_top_margin.large_bottom_margin > div .name_wrapper) is more specific */
+@media (max-width: 600px) { html body.cco_body form.feedback_form .name_wrapper { grid-template-columns: 1fr !important; } }
 
 /* Focus ring on dark bands: apricot (maroon would vanish there) */
 html body.cco_body .cc-hero, html body.cco_body .cc-section--ink, html body.cco_body .cc-quick, html body.cco_body #cc-footer, html body.cco_body #footer, html body.cco_body .site-nav-wrapper { --cc-focus: var(--cc-accent-on-dark); }
