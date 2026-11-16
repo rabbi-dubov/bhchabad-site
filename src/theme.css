@@ -1923,9 +1923,12 @@ html body.cco_body .cc-program__more { color: var(--cc-primary); font-size: 14px
   /* the overview line leads the list, a little brighter than the sub-pages */
   html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .co_submenu_container a.item.cc-overview span { color: var(--cc-white) !important; font-weight: 600 !important; }
 }
-/* the narrowest desktops (1025-1100px): a little less space around each label and a smaller title, so the row fits */
+/* the narrowest desktops (1025-1100px): a little less space around each label, smaller labels and title, so the row
+   (with Contact, Nov 16) fits */
 @media (min-width: 1025px) and (max-width: 1100px) {
-  html body.cco_body #tabContentMain .co_menu_item span.parent { padding-left: 5px !important; padding-right: 5px !important; }
-  html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title { font-size: 20px; }
+  html body.cco_body #tabContentMain .co_menu_item span.parent { padding-left: 3px !important; padding-right: 3px !important; }
+  html body.cco_body #tabContentMain .co_menu_item span.parent a, html body.cco_body #header.on-scroll #tabContentMain .co_menu_item span.parent a { font-size: 13px; }
+  html body.cco_body #tabContentMain .co_menu_item.donate_link span.parent a { padding: 9px 14px !important; }
+  html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title { font-size: 19px; }
   html body.cco_body #header_branding .site-logo-wrapper { padding-right: 12px !important; margin-right: 12px !important; }
 }

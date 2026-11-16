@@ -209,7 +209,10 @@
     }
     if (!donate || !model) { return; }
     var id = (/(\d+)$/.exec(CC.contactPageUrl) || [])[1], item = model.cloneNode(true);
-    item.className = "co_menu_item cc-contact-item" + (id && location.pathname.indexOf("/aid/" + id + "/") >= 0 ? " selected" : "");
+    var here = !!id && location.pathname.indexOf("/aid/" + id + "/") >= 0;
+    item.className = "co_menu_item cc-contact-item" + (here ? " selected" : "");
+    // on the Contact page itself only Contact is marked (ChabadOne also marks About, its parent in the menu)
+    if (here) { kids.forEach(function (k) { if (k !== item) { removeClass(k, "selected"); } }); }
     qa("[id]", item).forEach(function (n) { n.removeAttribute("id"); });
     qa("a", item).forEach(function (a) { a.setAttribute("href", CC.contactPageUrl); });
     var lab = q("span.parent a", item);
