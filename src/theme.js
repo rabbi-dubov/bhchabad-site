@@ -35,11 +35,12 @@
     // so every link on the site that points at /about is sent here instead (fixLinks).
     aboutUrl: "/7581763",
     donateUrl: "/4970020",
-    contactUrl: "/tools/feedback.asp",
+    contactUrl: "/tools/feedback.asp",   // the message form itself
+    contactPageUrl: "/7603665",          // our Contact page (phone, email, the form); the phone menu's "Contact" opens it (Levi, Nov 16)
     subscribeUrl: "/tools/subscribe/default.htm",
     // Menu (Nov 16 review). On phones a row with sub-pages opens its list when tapped; the row's own page
     // becomes the list's first line, named here (else "<Label> overview"). Hidden on computers.
-    menuOverview: { "About": "About us", "Learn": "All classes and courses" },
+    menuOverview: { "About": "About us", "Learn": "Learn overview" },
     // Sub-page names in the menus, by page number (the page's own title stays as it is). PROPOSAL in test
     // only, Nov 16: Levi agreed the Learn list was confusing; wording waits for his OK.
     menuLabels: {
@@ -207,6 +208,12 @@
     open.setAttribute("aria-label", "Menu");
     open.setAttribute("aria-expanded", "false");
     if (close) { close.setAttribute("aria-label", "Close menu"); }
+    // the drawer's bottom "Contact" opened the bare message form; it opens our Contact page instead
+    if (CC.contactPageUrl) {
+      qa(".mobile-menu-bottom-links a").forEach(function (a) {
+        if (/feedback\.asp/i.test(a.getAttribute("href") || "")) { a.setAttribute("href", CC.contactPageUrl); }
+      });
+    }
     function isOpen() { return /\bmenu-open\b/.test(d.body.className); }
     function sync() {
       var on = isOpen();
