@@ -234,39 +234,48 @@
     // two elements carry .js-mobile-menu-close: the × button and the dimmed backdrop beside the drawer.
     // The × is the one to name and focus; the backdrop is for mouse and touch only (Nov 16: the backdrop
     // got the name and the focus, and its focus ring showed as an orange line along the drawer).
-    var open = q(".js-mobile-menu-open"), wrap = q(".site-nav-wrapper"), was = false;
-    var close = q(".site-nav-wrapper .cs-mobile-menu-close") || q(".js-mobile-menu-close"), back = q(".cs-mobile-menu-close-back");
+    var open = q(".js-mobile-menu-open"), was = false;
     if (!open || open.getAttribute("data-cc-menu")) { return; }
     open.setAttribute("data-cc-menu", "1");
     open.setAttribute("aria-label", "Menu");
     open.setAttribute("aria-expanded", "false");
-    if (close) { close.setAttribute("aria-label", "Close menu"); }
-    if (back && back !== close) { back.setAttribute("tabindex", "-1"); back.setAttribute("aria-hidden", "true"); back.removeAttribute("aria-label"); }
-    // the drawer's bottom "Contact" opened the bare message form: with the Contact row in the menu it goes;
-    // without it, it opens our Contact page
-    if (CC.contactPageUrl) {
-      var hasItem = !!q("#tabContentMain .cc-contact-item");
-      qa(".mobile-menu-bottom-links a").forEach(function (a) {
-        if (!/feedback\.asp/i.test(a.getAttribute("href") || "")) { return; }
-        if (hasItem) { a.style.setProperty("display", "none", "important"); a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); }
-        else { a.setAttribute("href", CC.contactPageUrl); }
-      });
+    // ChabadOne's own script builds parts of the drawer after ours has run (the × button, the backdrop, the
+    // sub-list arrows), so they are looked up again whenever they are needed, and once more on page load
+    // (Nov 16: on the live site the × stayed unnamed and the closed drawer was not made inert).
+    function parts() { return { wrap: q(".site-nav-wrapper"), close: q(".site-nav-wrapper .cs-mobile-menu-close"), back: q(".cs-mobile-menu-close-back") }; }
+    function prep() {
+      var p = parts();
+      if (p.close) { p.close.setAttribute("aria-label", "Close menu"); }
+      if (p.back && p.back !== p.close) { p.back.setAttribute("tabindex", "-1"); p.back.setAttribute("aria-hidden", "true"); p.back.removeAttribute("aria-label"); }
+      // the drawer's bottom "Contact" opened the bare message form: with the Contact row in the menu it goes;
+      // without it, it opens our Contact page
+      if (CC.contactPageUrl) {
+        var hasItem = !!q("#tabContentMain .cc-contact-item");
+        qa(".mobile-menu-bottom-links a").forEach(function (a) {
+          if (!/feedback\.asp/i.test(a.getAttribute("href") || "")) { return; }
+          if (hasItem) { a.style.setProperty("display", "none", "important"); a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); }
+          else { a.setAttribute("href", CC.contactPageUrl); }
+        });
+      }
+      return p;
     }
     function isOpen() { return /\bmenu-open\b/.test(d.body.className); }
     function sync() {
-      var on = isOpen();
+      var p = prep(), on = isOpen();
       open.setAttribute("aria-expanded", on ? "true" : "false");
       if (on) { addClass(html, "cc-menu-open"); } else { html.className = html.className.replace(/\s?cc-menu-open\b/g, ""); }
-      if (wrap) { wrap.inert = phoneMq.matches && !on; }
-      if (on && !was && close) { try { close.focus(); } catch (e) {} }
-      if (!on && was && wrap && wrap.contains(d.activeElement)) { open.focus(); }
+      if (p.wrap) { p.wrap.inert = phoneMq.matches && !on; }
+      if (on && !was && p.close) { try { p.close.focus(); } catch (e) {} }
+      if (!on && was && p.wrap && p.wrap.contains(d.activeElement)) { open.focus(); }
       was = on;
     }
     sync();
     onMq(sync);
+    window.addEventListener("load", sync);
     if (window.MutationObserver) { new MutationObserver(sync).observe(d.body, { attributes: true, attributeFilter: ["class"] }); }
     d.addEventListener("keydown", function (e) {
       if ((e.key === "Escape" || e.key === "Esc") && isOpen()) {
+        var close = parts().close;
         if (close) { close.click(); } else { d.body.className = d.body.className.replace(/\s?menu-open\b/g, ""); }
         if (isOpen()) { d.body.className = d.body.className.replace(/\s?menu-open\b/g, ""); }
         open.focus();
@@ -290,7 +299,7 @@
     qa("#tabContentMain > .co_menu_item.multi_level").forEach(function (li) {
       if (li.getAttribute("data-cc-menu")) { return; }
       li.setAttribute("data-cc-menu", "1");
-      var label = q("span.parent a", li), toggle = q(".cs-menu-item-toggle", li), col = q(".co_submenu_container .co_column", li), quiet = false;
+      var label = q("span.parent a", li), col = q(".co_submenu_container .co_column", li), quiet = false;
       if (!label) { return; }
       var name = txt(label);
       // the extra link ChabadOne lays behind an open dropdown repeats the label: one stop for the keyboard is enough
@@ -298,14 +307,22 @@
       if (col && !q(".cc-overview", col)) {
         col.insertBefore(h("a", { "class": "item cc-overview", href: label.getAttribute("href") }, [h("span", { text: (CC.menuOverview || {})[name] || name + " overview" })]), col.firstChild);
       }
-      // on phones the whole row is the control, so the small arrow button stays out of the tab order
-      if (toggle) { toggle.setAttribute("tabindex", "-1"); toggle.setAttribute("aria-hidden", "true"); }
+      // on phones the whole row is the control, so the small arrow button stays out of the tab order.
+      // ChabadOne adds that button with its own script after ours, so it is looked up when needed.
+      function arrow() {
+        var t = q(".cs-menu-item-toggle", li);
+        if (t && !t.getAttribute("data-cc-quiet")) { t.setAttribute("data-cc-quiet", "1"); t.setAttribute("tabindex", "-1"); t.setAttribute("aria-hidden", "true"); }
+        return t;
+      }
+      arrow();
+      window.addEventListener("load", arrow);
       function shown() { return phoneMq.matches ? /\bitem-open\b/.test(li.className) : /\b(hover|cc-kb-open)\b/.test(li.className); }
       function sync() { label.setAttribute("aria-expanded", shown() ? "true" : "false"); }
       label.addEventListener("click", function (e) {
-        if (!phoneMq.matches || !toggle) { return; }
+        if (!phoneMq.matches) { return; }
+        var t = arrow();
         e.preventDefault();
-        toggle.click();
+        if (t) { t.click(); } else if (/\bitem-open\b/.test(li.className)) { removeClass(li, "item-open"); } else { addClass(li, "item-open"); }
       });
       // ChabadOne opens a list with inline styles on mouse hover; the keyboard gets the class .cc-kb-open
       // (see the CSS), only for keyboard focus, so a mouse click on a label doesn't pin its list open
