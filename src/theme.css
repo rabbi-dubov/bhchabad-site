@@ -1732,9 +1732,9 @@ html body.cco_body .cc-testimonials__dots button[aria-current="true"] { box-shad
    and the page-title band runs edge to edge with its title on the site grid.
    ========================================================================== */
 html body.cco_body .page-tools-sidebar, html body.cco_body #co_ads_container, html body.cco_body .co_local_menu.js-local-nav { display: none !important; }
-/* the content column takes the freed width, centred on the 1200px grid (the homepage keeps its own layout) */
-html body.cco_body:not(:has(.hp-table)) #co_content_container > .clearfix > .body_wrapper.co_body { margin: 0 !important; padding: 0 !important; width: auto !important; max-width: none !important; }
-html body.cco_body:not(:has(.hp-table)) #co_body_container {
+/* the content column takes the freed width, centred on the 1200px grid (the homepage and landing pages keep their own full-width layout) */
+html body.cco_body:not(:has(.hp-table)):not(:has(.cc-landing)) #co_content_container > .clearfix > .body_wrapper.co_body { margin: 0 !important; padding: 0 !important; width: auto !important; max-width: none !important; }
+html body.cco_body:not(:has(.hp-table)):not(:has(.cc-landing)) #co_body_container {
   float: none !important; width: auto !important; max-width: var(--cc-max) !important; margin: 0 auto !important;
   flex: 1 1 100% !important; min-width: 0 !important; box-sizing: border-box !important;
   padding-left: var(--cc-gutter) !important; padding-right: var(--cc-gutter) !important;
