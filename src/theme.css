@@ -1850,3 +1850,41 @@ html body.cco_body .cc-pair__give .cc-btn.cc-btn--ghost:hover { background: rgba
   html body.cco_body .cc-pair__ctas .cc-btn { flex: 1 1 auto; }
 }
 @media (max-width: 420px) { html body.cco_body .cc-pair #formContainer fieldset { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   20. ONE CARD STYLE EVERYWHERE (Levi, Nov 16: design proposal 4, "Ok good")
+   Every card: 12px corners, a thin line border, no shadow, the picture on top (3:2 for photos;
+   course covers and course art keep their own shape so their lettering is never cropped), the name
+   and a line under it. Hover: the border darkens and the photo zooms a touch (still for anyone who
+   asks for less motion). Event tags stay on the photo (bottom on the Learn grid: never over a face).
+   ========================================================================== */
+html body.cco_body { --cc-card-radius: 12px; --cc-card-line-hover: #CFC2BA; }
+html body.cco_body .cc-ev, html body.cco_body .cc-event, html body.cco_body .cc-card, html body.cco_body .cc-course, html body.cco_body .cc-program, html body.cco_body .cc-nowbar__card {
+  border-radius: var(--cc-card-radius); box-shadow: none; transition: border-color .2s ease;
+}
+html body.cco_body .cc-ev:hover, html body.cco_body .cc-event:hover, html body.cco_body .cc-program:hover, html body.cco_body .cc-program:focus-visible { border-color: var(--cc-card-line-hover); }
+html body.cco_body a.cc-card:hover { box-shadow: none; transform: none; border-color: var(--cc-card-line-hover); }
+html body.cco_body .cc-course:hover { box-shadow: none; transform: none; border-left-color: var(--cc-card-line-hover); border-right-color: var(--cc-card-line-hover); border-bottom-color: var(--cc-card-line-hover); }
+html body.cco_body .cc-course__cover { border-radius: 9px 9px 0 0; }
+html body.cco_body .cc-nowbar__card { box-shadow: none; }
+/* event cards: 3:2 photo; the photo zooms on its own layer so the tag stays sharp */
+html body.cco_body .cc-ev__img, html body.cco_body .cc-event__img { aspect-ratio: 3 / 2; overflow: hidden; }
+html body.cco_body .cc-ev__img::before { content: ""; position: absolute; inset: 0; background: inherit; transition: transform .5s ease; }
+html body.cco_body .cc-ev__img > img { transition: transform .5s ease; }
+html body.cco_body .cc-ev:hover .cc-ev__img::before, html body.cco_body .cc-ev:hover .cc-ev__img > img, html body.cco_body .cc-ev:focus-within .cc-ev__img::before, html body.cco_body .cc-ev:focus-within .cc-ev__img > img { transform: scale(1.03); }
+/* homepage program cards: the photo on top (3:2), the name and "Learn more" under it, on white */
+html body.cco_body .cc-program { display: flex; flex-direction: column; aspect-ratio: auto; background: var(--cc-white); border: 1px solid var(--cc-line); }
+html body.cco_body .cc-program::after { content: none; }
+html body.cco_body .cc-program__img { position: relative; inset: auto; flex: none; aspect-ratio: 3 / 2; transition: transform .5s ease; }
+html body.cco_body .cc-program:hover .cc-program__img, html body.cco_body .cc-program:focus-visible .cc-program__img { transform: scale(1.03); }
+html body.cco_body .cc-program__label { position: relative; z-index: 1; flex: 1; padding: 18px 20px 20px; background: var(--cc-white); }
+html body.cco_body .cc-program__title { color: var(--cc-ink); font-size: 24px; line-height: 1.15; }
+html body.cco_body .cc-program__more { color: var(--cc-primary); font-size: 14px; }
+@media (max-width: 560px) {
+  html body.cco_body .cc-program__label { padding: 12px 14px 14px; }
+  html body.cco_body .cc-program__title { font-size: 19px; }
+  html body.cco_body .cc-program__more { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body.cco_body .cc-ev__img::before, html body.cco_body .cc-ev__img > img, html body.cco_body .cc-program__img { transition: none; transform: none !important; }
+}
