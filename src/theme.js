@@ -31,7 +31,9 @@
     email: "info@bhchabad.org",
     eventsUrl: "/418840",
     eventsSource: "/tools/events/default.htm",
-    aboutUrl: "/about",
+    // Our own About page. ChabadOne reserves /about for Chabad.org's "About Chabad-Lubavitch" article,
+    // so every link on the site that points at /about is sent here instead (fixLinks).
+    aboutUrl: "/7581763",
     donateUrl: "/4970020",
     contactUrl: "/tools/feedback.asp",
     subscribeUrl: "/tools/subscribe/default.htm",
@@ -64,7 +66,7 @@
       heroEyebrow: "Shalom and welcome",   // label for the first slide when its title has none
       heroCta: "See what's coming up",
       heroSeconds: 7,
-      secondaryCta: { text: "About us", href: "/about" },   // shown on the first slide only
+      secondaryCta: { text: "About us", href: "/7581763" },   // shown on the first slide only (= CC.aboutUrl)
       introEyebrow: "Welcome",
       eventsEyebrow: "Coming up",
       eventsTitle: "Discover the joy and meaning in Judaism",
@@ -141,8 +143,8 @@
     if (!url || !window.fetch || !window.DOMParser) { done(null); return; }
     function save(v) { try { localStorage.setItem(key, JSON.stringify({ at: Date.now(), d: v })); } catch (e) {} done(v); }
     fetch(url, { credentials: "same-origin" }).then(function (r) { return r.ok ? r.text() : ""; })
-      .then(function (t) { save(t ? parse(new DOMParser().parseFromString(t, "text/html")) : null); })
-      .catch(function () { save(null); });
+      .then(function (t) { var v = null; try { v = t ? parse(new DOMParser().parseFromString(t, "text/html")) : null; } catch (e) {} return v; }, function () { return null; })
+      .then(save);
   }
   function onReady(fn) { if (d.readyState === "loading") { d.addEventListener("DOMContentLoaded", fn); } else { fn(); } }
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -167,6 +169,47 @@
       if (sub) { sub.style.display = "none"; t.appendChild(sub); }
       t.setAttribute("aria-label", CC.org + " home");
     }
+    // The emblem repeats the title's home link: keep it clickable, but out of the tab order and screen readers
+    qa("#header_branding a").forEach(function (a) {
+      if (a !== t && !txt(a) && !a.getAttribute("aria-label")) { a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); }
+    });
+    phoneMenu();
+  }
+
+  /* Phone menu (ChabadOne's drawer): names for its two icon buttons, Escape closes it,
+     and the page behind stays still while it is open (html.cc-menu-open, see the CSS). */
+  function phoneMenu() {
+    var open = q(".js-mobile-menu-open"), close = q(".js-mobile-menu-close");
+    if (!open || open.getAttribute("data-cc-menu")) { return; }
+    open.setAttribute("data-cc-menu", "1");
+    open.setAttribute("aria-label", "Menu");
+    open.setAttribute("aria-expanded", "false");
+    if (close) { close.setAttribute("aria-label", "Close menu"); }
+    function isOpen() { return /\bmenu-open\b/.test(d.body.className); }
+    function sync() {
+      var on = isOpen();
+      open.setAttribute("aria-expanded", on ? "true" : "false");
+      if (on) { addClass(html, "cc-menu-open"); } else { html.className = html.className.replace(/\s?cc-menu-open\b/g, ""); }
+    }
+    if (window.MutationObserver) { new MutationObserver(sync).observe(d.body, { attributes: true, attributeFilter: ["class"] }); }
+    d.addEventListener("keydown", function (e) {
+      if ((e.key === "Escape" || e.key === "Esc") && isOpen()) {
+        if (close) { close.click(); } else { d.body.className = d.body.className.replace(/\s?menu-open\b/g, ""); }
+        if (isOpen()) { d.body.className = d.body.className.replace(/\s?menu-open\b/g, ""); }
+        open.focus();
+      }
+    });
+  }
+
+  /* ChabadOne reserves some short addresses for Chabad.org articles (/about opens "About Chabad-Lubavitch").
+     Content typed in ChabadOne (the homepage message's "Get to know us", for one) still uses them,
+     so links to those addresses go to our own page instead. */
+  function fixLinks() {
+    var map = { "/about": CC.aboutUrl };
+    qa("a[href]").forEach(function (a) {
+      var href = (a.getAttribute("href") || "").replace(/^https?:\/\/(www\.)?lightbhchabad\.org/i, "").replace(/\/$/, "").toLowerCase();
+      if (map[href]) { a.setAttribute("href", map[href]); }
+    });
   }
 
   /* ---------- 1b. Notice bar ("new website, still building") ---------- */
@@ -226,16 +269,19 @@
   // and the page below never jumps. show(i) fades to layer i.
   function stack(cls, layers) {
     var box = h("div", { "class": "cc-stack " + (cls || "") }, layers);
-    layers.forEach(function (l, i) { addClass(l, "cc-slide"); if (i === 0) { addClass(l, "is-on"); } else { l.setAttribute("aria-hidden", "true"); } });
+    // Hidden slides are also inert, so the keyboard can't tab into their invisible buttons
+    function hide(l, off) { if (off) { l.setAttribute("aria-hidden", "true"); } else { l.removeAttribute("aria-hidden"); } l.inert = off; }
+    layers.forEach(function (l, i) { addClass(l, "cc-slide"); if (i === 0) { addClass(l, "is-on"); } else { hide(l, true); } });
     box.show = function (i) {
       qa(":scope > .cc-slide", box).forEach(function (l, j) {
         l.className = l.className.replace(/\s?is-on\b/g, "");
-        if (j === i) { addClass(l, "is-on"); l.removeAttribute("aria-hidden"); } else { l.setAttribute("aria-hidden", "true"); }
+        if (j === i) { addClass(l, "is-on"); }
+        hide(l, j !== i);
       });
     };
     return box;
   }
-  function photoLayer(src, alt) { return h("div", { role: "img", "aria-label": alt || "", style: "background-image:url(\"" + String(src).replace(/"/g, "%22") + "\")" }); }
+  function photoLayer(src, alt) { return h("div", { "class": "cc-photo", role: alt ? "img" : null, "aria-label": alt || null, "aria-hidden": alt ? null : "true", style: "background-image:url(\"" + String(src).replace(/"/g, "%22") + "\")" }); }
   function roundBtn(label, arrow) { return h("button", { type: "button", "class": "cc-round", "aria-label": label, text: arrow }); }
   function splitPipe(s) { var i = (s || "").indexOf(" | "); return i < 0 ? [s || "", ""] : [s.slice(0, i).trim(), s.slice(i + 3).trim()]; }
 
@@ -274,7 +320,7 @@
     var media = h("div", { "class": "cc-hero__media" }, [imgBox]);
     var sec = h("section", { "class": "cc-hero", "aria-label": "Welcome", "aria-roledescription": "carousel" }, [h("div", { "class": "cc-wrap" }, [textBox, media])]);
     if (slides.length < 2) { return sec; }
-    var idx = 0, timer = null;
+    var idx = 0, timer = null, hovered = false, focused = false;
     var dots = h("div", { "class": "cc-hero__dots", role: "group", "aria-label": "Choose a slide" });
     function show(i) {
       idx = (i + slides.length) % slides.length;
@@ -282,14 +328,17 @@
       qa("button", dots).forEach(function (b, j) { b.setAttribute("aria-current", j === idx ? "true" : "false"); });
     }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
-    function start() { stop(); if (!reduceMotion) { timer = setInterval(function () { show(idx + 1); }, CC.home.heroSeconds * 1000); } }
+    // rotation waits while the mouse is over the hero or the keyboard is inside it (a click on a dot doesn't restart it)
+    function start() { stop(); if (!reduceMotion && !hovered && !focused) { timer = setInterval(function () { show(idx + 1); }, CC.home.heroSeconds * 1000); } }
     slides.forEach(function (s, i) { var b = h("button", { type: "button", "aria-label": "Slide " + (i + 1) + ": " + s.title, "aria-current": i ? "false" : "true" }); b.addEventListener("click", function () { show(i); start(); }); dots.appendChild(b); });
     var prev = roundBtn("Previous slide", "←"), next = roundBtn("Next slide", "→");
     prev.addEventListener("click", function () { show(idx - 1); start(); });
     next.addEventListener("click", function () { show(idx + 1); start(); });
     media.appendChild(h("div", { "class": "cc-hero__nav" }, [prev, dots, next]));
-    sec.addEventListener("mouseenter", stop); sec.addEventListener("mouseleave", start);
-    sec.addEventListener("focusin", stop); sec.addEventListener("focusout", start);
+    sec.addEventListener("mouseenter", function () { hovered = true; stop(); });
+    sec.addEventListener("mouseleave", function () { hovered = false; start(); });
+    sec.addEventListener("focusin", function () { focused = true; stop(); });
+    sec.addEventListener("focusout", function (e) { if (!e.relatedTarget || !sec.contains(e.relatedTarget)) { focused = false; start(); } });
     start();
     return sec;
   }
@@ -433,7 +482,7 @@
   function testimonialsSection(list) {
     var sec = h("section", { "class": "cc-section cc-section--cream cc-testimonials", "aria-labelledby": "cc-tm-h" });
     function build(items) {
-      if (!items || !items.length) { if (sec.parentNode) { sec.parentNode.removeChild(sec); } return; }
+      if (!items || !items.length) { sec.hidden = true; if (sec.parentNode) { sec.parentNode.removeChild(sec); } return; }
       loadQuoteFont();
       // One photo layer per distinct picture; a quote without its own picture keeps the one before it
       var photos = [], layerOf = [], last = -1;
@@ -593,6 +642,8 @@
     next.addEventListener("click", function () { grid.scrollBy({ left: step(), behavior: reduceMotion ? "auto" : "smooth" }); });
     grid.addEventListener("scroll", upd, { passive: true });
     window.addEventListener("resize", upd);
+    // the row is built before the shell is on the page (no width yet): measure again once it has one
+    if (window.ResizeObserver) { new ResizeObserver(function () { upd(); }).observe(grid); }
     // Dated sessions from the native "Upcoming Events" feed on the homepage
     var sessions = qa(".upcoming_events .widget_content li", root).map(function (li) {
       // The title link sits in the heading; an icon-only .register_link may come first
@@ -628,12 +679,12 @@
       grid.textContent = "";
       if (!cards.length) {
         grid.appendChild(h("div", { "class": "cc-card" }, [h("h3", { text: "New classes are on the way" }), h("p", { text: "Check the full calendar or join our weekly email to hear first." })]));
-        upd();
+        setTimeout(upd, 0);
         return;
       }
-      cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : 1); });
+      cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : y.when ? 1 : 0); });
       cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(c)); });
-      upd();
+      setTimeout(upd, 0);
     }
     render([]);   // first paint from the calendar feed
     cachedPage("cc-courses-v2", 3600 * 1000, CC.eventsSource, function (doc) {
@@ -686,7 +737,7 @@
     var sec = h("section", { "class": "cc-strip", "aria-label": "Photos from our community" });
     withPhotos(function (g) {
       var list = g && g.strip || [];
-      if (list.length < 4) { if (sec.parentNode) { sec.parentNode.removeChild(sec); } return; }
+      if (list.length < 4) { sec.hidden = true; if (sec.parentNode) { sec.parentNode.removeChild(sec); } return; }
       function row(hide) {
         return h("div", { "class": "cc-strip__row", "aria-hidden": hide ? "true" : null }, list.map(function (p) {
           return h("img", { src: p.src, alt: hide ? "" : p.alt, loading: "lazy" });
@@ -748,6 +799,7 @@
   }
 
   function homeShell() {
+    if (!q(".hp-table") && /\bcc-home-wait\b/.test(html.className)) { addClass(html, "cc-shell-failed"); }
     // Detect the homepage by its widget table, NOT by body.home: ChabadOne adds that class
     // late with its own script, so checking it caused random fall-backs to the native homepage.
     var hp = q(".hp-table");
@@ -773,6 +825,10 @@
     }
     hp.parentNode.insertBefore(shell, hp);
     addClass(hp, "cc-native-parked");
+    // The parked widgets sit off-screen (the shell reads them); keep their ~40 links (sample items,
+    // Chabad.org articles) away from the keyboard and screen readers
+    hp.setAttribute("aria-hidden", "true");
+    hp.inert = true;
     addClass(html, "cc-shell-ready");
   }
 
@@ -820,6 +876,8 @@
       chips.forEach(function (a) {
         a.setAttribute("role", "button");
         a.addEventListener("click", function (ev) { ev.preventDefault(); filter((a.getAttribute("href") || "#all").slice(1)); });
+        // a link acting as a button also answers the Space bar
+        a.addEventListener("keydown", function (ev) { if (ev.key === " " || ev.key === "Spacebar") { ev.preventDefault(); a.click(); } });
       });
       if (chips.length) { filter("all"); }
 
@@ -829,7 +887,12 @@
       d.body.appendChild(dlg);
       if (typeof dlg.showModal !== "function") { return; } // very old browsers: cards stay plain links
       close.addEventListener("click", function () { dlg.close(); });
-      dlg.addEventListener("click", function (ev) { if (ev.target === dlg) { dlg.close(); } });
+      // close on a click in the dimmed backdrop only (not on the card's own padding, or after selecting text)
+      dlg.addEventListener("click", function (ev) {
+        if (ev.target !== dlg) { return; }
+        var r = dlg.getBoundingClientRect();
+        if (ev.clientX < r.left || ev.clientX > r.right || ev.clientY < r.top || ev.clientY > r.bottom) { dlg.close(); }
+      });
       dlg.addEventListener("close", function () { if (history.replaceState && /^#c-/.test(location.hash)) { history.replaceState(null, "", location.pathname + location.search); } });
       function open(card) {
         body.textContent = "";
@@ -940,7 +1003,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration].forEach(function (fn) {
+    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, fixLinks].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
