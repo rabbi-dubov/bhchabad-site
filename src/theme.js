@@ -99,7 +99,7 @@
       eventNames: { "24326": "Missing Piece", "23504": "Kabbalah", "23481": "NEXT GENesis" },
       // Calendar items to show even when the homepage feed (next 5 calendar items only) hasn't reached them yet.
       // date = YYYY-MM-DD; each drops off by itself after its date, and isn't doubled once the feed lists it.
-      // The card's photo is the first picture on the item's page (e.g. the flyer); register = optional
+      // image = the card's photo (paste the picture's address); without it, the first picture on the item's page. register = optional
       // "Register" button ("<page>#rsvp" scrolls to the RSVP form on that page).
       extraEvents: [
         { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "6:30 pm", href: "/7358669", register: "/7358669#rsvp" }
@@ -885,7 +885,7 @@
         var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(e.date || "");
         if (!m || !e.title || e.date < today) { return null; }
         var dt = new Date(+m[1], +m[2] - 1, +m[3]);
-        return { title: e.title, k: evKey(e.title), href: e.href || "", page: e.href || "", reg: false, register: e.register || "", key: e.date,
+        return { title: e.title, k: evKey(e.title), href: e.href || "", page: e.href || "", reg: false, register: e.register || "", image: e.image || "", key: e.date,
           wd: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dt.getDay()], mon: MONTHS[dt.getMonth()].replace(/^./, function (c) { return c.toUpperCase(); }),
           day: String(+m[3]), time: e.time || "", extra: true };
       }).filter(function (x) {
@@ -929,6 +929,7 @@
         if (used[x.k]) { return; }
         used[x.k] = 1;
         var pg = pagePics[x.k] || {};
+        if (x.image) { pg = { img: x.image, flyer: true, desc: pg.desc }; }
         cards.push({ title: x.title, href: x.page || x.href, reg: x.register || (x.reg ? x.href : ""), desc: pg.desc || "", img: pg.img || "", imgTop: !!pg.flyer, oneOff: !!x.extra, when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
       });
       grid.textContent = "";
@@ -1305,14 +1306,46 @@
       id = m ? m[1] : "";
     }
     var max = +(map[id] || 0);
+    // A number list 1..N (10+ numbers, nothing else) also counts, whatever its id; dates and ages never do
+    function numberList(sel) {
+      var n = 0, low = 99;
+      for (var i = 0; i < sel.options.length; i++) {
+        var v = String(sel.options[i].value).trim();
+        if (v === "" || v === "0") { continue; }
+        if (!/^\d+$/.test(v)) { return false; }
+        n++; low = Math.min(low, +v);
+      }
+      return n >= 10 && low <= 1;
+    }
+    function isQty(sel) {
+      var key = (sel.id || "") + " " + (sel.name || "") + " " + (sel.className || "");
+      if (/category|day|month|year|age|date|birth|hour|minute|time/i.test(key)) { return false; }
+      return /quantity|attendee|qty|ticket/i.test(key) || numberList(sel);
+    }
+    // Info box for checking a real page: add ?ccdebug (or #ccdebug) to the address
+    if (/ccdebug/i.test(location.search + location.hash)) {
+      var box = h("pre", { style: "position:fixed;left:8px;bottom:8px;z-index:99999;max-width:94vw;max-height:45vh;overflow:auto;background:#fff;color:#000;border:2px solid #c00;padding:8px;font:12px/1.4 monospace;white-space:pre-wrap;user-select:text" });
+      var show = function () {
+        var lines = ["theme test " + (window.ccMode || "") + " | eventid " + (id || "?") + " | max " + (max || "none")];
+        qa("select").forEach(function (sel, i) {
+          var o = sel.options, f = o.length ? o[0].value : "", l = o.length ? o[o.length - 1].value : "";
+          lines.push(i + ": id=" + (sel.id || "-") + " name=" + (sel.name || "-") + " opts=" + o.length + " [" + f + ".." + l + "] seen=" + (sel.offsetParent ? "y" : "n") + " capped=" + (sel.getAttribute("data-cc-capped") ? "y" : "n"));
+        });
+        var widgets = qa("[role=listbox], .select2, .chosen-container, .nice-select, .selectric, .dropdown-menu, .custom-select").length;
+        lines.push("custom dropdowns: " + widgets);
+        box.textContent = lines.join("\n");
+      };
+      d.body.appendChild(box); show();
+      d.addEventListener("change", function () { setTimeout(show, 400); }, true);
+      setTimeout(show, 2000);
+    }
     if (!max) { return; }
-    function isQty(sel) { return /quantity|attendee/i.test((sel.id || "") + " " + (sel.name || "")) && !/category/i.test(sel.id || ""); }
     function cap(sel) {
       if (!sel || sel.tagName !== "SELECT" || !isQty(sel)) { return; }
       var cut = false;
       for (var i = sel.options.length - 1; i >= 0; i--) {
         var v = parseInt(sel.options[i].value, 10);
-        if (v > max) { if (sel.options[i].selected) { cut = true; } sel.remove(i); }
+        if (v > max) { if (sel.options[i].selected) { cut = true; } sel.remove(i); sel.setAttribute("data-cc-capped", "1"); }
       }
       if (cut) { sel.value = String(max); sel.dispatchEvent(new Event("change", { bubbles: true })); }
     }
