@@ -31,6 +31,9 @@
     email: "info@bhchabad.org",
     eventsUrl: "/418840",
     eventsSource: "/tools/events/default.htm",
+    // Registration page: most people one form may register, by event id (the number-of-registrants list
+    // is cut to 1..N). The Missing Piece = 1-3 (Levi, Nov 17).
+    regMaxAttendees: { "24326": 3 },
     // Our own About page. ChabadOne reserves /about for Chabad.org's "About Chabad-Lubavitch" article,
     // so every link on the site that points at /about is sent here instead (fixLinks).
     aboutUrl: "/7581763",
@@ -89,11 +92,19 @@
       eventsTitle: "Discover the joy and meaning in Judaism",
       eventsLine: "The first class of every course is yours to try, commitment-free.",
       eventsAll: "Full calendar",
+      // Course page for a registration event (event id -> page). Its card's "Learn more" opens the page and
+      // "Register" the registration (Levi, Nov 17). Events not listed keep their own link.
+      eventPages: { "24326": "/7620415", "23504": "/7593397", "23481": "/7593500" },
+      // Calendar items to show even when the homepage feed (next 5 calendar items only) hasn't reached them yet.
+      // date = YYYY-MM-DD; each drops off by itself after its date, and isn't doubled once the feed lists it.
+      extraEvents: [
+        { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "", href: "/7358669" }
+      ],
       // Event-name prefixes turned into a readable label on the course card
       prefixes: { "JLI": "JLI course", "RCS": "Rosh Chodesh Society" },
       // Category tag on each event card: the first rule whose words match the event's name, label or text
       tags: [
-        { label: "Holiday", tone: "holiday", match: /chanuk|hanuk|purim|passover|pesach|seder|sukk|shavu|rosh hashana|yom kippur|simch|lag b.?omer|tu b.?shvat|megillah|shofar/i },
+        { label: "Holiday", tone: "holiday", match: /chanuk|hanuk|menorah|purim|passover|pesach|seder|sukk|shavu|rosh hashana|yom kippur|simch|lag b.?omer|tu b.?shvat|megillah|shofar/i },
         { label: "Shabbat", tone: "shabbat", match: /shabbat|shabbos|kiddush/i },
         { label: "Women", tone: "women", match: /women|ladies|genesis|challah|rosh chodesh/i },
         { label: "JLI Course", tone: "course", match: /\bjli\b|course/i }
@@ -770,7 +781,7 @@
     var w = ev.when, st = splitTitle(ev.title), tag = tagFor(st, ev), when = "";
     if (ev.sessions.length) {
       var first = ev.sessions[0], times = ev.sessions.filter(function (x) { return x.key === first.key && x.time; }).map(function (x) { return x.time; });
-      when = (ev.desc || ev.reg ? "Next: " : "") + first.wd + ", " + first.mon + " " + first.day + (times.length ? " · " + times.join(" or ") : "");
+      when = (!ev.oneOff && (ev.desc || ev.reg) ? "Next: " : "") + first.wd + ", " + first.mon + " " + first.day + (times.length ? " · " + times.join(" or ") : "");
     } else if (w) {
       when = "Starts " + w.wd + ", " + w.mon + " " + w.day;
     }
@@ -832,7 +843,49 @@
       }
       return "";
     }
+    // A registration event with its own course page (CC.home.eventPages): "Learn more" opens the page,
+    // "Register" the registration.
+    function evId(u) { var m = /eventid[=\/](\d+)/i.exec(u || ""); return m ? m[1] : ""; }
+    function linkPage(c) {
+      var map = CC.home.eventPages || {}, id = evId(c.href) || evId(c.reg), page = id && map[id];
+      if (!page || c.href === page) { return c; }
+      if (!c.reg) { c.reg = /register/i.test(c.href || "") ? c.href : "/tools/events/register.asp?eventid=" + id; }
+      c.href = page;
+      return c;
+    }
+    function pageNo(u) { var m = /(?:^|\/)(\d{5,})(?:[\/?#.]|$)/.exec(u || ""); return m ? m[1] : ""; }
+    // Calendar items beyond the feed's first 5 (CC.home.extraEvents), until their date has passed
+    function extras() {
+      var t = new Date(), today = t.getFullYear() + "-" + (t.getMonth() < 9 ? "0" : "") + (t.getMonth() + 1) + "-" + (t.getDate() < 10 ? "0" : "") + t.getDate();
+      return (CC.home.extraEvents || []).map(function (e) {
+        var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(e.date || "");
+        if (!m || !e.title || e.date < today) { return null; }
+        var dt = new Date(+m[1], +m[2] - 1, +m[3]);
+        return { title: e.title, k: evKey(e.title), href: e.href || "", page: e.href || "", reg: false, key: e.date,
+          wd: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dt.getDay()], mon: MONTHS[dt.getMonth()].replace(/^./, function (c) { return c.toUpperCase(); }),
+          day: String(+m[3]), time: e.time || "", extra: true };
+      }).filter(function (x) {
+        if (!x) { return false; }
+        var n = pageNo(x.page);   // already in the feed (same name or same page): no second card
+        return !sessions.some(function (y) { return y.k === x.k || (n && (pageNo(y.page) === n || pageNo(y.href) === n)); });
+      });
+    }
+    sessions = sessions.concat(extras());
+    // An extra item's photo and line come from its own page (og:image / og:description), cached for an hour
+    var pagePics = {}, lastCourses = null;
+    sessions.forEach(function (x) {
+      if (!x.extra || !x.page) { return; }
+      cachedPage("cc-evpage-" + pageNo(x.page), 3600 * 1000, x.page, function (doc) {
+        function meta(p) { var m = q("meta[property='" + p + "']", doc); return m ? (m.getAttribute("content") || "").trim() : ""; }
+        return { img: meta("og:image"), desc: meta("og:description") };
+      }, function (v) {
+        if (!v || (!v.img && !v.desc)) { return; }
+        pagePics[x.k] = v;
+        if (lastCourses) { render(lastCourses); }
+      });
+    });
     function render(courses) {
+      lastCourses = courses;
       var used = {}, cards = [];
       courses.forEach(function (c) {
         c.sessions = sessions.filter(function (x) { return x.k === evKey(c.title); });
@@ -843,7 +896,8 @@
       sessions.forEach(function (x) {   // calendar items without a registration page: one card each (next date)
         if (used[x.k]) { return; }
         used[x.k] = 1;
-        cards.push({ title: x.title, href: x.page || x.href, reg: x.reg ? x.href : "", desc: "", when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
+        var pg = pagePics[x.k] || {};
+        cards.push({ title: x.title, href: x.page || x.href, reg: x.reg ? x.href : "", desc: pg.desc || "", img: pg.img || "", oneOff: !!x.extra, when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
       });
       grid.textContent = "";
       if (!cards.length) {
@@ -852,7 +906,7 @@
         return;
       }
       cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : y.when ? 1 : 0); });
-      cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(c)); });
+      cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(linkPage(c))); });
       smartQuotes(grid);   // the cards can be rebuilt after the page's own pass ran
       setTimeout(upd, 0);
     }
@@ -1178,9 +1232,33 @@
         }
       });
     }
-    hideDuplicateNotes();
+    // 4) Cap the number-of-registrants list for events in CC.regMaxAttendees (e.g. 1-3).
+    //    ChabadOne refills the list when the category changes, so this runs again after every change.
+    var evIdM = /[?&]eventid=(\d+)/i.exec(location.search), regId = evIdM ? evIdM[1] : "";
+    if (!regId) {
+      var idIn = q("input[name='eventid'], input[name='EventID'], input[id='eventid']", page) || q("input[name='eventid'], input[name='EventID']");
+      regId = idIn ? String(idIn.value || "").trim() : "";
+    }
+    var maxQty = +((CC.regMaxAttendees || {})[regId] || 0);
+    function capQuantity() {
+      if (!maxQty) { return; }
+      qa("select[id$='_quantityOfAttendees']", page).forEach(function (sel) {
+        var cut = false;
+        for (var i = sel.options.length - 1; i >= 0; i--) {
+          var v = parseInt(sel.options[i].value, 10);
+          if (v > maxQty) { if (sel.options[i].selected) { cut = true; } sel.remove(i); }
+        }
+        if (cut) { sel.value = String(maxQty); sel.dispatchEvent(new Event("change", { bubbles: true })); }
+      });
+    }
+    page.addEventListener("change", function (e) {
+      if (e.target && /_priceCategory$/.test(e.target.id || "")) { setTimeout(capQuantity, 0); }
+    });
+
+    function afterChange() { hideDuplicateNotes(); capQuantity(); }
+    afterChange();
     if (window.MutationObserver) {
-      new MutationObserver(hideDuplicateNotes).observe(page, { childList: true, subtree: true });
+      new MutationObserver(afterChange).observe(page, { childList: true, subtree: true });
     }
 
     // 2) Make "Add additional reservations" say which registration types exist.
