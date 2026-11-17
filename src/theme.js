@@ -102,7 +102,8 @@
       // image = the card's photo (paste the picture's address); without it, the first picture on the item's page. register = optional
       // "Register" button ("<page>#rsvp" scrolls to the RSVP form on that page).
       extraEvents: [
-        { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "6:30 pm", href: "/7358669", register: "/7358669#rsvp" }
+        { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "6:30 pm", href: "/7358669", register: "/7358669#rsvp",
+          image: "https://w2.chabad.org/media/images/1396/Mdjq13962289.jpg" }
       ],
       // Event-name prefixes turned into a readable label on the course card
       prefixes: { "JLI": "JLI course", "RCS": "Rosh Chodesh Society" },
