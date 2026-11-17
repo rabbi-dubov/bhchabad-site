@@ -95,10 +95,14 @@
       // Course page for a registration event (event id -> page). Its card's "Learn more" opens the page and
       // "Register" the registration (Levi, Nov 17). Events not listed keep their own link.
       eventPages: { "24326": "/7620415", "23504": "/7593397", "23481": "/7593500" },
+      // The same courses by name, for slides and cards whose link has no event number (e.g. /jli-register)
+      eventNames: { "24326": "Missing Piece", "23504": "Kabbalah", "23481": "NEXT GENesis" },
       // Calendar items to show even when the homepage feed (next 5 calendar items only) hasn't reached them yet.
       // date = YYYY-MM-DD; each drops off by itself after its date, and isn't doubled once the feed lists it.
+      // The card's photo is the first picture on the item's page (e.g. the flyer); register = optional
+      // "Register" button ("<page>#rsvp" scrolls to the RSVP form on that page).
       extraEvents: [
-        { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "", href: "/7358669" }
+        { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "6:30 pm", href: "/7358669", register: "/7358669#rsvp" }
       ],
       // Event-name prefixes turned into a readable label on the course card
       prefixes: { "JLI": "JLI course", "RCS": "Rosh Chodesh Society" },
@@ -478,12 +482,32 @@
     }).filter(function (s) { return s.title || s.img; });
   }
 
+  // Course page for a link or title (CC.home.eventPages / eventNames): { id, page, reg } or null
+  function coursePage(href, title) {
+    var pages = CC.home.eventPages || {}, names = CC.home.eventNames || {};
+    var m = /eventid[=\/](\d+)/i.exec(href || ""), id = m && pages[m[1]] ? m[1] : "";
+    if (!id) {
+      var k = evKey(title);
+      Object.keys(names).some(function (n) { var nk = evKey(names[n]); if (k && nk && pages[n] && k.indexOf(nk) >= 0) { id = n; return true; } return false; });
+    }
+    if (!id) { return null; }
+    // Only a link that names this event's number is kept; anything else (/jli-register, a page) gets the direct address
+    var own = new RegExp("eventid[=\\/]" + id + "(\\D|$)", "i").test(href || "");
+    return { id: id, page: pages[id], reg: own ? href : "/tools/events/register.asp?eventid=" + id };
+  }
+
   // Rotating hero: every slide of the ChabadOne promo slider, with arrows, dots and a pause on hover.
   function heroSection(slides) {
     if (!slides.length) { return null; }
     var texts = slides.map(function (s, i) {
       var eyebrow = s.eyebrow || (i === 0 ? CC.home.heroEyebrow : "");
-      var ctaHref = s.href || "#cc-events-h", ctaText = s.href ? (s.cta || "Learn more") : CC.home.heroCta;
+      var ctaHref = s.href || "#cc-events-h", ctaText = s.href ? (s.cta || "Learn more") : CC.home.heroCta, regBtn = null;
+      // A course slide: "Learn more" opens the course page, "Register" the registration (Levi, Nov 17)
+      var cp = s.href ? coursePage(s.href, s.eyebrow + " " + s.title) : null;
+      if (cp && ctaHref !== cp.page) {
+        ctaHref = cp.page; ctaText = "Learn more";
+        regBtn = h("a", { "class": "cc-btn cc-btn--ghost", href: cp.reg, text: "Register", style: "color: var(--cc-white) !important" });
+      }
       return h("div", null, [
         eyebrow ? h("p", { "class": "cc-eyebrow", text: eyebrow }) : null,
         h(i === 0 ? "h1" : "h2", { "class": "cc-hero__title cc-head", text: s.title }),
@@ -491,7 +515,8 @@
         s.info ? h("p", { "class": "cc-hero__info", text: s.info }) : null,
         h("div", { "class": "cc-hero__ctas" }, [
           h("a", { "class": "cc-btn cc-btn--light", href: ctaHref, target: s.target || null, text: ctaText }),
-          i === 0 ? h("a", { "class": "cc-btn cc-btn--ghost", href: CC.home.secondaryCta.href, text: CC.home.secondaryCta.text, style: "color: var(--cc-white) !important" }) : null
+          regBtn,
+          i === 0 && !regBtn ? h("a", { "class": "cc-btn cc-btn--ghost", href: CC.home.secondaryCta.href, text: CC.home.secondaryCta.text, style: "color: var(--cc-white) !important" }) : null
         ])
       ]);
     });
@@ -788,7 +813,7 @@
     var ctas = [h("a", { "class": "cc-btn", href: ev.href, text: "Learn more" })];
     if (ev.reg && ev.reg !== ev.href) { ctas.push(h("a", { "class": "cc-btn cc-btn--ghost", href: ev.reg, text: "Register" })); }
     return h("article", { "class": "cc-ev cc-ev--" + tag.tone }, [
-      h("div", { "class": "cc-ev__img", style: ev.img ? "background-image:url(\"" + ev.img.replace(/"/g, "%22") + "\")" : null }, [
+      h("div", { "class": "cc-ev__img", style: ev.img ? "background-image:url(\"" + ev.img.replace(/"/g, "%22") + "\")" + (ev.imgTop ? ";background-position:center 15%" : "") : null }, [
         h("span", { "class": "cc-ev__tag", text: tag.label })
       ]),
       h("div", { "class": "cc-ev__body" }, [
@@ -845,12 +870,11 @@
     }
     // A registration event with its own course page (CC.home.eventPages): "Learn more" opens the page,
     // "Register" the registration.
-    function evId(u) { var m = /eventid[=\/](\d+)/i.exec(u || ""); return m ? m[1] : ""; }
     function linkPage(c) {
-      var map = CC.home.eventPages || {}, id = evId(c.href) || evId(c.reg), page = id && map[id];
-      if (!page || c.href === page) { return c; }
-      if (!c.reg) { c.reg = /register/i.test(c.href || "") ? c.href : "/tools/events/register.asp?eventid=" + id; }
-      c.href = page;
+      var cp = coursePage(c.reg || c.href, c.title) || coursePage(c.href, c.title);
+      if (!cp || c.href === cp.page) { return c; }
+      c.reg = cp.reg;
+      c.href = cp.page;
       return c;
     }
     function pageNo(u) { var m = /(?:^|\/)(\d{5,})(?:[\/?#.]|$)/.exec(u || ""); return m ? m[1] : ""; }
@@ -861,7 +885,7 @@
         var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(e.date || "");
         if (!m || !e.title || e.date < today) { return null; }
         var dt = new Date(+m[1], +m[2] - 1, +m[3]);
-        return { title: e.title, k: evKey(e.title), href: e.href || "", page: e.href || "", reg: false, key: e.date,
+        return { title: e.title, k: evKey(e.title), href: e.href || "", page: e.href || "", reg: false, register: e.register || "", key: e.date,
           wd: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dt.getDay()], mon: MONTHS[dt.getMonth()].replace(/^./, function (c) { return c.toUpperCase(); }),
           day: String(+m[3]), time: e.time || "", extra: true };
       }).filter(function (x) {
@@ -875,9 +899,17 @@
     var pagePics = {}, lastCourses = null;
     sessions.forEach(function (x) {
       if (!x.extra || !x.page) { return; }
-      cachedPage("cc-evpage-" + pageNo(x.page), 3600 * 1000, x.page, function (doc) {
+      cachedPage("cc-evpage2-" + pageNo(x.page), 3600 * 1000, x.page, function (doc) {
         function meta(p) { var m = q("meta[property='" + p + "']", doc); return m ? (m.getAttribute("content") || "").trim() : ""; }
-        return { img: meta("og:image"), desc: meta("og:description") };
+        // The page's own first picture (the flyer), not og:image (that is the site logo); skip header/menu/footer
+        var og = meta("og:image"), body = q("#co_body_container", doc) || doc.body || doc, pic = "";
+        qa("img", body).some(function (im) {
+          if (im.closest && im.closest("header, nav, footer, #header_branding, .site-logo-wrapper, .co_local_menu, #co_ads_container")) { return false; }
+          var src = imgSrc(im);
+          if (!src || src === og || /logo|icon|\.svg(\?|$)/i.test(src)) { return false; }
+          pic = src; return true;
+        });
+        return { img: pic || og, flyer: !!pic, desc: meta("og:description") };
       }, function (v) {
         if (!v || (!v.img && !v.desc)) { return; }
         pagePics[x.k] = v;
@@ -897,7 +929,7 @@
         if (used[x.k]) { return; }
         used[x.k] = 1;
         var pg = pagePics[x.k] || {};
-        cards.push({ title: x.title, href: x.page || x.href, reg: x.reg ? x.href : "", desc: pg.desc || "", img: pg.img || "", oneOff: !!x.extra, when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
+        cards.push({ title: x.title, href: x.page || x.href, reg: x.register || (x.reg ? x.href : ""), desc: pg.desc || "", img: pg.img || "", imgTop: !!pg.flyer, oneOff: !!x.extra, when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
       });
       grid.textContent = "";
       if (!cards.length) {
@@ -1232,33 +1264,9 @@
         }
       });
     }
-    // 4) Cap the number-of-registrants list for events in CC.regMaxAttendees (e.g. 1-3).
-    //    ChabadOne refills the list when the category changes, so this runs again after every change.
-    var evIdM = /[?&]eventid=(\d+)/i.exec(location.search), regId = evIdM ? evIdM[1] : "";
-    if (!regId) {
-      var idIn = q("input[name='eventid'], input[name='EventID'], input[id='eventid']", page) || q("input[name='eventid'], input[name='EventID']");
-      regId = idIn ? String(idIn.value || "").trim() : "";
-    }
-    var maxQty = +((CC.regMaxAttendees || {})[regId] || 0);
-    function capQuantity() {
-      if (!maxQty) { return; }
-      qa("select[id$='_quantityOfAttendees']", page).forEach(function (sel) {
-        var cut = false;
-        for (var i = sel.options.length - 1; i >= 0; i--) {
-          var v = parseInt(sel.options[i].value, 10);
-          if (v > maxQty) { if (sel.options[i].selected) { cut = true; } sel.remove(i); }
-        }
-        if (cut) { sel.value = String(maxQty); sel.dispatchEvent(new Event("change", { bubbles: true })); }
-      });
-    }
-    page.addEventListener("change", function (e) {
-      if (e.target && /_priceCategory$/.test(e.target.id || "")) { setTimeout(capQuantity, 0); }
-    });
-
-    function afterChange() { hideDuplicateNotes(); capQuantity(); }
-    afterChange();
+    hideDuplicateNotes();
     if (window.MutationObserver) {
-      new MutationObserver(afterChange).observe(page, { childList: true, subtree: true });
+      new MutationObserver(hideDuplicateNotes).observe(page, { childList: true, subtree: true });
     }
 
     // 2) Make "Add additional reservations" say which registration types exist.
@@ -1281,12 +1289,75 @@
     });
   }
 
+  /* ---------- Registration: cap the number of registrants (CC.regMaxAttendees) ----------
+     Runs on any event registration layout (not only #RegisterSinglePage). ChabadOne refills the
+     number list when the category changes, so it is cut again after every change and just before it opens. */
+  function registrationCap() {
+    if (!/\/tools\/events\//i.test(location.pathname) && !/eventid/i.test(location.href) && !q("[id$='_priceCategory'], #RegisterSinglePage")) { return; }
+    var map = CC.regMaxAttendees || {}, id = "", m = /eventid[=\/](\d+)/i.exec(location.href);
+    if (m) { id = m[1]; }
+    if (!id) {
+      var inp = q("input[name='eventid' i], input[id='eventid' i], input[name='EventID']");
+      id = inp ? String(inp.value || "").trim() : "";
+    }
+    if (!id) {   // ChabadOne's own script names the saved progress "Event_<id>_StoredProgress"
+      m = /Event_(\d+)_StoredProgress/.exec(d.documentElement.innerHTML) || /eventid\W{0,3}(\d{4,7})/i.exec(d.documentElement.innerHTML);
+      id = m ? m[1] : "";
+    }
+    var max = +(map[id] || 0);
+    if (!max) { return; }
+    function isQty(sel) { return /quantity|attendee/i.test((sel.id || "") + " " + (sel.name || "")) && !/category/i.test(sel.id || ""); }
+    function cap(sel) {
+      if (!sel || sel.tagName !== "SELECT" || !isQty(sel)) { return; }
+      var cut = false;
+      for (var i = sel.options.length - 1; i >= 0; i--) {
+        var v = parseInt(sel.options[i].value, 10);
+        if (v > max) { if (sel.options[i].selected) { cut = true; } sel.remove(i); }
+      }
+      if (cut) { sel.value = String(max); sel.dispatchEvent(new Event("change", { bubbles: true })); }
+    }
+    function capAll() { qa("select").forEach(cap); }
+    capAll();
+    d.addEventListener("change", function () { setTimeout(capAll, 0); setTimeout(capAll, 300); }, true);
+    ["focus", "mousedown", "touchstart", "keydown"].forEach(function (t) {
+      d.addEventListener(t, function (e) { cap(e.target); }, true);
+    });
+    if (window.MutationObserver) {
+      var busy = false;
+      new MutationObserver(function () { if (busy) { return; } busy = true; capAll(); busy = false; }).observe(d.body, { childList: true, subtree: true });
+    }
+  }
+
+  /* ---------- "#rsvp" on any page: jump to the page's RSVP / sign-up form ----------
+     Lets a button link to "<page>#rsvp" without editing the page (homepage event cards use it). */
+  function rsvpJump() {
+    if (!/^#rsvp$/i.test(location.hash) || d.getElementById("rsvp")) { return; }
+    var done = false;
+    function find() {
+      var body = q("#co_body_container") || d.body;
+      var named = qa("[id*='rsvp' i], [name*='rsvp' i]", body)[0];
+      if (named) { return named; }
+      return qa(".embedded_form, form, iframe", body).filter(function (n) {
+        return !(n.closest && n.closest("header, nav, footer, #header_branding, .co_local_menu, #co_ads_container")) && !/search/i.test((n.id || "") + (n.className || "") + (n.getAttribute("action") || ""));
+      })[0];
+    }
+    function go() {
+      var t = find();
+      if (!t) { return; }
+      if (!done) { t.id = t.id || "rsvp"; t.style.scrollMarginTop = "110px"; done = true; }
+      t.scrollIntoView({ block: "start" });
+    }
+    go();
+    if (!done) { setTimeout(go, 1200); }
+    window.addEventListener("load", function () { setTimeout(go, 50); });
+  }
+
   // Tiny hook so a design preview can show the testimonials layout with sample data (never used by the site itself)
   window.ccTheme = { testimonialsSection: testimonialsSection };
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, fixLinks, smartQuotes].forEach(function (fn) {
+    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
