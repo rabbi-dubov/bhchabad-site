@@ -34,6 +34,8 @@
     // Registration page: most people one form may register, by event id (the number-of-registrants list
     // is cut to 1..N). The Missing Piece = 1-3 (Levi, Nov 17).
     regMaxAttendees: { "24326": 3 },
+    // Least number of registrants by price category name, on every event: a couple is always 2 (Levi, Nov 20)
+    regMinByCategory: [{ match: /couple/i, min: 2 }],
     // Our own About page. ChabadOne reserves /about for Chabad.org's "About Chabad-Lubavitch" article,
     // so every link on the site that points at /about is sent here instead (fixLinks).
     aboutUrl: "/7581763",
@@ -1345,15 +1347,27 @@
       d.addEventListener("change", function () { setTimeout(show, 400); }, true);
       setTimeout(show, 2000);
     }
-    if (!max) { return; }
+    var mins = CC.regMinByCategory || [];
+    if (!max && !mins.length) { return; }
+    // The price category list that belongs to a quantity list (same id prefix), and its least number
+    function minFor(sel) {
+      var pre = String(sel.id || "").replace(/quantit[\s\S]*$/i, ""), cat = null;
+      qa("select").some(function (s) { if (s !== sel && /categor/i.test(s.id || s.name || "") && String(s.id || "").indexOf(pre) === 0) { cat = s; return true; } return false; });
+      var o = cat && cat.selectedIndex >= 0 ? cat.options[cat.selectedIndex] : null, t = o ? o.text : "", low = 0;
+      mins.some(function (r) { if (r.match.test(t)) { low = r.min; return true; } return false; });
+      return low;
+    }
     function cap(sel) {
       if (!sel || sel.tagName !== "SELECT" || !isQty(sel)) { return; }
-      var cut = false;
+      var low = minFor(sel), cut = false, raise = false;
       for (var i = sel.options.length - 1; i >= 0; i--) {
         var v = parseInt(sel.options[i].value, 10);
-        if (v > max) { if (sel.options[i].selected) { cut = true; } sel.remove(i); sel.setAttribute("data-cc-capped", "1"); }
+        if (max && v > max) { if (sel.options[i].selected) { cut = true; } sel.remove(i); sel.setAttribute("data-cc-capped", "1"); }
+        else if (low && v > 0 && v < low && sel.options.length > 1) { if (sel.options[i].selected) { raise = true; } sel.remove(i); sel.setAttribute("data-cc-capped", "1"); }
       }
-      if (cut) { sel.value = String(max); sel.dispatchEvent(new Event("change", { bubbles: true })); }
+      if (cut) { sel.value = String(max); }
+      if (raise || (low && parseInt(sel.value, 10) < low)) { sel.value = String(low); }
+      if (cut || raise) { sel.dispatchEvent(new Event("change", { bubbles: true })); }
     }
     function capAll() { qa("select").forEach(cap); }
     capAll();
