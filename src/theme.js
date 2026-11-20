@@ -105,6 +105,10 @@
         { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "6:30 pm", href: "/7358669", register: "/7358669#rsvp",
           image: "https://w2.chabad.org/media/images/1396/Mdjq13962289.jpg" }
       ],
+      // Fixed date line on a card instead of the feed's date, for series (the first word match wins; Levi, Nov 20)
+      whenText: [
+        { match: /genesis/i, text: "Monthly on Tuesdays" }
+      ],
       // Event-name prefixes turned into a readable label on the course card
       prefixes: { "JLI": "JLI course", "RCS": "Rosh Chodesh Society" },
       // Category tag on each event card: the first rule whose words match the event's name, label or text
@@ -811,6 +815,7 @@
     } else if (w) {
       when = "Starts " + w.wd + ", " + w.mon + " " + w.day;
     }
+    (CC.home.whenText || []).some(function (r) { if (r.match.test(st.title)) { when = r.text; return true; } return false; });
     var ctas = [h("a", { "class": "cc-btn", href: ev.href, text: "Learn more" })];
     if (ev.reg && ev.reg !== ev.href) { ctas.push(h("a", { "class": "cc-btn cc-btn--ghost", href: ev.reg, text: "Register" })); }
     return h("article", { "class": "cc-ev cc-ev--" + tag.tone }, [
