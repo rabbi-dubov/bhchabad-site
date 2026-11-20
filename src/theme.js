@@ -1405,12 +1405,25 @@
     window.addEventListener("load", function () { setTimeout(go, 50); });
   }
 
+  /* ---------- Browser-tab icon: the official Chabad emblem (chabadbrand.com) ----------
+     ChabadOne uses the whole site logo (emblem + words) as the icon, unreadable at tab size. Ours is a square
+     emblem on white, kept in data/brand/ (Levi, Nov 20). */
+  function favicon() {
+    var base = "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/data/brand/";
+    qa("link[rel~='icon'], link[rel='shortcut icon'], link[rel='apple-touch-icon']").forEach(function (l) { l.parentNode.removeChild(l); });
+    [["icon", "image/svg+xml", "favicon.svg", ""], ["icon", "image/png", "favicon-32.png", "32x32"], ["icon", "image/png", "favicon-192.png", "192x192"],
+     ["apple-touch-icon", "", "favicon-180.png", "180x180"]].forEach(function (f) {
+      var l = d.createElement("link"); l.rel = f[0]; if (f[1]) { l.type = f[1]; } if (f[3]) { l.setAttribute("sizes", f[3]); } l.href = base + f[2];
+      d.head.appendChild(l);
+    });
+  }
+
   // Tiny hook so a design preview can show the testimonials layout with sample data (never used by the site itself)
   window.ccTheme = { testimonialsSection: testimonialsSection };
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
