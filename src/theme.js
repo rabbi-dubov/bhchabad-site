@@ -1405,9 +1405,9 @@
     window.addEventListener("load", function () { setTimeout(go, 50); });
   }
 
-  /* ---------- Browser-tab icon: the official Chabad emblem (chabadbrand.com) ----------
+  /* ---------- Browser-tab icon: the official favicon from the chabadbrand.com brand kit ----------
      ChabadOne uses the whole site logo (emblem + words) as the icon, unreadable at tab size. Ours is a square
-     emblem on white, kept in data/brand/ (Levi, Nov 20). */
+     favicon (kit 04. Social/favicon.svg, default colors), kept in data/brand/ (Levi, Nov 20). */
   function favicon() {
     var base = "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/data/brand/";
     qa("link[rel~='icon'], link[rel='shortcut icon'], link[rel='apple-touch-icon']").forEach(function (l) { l.parentNode.removeChild(l); });
