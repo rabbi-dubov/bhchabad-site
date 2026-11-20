@@ -1936,3 +1936,33 @@ html body.cco_body .cc-program__more { color: var(--cc-primary); font-size: 14px
   html body.cco_body #header_branding a.site_title, html body.cco_body #header.on-scroll #header_branding a.site_title { font-size: 18px; }
   html body.cco_body #header_branding .site-logo-wrapper { padding-right: 10px !important; margin-right: 10px !important; }
 }
+
+/* ---------- 22. ABOUT PAGE PIECES (page 7581763; Levi, Nov 20) ---------- */
+/* cc-portrait: a framed photo of people with an optional credit line; --wide keeps a landscape photo whole */
+html body.cco_body .cc-portrait { margin: 0; }
+html body.cco_body .cc-portrait__img { aspect-ratio: 4 / 5; max-width: 100%; border-radius: var(--cc-radius); background: var(--cc-cream) center 30% / cover no-repeat; box-shadow: 18px 18px 0 var(--cc-accent-soft), var(--cc-shadow-lg); }
+html body.cco_body .cc-portrait--wide .cc-portrait__img { aspect-ratio: 3 / 2; background-position: center; }
+html body.cco_body .cc-portrait figcaption { margin-top: 26px; font-size: 13px; color: var(--cc-muted); }
+/* cc-page-title: the h1 of a content page without a hero, set like the hero title but on white */
+html body.cco_body .cc-page-title { color: var(--cc-ink); font-size: clamp(40px, 5vw, 60px) !important; line-height: 1.02; font-weight: 400; margin: 0 0 24px; text-wrap: balance; }
+/* cc-about: the opening section (photo beside the vision and two short bios) */
+html body.cco_body .cc-about .cc-split { gap: 72px; align-items: flex-start; }
+html body.cco_body .cc-about .cc-lede { font-size: 20px; line-height: 1.6; color: var(--cc-text); margin: 0 0 16px; max-width: 34em; }
+html body.cco_body .cc-about__people { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--cc-line); display: grid; gap: 16px; }
+html body.cco_body .cc-about__people p { font-size: 16px; line-height: 1.7; color: var(--cc-text); margin: 0; max-width: 38em; }
+html body.cco_body .cc-about__people strong { color: var(--cc-ink); }
+html body.cco_body .cc-about__family { color: var(--cc-muted) !important; }
+@media (max-width: 760px) { html body.cco_body .cc-about .cc-split { gap: 40px; } html body.cco_body .cc-about .cc-lede { font-size: 18px; } }
+/* cc-prose: a narrow column of reading text */
+html body.cco_body .cc-prose { max-width: 720px; margin: 0 auto; }
+html body.cco_body .cc-prose p { font-size: 18px; line-height: 1.7; color: var(--cc-text); }
+html body.cco_body .cc-section--ink p { color: var(--cc-on-dark-muted); font-size: 18px; line-height: 1.7; }
+/* cc-pullquote: one large quote inside a band */
+html body.cco_body .cc-pullquote { margin: 28px 0; padding: 4px 0 4px 24px; border-left: 3px solid var(--cc-accent); }
+html body.cco_body .cc-pullquote p { font-family: var(--cc-font-head) !important; font-style: italic; font-size: clamp(26px, 2.8vw, 36px) !important; line-height: 1.25; color: var(--cc-white) !important; margin: 0 0 8px !important; }
+html body.cco_body .cc-pullquote cite { font-style: normal; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
+html body.cco_body .cc-dedication { margin: 0 !important; padding-top: 22px; border-top: 1px solid var(--cc-line-dark); font-style: italic; color: var(--cc-white) !important; }
+/* cc-rebbe: the Rebbe band; without a portrait the text simply runs full width */
+html body.cco_body .cc-rebbe__img { aspect-ratio: 4 / 5; max-width: 100%; border-radius: var(--cc-radius); background: var(--cc-ink-deep) center / cover no-repeat; box-shadow: var(--cc-shadow-lg); }
+html body.cco_body .cc-rebbe .cc-split { gap: 72px; }
+html body.cco_body .cc-rebbe .cc-split > div:only-child { max-width: 760px; }
