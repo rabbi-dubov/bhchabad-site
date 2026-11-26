@@ -2000,8 +2000,6 @@ html body.cco_body.cc-footer-built #footer .footer_container { margin-top: 0 !im
    inline styles: every page keeps to the site's own fonts */
 html body.cco_body .co_body .article-body:not(:has(.cc-landing)) [style*="font-family"] { font-family: inherit !important; }
 
-/* Past courses: "Listen on the podcast" stays on one line under the topic */
-html body.cco_body .cc-library .cc-course__foot a { white-space: nowrap; }
 
 /* Newsletter page (/tools/subscribe): ChabadOne lays it out as two tables. Labels sit above full-width
    fields, each newsletter is one line with its tick box, in a card; the "manage" link is a plain link. */
