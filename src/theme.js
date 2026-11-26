@@ -104,13 +104,16 @@
       // image = the card's photo (paste the picture's address); without it, the first picture on the item's page. register = optional
       // "Register" button ("<page>#rsvp" scrolls to the RSVP form on that page).
       extraEvents: [
-        { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "6:30 pm", href: "/7358669", register: "/7358669#rsvp",
+        { title: "Shain Park Menorah Lighting", date: "2026-12-05", time: "6:30 pm", href: "/7358669", register: "/7358669#rsvp", first: true,
           image: "https://w2.chabad.org/media/images/1396/Mdjq13962289.jpg" }
       ],
       // Fixed date line on a card instead of the feed's date, for series (the first word match wins; Levi, Nov 20)
       whenText: [
         { match: /genesis/i, text: "Monthly on Tuesdays" }
       ],
+      // Events whose registration has closed (event id): their cards and slides keep "Learn more" but drop "Register"
+      // (Levi, Nov 22: the Kabbalah course has closed registration)
+      closedEvents: ["23504"],
       // Event-name prefixes turned into a readable label on the course card
       prefixes: { "JLI": "JLI course", "RCS": "Rosh Chodesh Society" },
       // Category tag on each event card: the first rule whose words match the event's name, label or text
@@ -500,6 +503,7 @@
     if (!id) { return null; }
     // Only a link that names this event's number is kept; anything else (/jli-register, a page) gets the direct address
     var own = new RegExp("eventid[=\\/]" + id + "(\\D|$)", "i").test(href || "");
+    if ((CC.home.closedEvents || []).indexOf(id) >= 0) { return { id: id, page: pages[id], reg: "" }; }
     return { id: id, page: pages[id], reg: own ? href : "/tools/events/register.asp?eventid=" + id };
   }
 
@@ -513,7 +517,7 @@
       var cp = s.href ? coursePage(s.href, s.eyebrow + " " + s.title) : null;
       if (cp && ctaHref !== cp.page) {
         ctaHref = cp.page; ctaText = "Learn more";
-        regBtn = h("a", { "class": "cc-btn cc-btn--ghost", href: cp.reg, text: "Register", style: "color: var(--cc-white) !important" });
+        if (cp.reg) regBtn = h("a", { "class": "cc-btn cc-btn--ghost", href: cp.reg, text: "Register", style: "color: var(--cc-white) !important" });
       }
       return h("div", null, [
         eyebrow ? h("p", { "class": "cc-eyebrow", text: eyebrow }) : null,
@@ -895,7 +899,7 @@
         var dt = new Date(+m[1], +m[2] - 1, +m[3]);
         return { title: e.title, k: evKey(e.title), href: e.href || "", page: e.href || "", reg: false, register: e.register || "", image: e.image || "", key: e.date,
           wd: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dt.getDay()], mon: MONTHS[dt.getMonth()].replace(/^./, function (c) { return c.toUpperCase(); }),
-          day: String(+m[3]), time: e.time || "", extra: true };
+          day: String(+m[3]), time: e.time || "", extra: true, first: !!e.first };
       }).filter(function (x) {
         if (!x) { return false; }
         var n = pageNo(x.page);   // already in the feed (same name or same page): no second card
@@ -938,7 +942,7 @@
         used[x.k] = 1;
         var pg = pagePics[x.k] || {};
         if (x.image) { pg = { img: x.image, flyer: true, desc: pg.desc }; }
-        cards.push({ title: x.title, href: x.page || x.href, reg: x.register || (x.reg ? x.href : ""), desc: pg.desc || "", img: pg.img || "", imgTop: !!pg.flyer, oneOff: !!x.extra, when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
+        cards.push({ title: x.title, href: x.page || x.href, reg: x.register || (x.reg ? x.href : ""), desc: pg.desc || "", img: pg.img || "", imgTop: !!pg.flyer, oneOff: !!x.extra, first: !!x.first, when: x, sessions: sessions.filter(function (y) { return y.k === x.k; }) });
       });
       grid.textContent = "";
       if (!cards.length) {
@@ -947,6 +951,8 @@
         return;
       }
       cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : y.when ? 1 : 0); });
+      // An extra item marked first (CC.home.extraEvents) leads the row until its date (Levi, Nov 26: menorah lighting first)
+      cards = cards.filter(function (c) { return c.first; }).concat(cards.filter(function (c) { return !c.first; }));
       cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(linkPage(c))); });
       smartQuotes(grid);   // the cards can be rebuilt after the page's own pass ran
       setTimeout(upd, 0);
