@@ -1981,8 +1981,10 @@ html body.cco_body .cc-evs::-webkit-scrollbar { display: none; }
 /* Text links ("Get to know us"): a tap area at least 24px tall */
 html body.cco_body .cc-link { display: inline-block; padding-top: 4px; }
 
-/* Footer: ChabadOne's own (hidden) footer block still held 80px of empty space above the credit line */
-html body.cco_body.cc-footer-built #footer .footer_container > .bottom_padding, html body.cco_body.cc-footer-built #footer .footer_container > br { display: none !important; }
+/* Footer: 90px of empty space sat between the divider and the credit line (our padding, ChabadOne's margin and a stray line break) */
+html body.cco_body.cc-footer-built #footer .footer_container > .bottom_padding > br { display: none !important; }
+html body.cco_body.cc-footer-built #footer .footer_container > .bottom_padding { padding-bottom: 0 !important; }
+html body.cco_body.cc-footer-built .cc-footer { padding-bottom: 0; }
 html body.cco_body.cc-footer-built #footer .footer_container { margin-top: 0 !important; }
 
 /* Phone menu on short screens (small phones, a phone held sideways): tighter rows, so Donate shows without scrolling */
@@ -2048,3 +2050,10 @@ html body.cco_body .notfound-navigate-desktop a { color: var(--cc-primary) !impo
 html body.cco_body a.notfound-home-button.co-button { background: var(--cc-primary) !important; color: var(--cc-white) !important; border: 0 !important; border-radius: var(--cc-pill) !important; font-family: var(--cc-font-body) !important; font-weight: 700 !important; }
 html body.cco_body .cc-notfound-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 html body.cco_body .cc-notfound-links .cc-btn { padding: 10px 16px; min-height: 42px; font-size: 14px; }
+/* 404 search: one border (the form's), not a second one on the field inside it */
+html body.cco_body .notfound-search-form { border: 1px solid var(--cc-field-border) !important; border-radius: var(--cc-radius-sm) !important; background: var(--cc-white) !important; }
+html body.cco_body .notfound-search-form .notfound-search-input { border: 0 !important; background: transparent !important; }
+/* Search page: ChabadOne's 30px-high field box cut off the top of our 48px field */
+html body.cco_body #MainSearchForm .co_global_input_container { height: auto !important; overflow: visible !important; }
+/* Newsletter page: the Subscribe button lines up with the fields */
+html body.cco_body #ContentBody form[name="subscribe"] div[align="center"] { text-align: left !important; }
