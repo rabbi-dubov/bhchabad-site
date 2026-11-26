@@ -46,6 +46,12 @@
     // ChabadOne's menu shows only the first 5 pages + Donate, so the theme adds it. "" removes it.
     menuContact: "Contact",
     subscribeUrl: "/tools/subscribe/default.htm",
+    // The newsletter page lists every list ChabadOne holds with none ticked; this one (Chabad News and Updates)
+    // starts ticked, so "Email updates" > name > Subscribe works without hunting for the right box. "" = none.
+    subscribeDefaultList: "22372",
+    // Old addresses from the Wix site that people may still have (Google, old emails): the "page not found"
+    // page sends them on to the page that replaced them. Lower case, no trailing slash.
+    oldPaths: { "/past-courses": "/7617671", "/jliaudio": "/7617671", "/try": "/7581757" },
     // Menu (Nov 16 review). On phones a row with sub-pages opens its list when tapped; the row's own page
     // becomes the list's first line, named here (else "<Label> overview"). Hidden on computers.
     menuOverview: { "About": "About us", "Learn": "Learn overview" },
@@ -215,7 +221,11 @@
     }
     // The emblem repeats the title's home link: keep it clickable, but out of the tab order and screen readers
     qa("#header_branding a").forEach(function (a) {
-      if (a !== t && !txt(a) && !a.getAttribute("aria-label")) { a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1"); }
+      if (a !== t && !txt(a) && !a.getAttribute("aria-label")) {
+        a.setAttribute("aria-hidden", "true"); a.setAttribute("tabindex", "-1");
+        // its picture is decoration too: an empty alt, so no screen reader reads out the file name
+        qa("img:not([alt])", a).forEach(function (im) { im.setAttribute("alt", ""); });
+      }
     });
     contactItem();
     phoneMenu();
@@ -402,7 +412,8 @@
   function fixLinks() {
     var map = { "/about": CC.aboutUrl };
     qa("a[href]").forEach(function (a) {
-      var href = (a.getAttribute("href") || "").replace(/^https?:\/\/(www\.)?lightbhchabad\.org/i, "").replace(/\/$/, "").toLowerCase();
+      // any of the site's own domains (bhchabad.org since the Nov 20 switch, lightbhchabad.org before it), with or without www
+      var href = (a.getAttribute("href") || "").replace(/^(https?:)?\/\/(www\.)?(light)?bhchabad\.org/i, "").replace(/[?#].*$/, "").replace(/\/$/, "").toLowerCase();
       if (map[href]) { a.setAttribute("href", map[href]); }
     });
   }
@@ -521,7 +532,9 @@
       }
       return h("div", null, [
         eyebrow ? h("p", { "class": "cc-eyebrow", text: eyebrow }) : null,
-        h(i === 0 ? "h1" : "h2", { "class": "cc-hero__title cc-head", text: s.title }),
+        // every slide title is an h2: the page's one h1 is the organisation's name (homeShell), which stays
+        // readable to screen readers and search engines whichever slide is showing (a hidden slide is inert)
+        h("h2", { "class": "cc-hero__title cc-head", text: s.title }),
         s.sub ? h("p", { "class": "cc-hero__sub", text: s.sub }) : null,
         s.info ? h("p", { "class": "cc-hero__info", text: s.info }) : null,
         h("div", { "class": "cc-hero__ctas" }, [
@@ -922,7 +935,7 @@
     var pagePics = {}, lastCourses = null;
     sessions.forEach(function (x) {
       if (!x.extra || !x.page) { return; }
-      cachedPage("cc-evpage2-" + pageNo(x.page), 3600 * 1000, x.page, function (doc) {
+      cachedPage("cc-evpage3-" + pageNo(x.page), 3600 * 1000, x.page, function (doc) {
         function meta(p) { var m = q("meta[property='" + p + "']", doc); return m ? (m.getAttribute("content") || "").trim() : ""; }
         // The page's own first picture (the flyer), not og:image (that is the site logo); skip header/menu/footer
         var og = meta("og:image"), body = q("#co_body_container", doc) || doc.body || doc, pic = "";
@@ -932,7 +945,9 @@
           if (!src || src === og || /logo|icon|\.svg(\?|$)/i.test(src)) { return false; }
           pic = src; return true;
         });
-        return { img: pic || og, flyer: !!pic, desc: meta("og:description") };
+        // The card's line: the page's description, else its own opening line (a card with only a title looked empty)
+        var lead = q(".cc-hero__sub, .cc-lede", body) || qa("p", body).filter(function (p) { return txt(p).length > 40; })[0];
+        return { img: pic || og, flyer: !!pic, desc: meta("og:description") || txt(lead) };
       }, function (v) {
         if (!v || (!v.img && !v.desc)) { return; }
         pagePics[x.k] = v;
@@ -1008,7 +1023,14 @@
       var box = stack("cc-welcome__img", list.map(function (p) { return photoLayer(p.src, p.alt); }));
       addClass(sec, "cc-welcome"); addClass(wrap, "cc-split");
       wrap.appendChild(box);
-      if (list.length > 1 && !reduceMotion) { var i = 0; setInterval(function () { i = (i + 1) % list.length; box.show(i); }, 3000); }
+      // a calm change every 6 seconds (3 was restless beside the text); it waits while the mouse is on the photo
+      // or the browser tab is in the background
+      if (list.length > 1 && !reduceMotion) {
+        var i = 0, held = false;
+        box.addEventListener("mouseenter", function () { held = true; });
+        box.addEventListener("mouseleave", function () { held = false; });
+        setInterval(function () { if (held || d.hidden) { return; } i = (i + 1) % list.length; box.show(i); }, 6000);
+      }
     });
     return sec;
   }
@@ -1036,7 +1058,11 @@
     var cards = qa(".sneak-peek-item", c).map(function (it) {
       var a = q("h6 a, .title_only a", it), th = q("a.thumbnail img, img", it);
       if (!a) { return null; }
-      return h("a", { "class": "cc-program", href: a.getAttribute("href") }, [
+      // "Learn more" never opens a registration form (Levi, Nov 17): a card that links to a course's
+      // registration goes to that course's page instead (CC.home.eventPages)
+      var href = a.getAttribute("href") || "", cp = /\/tools\/events\/register/i.test(href) ? coursePage(href, "") : null;
+      if (cp && cp.page) { href = cp.page; }
+      return h("a", { "class": "cc-program", href: href }, [
         h("div", { "class": "cc-program__img", style: th ? "background-image:url('" + bgUrl(th).replace(/'/g, "%27") + "')" : null }),
         h("div", { "class": "cc-program__label" }, [h("h3", { "class": "cc-program__title cc-head", text: txt(a) }), h("span", { "class": "cc-program__more", text: "Learn more →" })])
       ]);
@@ -1121,7 +1147,7 @@
     var hp = q(".hp-table");
     if (!hp || q("#cc-home")) { return; }
     addClass(html, "cc-home-page");
-    var shell = h("div", { id: "cc-home" });
+    var shell = h("div", { id: "cc-home" }, [h("h1", { "class": "cc-sr", text: CC.org })]);
     var build = {
       hero: function () { return heroSection(readSlides(q(".promo_slider", hp) || hp)); },
       quick: function () { return quickSection(hp); },
@@ -1422,6 +1448,33 @@
     window.addEventListener("load", function () { setTimeout(go, 50); });
   }
 
+  /* ---------- "Page not found" (ChabadOne's own page, .notfound-container) ----------
+     An old Wix address listed in CC.oldPaths goes straight to its new page. Otherwise the page gets the
+     site's sections as buttons (read from the menu), and its search field and button get names. */
+  function notFound() {
+    var box = q(".notfound-main-content");
+    if (!box) { return; }
+    var to = (CC.oldPaths || {})[location.pathname.replace(/\/+$/, "").toLowerCase()];
+    if (to) { location.replace(to); return; }
+    var sb = q(".notfound-search-form button", box), si = q(".notfound-search-input", box);
+    if (sb && !sb.getAttribute("aria-label")) { sb.setAttribute("aria-label", "Search"); }
+    if (si && !si.getAttribute("aria-label")) { si.setAttribute("aria-label", "Search this site"); }
+    if (q(".cc-notfound-links", box)) { return; }
+    var links = qa("#tabContentMain > .co_menu_item:not(.home):not(.donate_link) > span.parent a").map(function (a) {
+      return h("a", { "class": "cc-btn cc-btn--ghost", href: a.getAttribute("href"), text: txt(a) });
+    });
+    if (links.length) { box.appendChild(h("nav", { "class": "cc-notfound-links", "aria-label": "Main pages" }, links)); }
+  }
+
+  /* ---------- Newsletter page (/tools/subscribe): the main list starts ticked (CC.subscribeDefaultList) ---------- */
+  function subscribePage() {
+    var f = q("form[name='subscribe']");
+    if (!f || !CC.subscribeDefaultList) { return; }
+    var boxes = qa("input[type='checkbox'][name='subscriptions']", f);
+    if (!boxes.length || boxes.some(function (b) { return b.checked; })) { return; }
+    boxes.forEach(function (b) { if (b.value === CC.subscribeDefaultList) { b.checked = true; } });
+  }
+
   /* ---------- Browser-tab icon: the official favicon from the chabadbrand.com brand kit ----------
      ChabadOne uses the whole site logo (emblem + words) as the icon, unreadable at tab size. Ours is a square
      favicon (kit 04. Social/favicon.svg, default colors), kept in data/brand/ (Levi, Nov 20). */
@@ -1440,7 +1493,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }

@@ -1966,3 +1966,85 @@ html body.cco_body .cc-dedication { margin: 0 !important; padding-top: 22px; bor
 html body.cco_body .cc-rebbe__img { aspect-ratio: 4 / 5; max-width: 100%; border-radius: var(--cc-radius); background: var(--cc-ink-deep) center / cover no-repeat; box-shadow: var(--cc-shadow-lg); }
 html body.cco_body .cc-rebbe .cc-split { gap: 72px; }
 html body.cco_body .cc-rebbe .cc-split > div:only-child { max-width: 760px; }
+
+/* ==========================================================================
+   23. WHOLE-SITE AUDIT, ROUND 2 (Nov 26, 2026)
+   ========================================================================== */
+/* Placeholders: ChabadOne paints them black on its own forms, so "First Name" on the contact form looked
+   like a name already typed in. Every hint is the site's muted grey. */
+html body.cco_body input::placeholder, html body.cco_body textarea::placeholder { color: var(--cc-muted) !important; opacity: 1 !important; }
+
+/* "Coming up" row: no grey scrollbar under the cards (the arrows, a swipe and the Tab key still move it) */
+html body.cco_body .cc-evs { scrollbar-width: none; }
+html body.cco_body .cc-evs::-webkit-scrollbar { display: none; }
+
+/* Text links ("Get to know us"): a tap area at least 24px tall */
+html body.cco_body .cc-link { display: inline-block; padding-top: 4px; }
+
+/* Footer: ChabadOne's own (hidden) footer block still held 80px of empty space above the credit line */
+html body.cco_body.cc-footer-built #footer .footer_container > .bottom_padding, html body.cco_body.cc-footer-built #footer .footer_container > br { display: none !important; }
+html body.cco_body.cc-footer-built #footer .footer_container { margin-top: 0 !important; }
+
+/* Phone menu on short screens (small phones, a phone held sideways): tighter rows, so Donate shows without scrolling */
+@media (max-width: 1024px) and (max-height: 720px) {
+  html body.cco_body .site-nav-wrapper #co_menu_container { padding-top: 64px !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item:not(.donate_link) span.parent a { min-height: 50px; font-size: 23px !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.multi_level .cs-menu-item-toggle { height: 50px !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link { margin-top: 18px !important; }
+  html body.cco_body .site-nav-wrapper #tabContentMain > .co_menu_item.donate_link span.parent a { min-height: 48px; }
+}
+
+/* A page pasted in from a newsletter tool (NEXT GENesis) brought Helvetica, Arial and Georgia with it in
+   inline styles: every page keeps to the site's own fonts */
+html body.cco_body .co_body .article-body:not(:has(.cc-landing)) [style*="font-family"] { font-family: inherit !important; }
+
+/* Past courses: "Listen on the podcast" stays on one line under the topic */
+html body.cco_body .cc-library .cc-course__foot a { white-space: nowrap; }
+
+/* Newsletter page (/tools/subscribe): ChabadOne lays it out as two tables. Labels sit above full-width
+   fields, each newsletter is one line with its tick box, in a card; the "manage" link is a plain link. */
+html body.cco_body #ContentBody form[name="subscribe"] .container.border { border: 0 !important; background: transparent !important; padding: 0 !important; margin: 0 !important; text-align: left !important; }
+html body.cco_body #ContentBody form[name="subscribe"] table.subscribe_form, html body.cco_body #ContentBody form[name="subscribe"] table.subscribe_form tbody, html body.cco_body #ContentBody form[name="subscribe"] table.subscribe_form tr, html body.cco_body #ContentBody form[name="subscribe"] table.subscribe_form td { display: block !important; width: auto !important; padding: 0 !important; }
+html body.cco_body #ContentBody form[name="subscribe"] table.subscribe_form td.large_right_padding { padding: 14px 0 6px !important; font-size: 14px !important; font-weight: 700; color: var(--cc-ink) !important; }
+html body.cco_body #ContentBody form[name="subscribe"] table.subscribe_form td.hide_for_mobile { display: none !important; }
+html body.cco_body #ContentBody form[name="subscribe"] table.subscribe_form .co_form_input { max-width: 480px; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular { display: block !important; width: auto !important; max-width: 480px; box-sizing: border-box; margin: 28px 0 0 !important; padding: 10px 18px !important; background: var(--cc-white) !important; border: 1px solid var(--cc-line) !important; border-radius: 12px; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular tbody { display: block; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular tr { display: grid !important; grid-template-columns: 32px 1fr; align-items: start; background: transparent !important; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular td { padding: 9px 0 !important; text-align: left !important; line-height: 1.45; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular td[colspan] { grid-column: 1 / -1; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular tr[bgcolor="#EDF1F5"] td[align="right"], html body.cco_body #ContentBody form[name="subscribe"] table.regular td:has(> img:only-child) { display: none !important; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular tr[bgcolor="#EDF1F5"] td { font-weight: 700; color: var(--cc-ink) !important; border-top: 1px solid var(--cc-line); border-bottom: 1px solid var(--cc-line); }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular label { font-weight: 600; cursor: pointer; }
+html body.cco_body #ContentBody form[name="subscribe"] table.regular font { color: var(--cc-muted) !important; font-size: 14px; }
+html body.cco_body #ContentBody a[href*="/tools/login/settings"] { float: none !important; display: inline-block !important; width: auto !important; height: auto !important; margin: 0 0 8px !important; padding: 0 !important; background: transparent !important; border: 0 !important; box-shadow: none !important; font-size: 14px !important; font-weight: 700; color: var(--cc-primary) !important; text-decoration: underline !important; text-decoration-color: var(--cc-accent) !important; text-underline-offset: 3px; }
+
+/* Donate page: the cream panel stopped at the 1200px column with white on both sides (since the Nov 16
+   layout rule); a coloured band runs edge to edge (Levi, Nov 15). The shadow paints the cream out to the
+   window edges and the clip keeps it from spilling above or below; nothing changes in the layout. */
+html body.cco_body #ContentBody #donate-wrapper { box-shadow: 0 0 0 100vmax var(--cc-cream); clip-path: inset(0 -100vmax); }
+/* ...and its text, labels and fields were still in ChabadOne's Muli (a platform rule with an id beat our base rule) */
+html body.cco_body #ContentBody #donate-wrapper :is(p, label, input, select, textarea, button, small) { font-family: var(--cc-font-body) !important; }
+
+/* Search results: our own pages only, in the site's look. ChabadOne led with a Chabad.org "Topics" box and
+   followed our handful of pages with 11,000 Chabad.org results (Levi: every page is about this Chabad).
+   When a search finds none of our pages, the one list left is ChabadOne's general one. */
+html body.cco_body #SearchResultsContents > .search_info_box, html body.cco_body #SearchResultsContents > #TextResultsTable ~ #TextResultsTable { display: none !important; }
+html body.cco_body .co_search_form { margin-top: 40px !important; }
+html body.cco_body #SearchResultsContents .search_results .item { padding: 18px 0; }
+html body.cco_body #SearchResultsContents .search_results .item:empty { display: none; }
+html body.cco_body #SearchResultsContents .search_results .title a { font-family: var(--cc-font-head) !important; font-size: 24px; line-height: 1.2; color: var(--cc-ink) !important; text-decoration: none !important; }
+html body.cco_body #SearchResultsContents .search_results .title a:hover { color: var(--cc-primary) !important; text-decoration: underline !important; }
+html body.cco_body #SearchResultsContents .search_results .synopsis { max-width: 760px; margin-top: 6px; font-size: 16px; line-height: 1.6; color: var(--cc-muted); }
+html body.cco_body #SearchResultsContents .search_results .path, html body.cco_body #SearchResultsContents .search_results .path a { font-size: 13px; font-weight: 700; color: var(--cc-accent-text) !important; text-decoration: none; }
+html body.cco_body #SearchResultsContents .searchItemDivider { height: 0; margin: 0; border: 0; border-top: 1px solid var(--cc-line); background: none; }
+html body.cco_body #SearchResultsContents .pagination a, html body.cco_body #SearchResultsContents .page-selector a { color: var(--cc-primary) !important; }
+
+/* "Page not found" (ChabadOne's page): the site's heading, field and buttons instead of navy Muli */
+html body.cco_body .notfound-title { font-family: var(--cc-font-head) !important; font-weight: 400 !important; letter-spacing: -.01em; line-height: 1.08 !important; color: var(--cc-ink) !important; text-wrap: balance; }
+html body.cco_body .notfound-subtitle { font-weight: 500 !important; color: var(--cc-muted) !important; }
+html body.cco_body .notfound-search-form .notfound-search-input { font-family: var(--cc-font-body) !important; font-size: 16px !important; color: var(--cc-text) !important; background: var(--cc-white) !important; border: 1px solid var(--cc-field-border) !important; border-radius: var(--cc-radius-sm) !important; }
+html body.cco_body .notfound-navigate-desktop a { color: var(--cc-primary) !important; font-weight: 700; }
+html body.cco_body a.notfound-home-button.co-button { background: var(--cc-primary) !important; color: var(--cc-white) !important; border: 0 !important; border-radius: var(--cc-pill) !important; font-family: var(--cc-font-body) !important; font-weight: 700 !important; }
+html body.cco_body .cc-notfound-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+html body.cco_body .cc-notfound-links .cc-btn { padding: 10px 16px; min-height: 42px; font-size: 14px; }
