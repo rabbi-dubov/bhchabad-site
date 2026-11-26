@@ -902,8 +902,19 @@
           day: String(+m[3]), time: e.time || "", extra: true, first: !!e.first };
       }).filter(function (x) {
         if (!x) { return false; }
-        var n = pageNo(x.page);   // already in the feed (same name or same page): no second card
-        return !sessions.some(function (y) { return y.k === x.k || (n && (pageNo(y.page) === n || pageNo(y.href) === n)); });
+        var n = pageNo(x.page), hit = null;   // already in the feed (same name or same page): no second card,
+        sessions.forEach(function (y) {       // but the feed's card takes this item's page, RSVP, picture and place
+          if (y.k === x.k || (n && (pageNo(y.page) === n || pageNo(y.href) === n))) {
+            hit = y;
+            if (x.page) { y.page = x.page; y.href = x.page; }
+            if (x.register) { y.register = x.register; }
+            if (x.image) { y.image = x.image; }
+            if (x.first) { y.first = true; }
+            if (x.time && !y.time) { y.time = x.time; }
+            y.extra = true;   // a one-off: plain date line, text from its own page
+          }
+        });
+        return !hit;
       });
     }
     sessions = sessions.concat(extras());
