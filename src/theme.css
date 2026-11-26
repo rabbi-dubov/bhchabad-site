@@ -2055,3 +2055,13 @@ html body.cco_body .notfound-search-form .notfound-search-input { border: 0 !imp
 html body.cco_body #MainSearchForm .co_global_input_container { height: auto !important; overflow: visible !important; }
 /* Newsletter page: the Subscribe button lines up with the fields */
 html body.cco_body #ContentBody form[name="subscribe"] div[align="center"] { text-align: left !important; }
+/* Search page: ChabadOne fixes the search form at 550px, wider than a phone (the page scrolled sideways).
+   The field now fills the row beside the Find button, up to 640px, centred. (Two forms share the id
+   #MainSearchForm: a hidden one in the header and this one in the page.) */
+html body.cco_body #ContentBody .w100:has(.co_search_form) { width: auto !important; max-width: 100% !important; min-width: 0 !important; float: none !important; }
+html body.cco_body #ContentBody .co_search_form { width: auto !important; max-width: 640px; min-width: 0 !important; margin-left: auto !important; margin-right: auto !important; box-sizing: border-box; }
+html body.cco_body #ContentBody #MainSearchForm { display: flex !important; flex-direction: row-reverse; gap: 10px; align-items: flex-start; width: auto !important; }
+html body.cco_body #ContentBody #MainSearchForm .co_global_submit { float: none !important; flex: 0 0 auto; margin: 0 !important; }
+html body.cco_body #ContentBody #MainSearchForm .co_global_input_container { flex: 1 1 auto; min-width: 0; width: auto !important; float: none !important; margin: 0 !important; }
+html body.cco_body #ContentBody #MainSearchForm .co_global_input_container input.co_global_input { width: 100% !important; }
+html body.cco_body #ContentBody #MainSearchForm .break_floats { display: none; }
