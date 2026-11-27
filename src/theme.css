@@ -2541,3 +2541,6 @@ html.cc-v2 body.cco_body .cc-regtop__price { margin: 6px 0 0; font-size: 17px; f
 }
 /* the event's own banner picture repeats the header above it: left out on a course's registration page */
 html.cc-v2.cc-reg-course body.cco_body #co_body_container .banner_image { display: none !important; }
+/* art that carries the course name (regArt "fit"): shown whole, at the right, not cropped and not faded */
+html.cc-v2 body.cco_body .cc-regtop--fit .cc-regtop__art { top: 18px; bottom: 18px; right: var(--cc-gutter, 40px); width: 40%; -webkit-mask-image: none; mask-image: none; }
+html.cc-v2 body.cco_body .cc-regtop--fit .cc-regtop__art img { object-fit: contain; object-position: right center; }

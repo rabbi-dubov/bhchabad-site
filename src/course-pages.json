@@ -442,7 +442,8 @@
         "$150",
         "or $20 a session"
       ],
-      "lessonsZoom": true
+      "lessonsZoom": true,
+      "regArt": "fit"
     }
   }
 }

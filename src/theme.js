@@ -1914,8 +1914,11 @@
       var title = h("h1", { "class": "cc-regtop__title cc-head" }), at = c.em ? c.title.lastIndexOf(c.em) : -1;
       if (at < 0) { title.textContent = c.title; }
       else { title.appendChild(d.createTextNode(c.title.slice(0, at))); title.appendChild(h("em", { text: c.em })); title.appendChild(d.createTextNode(c.title.slice(at + c.em.length))); }
-      var band = h("header", { "class": "cc-regtop" + (c.art ? " cc-regtop--art" : ""), style: vars.join(";") }, [
-        c.art ? h("div", { "class": "cc-regtop__art", "aria-hidden": "true" }, [h("img", { src: c.art, alt: "", style: c.artPos ? "object-position:" + c.artPos : null })]) : null,
+      // regArt "fit" (course-pages.json): the art is shown whole at the right, for a picture that carries the
+      // course name and must not be cut; otherwise it fills its side of the band, cropped as on the course page
+      var fit = c.regArt === "fit";
+      var band = h("header", { "class": "cc-regtop" + (c.art ? " cc-regtop--art" : "") + (fit ? " cc-regtop--fit" : ""), style: vars.join(";") }, [
+        c.art ? h("div", { "class": "cc-regtop__art", "aria-hidden": "true" }, [h("img", { src: c.art, alt: "", style: c.artPos && !fit ? "object-position:" + c.artPos : null })]) : null,
         h("div", { "class": "cc-wrap cc-regtop__in" }, [
           h("a", { "class": "cc-regtop__back", href: courseHref(slug), text: "About this course" }),
           h("p", { "class": "cc-regtop__eyebrow", text: "Registration" }),
