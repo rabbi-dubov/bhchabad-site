@@ -2094,3 +2094,32 @@ html body.cco_body #CalendarContentContainer .main { width: auto !important; }
 @media screen { html body.cco_body #CalendarViewContainer .filter-container:not(:has(input, select, label, button, form)) { display: none !important; } }
 /* phones: the month grid scrolls sideways inside its own box, the page does not */
 @media (max-width: 900px) { html body.cco_body #CalendarContentContainer { overflow-x: auto; overflow-y: hidden; padding-bottom: 8px; -webkit-overflow-scrolling: touch; } }
+
+/* ---------- 25. NEW LOOK, PREVIEW ONLY (html.cc-v2; Levi, Nov 26, 2026: "lets get to work updating the site to the new look") ----------
+   theme.js adds cc-v2 to html only in a browser that asked for it with ?look=next (off again with ?look=now),
+   so nothing here reaches visitors until launch. Design source: the canvas "BH Chabad design direction".
+   Layer 1 (this block): type, shapes and motion, done with the tokens so every page changes at once.
+   Later layers (homepage opening, ways in, numbers band, course template) are added below, same prefix. */
+html.cc-v2 {
+  --cc-font-head: "Instrument Serif", "DM Serif Display", Georgia, serif;
+  --cc-radius: 24px;
+  --cc-radius-sm: 14px;
+  --cc-pill: 999px;
+}
+/* Instrument Serif is lighter and narrower than DM Serif Display: headings grow and tighten */
+html.cc-v2 body.cco_body .cc-h2 { font-size: clamp(34px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -0.015em; }
+html.cc-v2 body.cco_body .cc-hero__title { font-size: clamp(40px, 7vw, 100px); line-height: 0.96; letter-spacing: -0.02em; }
+html.cc-v2 body.cco_body .cc-landing .cc-hero__title, html.cc-v2 body.cco_body .cc-page-title { font-size: clamp(38px, 5.4vw, 76px) !important; line-height: 1; letter-spacing: -0.02em; }
+html.cc-v2 body.cco_body .cc-hero__title em, html.cc-v2 body.cco_body .cc-h2 em, html.cc-v2 body.cco_body .cc-page-title em { font-style: italic; }
+html.cc-v2 body.cco_body .cc-ev__title, html.cc-v2 body.cco_body .cc-nowbar__title { letter-spacing: -0.01em; }
+/* frosted header on computers (not on phones: a filter on the header would trap the slide-in menu inside it) */
+@media (min-width: 1025px) {
+  html.cc-v2 body.cco_body #header, html.cc-v2 body.cco_body #header.on-scroll { background: rgba(255, 255, 255, .84) !important; -webkit-backdrop-filter: saturate(1.4) blur(16px); backdrop-filter: saturate(1.4) blur(16px); }
+}
+/* sections rise in once as they enter the screen; off for people who ask their device for less motion */
+@keyframes cc-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    html.cc-v2 body.cco_body .cc-section > .cc-wrap { animation: cc-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 30%; }
+  }
+}

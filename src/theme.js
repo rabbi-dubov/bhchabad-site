@@ -14,6 +14,21 @@
   if (window.__ccThemeLoaded) { return; }
   window.__ccThemeLoaded = true;
 
+  /* New-look preview (Levi, Nov 26, 2026). Adding "?look=next" to any address turns the new look on for this
+     browser only; "?look=now" turns it off. Everything for it sits under html.cc-v2 in theme.css (section 25),
+     so visitors never see it until the switch is removed at launch. */
+  try {
+    var lk = /[?&]look=(next|now)\b/.exec(location.search);
+    if (lk) { if (lk[1] === "next") { localStorage.setItem("cc-look", "next"); } else { localStorage.removeItem("cc-look"); } }
+    if (localStorage.getItem("cc-look") === "next") {
+      html.className += " cc-v2";
+      var lf = d.createElement("link");
+      lf.rel = "stylesheet";
+      lf.href = "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap";
+      d.head.appendChild(lf);
+    }
+  } catch (e) {}
+
   /* ---------- Site facts (edit here) ---------- */
   var CC = {
     org: "Chabad Jewish Center of Bloomfield Hills",
