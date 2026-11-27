@@ -143,6 +143,9 @@
       heroSeconds: 7,
       secondaryCta: { text: "About us", href: "/7581763" },   // shown on the first slide only (= CC.aboutUrl)
       introEyebrow: "Welcome",
+      // New look, welcome section: the word of its heading set in italics, and the three promises under the text
+      introEm: "you",
+      introPoints: ["No membership", "No labels", "No prior knowledge"],
       eventsEyebrow: "Coming up",
       eventsTitle: "Discover the joy and meaning in Judaism",
       eventsLine: "The first class of every course is yours to try, commitment-free.",
@@ -1017,7 +1020,10 @@
     var sec = h("section", { "class": "cc-section cc-section--cream cc-events", "aria-labelledby": "cc-events-h" }, [
       h("div", { "class": "cc-wrap" }, [
         h("div", { "class": "cc-head-row" }, [
-          h("div", null, [h("p", { "class": "cc-eyebrow", text: CC.home.eventsEyebrow }), h("h2", { "class": "cc-h2 cc-head", id: "cc-events-h", text: CC.home.eventsTitle }), CC.home.eventsLine ? h("p", { "class": "cc-lede", text: CC.home.eventsLine }) : null]),
+          h("div", null, [h("p", { "class": "cc-eyebrow", text: CC.home.eventsEyebrow }), h("h2", { "class": "cc-h2 cc-head", id: "cc-events-h", text: CC.home.eventsTitle }),
+            // the "first class is yours to try" line is about courses, not about every event: the new look leaves it to
+            // the course pages (Levi, Nov 27)
+            CC.home.eventsLine && !/cc-v2/.test(html.className) ? h("p", { "class": "cc-lede", text: CC.home.eventsLine }) : null]),
           h("div", { "class": "cc-events__nav" }, [prev, next, h("a", { "class": "cc-btn cc-btn--ghost", href: CC.eventsUrl, text: CC.home.eventsAll })])
         ]),
         grid
@@ -1176,10 +1182,18 @@
     var body = q(".message_format .bottom_padding, .widget_content .bottom_padding, .widget_content", m);
     var more = q("a.readMore", m);
     var bodyText = body ? txt(body).replace(more ? txt(more) : "\u0000", "").trim() : "";
-    var words = h("div", null, [
-      h("p", { "class": "cc-eyebrow", text: CC.home.introEyebrow }),
-      h("h2", { "class": "cc-h2 cc-head", text: head || "There's a place for you here." }),
+    // New look (the approved homepage board): one word of the heading in italics, three short promises under the
+    // text, and the photos in an arch at the left with small dots under it
+    var v2 = /cc-v2/.test(html.className), headText = head || "There's a place for you here.", headNode = h("h2", { "class": "cc-h2 cc-head" });
+    var em = v2 ? CC.home.introEm : "", at = em ? (" " + headText + " ").indexOf(" " + em + " ") : -1;
+    if (at < 0) { headNode.textContent = headText; }
+    else { headNode.appendChild(d.createTextNode(headText.slice(0, at))); headNode.appendChild(h("em", { text: em })); headNode.appendChild(d.createTextNode(headText.slice(at + em.length))); }
+    var points = v2 ? (CC.home.introPoints || []) : [];
+    var words = h("div", { "class": v2 ? "cc-welcome__words" : null }, [
+      v2 ? null : h("p", { "class": "cc-eyebrow", text: CC.home.introEyebrow }),
+      headNode,
       bodyText ? h("p", { "class": "cc-lede", text: bodyText }) : null,
+      points.length ? h("ul", { "class": "cc-welcome__points" }, points.map(function (t) { return h("li", { "class": "cc-head", text: t }); })) : null,
       more ? h("p", { style: "margin-top:24px" }, [h("a", { "class": "cc-link", href: more.getAttribute("href"), text: txt(more) || "Learn more" })]) : null
     ]);
     var wrap = h("div", { "class": "cc-wrap" }, [words]);
@@ -1190,14 +1204,19 @@
       if (!list.length) { return; }
       var box = stack("cc-welcome__img", list.map(function (p) { return photoLayer(p.src, p.alt); }));
       addClass(sec, "cc-welcome"); addClass(wrap, "cc-split");
-      wrap.appendChild(box);
+      var dots = v2 && list.length > 1 ? h("div", { "class": "cc-welcome__dots", "aria-hidden": "true" }, list.map(function (p, j) { return h("span", { "class": j ? null : "is-on" }); })) : null;
+      wrap.appendChild(v2 ? h("div", { "class": "cc-welcome__media" }, [box, dots]) : box);
       // a calm change every 6 seconds (3 was restless beside the text); it waits while the mouse is on the photo
       // or the browser tab is in the background
       if (list.length > 1 && !reduceMotion) {
         var i = 0, held = false;
         box.addEventListener("mouseenter", function () { held = true; });
         box.addEventListener("mouseleave", function () { held = false; });
-        setInterval(function () { if (held || d.hidden) { return; } i = (i + 1) % list.length; box.show(i); }, 6000);
+        setInterval(function () {
+          if (held || d.hidden) { return; }
+          i = (i + 1) % list.length; box.show(i);
+          if (dots) { qa("span", dots).forEach(function (s, j) { s.className = j === i ? "is-on" : ""; }); }
+        }, 6000);
       }
     });
     return sec;
@@ -1733,6 +1752,13 @@
     ]);
     var artImg = c.art ? h("img", { src: c.art, alt: c.artAlt || "", style: c.artPos ? "object-position:" + c.artPos : null }) : null;
     var banner = c.opening === "banner";
+    // a faint line pattern taken from the course's own graphics (hexagons for The Missing Piece) behind the words
+    var lines = (c.pattern || []).filter(function (p) { return /^[MmLlHhVvZz0-9 .,-]+$/.test(p); });
+    if (lines.length && !banner) {
+      var pat = h("span", { "class": "cc-cp__pattern", "aria-hidden": "true" });
+      pat.innerHTML = '<svg viewBox="0 0 680 660" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1.5">' + lines.map(function (p) { return '<path d="' + p + '"/>'; }).join("") + "</svg>";
+      words.insertBefore(pat, words.firstChild);
+    }
     var top = h("header", { "class": "cc-cp__top cc-cp__top--" + (banner ? "banner" : "split") }, banner ? [
       c.banner ? h("img", { "class": "cc-cp__backdrop", src: c.banner, alt: "" }) : null,
       h("div", { "class": "cc-wrap" }, [words, artImg ? h("div", { "class": "cc-cp__art" }, [artImg]) : null])
@@ -1766,7 +1792,7 @@
       facts
     ]);
 
-    var lessons = (c.lessons || []).length ? h("section", { "class": "cc-cp__lessons" + (c.colors && c.colors.paper ? " cc-cp__lessons--paper" : "") + (c.lessonsBlend ? " cc-cp__lessons--blend" : "") + (c.lessonsZoom ? " cc-cp__lessons--zoom" : ""), id: lessonsId, "aria-labelledby": "cc-cp-les" }, [h("div", { "class": "cc-wrap" }, [
+    var lessons = (c.lessons || []).length ? h("section", { "class": "cc-cp__lessons" + (c.colors && c.colors.paper ? " cc-cp__lessons--paper" : "") + (c.lessonsBlend ? " cc-cp__lessons--blend" : "") + (c.lessonsZoom ? " cc-cp__lessons--zoom" : "") + (c.lessonsShape === "hex" ? " cc-cp__lessons--hex" : ""), id: lessonsId, "aria-labelledby": "cc-cp-les" }, [h("div", { "class": "cc-wrap" }, [
       h("h2", { "class": "cc-cp__h2 cc-head", id: "cc-cp-les", text: c.lessonsTitle || "Lessons" }),
       h("ol", { "class": "cc-cp__list" }, c.lessons.map(function (l, i) {
         return h("li", null, [

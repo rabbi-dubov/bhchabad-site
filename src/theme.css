@@ -2438,3 +2438,34 @@ html.cc-v2 body.cco_body .cc-cp__prices strong { display: block; font-weight: 40
   html.cc-v2 body.cco_body .cc-cp__close-body { padding: 48px var(--cc-gutter); }
 }
 @media (prefers-reduced-motion: reduce) { html.cc-v2 body.cco_body .cc-cp .cc-cp__btn:hover { transform: none; } }
+
+/* ---------- 28. NEW LOOK, LAYER 5 (html.cc-v2 only; Levi, Nov 27): welcome arch, course line patterns, hexagon lesson pictures ---------- */
+/* Welcome ("There's a place for you here"): as on the approved homepage board. The photos sit in an arch at the
+   left with small dots under it; the words carry one italic word and three short promises. */
+html.cc-v2 body.cco_body .cc-welcome .cc-split { gap: 48px 72px; }
+html.cc-v2 body.cco_body .cc-welcome__words { flex: 1.3 1 460px; }
+html.cc-v2 body.cco_body .cc-welcome__words .cc-h2 em { font-style: italic; color: var(--cc-accent-text); }
+html.cc-v2 body.cco_body .cc-welcome__words .cc-lede { margin-top: 22px; font-size: 20px; line-height: 1.6; color: #43363A; }
+html.cc-v2 body.cco_body .cc-welcome__media { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+html.cc-v2 body.cco_body .cc-welcome__media .cc-welcome__img { width: 100%; max-width: 440px; aspect-ratio: 4 / 5; border-radius: 240px 240px 20px 20px; background: var(--cc-line); box-shadow: none; }
+html.cc-v2 body.cco_body .cc-welcome__dots { display: flex; gap: 8px; }
+html.cc-v2 body.cco_body .cc-welcome__dots span { width: 6px; height: 6px; border-radius: 999px; background: #D9C9C0; transition: width .4s ease, background-color .4s ease; }
+html.cc-v2 body.cco_body .cc-welcome__dots span.is-on { width: 26px; background: var(--cc-primary); }
+html.cc-v2 body.cco_body .cc-welcome__points { list-style: none !important; display: flex; flex-wrap: wrap; gap: 10px 36px; margin: 34px 0 0 !important; padding: 26px 0 0 !important; border-top: 1px solid #E2D6CE; }
+html.cc-v2 body.cco_body .cc-welcome__points li { margin: 0 !important; padding: 0 !important; list-style: none !important; font-size: clamp(32px, 3.3vw, 46px); line-height: 1.05; color: var(--cc-ink); }
+html.cc-v2 body.cco_body .cc-welcome__points li:nth-child(2) { color: var(--cc-primary); }
+html.cc-v2 body.cco_body .cc-welcome__points li:nth-child(3) { color: var(--cc-accent-text); }
+@media (min-width: 901px) { html.cc-v2 body.cco_body .cc-welcome__media { order: -1; } }
+@media (max-width: 760px) {
+  html.cc-v2 body.cco_body .cc-welcome__media .cc-welcome__img { max-width: 320px; }
+  html.cc-v2 body.cco_body .cc-welcome__words .cc-lede { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { html.cc-v2 body.cco_body .cc-welcome__dots span { transition: none; } }
+
+/* Course pages: the faint line pattern behind the opening words, drawn from the course's own graphics */
+html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__words { overflow: hidden; }
+html.cc-v2 body.cco_body .cc-cp__pattern { position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: .2; pointer-events: none; }
+html.cc-v2 body.cco_body .cc-cp__pattern svg { display: block; width: 100%; height: 100%; }
+html.cc-v2 body.cco_body .cc-cp__words > :not(.cc-cp__pattern) { position: relative; }
+/* Lesson photos cut to the course's hexagon (The Missing Piece) */
+html.cc-v2 body.cco_body .cc-cp__lessons--hex .cc-cp__pic { object-fit: cover; clip-path: polygon(50% 0, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%); }
