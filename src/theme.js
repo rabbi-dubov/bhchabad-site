@@ -1766,7 +1766,7 @@
       facts
     ]);
 
-    var lessons = (c.lessons || []).length ? h("section", { "class": "cc-cp__lessons" + (c.colors && c.colors.paper ? " cc-cp__lessons--paper" : "") + (c.lessonsBlend ? " cc-cp__lessons--blend" : ""), id: lessonsId, "aria-labelledby": "cc-cp-les" }, [h("div", { "class": "cc-wrap" }, [
+    var lessons = (c.lessons || []).length ? h("section", { "class": "cc-cp__lessons" + (c.colors && c.colors.paper ? " cc-cp__lessons--paper" : "") + (c.lessonsBlend ? " cc-cp__lessons--blend" : "") + (c.lessonsZoom ? " cc-cp__lessons--zoom" : ""), id: lessonsId, "aria-labelledby": "cc-cp-les" }, [h("div", { "class": "cc-wrap" }, [
       h("h2", { "class": "cc-cp__h2 cc-head", id: "cc-cp-les", text: c.lessonsTitle || "Lessons" }),
       h("ol", { "class": "cc-cp__list" }, c.lessons.map(function (l, i) {
         return h("li", null, [

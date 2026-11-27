@@ -138,12 +138,13 @@
       },
       "trailer": "",
       "facts": [
-        ["When", "Monthly on Tuesdays, 6:30 pm", "Nov 17, 2026 to May 18, 2027"],
+        ["When", "Monthly on Tuesdays", "6:30 pm · Nov 17, 2026 to May 18, 2027"],
         ["Where", "A home in Bloomfield Hills", "Address provided upon registration"],
         ["Teacher", "Mushky Dubov", ""]
       ],
       "lessonsTitle": "Seven lessons",
       "lessonsBlend": true,
+      "lessonsZoom": true,
       "lessons": [
         { "when": "Nov 17", "title": "Generating a Universe", "text": "Living between the Trees", "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L1.png" },
         { "when": "Dec 15", "title": "Engendering Evil", "text": "Biting More Than Can Be Swallowed", "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L2.png" },
