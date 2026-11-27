@@ -2561,3 +2561,21 @@ html.cc-v2.cc-reg-course body.cco_body #RegisterHeader { display: none !importan
 html.cc-v2.cc-reg-course body.cco_body #RegisterBody { margin-top: 8px; }
 /* Homepage, the large quote when it is long (more than about 150 characters): a size smaller and a narrower measure */
 html.cc-v2 body.cco_body .cc-wall__q--big.cc-wall__q--long .cc-wall__text { max-width: 920px; font-size: clamp(25px, 2.9vw, 40px); line-height: 1.22; }
+/* The B"H mark belongs at the head of the page, top right (Levi, Nov 27: it "is in the wrong place" at the foot
+   of the opening). On phones and tablets: the top right corner of the photo, just under the header. On computers
+   the header lies over the photo, so it sits just under the header's line. */
+html.cc-v2 body.cco_body .cc-top .cc-bh { top: 12px; bottom: auto; }
+@media (min-width: 1025px) { html.cc-v2.cc-shell-ready body.cco_body .cc-top .cc-bh { top: calc(var(--cc-hdr-h, 84px) + 14px); } }
+/* Phones: the opening is one calm screen (Levi, Nov 27: "It feels too squashed, maybe the text should start lower
+   down, more spacing"). The words start lower, so more of the photo shows; there is more air between the title,
+   the line and the button; the button ends a little above the bottom of the screen; the "Next up" card starts
+   below it, with room of its own, and is met on the first scroll. */
+@media (max-width: 760px) {
+  html.cc-v2 body.cco_body .cc-top__text { min-height: max(480px, calc(100vh - var(--cc-hdr-h, 66px) - 24px)); min-height: max(480px, calc(100svh - var(--cc-hdr-h, 66px) - 24px)); padding-bottom: 44px; }
+  html.cc-v2 body.cco_body .cc-top__sub { margin-top: 18px; }
+  html.cc-v2 body.cco_body .cc-top .cc-hero__ctas { margin-top: 30px; }
+  html.cc-v2 body.cco_body .cc-top a.cc-next { margin-top: 20px; }
+  html.cc-v2 body.cco_body .cc-top .cc-wrap { padding-bottom: 36px; }
+  html.cc-v2 body.cco_body .cc-top__photos { bottom: 170px; }
+  html.cc-v2 body.cco_body .cc-top__photos::after { background: linear-gradient(180deg, rgba(47, 6, 25, .14) 0%, rgba(47, 6, 25, 0) 30%, rgba(47, 6, 25, .42) 58%, rgba(47, 6, 25, .9) 82%, #2F0619 100%); }
+}
