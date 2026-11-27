@@ -1979,7 +1979,8 @@
       var all = (data && data.courses) || {};
       Object.keys(all).forEach(function (k) {
         var c = all[k];
-        if (c.regDate && new RegExp("eventid=" + m[1] + "(\\D|$)").test(c.register || "")) { put(c.regDate); }
+        // either link form: register.asp?eventid=N or register_cdo/eventid/N
+        if (c.regDate && new RegExp("eventid[=/]" + m[1] + "(\\D|$)").test(c.register || "")) { put(c.regDate); }
       });
     }).catch(function () {});
   }
