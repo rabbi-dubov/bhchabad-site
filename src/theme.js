@@ -1574,6 +1574,27 @@
         link.appendChild(d.createTextNode("Add another registration (" + names.join(" or ") + ")"));
       }
     });
+
+    // 4) "Continue" / "Add": ChabadOne puts the new people's fields ABOVE the row that was just tapped.
+    //    A browser with scroll anchoring (Chrome, Android) then follows that row, or the footer, down the
+    //    page: the visitor lands some 1,500px lower and has to scroll back up (Levi on his phone, Nov 27).
+    //    Anchoring is off on this page (theme.css, html.cc-reg-page) and the first new card is brought into
+    //    view. The count is taken in the capture phase, before ChabadOne's own handler adds the cards.
+    addClass(html, "cc-reg-page");
+    page.addEventListener("click", function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest("button.add_attendee") : null;
+      var perf = btn && btn.closest(".performance");
+      if (!perf) { return; }
+      var before = qa(".reservation", perf).length;
+      setTimeout(function () {
+        var card = qa(".reservation", perf)[before];
+        if (!card) { return; }
+        var top = card.getBoundingClientRect().top;
+        if (top < 70 || top > window.innerHeight * 0.45) {
+          card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+        }
+      }, 60);
+    }, true);
   }
 
   /* ---------- Registration: cap the number of registrants (CC.regMaxAttendees) ----------
