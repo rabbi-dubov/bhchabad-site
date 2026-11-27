@@ -2544,3 +2544,8 @@ html.cc-v2.cc-reg-course body.cco_body #co_body_container .banner_image { displa
 /* art that carries the course name (regArt "fit"): shown whole, at the right, not cropped and not faded */
 html.cc-v2 body.cco_body .cc-regtop--fit .cc-regtop__art { top: 18px; bottom: 18px; right: var(--cc-gutter, 40px); width: 40%; -webkit-mask-image: none; mask-image: none; }
 html.cc-v2 body.cco_body .cc-regtop--fit .cc-regtop__art img { object-fit: contain; object-position: right center; }
+/* Phones: the row of event cards runs to both screen edges while it is swiped (Levi, Nov 27: "a white bar on the
+   right side"). Before, the row stopped at the page margin, so the next card was cut off short of the edge. */
+@media (max-width: 760px) {
+  html body.cco_body .cc-events__track, html body.cco_body .cc-evs { margin-left: calc(-1 * var(--cc-gutter)); margin-right: calc(-1 * var(--cc-gutter)); padding-left: var(--cc-gutter); padding-right: var(--cc-gutter); scroll-padding-left: var(--cc-gutter); }
+}
