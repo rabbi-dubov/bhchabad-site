@@ -441,7 +441,8 @@
       "priceShort": [
         "$150",
         "or $20 a session"
-      ]
+      ],
+      "lessonsZoom": true
     }
   }
 }

@@ -14,21 +14,29 @@
   if (window.__ccThemeLoaded) { return; }
   window.__ccThemeLoaded = true;
 
-  /* New-look preview (Levi, Nov 26, 2026). Adding "?look=next" to any address turns the new look on for this
-     browser only; "?look=now" turns it off. Everything for it sits under html.cc-v2 in theme.css (section 25),
-     so visitors never see it until the switch is removed at launch. */
+  /* The look (launch switch, Nov 27, 2026). The new look (html.cc-v2; theme.css section 25 onward) is what
+     every visitor gets: LOOK_DEFAULT = "next". Adding "?look=now" to any address brings the previous look back
+     for that browser only (a way back if a page misbehaves); "?look=next" returns to the new one.
+     To put the whole site back on the previous look, set LOOK_DEFAULT to "now" and release.
+     The header loader may already have added cc-v2 and the heading font before the page was drawn; this block
+     does the same for an older loader, and takes the class off again when this browser asked for "now". */
+  var LOOK_DEFAULT = "next", look = LOOK_DEFAULT;
   try {
     // ChabadOne rewrites "/7581757?look=next" to ".../aid/7581757/look/next/...", so both spellings are read
     var lk = /[?&\/]look[=\/](next|now)(?=[\/&#]|$)/.exec(location.pathname + location.search);
-    if (lk) { if (lk[1] === "next") { localStorage.setItem("cc-look", "next"); } else { localStorage.removeItem("cc-look"); } }
-    if (localStorage.getItem("cc-look") === "next") {
-      html.className += " cc-v2";
+    if (lk) { localStorage.setItem("cc-look", lk[1]); }
+    look = localStorage.getItem("cc-look") || LOOK_DEFAULT;
+  } catch (e) {}
+  html.className = html.className.replace(/\s*\bcc-v2\b/g, "");
+  if (look === "next") {
+    html.className += " cc-v2";
+    if (!d.querySelector('link[href*="Instrument+Serif:ital@0;1"]')) {
       var lf = d.createElement("link");
       lf.rel = "stylesheet";
       lf.href = "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap";
       d.head.appendChild(lf);
     }
-  } catch (e) {}
+  }
 
   /* ---------- Site facts (edit here) ---------- */
   var CC = {
@@ -76,6 +84,8 @@
     menuLabels: {
       "7593397": "JLI course: Kabbalah",
       "7620415": "JLI course: The Missing Piece",
+      "7645563": "JLI course: Kabbalah",            // the ordinary pages that replace the two JLI mini-sites
+      "7645556": "JLI course: The Missing Piece",
       "7593500": "Women’s learning: NEXT GENesis"
     },
     // Sub-pages left out of the menus, by page number (Torah Deep Dive is not running; proposal, as above)
@@ -153,7 +163,7 @@
       eventsAll: "All events",   // was "Full calendar": the page it opens is a list of events, not a calendar (Levi, Nov 26)
       // Course page for a registration event (event id -> page). Its card's "Learn more" opens the page and
       // "Register" the registration (Levi, Nov 17). Events not listed keep their own link.
-      eventPages: { "24326": "/7620415", "23504": "/7593397", "23481": "/7593500" },
+      eventPages: { "24326": "/7645556", "23504": "/7645563", "23481": "/7593500" },
       // The same courses by name, for slides and cards whose link has no event number (e.g. /jli-register)
       eventNames: { "24326": "Missing Piece", "23504": "Kabbalah", "23481": "NEXT GENesis" },
       // Calendar items to show even when the homepage feed (next 5 calendar items only) hasn't reached them yet.
@@ -1731,10 +1741,10 @@
      opening (course art, title in the site's heading font), floating course bar with Register, About + facts card,
      lessons list, teacher, Good to know, closing Register band. Only the words, the pictures and a few colors
      taken from the course art change from course to course.
-     Where it shows (preview only, html.cc-v2): on a course's own page (CC.courseNext.pages), in place of the
+     Where it shows (new look, html.cc-v2): on a course's own page (CC.courseNext.pages), in place of the
      page's body; and on the Learn page with "?course=<name>" in the address. Two courses used to live on JLI
      mini-site pages without the site's header and menu; each now has an ordinary page (CC.courseNext.moved),
-     and in the preview the old addresses and links to them lead to the new page. */
+     and the old addresses and links to them lead to the new page. */
   function coursePageId() {
     var p = /\/aid\/(\d+)\//.exec(location.pathname) || /^\/(\d+)\/?$/.exec(location.pathname);
     return p ? p[1] : "";
@@ -1874,12 +1884,18 @@
     var cfg = CC.courseNext;
     if (!cfg || !/cc-v2/.test(html.className)) { return; }
     var moved = cfg.moved || {};
-    // In the preview, a link to an old JLI mini-site course page opens the ordinary page that replaced it
-    d.addEventListener("click", function (e) {
-      var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-      if (!a) { return; }
+    // A link to an old JLI mini-site course page leads to the ordinary page that replaced it: links already on
+    // the page are corrected now and once more after the late-built parts (events, cards) are in, and any
+    // link is corrected again at the moment it is clicked.
+    function movedHref(a) {
       var hr = a.getAttribute("href") || "", m = /^(?:https?:\/\/(?:www\.)?bhchabad\.org)?\/(\d{5,})\/?$/i.exec(hr) || /\/aid\/(\d{5,})\//.exec(hr);
       if (m && moved[m[1]]) { a.setAttribute("href", "/" + moved[m[1]]); }
+    }
+    function movedAll() { qa("a[href]").forEach(movedHref); }
+    movedAll(); setTimeout(movedAll, 1500); window.addEventListener("load", function () { setTimeout(movedAll, 600); });
+    d.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if (a) { movedHref(a); }
     }, true);
     var slug = courseSlug();
     if (!slug) { return; }

@@ -2364,8 +2364,8 @@ html.cc-v2 body.cco_body .cc-cp__list li > div { flex: 1 1 auto; min-width: 0; }
 html.cc-v2 body.cco_body .cc-cp__pic { flex: 0 0 104px; width: 104px !important; height: 104px !important; object-fit: contain; }
 html.cc-v2 body.cco_body .cc-cp__lessons--paper .cc-cp__pic { mix-blend-mode: darken; }
 html.cc-v2 body.cco_body .cc-cp__lessons--blend .cc-cp__pic { mix-blend-mode: multiply; }
-/* pictures that come with a wide empty margin are enlarged inside their own square */
-html.cc-v2 body.cco_body .cc-cp__lessons--zoom .cc-cp__pic { transform: scale(1.7); clip-path: inset(20.6%); }
+/* cut-out pictures that come with a wide see-through margin are enlarged a little (nothing is clipped: the margin is empty) */
+html.cc-v2 body.cco_body .cc-cp__lessons--zoom .cc-cp__pic { transform: scale(1.25); }
 html.cc-v2 body.cco_body .cc-cp__num { flex: 0 0 104px; text-align: center; font-size: 64px; line-height: 1; color: var(--cp-label) !important; }
 html.cc-v2 body.cco_body .cc-cp__les-k { display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-label); }
 html.cc-v2 body.cco_body .cc-cp__les-t { margin: 4px 0 0; font-size: 26px !important; line-height: 1.12; color: var(--cp-ink) !important; }
