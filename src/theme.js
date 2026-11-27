@@ -1700,7 +1700,7 @@
       times.forEach(function (ms) { setTimeout(go, ms); });
       return go;
     }
-    var m = /^#([A-Za-z][w-]*)$/.exec(location.hash);
+    var m = /^#([A-Za-z][\w-]*)$/.exec(location.hash);
     if (m && !/^c-/.test(m[1])) {
       var go = settle(m[1], [0, 300, 900, 1600, 2600, 4000]);
       window.addEventListener("load", function () { setTimeout(go, 60); setTimeout(go, 700); });
@@ -1708,7 +1708,7 @@
     d.addEventListener("click", function (e) {
       var a = e.target && e.target.closest ? e.target.closest("a[href^='#']") : null;
       var id = a ? a.getAttribute("href").slice(1) : "";
-      if (!/^[A-Za-z][w-]*$/.test(id) || /^c-/.test(id) || !d.getElementById(id)) { return; }
+      if (!/^[A-Za-z][\w-]*$/.test(id) || /^c-/.test(id) || !d.getElementById(id)) { return; }
       setTimeout(function () { settle(id, [800, 1600]); }, 0);   // after the tap's own events, so they don't count as the visitor moving on
     });
   }
