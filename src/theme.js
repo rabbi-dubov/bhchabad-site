@@ -1909,6 +1909,14 @@
       var all = (data && data.courses) || {}, slug = "", c = null;
       Object.keys(all).forEach(function (k) { if (new RegExp("eventid=" + m[1] + "(\\D|$)").test(all[k].register || "")) { slug = k; c = all[k]; } });
       if (!c || c.state === "closed" || q(".cc-regtop")) { return; }
+      // The stylesheet and this script reach browsers separately, and the file host can hand out a new script
+      // with an older stylesheet for a while (it did on Nov 27: the band came out unstyled, with the art at
+      // full size above the form). So the band is only built when its own rules are really there.
+      var probe = h("div", { "class": "cc-regtop" });
+      probe.style.display = "none"; d.body.appendChild(probe);
+      var styled = window.getComputedStyle(probe).position === "relative";
+      d.body.removeChild(probe);
+      if (!styled) { return; }
       var col = c.colors || {}, vars = [];
       Object.keys(col).forEach(function (k) { if (/^#[0-9a-f]{3,8}$/i.test(col[k])) { vars.push("--cp-" + k.replace(/[A-Z]/g, function (x) { return "-" + x.toLowerCase(); }) + ":" + col[k]); } });
       var title = h("h1", { "class": "cc-regtop__title cc-head" }), at = c.em ? c.title.lastIndexOf(c.em) : -1;
