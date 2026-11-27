@@ -2607,3 +2607,8 @@ html body.cco_body #ReserversInformation .optin_checkbox { float: none !importan
 html body.cco_body #ReserversInformation .optin_message_text { flex: 1 1 auto; width: auto !important; margin: 0 !important; padding: 0 !important; }
 html body.cco_body #ReserversInformation .optin_message_text label { font-size: 15px !important; line-height: 1.45; color: var(--cc-text); cursor: pointer; }
 html body.cco_body #RegisterSinglePage .reservation:not(:last-child) .embedded_form > .center.small { display: none !important; }
+/* Stars on each person's First and Last name (theme.js adds the span), in the colour of the other stars. */
+html body.cco_body #RegisterSinglePage .cc-req { color: #A4342A; font-weight: 600; }
+/* A form page that opens with a designed section (the menorah lighting page): ChabadOne's 40px of form padding
+   left a white band between the header and the section (Levi, Nov 27). */
+html body.cco_body form.userform-form .form-all:has(.form-line:first-child .cc-landing) { padding-top: 0 !important; }

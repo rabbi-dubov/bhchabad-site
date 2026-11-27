@@ -1551,9 +1551,26 @@
         }
       });
     }
-    hideDuplicateNotes();
+    // 3b) Each person's First and Last name are required (ChabadOne refuses the form without them) but
+    //     carry no star, unlike every other required field (Levi, Nov 27).
+    function starNames() {
+      qa(".reservation input", page).forEach(function (i) {
+        if (i.getAttribute("data-cc-star") || !/^\s*(first|last) name\s*$/i.test(i.getAttribute("placeholder") || "")) { return; }
+        i.setAttribute("data-cc-star", "1");
+        i.setAttribute("aria-required", "true");
+        var lab = i.id ? q("label[for='" + i.id + "']", page) : null, n = i;
+        for (var k = 0; !lab && n && k < 3; k++) {   // the label sits just before the box, or before its wrapper
+          var p = n.previousElementSibling;
+          if (p && /^\s*(first|last) name:?\s*$/i.test(txt(p))) { lab = p; }
+          n = n.parentElement;
+        }
+        if (lab && !q(".cc-req", lab)) { lab.appendChild(h("span", { "class": "cc-req", text: " *" })); }
+      });
+    }
+    function tidy() { hideDuplicateNotes(); starNames(); }
+    tidy();
     if (window.MutationObserver) {
-      new MutationObserver(hideDuplicateNotes).observe(page, { childList: true, subtree: true });
+      new MutationObserver(tidy).observe(page, { childList: true, subtree: true });
     }
 
     // 2) Make "Add additional reservations" say which registration types exist.
@@ -1709,6 +1726,14 @@
       var a = e.target && e.target.closest ? e.target.closest("a[href^='#']") : null;
       var id = a ? a.getAttribute("href").slice(1) : "";
       if (!/^[A-Za-z][\w-]*$/.test(id) || /^c-/.test(id) || !d.getElementById(id)) { return; }
+      // A button that points at a form's first box ("#id_6") would hide the form's heading above the screen:
+      // when the page has an "rsvp" section before that box, the button goes to the section instead.
+      var box = d.getElementById(id), rs = d.getElementById("rsvp");
+      if (rs && rs !== box && /\bform-line\b/.test(box.className || "") && (rs.compareDocumentPosition(box) & 4)) {
+        e.preventDefault();
+        id = "rsvp";
+        rs.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      }
       setTimeout(function () { settle(id, [800, 1600]); }, 0);   // after the tap's own events, so they don't count as the visitor moving on
     });
   }
