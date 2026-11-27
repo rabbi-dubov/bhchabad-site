@@ -130,20 +130,56 @@ The goal is that every page, form and block looks right automatically.
   - Duplicate per-person notes are hidden.
   - The submit button is a normal, full-width button (not sticky).
 
-## 6. Deploy procedure
-1. Edit `src/*`, then run `python3 build.py`. It minifies, checks for no `&`/`<` in the CSS and no `]]>` in the JS, stamps the version, and writes `dist/header.html` and `dist/footer.html`.
-2. **Test before deploying:** inject into the live page in the `seed` tab. Replace the text of the live `<style>` that starts with `:root{--cc-ink` (CSS changes), or run a standalone copy of the changed JS function. Test on desktop and phone (§7).
-3. **Transfer to the admin tab** (the browser can't fetch from the container):
-   - Small change: `python3 tools/mkpatch.py`. It diffs git HEAD's dist (= live) against the new dist and prints anchor/replace pairs plus old and new hashes. Apply them in the `tab-1` page JS to the textarea values, check the old hash first and the new hash after. Abort on any mismatch.
-   - Big change: gzip+base64 the `{h, f}` JSON, decode in the page with `DecompressionStream('gzip')`, and verify SHA-256.
-4. Assert the site title contains "Bloomfield". Set `#customheader` and `#customfooter`, set `#saveHeaderCodeWizard` = `1`, then call `doSubmit('tag')`. Wait, then re-read both boxes and confirm they equal what was sent and the page says "pending".
-5. Publish: set `#previewstate` = `1`, then call `doSubmit('publish')`. The auto-mode classifier may block this; if so, ask Levi in chat, then publish.
-6. Verify live:
-   - The version stamp changed.
-   - Homepage: load it 5× in hidden iframes and expect `cc-home-page cc-shell-ready` every time.
-   - The registration flow (§7).
-7. `git commit` (this makes HEAD = live for the next mkpatch). Then write the changed source files back to the project docs (`theme/*`).
-8. **Rollback:** paste the previous dist (`git show HEAD~1:dist/header.html`) and save and publish. Or empty both boxes. Or set `CC_ENABLED = false` in theme.js.
+## 6. Release (how a change reaches visitors)
+
+**Read this before every release. It changed on Nov 27, 2026, after a release broke the live site for about an hour.**
+
+The live site does not follow the newest files in the repo. ChabadOne's Custom Header Code holds one line,
+`var LIVE = "<commit id>";`, and every visitor's browser loads `live/theme.min.css`, `live/theme.min.js` and
+`live/course-pages.json` from exactly that commit of this repo (through jsDelivr). A release has two halves:
+the files in the repo, and that id in ChabadOne. **Until the id is changed and published in ChabadOne, visitors
+keep the previous release.** That is also the safety: script, stylesheet and course data always arrive as one set.
+
+Why: jsDelivr's "newest files" address (`@main`) can lag for hours and hand out a new script with an older
+stylesheet, or even an older script after a refresh request. An exact commit id is served correctly at once.
+
+### The steps
+1. **Build and check in test.** `node tools/build.mjs test`, commit, push. Look at it as a first-time visitor
+   from the commit address (PLAYBOOK, Nov 27, "testing a build as a first-time visitor"). Do not trust
+   `?cc=test` to be current: it still reads `@main/test/`, which can lag.
+2. **Get Levi's yes in chat for that change** (a "maybe" is not a yes). Ask in the same breath for his say-so
+   to update the header code, because step 6 ticks ChabadOne's "I agree" box, which needs his word each time.
+3. `git pull --rebase` (two sessions may share this folder), then `node tools/build.mjs promote`.
+   If test/ holds something Levi has NOT approved, do not promote: build the approved source only
+   (see PLAYBOOK, Nov 27, "hotfix without the other session's change").
+4. Commit ("Release v... to live: ...") and push.
+5. `node tools/pin.mjs`. It writes the new commit id into `loader/header.html` and checks that jsDelivr serves
+   the release at that id. If it prints WRONG or STOP, do not go on.
+6. **ChabadOne, in Levi's Edge** (he signs in himself): open
+   `https://www.chabadone.org/platform/sitecontrol/admin/#page=/platform/sitecontrol/admin/wizards/sitetitles.asp`.
+   Check the site title says "Bloomfield". In the Custom Header Code box (`#customheader`, inside the AdminMain
+   frame) change ONLY the id in the `var LIVE = "...";` line. Never paste the whole box from a file: its first
+   line is a Google site-verification tag that lives only there. Afterwards everything after that first line
+   must equal `loader/header.html` after its first line (compare SHA-256 fingerprints; `tools/pin.mjs` prints
+   the repo's). Then: the lower Save, tick "I agree", Ok, wait for "Your changes are pending", Preview, Publish.
+   All with real clicks.
+7. **Check the live site as a visitor**, every time: homepage (header is about 85px tall, one logo), one course
+   page, and registration 24326 **without submitting** (form, both prices, Continue). In the page,
+   `window.ccBase` must contain the new id, and both theme files must start with the new version.
+8. Commit `loader/header.html` and the notes (HANDOFF "Where things stand" + the release log line), push.
+
+### Going back
+Put the previous release's id back in ChabadOne (step 6) and publish: the site is on the old release at once.
+The ids are in HANDOFF.md under "Release log". One browser only: add `?look=now` to an address.
+
+### Never
+- Never point the live site at `@main` again.
+- Never send repeated refresh ("purge") requests to jsDelivr: after a few it refuses them for 25 to 40 minutes
+  (`"throttled": true, "throttlingReset": <seconds>` in the reply) and each new request restarts the wait.
+  With the pinned id no purge is needed for a release at all. For `@main/test/`, purge once and read the reply.
+- Never release a script that draws something new without checking that its styles are there (see
+  `registrationCourse` in theme.js: it tests a probe element's style before building its header).
+- Never count a release as done before step 7.
 
 ## 7. Test checklist (every deploy)
 - **Desktop:** the pane at its own width, plus a 1100–1280px emulation.

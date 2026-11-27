@@ -24,6 +24,19 @@ Two people work with Claude on it, in separate sessions. The files below are the
 2. Add any new platform fact, decision or preference to `PLAYBOOK.md` (date, what, why).
 3. Commit and push to GitHub, so the next session, on any computer, starts from it.
 
+## Releasing to the live site (read before any release)
+
+The live site runs ONE exact release: the commit id in the line `var LIVE = "...";` of ChabadOne's Custom Header Code. Changing files in `live/` does nothing for visitors until that id is updated and published in ChabadOne.
+
+1. Build and check in `test/`. Get Levi's plain yes for the change, and his say-so for the header-code update (it ticks ChabadOne's "I agree" box).
+2. `git pull --rebase`, `node tools/build.mjs promote`, commit, push.
+3. `node tools/pin.mjs` (writes the new id into `loader/header.html` and checks the file host serves it).
+4. In ChabadOne (Levi's Edge): change only that id in the Custom Header Code, Save, "I agree" + Ok, Preview, Publish.
+5. Check the live site as a visitor: homepage, a course page, registration 24326 without submitting.
+6. Add the release to the "Release log" in HANDOFF.md, commit, push.
+
+To go back: put the previous id from the Release log into the header code and publish. Full steps and the reasons are in SKILL.md, section 6. Do not send repeated refresh requests to the file host, and never point the live site at `@main`.
+
 ## Hard rules
 
 - Only touch BH Chabad (site 10077, "Bloomfield" in the site title). Never PrincetonChabad, which shares the same login.
@@ -36,6 +49,6 @@ Two people work with Claude on it, in separate sessions. The files below are the
 
 ## Where things live
 
-- **Code and notes**: this repo, github.com/rabbi-dubov/bhchabad-site. The live site loads `live/` from it through jsDelivr.
+- **Code and notes**: this repo, github.com/rabbi-dubov/bhchabad-site. The live site loads `live/` from it through jsDelivr, at the exact commit named in ChabadOne's header code (see "Releasing to the live site").
 - **Plans and drafts** (private claude.ai docs, shared with Rivka): links in HANDOFF.md.
 - **Photos and source files**: the `Shlichus` folder on Levi's OneDrive. Skip the duplicate `Shlichus\Shlichus` copy and never use the donation-check scans.

@@ -21,10 +21,15 @@ html.cc-hold.cc-home-wait.cc-css.cc-shell-ready body, html.cc-hold.cc-shell-fail
   try { if (m) { localStorage.setItem("cc-mode", m[1]); } mode = localStorage.getItem("cc-mode") || "live"; } catch (e) {}
   window.ccMode = mode;
   if (mode === "off") { return; }
-  var base = "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/" + (mode === "test" ? "test/" : "live/");
+  // LIVE = the exact release the site runs (a commit id of the repo). jsDelivr serves an exact commit at once and never
+  // mixes versions; "@main" lagged for hours and handed out a new script with an old stylesheet (Nov 27, 2026).
+  // EVERY RELEASE: put the new release commit's full id here, then Save, Preview, Publish. See SKILL.md, "Release".
+  var LIVE = "f7a4e3ee01ac85695f9ba04de6ef45840de0ac82";
+  var test = mode === "test";
+  var base = "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@" + (test ? "main/test/" : LIVE + "/live/");
   window.ccBase = base;
-  // hourly cache-buster: jsDelivr tells browsers to keep files 7 days, so updates would otherwise reach visitors late
-  window.ccV = "?v=" + Math.floor(Date.now() / 3600000);
+  // test files change under one address, so they get an hourly key; a release's files never change, so they need none
+  window.ccV = test ? "?v=" + Math.floor(Date.now() / 3600000) : "";
   var h = document.documentElement, home = location.pathname === "/" || /default\.asp$/i.test(location.pathname);
   // the look: the new one for everyone; "?look=now" brings the previous look back for this browser, "?look=next" undoes that
   // (theme.js reads the same setting and has the last word)
