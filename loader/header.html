@@ -1,4 +1,5 @@
-<!-- BH CHABAD THEME LOADER (header). Paste once into ChabadOne > Settings > General Settings > Custom Header Code. -->
+<meta name="google-site-verification" content="xyBjorCWlhQvdIwfLPiB3YHHvQmA8w_tLXRHDZWzrmI" />
+<!-- BH CHABAD THEME LOADER (header), launch version of Nov 27, 2026. Paste once into ChabadOne > Settings > General Settings > Custom Header Code. -->
 <!-- The design itself lives in github.com/rabbi-dubov/bhchabad-site (live/ folder). Preview mode: add ?cc=test to any page URL; ?cc=off turns the theme off for you; ?cc=live returns to normal. -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <!-- No flash of the old design: the page stays invisible until our CSS has loaded (on the homepage, until the
@@ -11,7 +12,7 @@ html.cc-hold.cc-home-wait.cc-css.cc-shell-ready body, html.cc-hold.cc-shell-fail
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" />
 <link rel="stylesheet" type="text/css" href="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-style.css" />
 <script type="text/javascript" src="https://w2.Chabad.org/images/Shluchim/minisites/themes/form-redesign/form-script.js"></script>
 <script type="text/javascript">//<![CDATA[
@@ -25,7 +26,11 @@ html.cc-hold.cc-home-wait.cc-css.cc-shell-ready body, html.cc-hold.cc-shell-fail
   // hourly cache-buster: jsDelivr tells browsers to keep files 7 days, so updates would otherwise reach visitors late
   window.ccV = "?v=" + Math.floor(Date.now() / 3600000);
   var h = document.documentElement, home = location.pathname === "/" || /default\.asp$/i.test(location.pathname);
-  h.className += " cc-on cc-hold" + (home ? " cc-home-wait" : "");
+  // the look: the new one for everyone; "?look=now" brings the previous look back for this browser, "?look=next" undoes that
+  // (theme.js reads the same setting and has the last word)
+  var look = "next";
+  try { var lm = /[?&]look=(next|now)\b/.exec(location.search); if (lm) { localStorage.setItem("cc-look", lm[1]); } look = localStorage.getItem("cc-look") || "next"; } catch (e) {}
+  h.className += " cc-on cc-hold" + (look === "next" ? " cc-v2" : "") + (home ? " cc-home-wait" : "");
   function release() { h.className = h.className.replace(/\bcc-hold\b/g, ""); }
   var l = document.createElement("link"); l.rel = "stylesheet"; l.href = base + "theme.min.css" + window.ccV;
   l.onload = function () { h.className += " cc-css"; };
