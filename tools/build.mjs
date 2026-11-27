@@ -42,9 +42,13 @@ if (mode === 'test') {
   fs.writeFileSync(path.join(dir, 'theme.min.css'), `/* BH Chabad theme v${ver} */${css}\n`);
   fs.writeFileSync(path.join(dir, 'theme.min.js'), `/* BH Chabad theme v${ver} */${js}\n`);
   fs.writeFileSync(path.join(dir, 'VERSION'), ver + '\n');
+  // course pages of the new look: one data file, checked and packed (theme.js coursePageNext fetches it)
+  const courses = JSON.parse(fs.readFileSync(path.join(root, 'src/course-pages.json'), 'utf8'));
+  delete courses._about;
+  fs.writeFileSync(path.join(dir, 'course-pages.json'), JSON.stringify(courses) + '\n');
   console.log('test/ version', ver);
 } else if (mode === 'promote') {
-  for (const f of ['theme.min.css', 'theme.min.js', 'VERSION']) {
+  for (const f of ['theme.min.css', 'theme.min.js', 'VERSION', 'course-pages.json']) {
     fs.copyFileSync(path.join(root, 'test', f), path.join(root, 'live', f));
   }
   console.log('live/ now =', fs.readFileSync(path.join(root, 'live/VERSION'), 'utf8').trim());

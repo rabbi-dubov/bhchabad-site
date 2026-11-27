@@ -2248,3 +2248,186 @@ html.cc-v2 body.cco_body .cc-events__nav .cc-round { display: none !important; }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:not(:first-child) .cc-btn:hover { color: var(--cc-ink) !important; text-decoration: underline !important; text-underline-offset: 4px; }
 }
 @media (min-width: 761px) and (max-width: 1024px) { html.cc-v2 body.cco_body .cc-evs { grid-template-columns: 1fr; } html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child { grid-row: auto; min-height: 460px; } }
+
+/* ---------- 27. NEW LOOK, LAYER 4 (html.cc-v2 only; Levi, Nov 27): five ways in, "In their words" band, course template ---------- */
+/* Ways in: with Shul there are five. One row on computers, three and two on tablets, and on phones the last one
+   takes the full width so no cell is left empty. */
+@media (min-width: 1025px) {
+  html.cc-v2 body.cco_body .cc-ways ul:has(> li:nth-child(5)) { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 28px; }
+  html.cc-v2 body.cco_body .cc-ways ul:has(> li:nth-child(5)) .cc-ways__name { font-size: 31px; }
+}
+@media (min-width: 761px) and (max-width: 1024px) { html.cc-v2 body.cco_body .cc-ways ul:has(> li:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) { html.cc-v2 body.cco_body .cc-ways li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+
+/* "In their words": the dark band that took the numbers band's place. The first quote is the headline. */
+html.cc-v2 body.cco_body .cc-wall { text-align: left; }
+html.cc-v2 body.cco_body .cc-wall h2.cc-eyebrow { display: block; margin: 0 0 30px; font-family: var(--cc-font-body) !important; font-size: 13px; font-weight: 700; letter-spacing: .16em; line-height: 1.5; color: var(--cc-accent-on-dark) !important; }
+html.cc-v2 body.cco_body .cc-wall__q { margin: 0; padding: 0; }
+html.cc-v2 body.cco_body .cc-wall__text { margin: 0; font-size: 19px; line-height: 1.55; color: var(--cc-on-dark); }
+html.cc-v2 body.cco_body .cc-wall__by { margin: 14px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
+html.cc-v2 body.cco_body .cc-wall__q--big .cc-wall__text { max-width: 1040px; font-family: "Instrument Serif", Georgia, serif !important; font-style: italic; font-size: clamp(32px, 4.5vw, 62px); line-height: 1.1; letter-spacing: -0.01em; color: var(--cc-white); text-wrap: balance; }
+html.cc-v2 body.cco_body .cc-wall__q--big .cc-wall__by { margin-top: 24px; font-size: 13px; }
+html.cc-v2 body.cco_body .cc-wall__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 32px 48px; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--cc-line-dark); }
+@media (max-width: 760px) { html.cc-v2 body.cco_body .cc-wall__row { margin-top: 40px; padding-top: 32px; } html.cc-v2 body.cco_body .cc-wall__text { font-size: 17px; } }
+
+/* Course template (theme.js coursePageNext / buildCourse). One layout for every course; the colors come from the
+   course's entry in course-pages.json as --cp-* on the root. */
+html.cc-v2 body.cco_body .cc-cp-parked { display: none !important; }
+html.cc-v2.cc-course-wait body.cco_body .cc-landing:not(.cc-cp) { visibility: hidden; }
+html.cc-v2 body.cco_body .cc-cp {
+  --cp-bg: var(--cc-ink); --cp-ink: var(--cc-ink); --cp-on-bg: #FFFFFF; --cp-on-bg-soft: #F0E3E8; --cp-accent: var(--cc-accent-on-dark);
+  --cp-label: var(--cc-accent-text); --cp-btn: #FFFFFF; --cp-btn-text: var(--cc-ink); --cp-deep: var(--cc-ink-deep); --cp-on-deep-accent: var(--cc-accent-on-dark);
+  --cp-rule: #E2D6CE;
+  background: #FBF8F4; color: var(--cc-text); font-size: 17px; line-height: 1.6; text-align: left;
+}
+html.cc-v2 body.cco_body .cc-cp img { max-width: none; }
+html.cc-v2 body.cco_body .cc-cp__eyebrow { display: block; margin: 0 0 18px; font-family: var(--cc-font-body) !important; font-size: 13px; font-weight: 700; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; color: var(--cp-label) !important; }
+
+/* buttons: --b and --f are the button's own two colors, the same at rest and on hover */
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn, html.cc-v2 body.cco_body .cc-cp .cc-cp__btn:hover { --b: var(--cp-ink); --f: #FFFFFF; background: var(--b) !important; color: var(--f) !important; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn { min-height: 56px; padding: 0 30px; border-radius: 999px !important; font-size: 17px; white-space: nowrap; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn:hover { filter: brightness(1.07); }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn .cc-arrow { margin-left: 4px; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__top .cc-cp__btn--main, html.cc-v2 body.cco_body .cc-cp .cc-cp__top .cc-cp__btn--main:hover { --b: var(--cp-btn); --f: var(--cp-btn-text); }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__top .cc-cp__btn--line, html.cc-v2 body.cco_body .cc-cp .cc-cp__top .cc-cp__btn--line:hover { --b: transparent; --f: var(--cp-on-bg); box-shadow: inset 0 0 0 1.5px currentColor; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--bar, html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--bar:hover { --b: var(--cp-deep); --f: #FFFFFF; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--bar { min-height: 52px; padding: 0 28px; font-size: 16px; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--facts, html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--facts:hover { --b: var(--cp-on-deep-accent); --f: var(--cp-ink); }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--close, html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--close:hover { --b: #FFFFFF; --f: var(--cp-ink); }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--closeline, html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--closeline:hover { --b: transparent; --f: #FFFFFF; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .5); }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--close, html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--closeline { min-height: 58px; white-space: normal; text-align: center; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--close { font-size: 18px; }
+html.cc-v2 body.cco_body .cc-cp .cc-cp__top .cc-cp__btn--line svg { margin-right: 4px; }
+
+/* opening, shared words */
+html.cc-v2 body.cco_body .cc-cp__top { --cc-focus: var(--cp-on-bg); background: var(--cp-bg); color: var(--cp-on-bg); }
+html.cc-v2 body.cco_body .cc-cp__top .cc-cp__eyebrow { color: var(--cp-accent) !important; }
+html.cc-v2 body.cco_body .cc-cp__title { margin: 0; font-weight: 400; font-size: clamp(46px, 6.2vw, 96px) !important; line-height: .95; letter-spacing: -0.02em; color: var(--cp-on-bg) !important; text-wrap: balance; }
+html.cc-v2 body.cco_body .cc-cp__title em, html.cc-v2 body.cco_body .cc-cp__close-title em { font-style: italic; }
+html.cc-v2 body.cco_body .cc-cp__title em { color: var(--cp-accent); }
+html.cc-v2 body.cco_body .cc-cp__lead { margin: 26px 0 0; max-width: 520px; font-size: 21px; line-height: 1.5; color: var(--cp-on-bg-soft) !important; }
+html.cc-v2 body.cco_body .cc-cp__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 34px; }
+html.cc-v2 body.cco_body .cc-cp__note { margin: 18px 0 0; font-size: 15px; color: var(--cp-on-bg-soft) !important; }
+/* opening, "split": the course art fills one half edge to edge, the other half takes the art's ground color */
+html.cc-v2 body.cco_body .cc-cp__top--split { display: flex; flex-wrap: wrap; }
+html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__art { position: relative; flex: 1 1 520px; min-width: 0; min-height: min(660px, 78vh); overflow: hidden; }
+html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__art img, html.cc-v2 body.cco_body .cc-cp__close-art img, html.cc-v2 body.cco_body .cc-cp__backdrop, html.cc-v2 body.cco_body .cc-cp__trailer img { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; object-fit: cover; }
+html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__words { position: relative; flex: 1 1 520px; min-width: 0; box-sizing: border-box; padding: 72px 56px 110px; display: flex; flex-direction: column; justify-content: center; }
+/* opening, "banner": the course's textless banner across the page under a light veil, the art beside the words */
+html.cc-v2 body.cco_body .cc-cp__top--banner { position: relative; overflow: hidden; }
+html.cc-v2 body.cco_body .cc-cp__top--banner:has(.cc-cp__backdrop)::before { content: ""; position: absolute; z-index: 1; top: 0; right: 0; bottom: 0; left: 0; background: var(--cp-bg); opacity: .78; }
+html.cc-v2 body.cco_body .cc-cp__top--banner .cc-wrap { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 40px 56px; padding-top: 84px; padding-bottom: 124px; }
+html.cc-v2 body.cco_body .cc-cp__top--banner .cc-cp__words { flex: 1.3 1 480px; min-width: 0; }
+html.cc-v2 body.cco_body .cc-cp__top--banner .cc-cp__title { font-size: clamp(42px, 5.6vw, 86px) !important; }
+html.cc-v2 body.cco_body .cc-cp__top--banner .cc-cp__art { flex: 1 1 300px; min-width: 0; display: flex; justify-content: center; }
+html.cc-v2 body.cco_body .cc-cp__top--banner .cc-cp__art img { display: block; width: 100% !important; max-width: 400px; height: auto !important; aspect-ratio: 4 / 5; object-fit: cover; mix-blend-mode: darken; -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 60%, transparent 100%); }
+
+/* the floating course bar: straddles the opening's lower edge, then stays under the header while the page scrolls */
+html.cc-v2 body.cco_body .cc-cp__barwrap { position: sticky; top: calc(var(--cc-hdr-h, 84px) + 12px); z-index: 20; margin-top: -40px; padding: 0 var(--cc-gutter); }
+html.cc-v2 body.cco_body .cc-cp__bar { max-width: 1264px; margin: 0 auto; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding: 12px 12px 12px 30px; border-radius: 40px; background: #FFFFFF; border: 1px solid var(--cc-line); box-shadow: 0 18px 50px rgba(30, 20, 30, .18); }
+html.cc-v2 body.cco_body .cc-cp__bar-text { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; min-width: 0; }
+html.cc-v2 body.cco_body .cc-cp__bar-name { font-size: 27px; line-height: 1.1; color: var(--cp-ink) !important; }
+html.cc-v2 body.cco_body .cc-cp__bar-when { font-size: 15px; font-weight: 600; color: var(--cc-muted); }
+html.cc-v2 body.cco_body .cc-cp__bar-act { display: flex; align-items: center; gap: 18px; margin-left: auto; }
+html.cc-v2 body.cco_body .cc-cp__bar-price { font-size: 16px; font-weight: 700; color: var(--cp-ink); white-space: nowrap; }
+html.cc-v2 body.cco_body .cc-cp__bar-short { display: none; }
+
+/* About + facts card */
+html.cc-v2 body.cco_body .cc-cp__main { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px 72px; padding-top: 88px; padding-bottom: 56px; }
+html.cc-v2 body.cco_body .cc-cp__about { flex: 999 1 520px; min-width: 0; }
+html.cc-v2 body.cco_body .cc-cp__about-lead { margin: 0; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.14; letter-spacing: -0.01em; color: var(--cp-ink) !important; text-wrap: balance; }
+html.cc-v2 body.cco_body .cc-cp__about-text { margin: 20px 0 0; max-width: 680px; font-size: 18px; line-height: 1.7; color: #43363A; }
+html.cc-v2 body.cco_body .cc-cp__trailer { position: relative; display: flex; align-items: flex-end; margin-top: 36px; max-width: 760px; aspect-ratio: 16 / 9; border-radius: 24px; overflow: hidden; background: var(--cp-ink); color: #FFFFFF !important; text-decoration: none !important; }
+html.cc-v2 body.cco_body .cc-cp__trailer::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .7) 100%); }
+html.cc-v2 body.cco_body .cc-cp__trailer-play { position: absolute; z-index: 1; top: 50%; left: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%; background: #FFFFFF; color: var(--cp-ink); display: flex; align-items: center; justify-content: center; box-shadow: 0 16px 40px rgba(0, 0, 0, .4); }
+html.cc-v2 body.cco_body .cc-cp__trailer-play svg { width: 34px; height: 34px; }
+html.cc-v2 body.cco_body .cc-cp__trailer-word { position: relative; z-index: 1; padding: 24px 28px; font-weight: 700; font-size: 17px; }
+html.cc-v2 body.cco_body .cc-cp__facts { --cc-focus: #FFFFFF; flex: 1 1 320px; min-width: 0; max-width: 420px; box-sizing: border-box; padding: 34px 32px; border-radius: 28px; background: var(--cp-ink); color: #FFFFFF; display: flex; flex-direction: column; gap: 24px; }
+html.cc-v2 body.cco_body .cc-cp__fact { display: flex; flex-direction: column; gap: 4px; }
+html.cc-v2 body.cco_body .cc-cp__fact-k { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-on-deep-accent); }
+html.cc-v2 body.cco_body .cc-cp__fact-v { font-size: 28px; line-height: 1.12; color: #FFFFFF !important; }
+html.cc-v2 body.cco_body .cc-cp__fact-n { font-size: 15px; color: rgba(255, 255, 255, .86); }
+html.cc-v2 body.cco_body .cc-cp__ask { text-align: center; font-size: 15px; font-weight: 600; color: #FFFFFF !important; text-decoration: underline !important; text-underline-offset: 4px; }
+
+/* lessons: full width, two columns, each picture straight on the page (no frame, tile or shadow) */
+html.cc-v2 body.cco_body .cc-cp__lessons { padding: 24px 0 88px; scroll-margin-top: 96px; }
+html.cc-v2 body.cco_body .cc-cp__lessons--paper { --cp-rule: rgba(47, 42, 31, .2); margin-top: 32px; padding-top: 80px; background: var(--cp-paper); }
+html.cc-v2 body.cco_body .cc-cp__h2 { margin: 0 0 28px; font-weight: 400; font-size: clamp(38px, 4.4vw, 60px) !important; line-height: 1.02; letter-spacing: -0.015em; color: var(--cp-ink) !important; }
+html.cc-v2 body.cco_body .cc-cp__list { margin: 0 !important; padding: 0 !important; list-style: none !important; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 0 72px; border-top: 1px solid var(--cp-rule); }
+html.cc-v2 body.cco_body .cc-cp__list li { display: flex; align-items: center; gap: 24px; margin: 0 !important; padding: 20px 0 !important; list-style: none !important; border-bottom: 1px solid var(--cp-rule); }
+html.cc-v2 body.cco_body .cc-cp__list li > div { flex: 1 1 auto; min-width: 0; }
+html.cc-v2 body.cco_body .cc-cp__pic { flex: 0 0 104px; width: 104px !important; height: 104px !important; object-fit: contain; }
+html.cc-v2 body.cco_body .cc-cp__lessons--paper .cc-cp__pic { mix-blend-mode: darken; }
+html.cc-v2 body.cco_body .cc-cp__lessons--blend .cc-cp__pic { mix-blend-mode: multiply; }
+html.cc-v2 body.cco_body .cc-cp__num { flex: 0 0 104px; text-align: center; font-size: 64px; line-height: 1; color: var(--cp-label) !important; }
+html.cc-v2 body.cco_body .cc-cp__les-k { display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-label); }
+html.cc-v2 body.cco_body .cc-cp__les-t { margin: 4px 0 0; font-size: 26px !important; line-height: 1.12; color: var(--cp-ink) !important; }
+html.cc-v2 body.cco_body .cc-cp__les-p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--cc-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* teacher */
+html.cc-v2 body.cco_body .cc-cp__teacher .cc-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 40px 56px; padding-top: 72px; padding-bottom: 72px; }
+html.cc-v2 body.cco_body .cc-cp__teacher-pic, html.cc-v2 body.cco_body .cc-cp__teacher-words { flex: 1 1 420px; min-width: 0; }
+html.cc-v2 body.cco_body .cc-cp__teacher-pic img { display: block; width: 100% !important; height: auto !important; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 24px; }
+html.cc-v2 body.cco_body .cc-cp__teacher .cc-cp__eyebrow { margin-bottom: 12px; }
+html.cc-v2 body.cco_body .cc-cp__teacher .cc-cp__h2 { margin: 0; font-size: clamp(36px, 4vw, 54px) !important; }
+html.cc-v2 body.cco_body .cc-cp__teacher-text { margin: 18px 0 0; max-width: 520px; color: #43363A; }
+html.cc-v2 body.cco_body .cc-cp__stats { list-style: none !important; display: flex; flex-wrap: wrap; gap: 12px 44px; margin: 28px 0 0 !important; padding: 24px 0 0 !important; border-top: 1px solid #DCD3CB; }
+html.cc-v2 body.cco_body .cc-cp__stats li { display: flex; flex-direction: column; margin: 0 !important; padding: 0 !important; list-style: none !important; }
+html.cc-v2 body.cco_body .cc-cp__stats strong { font-weight: 400; font-size: 48px; line-height: 1; color: var(--cp-ink) !important; }
+html.cc-v2 body.cco_body .cc-cp__stats span { margin-top: 4px; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cp-label); }
+
+/* Good to know */
+html.cc-v2 body.cco_body .cc-cp__faq .cc-wrap { display: flex; flex-wrap: wrap; gap: 32px 56px; padding-top: 40px; padding-bottom: 96px; }
+html.cc-v2 body.cco_body .cc-cp__faq .cc-cp__h2 { flex: 1 1 260px; margin: 0; }
+html.cc-v2 body.cco_body .cc-cp__cards { flex: 2.4 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 20px; }
+html.cc-v2 body.cco_body .cc-cp__card { padding: 26px; border-radius: 20px; background: #FFFFFF; border: 1px solid var(--cc-line); }
+html.cc-v2 body.cco_body .cc-cp__card h3 { margin: 0 0 8px; font-size: 26px !important; line-height: 1.15; color: var(--cc-text) !important; }
+html.cc-v2 body.cco_body .cc-cp__card p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--cc-muted); }
+
+/* closing band: the art returns beside the last call to register */
+html.cc-v2 body.cco_body .cc-cp__close { --cc-focus: #FFFFFF; display: flex; flex-wrap: wrap; background: var(--cp-deep); color: #FFFFFF; }
+html.cc-v2 body.cco_body .cc-cp__close-art { position: relative; flex: 1 1 360px; min-width: 0; min-height: 360px; background: var(--cp-bg); overflow: hidden; }
+html.cc-v2 body.cco_body .cc-cp__close-body { flex: 2 1 560px; min-width: 0; box-sizing: border-box; padding: 76px 56px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 36px; }
+html.cc-v2 body.cco_body .cc-cp__close-words { flex: 1 1 320px; min-width: 0; }
+html.cc-v2 body.cco_body .cc-cp__close-title { margin: 0; font-weight: 400; font-size: clamp(42px, 5vw, 72px) !important; line-height: .98; letter-spacing: -0.02em; color: #FFFFFF !important; }
+html.cc-v2 body.cco_body .cc-cp__close-title em { color: var(--cp-on-deep-accent); }
+html.cc-v2 body.cco_body .cc-cp__close-words p { margin: 18px 0 0; max-width: 420px; color: rgba(255, 255, 255, .88); }
+html.cc-v2 body.cco_body .cc-cp__close-act { flex: 0 1 380px; min-width: min(260px, 100%); display: flex; flex-direction: column; gap: 14px; }
+html.cc-v2 body.cco_body .cc-cp__prices { display: flex; gap: 14px; }
+html.cc-v2 body.cco_body .cc-cp__prices > div { flex: 1 1 0; padding: 20px; border-radius: 20px; border: 1.5px solid rgba(255, 255, 255, .4); }
+html.cc-v2 body.cco_body .cc-cp__prices span { display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-on-deep-accent); }
+html.cc-v2 body.cco_body .cc-cp__prices strong { display: block; font-weight: 400; font-size: 44px; line-height: 1.1; color: #FFFFFF !important; }
+
+/* phones: words first, the art as a rounded picture under them, and the course bar pinned to the bottom of the screen */
+@media (max-width: 760px) {
+  html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__words { order: 1; flex-basis: 100%; padding: 36px var(--cc-gutter) 24px; }
+  html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__art { order: 2; flex: 1 1 100%; min-height: 250px; margin: 0 var(--cc-gutter) 32px; border-radius: 22px; }
+  html.cc-v2 body.cco_body .cc-cp__top--banner .cc-wrap { padding-top: 40px; padding-bottom: 40px; }
+  html.cc-v2 body.cco_body .cc-cp__top--banner .cc-cp__art img { max-width: 260px; }
+  html.cc-v2 body.cco_body .cc-cp__lead { font-size: 18px; margin-top: 18px; }
+  html.cc-v2 body.cco_body .cc-cp__ctas { margin-top: 24px; }
+  html.cc-v2 body.cco_body .cc-cp .cc-cp__btn { min-height: 52px; padding: 0 24px; font-size: 16px; }
+  html.cc-v2 body.cco_body .cc-cp__barwrap { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 900; margin: 0; padding: 0; }
+  html.cc-v2 body.cco_body .cc-cp__bar { flex-wrap: nowrap; max-width: none; gap: 14px; padding: 12px var(--cc-gutter) calc(12px + env(safe-area-inset-bottom, 0px)); border: 0; border-top: 1px solid var(--cc-line); border-radius: 0; box-shadow: 0 -10px 30px rgba(30, 20, 30, .18); }
+  html.cc-v2 body.cco_body .cc-cp__bar-text, html.cc-v2 body.cco_body .cc-cp__bar-price { display: none; }
+  html.cc-v2 body.cco_body .cc-cp__bar-short { display: flex; flex-direction: column; white-space: nowrap; }
+  html.cc-v2 body.cco_body .cc-cp__bar-short strong { font-weight: 400; font-size: 28px; line-height: 1; color: var(--cp-ink) !important; }
+  html.cc-v2 body.cco_body .cc-cp__bar-short span { font-size: 12px; font-weight: 600; color: var(--cc-muted); }
+  html.cc-v2 body.cco_body .cc-cp__bar-act { flex: 1 1 auto; margin: 0; gap: 14px; }
+  html.cc-v2 body.cco_body .cc-cp .cc-cp__btn--bar { flex: 1 1 auto; white-space: normal; text-align: center; }
+  html.cc-v2.cc-menu-open body.cco_body .cc-cp__barwrap { display: none; }
+  html.cc-v2.cc-course-page body.cco_body #footer { padding-bottom: 84px; }
+  html.cc-v2 body.cco_body .cc-cp__main { padding-top: 48px; padding-bottom: 32px; gap: 40px; }
+  html.cc-v2 body.cco_body .cc-cp__facts { max-width: none; padding: 28px 24px; }
+  html.cc-v2 body.cco_body .cc-cp__lessons { padding-bottom: 56px; }
+  html.cc-v2 body.cco_body .cc-cp__lessons--paper { padding-top: 56px; }
+  html.cc-v2 body.cco_body .cc-cp__list li { gap: 16px; padding: 16px 0 !important; }
+  html.cc-v2 body.cco_body .cc-cp__pic { flex-basis: 80px; width: 80px !important; height: 80px !important; }
+  html.cc-v2 body.cco_body .cc-cp__num { flex-basis: 56px; font-size: 48px; }
+  html.cc-v2 body.cco_body .cc-cp__les-t { font-size: 23px !important; }
+  html.cc-v2 body.cco_body .cc-cp__teacher .cc-wrap { padding-top: 48px; padding-bottom: 48px; }
+  html.cc-v2 body.cco_body .cc-cp__faq .cc-wrap { padding-top: 24px; padding-bottom: 64px; }
+  html.cc-v2 body.cco_body .cc-cp__close-art { min-height: 240px; }
+  html.cc-v2 body.cco_body .cc-cp__close-body { padding: 48px var(--cc-gutter); }
+}
+@media (prefers-reduced-motion: reduce) { html.cc-v2 body.cco_body .cc-cp .cc-cp__btn:hover { transform: none; } }

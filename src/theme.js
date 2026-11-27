@@ -83,6 +83,13 @@
     // Testimonials live on an ordinary ChabadOne page. Each one = a Quote (blockquote) whose last line
     // starts with a dash: "— Name, context". The homepage reads them; no quotes = no section.
     testimonialsUrl: "/7617013", // "In their words" page (hidden, under About)
+    // New look, course pages (see coursePageNext): page number -> the course's name in course-pages.json.
+    // bare = pages that are still JLI mini-sites with no site header; host = the page that shows them in the preview.
+    courseNext: {
+      pages: { "7620415": "missing-piece", "7593397": "kabbalah", "7593500": "genesis" },
+      bare: ["7620415", "7593397"],
+      host: "/7581757"
+    },
     // Homepage photos live on an ordinary ChabadOne page: pictures under a heading containing "Welcome"
     // rotate beside the welcome text, under "Strip" they scroll in the photo strip, under "Donate" the
     // first one is the donate background, under "Cards" they replace the program-card pictures in order.
@@ -107,16 +114,22 @@
       sections: ["hero", "quick", "intro", "strip", "events", "programs", "testimonials", "pair"],
       // New look only (html.cc-v2): its own section order, and a numbers band in place of a Tanya feature
       // (Levi, Nov 26: "a bar with powerful stats"). Only figures already published on the site.
-      sectionsNext: ["top", "ways", "events", "intro", "numbers", "testimonials", "pair"],
+      // Nov 27 (Levi): the numbers band felt out of place; the strongest feedback carries that spot instead
+      // ("numbers" still works if it is put back in this list).
+      sectionsNext: ["top", "ways", "events", "intro", "testimonials", "pair"],
+      // New look: how many quotes "In their words" shows at once (the first on the testimonials page is the large one)
+      wallQuotes: 4,
       // New look, the opening ("top"): one photo with the first slide's own words (eyebrow, title, text), and a
       // "Next up" card filled from the nearest dated event. topEm = the word of the title set in italics.
       // The photo: the pictures under a "Hero" heading on the photos page (they change slowly), else the first slide's.
       topEm: "home",
       topCtas: [["See what’s coming up", "#cc-events-h"], ["Get in touch", "/7603665"]],
-      // New look, "ways": four ways in, in place of the icon row (name, one line, page)
+      // New look, "ways": the ways in, in place of the icon row (name, one line, page).
+      // Shul added Nov 27 (Levi: "we should also highlight the shul experience here").
       ways: [
         ["Learn", "JLI courses and weekly classes, in person or on Zoom", "/7581757"],
         ["Celebrate", "Holidays and events through the year", "/7581764"],
+        ["Shul", "Shabbat services, once a month", "/7581760"],
         ["Women", "NEXT GENesis: monthly evenings of learning, with dinner", "/7593500"],
         ["Tanya", "A weekly class and a podcast", "/7581759"]
       ],
@@ -755,6 +768,26 @@
     function build(items) {
       if (!items || !items.length) { sec.hidden = true; if (sec.parentNode) { sec.parentNode.removeChild(sec); } return; }
       loadQuoteFont();
+      // New look (Levi, Nov 27: the strongest feedback in place of the numbers band): a dark band with the first
+      // quote of the testimonials page set large and the next few in a row under it, all in view at once.
+      // Words only: no picture stands beside a quote unless it is that person (Levi, Nov 26).
+      if (/cc-v2/.test(html.className)) {
+        var fig = function (t, cls) {
+          return h("figure", { "class": "cc-wall__q " + cls }, [
+            h("p", { "class": "cc-wall__text", text: "“" + curl(t.quote, " ") + "”" }),
+            t.by ? h("figcaption", { "class": "cc-wall__by", text: t.by }) : null
+          ]);
+        };
+        var rest = items.slice(1, Math.max(1, CC.home.wallQuotes || 4));
+        sec.className = "cc-section cc-section--ink cc-wall";
+        sec.textContent = "";
+        sec.appendChild(h("div", { "class": "cc-wrap" }, [
+          h("h2", { "class": "cc-eyebrow", id: "cc-tm-h", text: CC.home.testimonialsTitle }),
+          fig(items[0], "cc-wall__q--big"),
+          rest.length ? h("div", { "class": "cc-wall__row" }, rest.map(function (t) { return fig(t, ""); })) : null
+        ]));
+        return;
+      }
       // One photo layer per distinct picture; a quote without its own picture keeps the one before it
       var photos = [], layerOf = [], last = -1;
       items.forEach(function (t, i) {
@@ -1644,12 +1677,179 @@
     });
   }
 
+  /* ---------- New look only: the course page, one template for every course (Levi, Nov 27: "you can now build
+     the course template") ----------
+     Every course is drawn from one entry in course-pages.json (src/course-pages.json, built beside this script):
+     opening (course art, title in the site's heading font), floating course bar with Register, About + facts card,
+     lessons list, teacher, Good to know, closing Register band. Only the words, the pictures and a few colors
+     taken from the course art change from course to course.
+     Where it shows (preview only, html.cc-v2): on a course's own page (CC.courseNext.pages), in place of the
+     page's body; and on the Learn page with "?course=<name>" in the address. Two course pages are still JLI
+     mini-sites without the site's header and menu, so in the preview their links open the Learn-page address
+     instead. Nothing on ChabadOne is changed by this. */
+  function courseSlug() {
+    var cfg = CC.courseNext || {}, m = /[?&\/]course[=\/]([a-z0-9-]+)(?=[\/&#.]|$)/i.exec(location.pathname + location.search);
+    if (m) { return m[1].toLowerCase(); }
+    var p = /\/aid\/(\d+)\//.exec(location.pathname) || /^\/(\d+)\/?$/.exec(location.pathname);
+    return (p && (cfg.pages || {})[p[1]]) || "";
+  }
+  function courseHref(slug) {
+    var cfg = CC.courseNext || {}, id = "";
+    Object.keys(cfg.pages || {}).forEach(function (k) { if (cfg.pages[k] === slug) { id = k; } });
+    return id && (cfg.bare || []).indexOf(id) < 0 ? "/" + id : cfg.host + "?course=" + slug;
+  }
+  function buildCourse(c) {
+    var open = c.state !== "closed", col = c.colors || {}, vars = [];
+    Object.keys(col).forEach(function (k) { if (/^#[0-9a-f]{3,8}$/i.test(col[k])) { vars.push("--cp-" + k.replace(/[A-Z]/g, function (x) { return "-" + x.toLowerCase(); }) + ":" + col[k]); } });
+    function titleNode(tag, cls, text, em) {
+      var n = h(tag, { "class": cls + " cc-head" }), at = em ? text.lastIndexOf(em) : -1;
+      if (at < 0) { n.textContent = text; }
+      else { n.appendChild(d.createTextNode(text.slice(0, at))); n.appendChild(h("em", { text: em })); n.appendChild(d.createTextNode(text.slice(at + em.length))); }
+      return n;
+    }
+    function regBtn(cls) { return withArrow(h("a", { "class": "cc-btn cc-cp__btn " + (cls || ""), href: c.register, text: "Register" })); }
+    function nextBtn(cls) { return c.next ? withArrow(h("a", { "class": "cc-btn cc-cp__btn " + (cls || ""), href: courseHref(c.next.course), text: c.next.text })) : null; }
+    var lessonsId = "cc-cp-lessons", lessonsWord = "See the " + String(c.lessonsTitle || "lessons").toLowerCase();
+    var toLessons = h("a", { "class": "cc-btn cc-cp__btn", href: "#" + lessonsId, text: lessonsWord });
+    toLessons.addEventListener("click", function (e) {
+      var t = d.getElementById(lessonsId);
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); }
+    });
+    var play = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>';
+    var trailerBtn = null;
+    if (c.trailer) {
+      trailerBtn = h("a", { "class": "cc-btn cc-cp__btn cc-cp__btn--line", href: c.trailer, target: "_blank", rel: "noopener" });
+      trailerBtn.innerHTML = play; trailerBtn.appendChild(d.createTextNode("Watch the trailer"));
+    }
+    // opening: Register first while enrolling; a closed course leads with its lessons
+    var first = open && c.register ? regBtn("cc-cp__btn--main") : toLessons, second = trailerBtn || (first === toLessons ? null : toLessons);
+    addClass(first, "cc-cp__btn--main"); if (second && second !== trailerBtn) { addClass(second, "cc-cp__btn--line"); }
+    var words = h("div", { "class": "cc-cp__words" }, [
+      c.eyebrow ? h("p", { "class": "cc-cp__eyebrow", text: c.eyebrow }) : null,
+      titleNode("h1", "cc-cp__title", c.title, c.em),
+      c.lead ? h("p", { "class": "cc-cp__lead", text: c.lead }) : null,
+      h("div", { "class": "cc-cp__ctas" }, [first, second]),
+      c.note ? h("p", { "class": "cc-cp__note", text: c.note }) : null
+    ]);
+    var artImg = c.art ? h("img", { src: c.art, alt: c.artAlt || "", style: c.artPos ? "object-position:" + c.artPos : null }) : null;
+    var banner = c.opening === "banner";
+    var top = h("header", { "class": "cc-cp__top cc-cp__top--" + (banner ? "banner" : "split") }, banner ? [
+      c.banner ? h("img", { "class": "cc-cp__backdrop", src: c.banner, alt: "" }) : null,
+      h("div", { "class": "cc-wrap" }, [words, artImg ? h("div", { "class": "cc-cp__art" }, [artImg]) : null])
+    ] : [artImg ? h("div", { "class": "cc-cp__art" }, [artImg]) : null, words]);
+
+    // the floating course bar: name, when and where, price, and the one button that matters now
+    var barBtn = open && c.register ? regBtn("cc-cp__btn--bar") : nextBtn("cc-cp__btn--bar");
+    var bar = h("div", { "class": "cc-cp__barwrap" }, [h("div", { "class": "cc-cp__bar" }, [
+      h("div", { "class": "cc-cp__bar-text" }, [h("span", { "class": "cc-cp__bar-name cc-head", text: c.title }), c.bar ? h("span", { "class": "cc-cp__bar-when", text: c.bar }) : null]),
+      h("div", { "class": "cc-cp__bar-act" }, [
+        c.price ? h("span", { "class": "cc-cp__bar-price", text: c.price }) : null,
+        c.priceShort ? h("span", { "class": "cc-cp__bar-short" }, [h("strong", { "class": "cc-head", text: c.priceShort[0] }), c.priceShort[1] ? h("span", { text: c.priceShort[1] }) : null]) : null,
+        barBtn
+      ])
+    ])]);
+
+    var about = c.about || {}, trailerBox = null;
+    if (c.trailer) {
+      trailerBox = h("a", { "class": "cc-cp__trailer", href: c.trailer, target: "_blank", rel: "noopener", "aria-label": "Play the course trailer" }, [
+        c.art ? h("img", { src: c.art, alt: "" }) : null, h("span", { "class": "cc-cp__trailer-play" }), h("span", { "class": "cc-cp__trailer-word", text: "Watch the course trailer" })]);
+      q(".cc-cp__trailer-play", trailerBox).innerHTML = play;
+    }
+    var facts = h("aside", { "class": "cc-cp__facts", "aria-label": "At a glance" }, (c.facts || []).map(function (f) {
+      return h("div", { "class": "cc-cp__fact" }, [h("span", { "class": "cc-cp__fact-k", text: f[0] }), h("span", { "class": "cc-cp__fact-v cc-head", text: f[1] }), f[2] ? h("span", { "class": "cc-cp__fact-n", text: f[2] }) : null]);
+    }).concat(open && c.register ? [regBtn("cc-cp__btn--facts"), h("a", { "class": "cc-cp__ask", href: CC.contactPageUrl, text: "A question first? Get in touch" })] : []));
+    var main = h("div", { "class": "cc-wrap cc-cp__main" }, [
+      h("section", { "class": "cc-cp__about", "aria-labelledby": "cc-cp-about" }, [
+        h("h2", { "class": "cc-cp__eyebrow", id: "cc-cp-about", text: "About the course" }),
+        about.lead ? h("p", { "class": "cc-cp__about-lead cc-head", text: about.lead }) : null
+      ].concat((about.text || []).map(function (t) { return h("p", { "class": "cc-cp__about-text", text: t }); })).concat([trailerBox])),
+      facts
+    ]);
+
+    var lessons = (c.lessons || []).length ? h("section", { "class": "cc-cp__lessons" + (c.colors && c.colors.paper ? " cc-cp__lessons--paper" : "") + (c.lessonsBlend ? " cc-cp__lessons--blend" : ""), id: lessonsId, "aria-labelledby": "cc-cp-les" }, [h("div", { "class": "cc-wrap" }, [
+      h("h2", { "class": "cc-cp__h2 cc-head", id: "cc-cp-les", text: c.lessonsTitle || "Lessons" }),
+      h("ol", { "class": "cc-cp__list" }, c.lessons.map(function (l, i) {
+        return h("li", null, [
+          l.img ? h("img", { "class": "cc-cp__pic", src: l.img, alt: "", loading: "lazy", width: "104", height: "104" }) : h("span", { "class": "cc-cp__num cc-head", "aria-hidden": "true", text: String(i + 1) }),
+          h("div", null, [
+            h("span", { "class": "cc-cp__les-k", text: "Lesson " + (i + 1) + (l.when ? " · " + l.when : "") }),
+            h("h3", { "class": "cc-cp__les-t cc-head", text: l.title }),
+            l.text ? h("p", { "class": "cc-cp__les-p", text: l.text }) : null
+          ])
+        ]);
+      }))
+    ])]) : null;
+
+    var tc = c.teacher, teacher = tc ? h("section", { "class": "cc-cp__teacher", "aria-labelledby": "cc-cp-who" }, [h("div", { "class": "cc-wrap" }, [
+      tc.photo ? h("div", { "class": "cc-cp__teacher-pic" }, [h("img", { src: tc.photo, alt: tc.photoAlt || "", loading: "lazy" })]) : null,
+      h("div", { "class": "cc-cp__teacher-words" }, [
+        h("p", { "class": "cc-cp__eyebrow", text: "Your teacher" }),
+        h("h2", { "class": "cc-cp__h2 cc-head", id: "cc-cp-who", text: tc.name }),
+        tc.text ? h("p", { "class": "cc-cp__teacher-text", text: tc.text }) : null,
+        (tc.stats || []).length ? h("ul", { "class": "cc-cp__stats" }, tc.stats.map(function (s) { return h("li", null, [h("strong", { "class": "cc-head", text: s[0] }), h("span", { text: s[1] })]); })) : null
+      ])
+    ])]) : null;
+
+    var faq = (c.faq || []).length ? h("section", { "class": "cc-cp__faq", "aria-labelledby": "cc-cp-faq" }, [h("div", { "class": "cc-wrap" }, [
+      h("h2", { "class": "cc-cp__h2 cc-head", id: "cc-cp-faq", text: "Good to know" }),
+      h("div", { "class": "cc-cp__cards" }, c.faq.map(function (f) { return h("div", { "class": "cc-cp__card" }, [h("h3", { "class": "cc-head", text: f[0] }), h("p", { text: f[1] })]); }))
+    ])]) : null;
+
+    var cl = c.closing, close = cl ? h("section", { "class": "cc-cp__close", "aria-labelledby": "cc-cp-reg" }, [
+      c.art ? h("div", { "class": "cc-cp__close-art" }, [h("img", { src: c.art, alt: "", loading: "lazy", style: c.artPos ? "object-position:" + c.artPos : null })]) : null,
+      h("div", { "class": "cc-cp__close-body" }, [
+        h("div", { "class": "cc-cp__close-words" }, [titleNode("h2", "cc-cp__close-title", cl.title + " " + cl.em, cl.em), cl.text ? h("p", { text: cl.text }) : null]),
+        h("div", { "class": "cc-cp__close-act" }, [
+          (cl.prices || []).length ? h("div", { "class": "cc-cp__prices" }, cl.prices.map(function (p) { return h("div", null, [h("span", { text: p[0] }), h("strong", { "class": "cc-head", text: p[1] })]); })) : null,
+          open && c.register ? regBtn("cc-cp__btn--close") : nextBtn("cc-cp__btn--close"),
+          cl.ask ? h("a", { "class": "cc-btn cc-cp__btn cc-cp__btn--closeline", href: CC.contactPageUrl, text: cl.ask }) : null
+        ])
+      ])
+    ]) : null;
+    var closeH = close && q(".cc-cp__close-title", close);
+    if (closeH) { closeH.setAttribute("id", "cc-cp-reg"); }
+
+    return h("div", { "class": "cc-landing cc-cp cc-cp--" + (open ? "open" : "closed"), style: vars.join(";") }, [top, bar, main, lessons, teacher, faq, close]);
+  }
+  function coursePageNext() {
+    var cfg = CC.courseNext;
+    if (!cfg || !/cc-v2/.test(html.className)) { return; }
+    // In the preview, a link to a course page that is still a JLI mini-site opens the new template instead
+    d.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a) { return; }
+      var hr = a.getAttribute("href") || "", m = /^(?:https?:\/\/(?:www\.)?bhchabad\.org)?\/(\d{5,})\/?$/i.exec(hr) || /\/aid\/(\d{5,})\//.exec(hr);
+      if (m && (cfg.bare || []).indexOf(m[1]) >= 0 && cfg.pages[m[1]]) { a.setAttribute("href", cfg.host + "?course=" + cfg.pages[m[1]]); }
+    }, true);
+    var slug = courseSlug();
+    if (!slug) { return; }
+    if (!q("#header")) { location.replace(cfg.host + "?course=" + slug); return; }
+    var old = q(".cc-landing"), holder = old ? old.parentNode : (q(".co_body.article-body") || q("#co_content_container"));
+    if (!holder || !window.fetch || !window.ccBase) { return; }
+    addClass(html, "cc-course-wait");   // the page's own body stays out of sight while the course is fetched
+    function done() { removeClass(html, "cc-course-wait"); }
+    fetch(window.ccBase + "course-pages.json" + (window.ccV || "")).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      var c = data && data.courses && data.courses[slug];
+      if (!c) { done(); return; }
+      var page = buildCourse(c);
+      qa(":scope > *", holder).forEach(function (n) { n.hidden = true; n.setAttribute("aria-hidden", "true"); addClass(n, "cc-cp-parked"); });
+      holder.appendChild(page);
+      addClass(html, "cc-course-page");
+      d.title = c.title + " - " + CC.org;
+      var hd = q("#header"), setH = function () { if (hd) { html.style.setProperty("--cc-hdr-h", hd.offsetHeight + "px"); } };
+      setH(); window.addEventListener("resize", setH); window.addEventListener("load", setH);
+      smartQuotes(page);
+      done();
+      window.scrollTo(0, 0);
+    }).catch(done);
+  }
+
   // Tiny hook so a design preview can show the testimonials layout with sample data (never used by the site itself)
   window.ccTheme = { testimonialsSection: testimonialsSection };
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, closedCourse, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCap, rsvpJump, closedCourse, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
