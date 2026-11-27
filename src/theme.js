@@ -800,7 +800,8 @@
         sec.textContent = "";
         sec.appendChild(h("div", { "class": "cc-wrap" }, [
           h("h2", { "class": "cc-eyebrow", id: "cc-tm-h", text: CC.home.testimonialsTitle }),
-          fig(items[0], "cc-wall__q--big"),
+          // a long first quote (several sentences) is set a size smaller, so it stays a quote and not a wall of type
+          fig(items[0], "cc-wall__q--big" + (String(items[0].quote || "").length > 150 ? " cc-wall__q--long" : "")),
           rest.length ? h("div", { "class": "cc-wall__row" }, rest.map(function (t) { return fig(t, ""); })) : null
         ]));
         return;
