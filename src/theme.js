@@ -1870,6 +1870,13 @@
       var hd = q("#header"), setH = function () { if (hd) { html.style.setProperty("--cc-hdr-h", hd.offsetHeight + "px"); } };
       setH(); window.addEventListener("resize", setH); window.addEventListener("load", setH);
       smartQuotes(page);
+      // at the closing band the same button is on the page itself: the floating bar steps aside there
+      var closing = q(".cc-cp__close", page);
+      if (closing && window.IntersectionObserver) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (en) { if (en.isIntersecting) { addClass(page, "cc-cp--end"); } else { removeClass(page, "cc-cp--end"); } });
+        }, { threshold: 0.35 }).observe(closing);
+      }
       done();
       window.scrollTo(0, 0);
     }).catch(done);

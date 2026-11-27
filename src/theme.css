@@ -2469,3 +2469,13 @@ html.cc-v2 body.cco_body .cc-cp__pattern svg { display: block; width: 100%; heig
 html.cc-v2 body.cco_body .cc-cp__words > :not(.cc-cp__pattern) { position: relative; }
 /* Lesson photos cut to the course's hexagon (The Missing Piece) */
 html.cc-v2 body.cco_body .cc-cp__lessons--hex .cc-cp__pic { object-fit: cover; clip-path: polygon(50% 0, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%); }
+
+/* ---------- 29. FOUND IN THE NOV 27 PRE-LAUNCH CHECK ---------- */
+/* ChabadOne's own "back to top" button (its footer on /tools pages such as the message form and the newsletter
+   page) holds an arrow with a negative margin that sticks 3px past the right edge on phones: the page then slides
+   sideways by a few pixels. Clipping the button to its own box keeps the arrow and removes the slide. */
+html body.cco_body .back_to_top { overflow: hidden; }
+/* Course pages: the floating course bar fades out while the closing band (which carries the same button) is on screen */
+html.cc-v2 body.cco_body .cc-cp__barwrap { transition: opacity .25s ease; }
+html.cc-v2 body.cco_body .cc-cp--end .cc-cp__barwrap { opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { html.cc-v2 body.cco_body .cc-cp__barwrap { transition: none; } }
