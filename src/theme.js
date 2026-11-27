@@ -1951,6 +1951,56 @@
     }).catch(function () {});
   }
 
+  /* The "Date" line of a registration page is ChabadOne's own, made from the event's settings. An event saved
+     without a start time shows "12:00AM" as its start, and one without an end time ends at 12:00AM the day after
+     (Levi, Nov 27, on The Missing Piece: "absolutely the wrong start time"). So: (1) a course in course-pages.json
+     with a `regDate` shows that line instead (a course with two class times has no single right start time);
+     (2) any other event whose line has a midnight time shows its dates only, with a midnight end moved back to
+     the day it belongs to. Either way the "add to calendar" link goes, since the file it gives has the same
+     wrong time. Runs on every event, in both looks. */
+  function registrationDate() {
+    if (!/\/tools\/events\/register/i.test(location.pathname)) { return; }
+    var box = q(".ical_link");
+    if (!box || box.getAttribute("data-cc-date")) { return; }
+    var raw = (box.textContent || "").replace(/\s+/g, " ").trim();
+    function put(t) { box.textContent = t; box.setAttribute("data-cc-date", "1"); }
+    if (/\b12:00\s*AM\b/i.test(raw)) { put(datesOnly(raw)); }
+    var m = /eventid[=\/](\d+)/i.exec(location.pathname + location.search);
+    if (!m || !window.fetch || !window.ccBase) { return; }
+    fetch(window.ccBase + "course-pages.json" + (window.ccV || "")).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      var all = (data && data.courses) || {};
+      Object.keys(all).forEach(function (k) {
+        var c = all[k];
+        if (c.regDate && new RegExp("eventid=" + m[1] + "(\\D|$)").test(c.register || "")) { put(c.regDate); }
+      });
+    }).catch(function () {});
+  }
+  // "Jan 20,  12:00AM - Feb 24, 2027 8:30PM" -> "Jan 20 – Feb 24, 2027". A time is kept only when it is not
+  // midnight and the event is one day; when the line cannot be read, the times are simply taken out.
+  function datesOnly(raw) {
+    var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var TIME = /,?\s*(\d{1,2}:\d{2}\s*[AP]M)\s*$/i;
+    function part(s) {
+      s = s.trim();
+      var t = TIME.exec(s), rest = (t ? s.slice(0, t.index) : s).replace(/,\s*$/, "").trim();
+      var dm = /^(?:[A-Za-z]+,\s*)?([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2})(?:,\s*(\d{4}))?$/.exec(rest);
+      return { time: t ? t[1].replace(/\s+/g, "") : "", mon: dm ? MON.indexOf(dm[1].charAt(0).toUpperCase() + dm[1].slice(1, 3).toLowerCase()) : -1, day: dm ? +dm[2] : 0, year: dm && dm[3] ? +dm[3] : 0, text: rest };
+    }
+    var bits = raw.split(/\s+[-–]\s+/), a = part(bits[0]), b = bits[1] ? part(bits[1]) : null;
+    var plain = raw.replace(/,?\s*\d{1,2}:\d{2}\s*[AP]M/gi, "").replace(/\s+[-–]\s+/, " – ").replace(/\s+/g, " ").trim();
+    if (a.mon < 0 || (b && b.mon < 0 && !/^\d{1,2}:\d{2}/.test(bits[1].trim()))) { return plain; }
+    var year = (b && b.year) || a.year || new Date().getFullYear();
+    var start = new Date(a.year || year, a.mon, a.day), end = b && b.mon >= 0 ? new Date(b.year || year, b.mon, b.day) : start;
+    if (!a.year && end < start) { start = new Date(year - 1, a.mon, a.day); }   // "Nov 9 - May 11, 2027": Nov 9 is 2026
+    if (b && /^12:00AM$/i.test(b.time) && end > start) { end = new Date(end.getFullYear(), end.getMonth(), end.getDate() - 1); }
+    function fmt(dt, withYear) { return MON[dt.getMonth()] + " " + dt.getDate() + (withYear ? ", " + dt.getFullYear() : ""); }
+    if (+end === +start) {
+      var t = /^12:00AM$/i.test(a.time) ? "" : a.time;
+      return fmt(start, true) + (t ? ", " + t.replace(/(AM|PM)$/i, " $1").toLowerCase() : "");
+    }
+    return fmt(start, start.getFullYear() !== end.getFullYear()) + " – " + fmt(end, true);
+  }
+
   function coursePageNext() {
     var cfg = CC.courseNext;
     if (!cfg || !/cc-v2/.test(html.className)) { return; }
@@ -2017,7 +2067,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCourse, registrationCap, rsvpJump, closedCourse, eventsListClosed, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCourse, registrationDate, registrationCap, rsvpJump, closedCourse, eventsListClosed, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
