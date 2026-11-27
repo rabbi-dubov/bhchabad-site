@@ -2123,3 +2123,12 @@ html.cc-v2 body.cco_body .cc-ev__title, html.cc-v2 body.cco_body .cc-nowbar__tit
     html.cc-v2 body.cco_body .cc-section > .cc-wrap { animation: cc-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 30%; }
   }
 }
+
+/* new look, layer 2: numbers band on the homepage (theme.js numbersSection) */
+html.cc-v2 body.cco_body .cc-numbers .cc-h2 { color: var(--cc-white); }
+html.cc-v2 body.cco_body .cc-numbers .cc-h2 em { color: var(--cc-accent-on-dark); }
+html.cc-v2 body.cco_body .cc-numbers__list { list-style: none; margin: 44px 0 40px; padding: 36px 0 0 !important; border-top: 1px solid var(--cc-line-dark); display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 32px 28px; }
+html.cc-v2 body.cco_body .cc-numbers__list li { display: flex; flex-direction: column; gap: 8px; margin: 0 !important; padding: 0 !important; list-style: none !important; }
+html.cc-v2 body.cco_body .cc-numbers__list strong { font-family: var(--cc-font-head) !important; font-weight: 400; font-size: clamp(48px, 5.4vw, 76px); line-height: .95; color: var(--cc-white); }
+html.cc-v2 body.cco_body .cc-numbers__list span { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc-accent-on-dark); }
+html.cc-v2 body.cco_body .cc-numbers .cc-btn--ghost { color: var(--cc-white) !important; border-color: rgba(255, 255, 255, .6) !important; }

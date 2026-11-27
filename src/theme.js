@@ -105,6 +105,12 @@
       // Homepage sections, in order.
       // "pair" = newsletter and donate side by side (Levi, Nov 16); "partner" and "subscribe" still work alone.
       sections: ["hero", "quick", "intro", "strip", "events", "programs", "testimonials", "pair"],
+      // New look only (html.cc-v2): its own section order, and a numbers band in place of a Tanya feature
+      // (Levi, Nov 26: "a bar with powerful stats"). Only figures already published on the site.
+      sectionsNext: ["hero", "quick", "intro", "strip", "events", "numbers", "programs", "testimonials", "pair"],
+      numbersTitle: "In Bloomfield Hills since", numbersYear: "2017",
+      numbers: [["46", "courses taught"], ["550+", "course participants"], ["40,000+", "Tanya podcast plays"], ["95", "countries listening"]],
+      numbersLinks: [["See this season’s courses", "/7581757"], ["Listen to the Tanya podcast", "/7581759"]],
       // Hero = every slide of the ChabadOne promo slider. In a slide's title, "Eyebrow | Title" adds the
       // small label above it; in its text, "Description | Date line" adds the date line under it.
       heroEyebrow: "Shalom and welcome",   // label for the first slide when its title has none
@@ -793,6 +799,24 @@
     });
   }
 
+  // New look only: the centre in four numbers, on the dark band
+  function numbersSection() {
+    var n = CC.home.numbers || [];
+    if (!n.length) { return null; }
+    var title = h("h2", { "class": "cc-h2 cc-head", id: "cc-num-h" });
+    title.appendChild(d.createTextNode(CC.home.numbersTitle + " "));
+    title.appendChild(h("em", { text: CC.home.numbersYear }));
+    return h("section", { "class": "cc-section cc-section--ink cc-numbers", "aria-labelledby": "cc-num-h" }, [
+      h("div", { "class": "cc-wrap" }, [
+        title,
+        h("ul", { "class": "cc-numbers__list" }, n.map(function (x) { return h("li", null, [h("strong", { text: x[0] }), h("span", { text: x[1] })]); })),
+        h("div", { "class": "cc-hero__ctas" }, (CC.home.numbersLinks || []).map(function (l, i) {
+          return h("a", { "class": "cc-btn " + (i ? "cc-btn--ghost" : "cc-btn--accent"), href: l[1], text: l[0] });
+        }))
+      ])
+    ]);
+  }
+
   function partnerSection() {
     var p = CC.home.partner;
     if (!p) { return null; }
@@ -1172,11 +1196,13 @@
       events: function () { return eventsSection(hp); },
       programs: function () { return programsSection(hp); },
       testimonials: function () { return testimonialsSection(); },
+      numbers: numbersSection,
       partner: partnerSection,
       subscribe: function () { return subscribeSection(hp); },
       pair: function () { return pairSection(hp); }
     };
-    CC.home.sections.forEach(function (k) { var s = build[k] && build[k](); if (s) { shell.appendChild(s); } });
+    var order = /cc-v2/.test(html.className) && CC.home.sectionsNext ? CC.home.sectionsNext : CC.home.sections;
+    order.forEach(function (k) { var s = build[k] && build[k](); if (s) { shell.appendChild(s); } });
     var heroWrap = CC.home.bh && q(".cc-hero .cc-wrap", shell);
     if (heroWrap) {
       if (CC.bhFont && !q("link[data-cc-bh-font]")) { d.head.appendChild(h("link", { rel: "stylesheet", href: CC.bhFont, "data-cc-bh-font": "1" })); }
