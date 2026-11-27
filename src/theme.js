@@ -1551,20 +1551,11 @@
         }
       });
     }
-    // 3b) Each person's First and Last name are required (ChabadOne refuses the form without them) but
-    //     carry no star, unlike every other required field (Levi, Nov 27).
+    // 3b) Each person's First and Last name are required (ChabadOne refuses the form without them): the
+    //     boxes say so to screen readers; their visible labels and stars are drawn in theme.css.
     function starNames() {
-      qa(".reservation input", page).forEach(function (i) {
-        if (i.getAttribute("data-cc-star") || !/^\s*(first|last) name\s*$/i.test(i.getAttribute("placeholder") || "")) { return; }
-        i.setAttribute("data-cc-star", "1");
-        i.setAttribute("aria-required", "true");
-        var lab = i.id ? q("label[for='" + i.id + "']", page) : null, n = i;
-        for (var k = 0; !lab && n && k < 3; k++) {   // the label sits just before the box, or before its wrapper
-          var p = n.previousElementSibling;
-          if (p && /^\s*(first|last) name:?\s*$/i.test(txt(p))) { lab = p; }
-          n = n.parentElement;
-        }
-        if (lab && !q(".cc-req", lab)) { lab.appendChild(h("span", { "class": "cc-req", text: " *" })); }
+      qa(".reservation input[id$='_firstName'], .reservation input[id$='_lastName']", page).forEach(function (i) {
+        if (!i.getAttribute("aria-required")) { i.setAttribute("aria-required", "true"); }
       });
     }
     function tidy() { hideDuplicateNotes(); starNames(); }

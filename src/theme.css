@@ -1095,8 +1095,8 @@ html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .g
 html body.cco_body #RegisterSinglePage .reservation .seat_selection:empty { display: none; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before,
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { display: block; font-size: 14px; font-weight: 600; color: var(--cc-ink); margin: 0 0 6px; }
-html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before { content: "First name"; }
-html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { content: "Last name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(2)::before { content: "First name *"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > div:nth-child(3)::before { content: "Last name *"; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child > .price-display { line-height: 48px; }
 html body.cco_body #RegisterSinglePage .reservation [id$="_index"] {
   width: 32px !important; height: 32px; border-radius: 50%; background: var(--cc-primary); color: var(--cc-white);
@@ -1133,8 +1133,8 @@ html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > div:nth-child(2)::before, html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > div:nth-child(3)::before { content: none !important; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block { display: block !important; width: 100% !important; margin: 0 0 12px !important; padding: 0 !important; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block::before { display: block; font-size: 14px; font-weight: 600; color: var(--cc-ink); margin: 0 0 6px; }
-html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block:nth-child(1)::before { content: "First name"; }
-html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block:nth-child(2)::before { content: "Last name"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block:nth-child(1)::before { content: "First name *"; }
+html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .inline_block:nth-child(2)::before { content: "Last name *"; }
 html body.cco_body #RegisterSinglePage .reservation > .clearfix:first-child:has(> .clearfix.small_top_padding) > .clearfix.small_top_padding > .seat_selection:empty { display: none !important; }
 html body.cco_body #RegisterSinglePage .embedded_form #formContainer { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; max-width: none !important; }
 html body.cco_body #RegisterSinglePage .embedded_form .form-input input:not([type="radio"]):not([type="checkbox"]), html body.cco_body #RegisterSinglePage .embedded_form .form-input textarea { width: 100% !important; box-sizing: border-box; }
@@ -2607,8 +2607,6 @@ html body.cco_body #ReserversInformation .optin_checkbox { float: none !importan
 html body.cco_body #ReserversInformation .optin_message_text { flex: 1 1 auto; width: auto !important; margin: 0 !important; padding: 0 !important; }
 html body.cco_body #ReserversInformation .optin_message_text label { font-size: 15px !important; line-height: 1.45; color: var(--cc-text); cursor: pointer; }
 html body.cco_body #RegisterSinglePage .reservation:not(:last-child) .embedded_form > .center.small { display: none !important; }
-/* Stars on each person's First and Last name (theme.js adds the span), in the colour of the other stars. */
-html body.cco_body #RegisterSinglePage .cc-req { color: #A4342A; font-weight: 600; }
 /* A form page that opens with a designed section (the menorah lighting page): ChabadOne's 40px of form padding
    left a white band between the header and the section (Levi, Nov 27). */
 html body.cco_body form.userform-form .form-all:has(.form-line:first-child .cc-landing) { padding-top: 0 !important; }
