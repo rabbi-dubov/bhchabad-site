@@ -2510,3 +2510,6 @@ html body.cco_body .main .details i, html body.cco_body .main .details em { font
   html.cc-v2 body.cco_body .cc-top .cc-hero__ctas .cc-btn--ghost { display: none !important; }
   html.cc-v2 body.cco_body .cc-top a.cc-next { flex: 0 0 auto; margin-top: 4px; box-shadow: none; }
 }
+/* "Page not found": the current courses are offered first (theme.js notFound), each row under a small label */
+html body.cco_body .cc-notfound-label { margin: 30px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-accent-text); }
+html body.cco_body .cc-notfound-label + .cc-notfound-links { margin-top: 12px; }

@@ -99,6 +99,8 @@
     courseNext: {
       pages: { "7645556": "missing-piece", "7645563": "kabbalah", "7593500": "genesis" },
       moved: { "7620415": "7645556", "7593397": "7645563" },
+      // the course pages offered on the "page not found" page, in this order (page number, name)
+      list: [["7645556", "The Missing Piece"], ["7645563", "Kabbalah and the Hidden Architecture of You"], ["7593500", "NEXT GENesis"]],
       host: "/7581757"
     },
     // Homepage photos live on an ordinary ChabadOne page: pictures under a heading containing "Welcome"
@@ -1703,14 +1705,21 @@
     if (!box) { return; }
     var to = (CC.oldPaths || {})[location.pathname.replace(/\/+$/, "").toLowerCase()];
     if (to) { location.replace(to); return; }
-    // a course page that was replaced (CC.courseNext.moved): its old address, short or long, goes to the new page
-    var gone = /\/aid\/(\d+)\//.exec(location.pathname) || /^\/(\d+)\/?$/.exec(location.pathname);
-    var now = gone && CC.courseNext && (CC.courseNext.moved || {})[gone[1]];
-    if (now) { location.replace("/" + now); return; }
     var sb = q(".notfound-search-form button", box), si = q(".notfound-search-input", box);
     if (sb && !sb.getAttribute("aria-label")) { sb.setAttribute("aria-label", "Search"); }
     if (si && !si.getAttribute("aria-label")) { si.setAttribute("aria-label", "Search this site"); }
     if (q(".cc-notfound-links", box)) { return; }
+    // The current courses first. ChabadOne sends a deleted page's address to /tools/404.htm and drops the
+    // address that was asked for, so the two old JLI course addresses (in emails and flyers already sent)
+    // cannot be forwarded: the next best thing is to offer the course pages right here.
+    var courses = ((CC.courseNext || {}).list || []).map(function (c) {
+      return h("a", { "class": "cc-btn cc-btn--ghost", href: "/" + c[0], text: c[1] });
+    });
+    if (courses.length) {
+      box.appendChild(h("p", { "class": "cc-notfound-label", text: "Looking for a course?" }));
+      box.appendChild(h("nav", { "class": "cc-notfound-links cc-notfound-links--courses", "aria-label": "Courses" }, courses));
+      box.appendChild(h("p", { "class": "cc-notfound-label", text: "Or start from a main page" }));
+    }
     var links = qa("#tabContentMain > .co_menu_item:not(.home):not(.donate_link) > span.parent a").map(function (a) {
       return h("a", { "class": "cc-btn cc-btn--ghost", href: a.getAttribute("href"), text: txt(a) });
     });
@@ -1894,7 +1903,16 @@
     function movedHref(a) {
       var hr = a.getAttribute("href") || "", m = /^(?:https?:\/\/(?:www\.)?bhchabad\.org)?\/(\d{5,})\/?(#[\w-]*)?$/i.exec(hr) || /\/aid\/(\d{5,})\/[^#]*(#[\w-]*)?$/.exec(hr);
       // "#lessons" was the lessons block of the mini-site; on the new page it is "#cc-cp-lessons"
-      if (m && moved[m[1]]) { a.setAttribute("href", "/" + moved[m[1]] + (m[2] === "#lessons" ? "#cc-cp-lessons" : (m[2] || ""))); }
+      if (!m || !moved[m[1]]) { return; }
+      var to = moved[m[1]];
+      a.setAttribute("href", "/" + to + (m[2] === "#lessons" ? "#cc-cp-lessons" : (m[2] || "")));
+      a.setAttribute("data-cc-moved", "1");
+      // ChabadOne's menu can go on listing a deleted page for a while. Where the same menu list already has
+      // the new page, the leftover line is taken out, so no course shows twice.
+      var box = a.closest ? a.closest(".co_submenu_container") : null;
+      if (box && qa("a[href]", box).some(function (b) { return b !== a && !b.getAttribute("data-cc-moved") && new RegExp("/" + to + "(/|$)").test(b.getAttribute("href") || ""); })) {
+        a.hidden = true; a.setAttribute("aria-hidden", "true"); a.style.setProperty("display", "none", "important");
+      }
     }
     function movedAll() { qa("a[href]").forEach(movedHref); }
     movedAll(); setTimeout(movedAll, 1500); window.addEventListener("load", function () { setTimeout(movedAll, 600); });
