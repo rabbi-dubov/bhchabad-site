@@ -24,7 +24,7 @@ html.cc-hold.cc-home-wait.cc-css.cc-shell-ready body, html.cc-hold.cc-shell-fail
   // LIVE = the exact release the site runs (a commit id of the repo). jsDelivr serves an exact commit at once and never
   // mixes versions; "@main" lagged for hours and handed out a new script with an old stylesheet (Nov 27, 2026).
   // EVERY RELEASE: put the new release commit's full id here, then Save, Preview, Publish. See SKILL.md, "Release".
-  var LIVE = "f7a4e3ee01ac85695f9ba04de6ef45840de0ac82";
+  var LIVE = "62b8043c921ccac79298682a05ba30eadc302975";
   var test = mode === "test";
   var base = "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@" + (test ? "main/test/" : LIVE + "/live/");
   window.ccBase = base;
