@@ -1664,6 +1664,29 @@
     if (hit) { addClass(html, "cc-course-closed"); }
   }
 
+  /* ChabadOne's own Event Reservations list keeps a Register button on an event whose registration has closed
+     (checked Nov 27: the Kabbalah event's "Purchase Tickets By" date had passed and its own page said "Reservations
+     for this event segment is closed", yet the list still offered Register; no event setting removes it). For the
+     events in CC.home.closedEvents the button gives way to a plain note, and the title opens the course page. */
+  function eventsListClosed() {
+    var home = CC.home || {}, closed = home.closedEvents || [], pages = home.eventPages || {};
+    if (!closed.length) { return; }
+    qa(".event").forEach(function (ev) {
+      var inp = q("form input[name='eventid']", ev), id = inp ? String(inp.value) : "";
+      if (closed.indexOf(id) < 0) { return; }
+      var form = inp.form || q("form", ev);
+      if (!form || form.getAttribute("data-cc-closed")) { return; }
+      form.setAttribute("data-cc-closed", "1");
+      form.style.setProperty("display", "none", "important");
+      form.parentNode.insertBefore(h("p", { "class": "cc-ev-closed" }, [
+        h("span", { text: "Registration has closed." }),
+        pages[id] ? h("a", { "class": "cc-link", href: pages[id], text: "About this course" }) : null
+      ]), form);
+      var t = q("h2 a", ev);
+      if (t && pages[id]) { t.setAttribute("href", pages[id]); }
+    });
+  }
+
   function notFound() {
     var box = q(".notfound-main-content");
     if (!box) { return; }
@@ -1887,7 +1910,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCap, rsvpJump, closedCourse, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCap, rsvpJump, closedCourse, eventsListClosed, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
