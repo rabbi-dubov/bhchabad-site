@@ -2539,3 +2539,5 @@ html.cc-v2 body.cco_body .cc-regtop__price { margin: 6px 0 0; font-size: 17px; f
   html.cc-v2 body.cco_body a.cc-regtop__back { margin-bottom: 18px; }
   html.cc-v2 body.cco_body .cc-regtop__line, html.cc-v2 body.cco_body .cc-regtop__price { font-size: 16px; }
 }
+/* the event's own banner picture repeats the header above it: left out on a course's registration page */
+html.cc-v2.cc-reg-course body.cco_body #co_body_container .banner_image { display: none !important; }

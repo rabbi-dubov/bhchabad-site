@@ -1929,6 +1929,22 @@
       holder.hidden = true; holder.setAttribute("aria-hidden", "true"); holder.style.setProperty("display", "none", "important");
       addClass(html, "cc-reg-course");
       smartQuotes(band);
+      // The form's buttons, links, step marks and highlights take the course's color in place of the site's
+      // maroon, provided it reads well on white (contrast of 4.5 or more with white text).
+      function onWhite(hex) {
+        var n = parseInt(hex.slice(1), 16), ch = [n >> 16 & 255, n >> 8 & 255, n & 255].map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+        return 1.05 / (0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2] + 0.05);
+      }
+      var six = /^#[0-9a-f]{6}$/i, main = six.test(col.label || "") ? col.label : (six.test(col.deep || "") ? col.deep : ""), form = q("#co_body_container");
+      if (main && form && onWhite(main) >= 4.5) {
+        var dark = six.test(col.ink || "") && onWhite(col.ink) >= 7 ? col.ink : main;
+        form.style.setProperty("--cc-primary", main);
+        form.style.setProperty("--cc-primary-2", dark);
+        form.style.setProperty("--cc-focus", main);
+        form.style.setProperty("--cc-accent-text", main);
+        form.style.setProperty("--cc-ink", dark);
+        form.style.setProperty("--cc-tint", "color-mix(in srgb, " + main + " 8%, #fff)");
+      }
     }).catch(function () {});
   }
 
