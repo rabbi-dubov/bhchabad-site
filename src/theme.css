@@ -2579,3 +2579,14 @@ html.cc-v2 body.cco_body .cc-top .cc-bh { top: 12px; bottom: auto; }
   html.cc-v2 body.cco_body .cc-top__photos { bottom: 170px; }
   html.cc-v2 body.cco_body .cc-top__photos::after { background: linear-gradient(180deg, rgba(47, 6, 25, .14) 0%, rgba(47, 6, 25, 0) 30%, rgba(47, 6, 25, .42) 58%, rgba(47, 6, 25, .9) 82%, #2F0619 100%); }
 }
+/* Welcome section on phones and tablets (Levi, Nov 27): the photo comes first and "There's a place for you here"
+   right under it; less empty space above the section; the arch is wider and less tall, so a group photo keeps
+   its faces. (On computers the photo was already first, at the left.) */
+html.cc-v2 body.cco_body .cc-welcome__media { order: -1; }
+@media (max-width: 900px) {
+  html.cc-v2 body.cco_body .cc-section.cc-welcome { padding-top: 20px; }
+  html.cc-v2 body.cco_body .cc-welcome .cc-split { gap: 30px 48px; }
+}
+@media (max-width: 760px) {
+  html.cc-v2 body.cco_body .cc-welcome__media .cc-welcome__img { max-width: 420px; aspect-ratio: 1 / 1.06; }
+}
