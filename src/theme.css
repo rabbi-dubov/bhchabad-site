@@ -2369,7 +2369,7 @@ html.cc-v2 body.cco_body .cc-cp__lessons--zoom .cc-cp__pic { transform: scale(1.
 html.cc-v2 body.cco_body .cc-cp__num { flex: 0 0 104px; text-align: center; font-size: 64px; line-height: 1; color: var(--cp-label) !important; }
 html.cc-v2 body.cco_body .cc-cp__les-k { display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-label); }
 html.cc-v2 body.cco_body .cc-cp__les-t { margin: 4px 0 0; font-size: 26px !important; line-height: 1.12; color: var(--cp-ink) !important; }
-html.cc-v2 body.cco_body .cc-cp__les-p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--cc-muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+html.cc-v2 body.cco_body .cc-cp__les-p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--cc-muted); }   /* shown in full: Levi, Nov 27, "the lesson descriptions are all cut off" */
 
 /* teacher */
 html.cc-v2 body.cco_body .cc-cp__teacher .cc-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 40px 56px; padding-top: 72px; padding-bottom: 72px; }
