@@ -46,6 +46,7 @@ To go back: put the previous id from the Release log into the header code and pu
 - This repo is **public**. Never commit names or details of community members, testimonial writers' names, emails, phone numbers of private people, donation data or anything from Levi's inbox. Personal photos and private notes stay in the Shlichus folder or the private claude.ai docs.
 - Testimonials: shown as first name and last initial only ("David R."), with no program or year. Where a name is missing or too recognizable, use a plain pseudonym (Levi's decision, Oct 24). No "names have been changed" note under the quotes (Levi, Oct 25). Light edits only; each must still sound like the person.
 - Avoid rate limits on ChabadOne: one check per change, no reload loops.
+- Course information follows the guide "Course pages: what goes where" (link in HANDOFF.md): each fact is written once, in `src/course-pages.json`, and shown once per page. Do not design a course page or a registration page afresh; change the guide first if the rule should change.
 
 ## Where things live
 
