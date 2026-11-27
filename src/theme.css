@@ -2145,13 +2145,16 @@ html.cc-v2 body.cco_body #header_branding .cc-logo-wide.cc-logo-wide--dark { dis
 
 /* Homepage, computers: the header lies over the opening photo (white logo and menu) until the page is scrolled */
 @media (min-width: 1025px) {
-  html.cc-v2.cc-shell-ready body.cco_body #header, html.cc-v2.cc-shell-ready body.cco_body #header.on-scroll { position: fixed !important; left: 0; right: 0; transition: background-color .25s ease, border-color .25s ease; }
+  /* the header stays sticky (the notice bar above it keeps its own row); the opening is pulled up under it by the
+     header's height, which theme.js measures into --cc-hdr-h */
+  html.cc-v2.cc-shell-ready body.cco_body #header, html.cc-v2.cc-shell-ready body.cco_body #header.on-scroll { transition: background-color .25s ease, border-color .25s ease; }
+  html.cc-v2.cc-shell-ready body.cco_body .cc-top { margin-top: calc(-1 * var(--cc-hdr-h, 84px)); }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header, html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header.on-scroll { background: transparent !important; border-bottom-color: rgba(255, 255, 255, .18); -webkit-backdrop-filter: none; backdrop-filter: none; }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header_branding .cc-logo-wide { display: none; }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header_branding .cc-logo-wide.cc-logo-wide--dark { display: block; }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header #tabContentMain .co_menu_item:not(.donate_link) span.parent a { color: var(--cc-white) !important; }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header #tabContentMain .co_menu_item:not(.donate_link) span.parent a:hover { color: var(--cc-accent-on-dark) !important; }
-  html.cc-v2.cc-shell-ready body.cco_body .cc-top .cc-wrap { padding-top: 150px; }
+  html.cc-v2.cc-shell-ready body.cco_body .cc-top .cc-wrap { padding-top: calc(var(--cc-hdr-h, 84px) + 64px); }
 }
 
 /* The opening: one photo, the welcome words, and the "Next up" card */

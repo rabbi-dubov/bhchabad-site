@@ -1106,7 +1106,12 @@
       }
       cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : y.when ? 1 : 0); });
       // An extra item marked first (CC.home.extraEvents) leads the row until its date (Levi, Nov 26: menorah lighting first)
-      var soonest = cards.filter(function (c) { return c.when; })[0];
+      // "Next up" (new look) = the nearest date a visitor can still join: a course whose registration has closed is passed over
+      var dated = cards.filter(function (c) { return c.when; });
+      var soonest = dated.filter(function (c) {
+        var cp = coursePage(c.reg || c.href, c.title) || coursePage(c.href, c.title);
+        return !(cp && (CC.home.closedEvents || []).indexOf(cp.id) >= 0);
+      })[0] || dated[0];
       cards = cards.filter(function (c) { return c.first; }).concat(cards.filter(function (c) { return !c.first; }));
       cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(linkPage(c))); });
       fillNext(soonest ? linkPage(soonest) : null);   // new look: the "Next up" card in the opening
@@ -1301,6 +1306,11 @@
       heroWrap.appendChild(h("span", { "class": "cc-bh", lang: "he", "aria-hidden": "true", text: CC.home.bh }));
     }
     hp.parentNode.insertBefore(shell, hp);
+    // New look: the opening photo runs up under the header, so the styles need the header's height
+    if (/cc-v2/.test(html.className) && q(".cc-top", shell)) {
+      var hd = q("#header"), setH = function () { if (hd) { html.style.setProperty("--cc-hdr-h", hd.offsetHeight + "px"); } };
+      setH(); window.addEventListener("resize", setH); window.addEventListener("load", setH);
+    }
     addClass(hp, "cc-native-parked");
     // The parked widgets sit off-screen (the shell reads them); keep their ~40 links (sample items,
     // Chabad.org articles) away from the keyboard and screen readers
