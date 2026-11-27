@@ -2513,3 +2513,7 @@ html body.cco_body .main .details i, html body.cco_body .main .details em { font
 /* "Page not found": the current courses are offered first (theme.js notFound), each row under a small label */
 html body.cco_body .cc-notfound-label { margin: 30px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cc-accent-text); }
 html body.cco_body .cc-notfound-label + .cc-notfound-links { margin-top: 12px; }
+/* Homepage, four ways in (Tanya is part of Learn since Nov 27): one row of four on computers, two by two on
+   tablets and phones. The rules for five stay above in case a fifth returns. */
+@media (min-width: 1025px) { html.cc-v2 body.cco_body .cc-ways ul:has(> li:nth-child(4)):not(:has(> li:nth-child(5))) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 761px) and (max-width: 1024px) { html.cc-v2 body.cco_body .cc-ways ul:has(> li:nth-child(4)):not(:has(> li:nth-child(5))) { grid-template-columns: 1fr 1fr; } }

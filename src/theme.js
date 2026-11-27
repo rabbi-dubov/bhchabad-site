@@ -138,13 +138,14 @@
       topEm: "home",
       topCtas: [["See what’s coming up", "#cc-events-h"], ["Get in touch", "/7603665"]],
       // New look, "ways": the ways in, in place of the icon row (name, one line, page).
-      // Shul added Nov 27 (Levi: "we should also highlight the shul experience here").
+      // Shul added Nov 27 (Levi: "we should also highlight the shul experience here"). Four, not five, since the
+      // launch day: Tanya is part of Learn here (Levi: "merge tanya with learn, so that there are only 4
+      // sections there"); it keeps its own place in the menu. The Learn line's wording is Claude's.
       ways: [
-        ["Learn", "JLI courses and weekly classes, in person or on Zoom", "/7581757"],
+        ["Learn", "JLI courses, weekly classes and Tanya, in person or on Zoom", "/7581757"],
         ["Celebrate", "Holidays and events through the year", "/7581764"],
         ["Shul", "Shabbat services, once a month", "/7581760"],
-        ["Women", "NEXT GENesis: monthly evenings of learning, with dinner", "/7593500"],
-        ["Tanya", "A weekly class and a podcast", "/7581759"]
+        ["Women", "NEXT GENesis: monthly evenings of learning, with dinner", "/7593500"]
       ],
       numbersTitle: "In Bloomfield Hills since", numbersYear: "2017",
       numbers: [["46", "courses taught"], ["550+", "course participants"], ["40,000+", "Tanya podcast plays"], ["95", "countries listening"]],
