@@ -18,7 +18,8 @@
      browser only; "?look=now" turns it off. Everything for it sits under html.cc-v2 in theme.css (section 25),
      so visitors never see it until the switch is removed at launch. */
   try {
-    var lk = /[?&]look=(next|now)\b/.exec(location.search);
+    // ChabadOne rewrites "/7581757?look=next" to ".../aid/7581757/look/next/...", so both spellings are read
+    var lk = /[?&\/]look[=\/](next|now)(?=[\/&#]|$)/.exec(location.pathname + location.search);
     if (lk) { if (lk[1] === "next") { localStorage.setItem("cc-look", "next"); } else { localStorage.removeItem("cc-look"); } }
     if (localStorage.getItem("cc-look") === "next") {
       html.className += " cc-v2";
