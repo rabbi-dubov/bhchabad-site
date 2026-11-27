@@ -1680,6 +1680,39 @@
     }
   }
 
+  /* ---------- Links to a part of a page ("<page>#rsvp", "#cc-cp-lessons"...) land on that part ----------
+     The browser jumps to the part as soon as it exists, but the page keeps growing above it afterwards (this
+     script builds sections, pictures load), so the visitor was left hundreds of pixels short or past it
+     (Levi, Nov 27: the menorah lighting "RSVP" button). The jump is repeated while the page settles, and
+     stops the moment the visitor touches the page. Also covers a tap on a link to a part of the same page. */
+  function hashSettle() {
+    function settle(id, times) {
+      var moved = false;
+      function stop() { moved = true; }
+      ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (ev) { window.addEventListener(ev, stop, { passive: true, once: true, capture: true }); });
+      function go() {
+        if (moved) { return; }
+        var t = d.getElementById(id);
+        if (!t) { return; }
+        var top = t.getBoundingClientRect().top;
+        if (top < 50 || top > 150) { t.scrollIntoView({ block: "start" }); }
+      }
+      times.forEach(function (ms) { setTimeout(go, ms); });
+      return go;
+    }
+    var m = /^#([A-Za-z][w-]*)$/.exec(location.hash);
+    if (m && !/^c-/.test(m[1])) {
+      var go = settle(m[1], [0, 300, 900, 1600, 2600, 4000]);
+      window.addEventListener("load", function () { setTimeout(go, 60); setTimeout(go, 700); });
+    }
+    d.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("a[href^='#']") : null;
+      var id = a ? a.getAttribute("href").slice(1) : "";
+      if (!/^[A-Za-z][w-]*$/.test(id) || /^c-/.test(id) || !d.getElementById(id)) { return; }
+      setTimeout(function () { settle(id, [800, 1600]); }, 0);   // after the tap's own events, so they don't count as the visitor moving on
+    });
+  }
+
   /* ---------- "#rsvp" on any page: jump to the page's RSVP / sign-up form ----------
      Lets a button link to "<page>#rsvp" without editing the page (homepage event cards use it). */
   function rsvpJump() {
@@ -2117,7 +2150,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCourse, registrationDate, registrationCap, rsvpJump, closedCourse, eventsListClosed, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCourse, registrationDate, registrationCap, rsvpJump, hashSettle, closedCourse, eventsListClosed, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
