@@ -115,7 +115,7 @@
       eventsEyebrow: "Coming up",
       eventsTitle: "Discover the joy and meaning in Judaism",
       eventsLine: "The first class of every course is yours to try, commitment-free.",
-      eventsAll: "Full calendar",
+      eventsAll: "All events",   // was "Full calendar": the page it opens is a list of events, not a calendar (Levi, Nov 26)
       // Course page for a registration event (event id -> page). Its card's "Learn more" opens the page and
       // "Register" the registration (Levi, Nov 17). Events not listed keep their own link.
       eventPages: { "24326": "/7620415", "23504": "/7593397", "23481": "/7593500" },
