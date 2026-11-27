@@ -107,7 +107,19 @@
       sections: ["hero", "quick", "intro", "strip", "events", "programs", "testimonials", "pair"],
       // New look only (html.cc-v2): its own section order, and a numbers band in place of a Tanya feature
       // (Levi, Nov 26: "a bar with powerful stats"). Only figures already published on the site.
-      sectionsNext: ["hero", "quick", "intro", "strip", "events", "numbers", "programs", "testimonials", "pair"],
+      sectionsNext: ["top", "ways", "events", "intro", "numbers", "testimonials", "pair"],
+      // New look, the opening ("top"): one photo with the first slide's own words (eyebrow, title, text), and a
+      // "Next up" card filled from the nearest dated event. topEm = the word of the title set in italics.
+      // The photo: the pictures under a "Hero" heading on the photos page (they change slowly), else the first slide's.
+      topEm: "home",
+      topCtas: [["See what’s coming up", "#cc-events-h"], ["Get in touch", "/7603665"]],
+      // New look, "ways": four ways in, in place of the icon row (name, one line, page)
+      ways: [
+        ["Learn", "JLI courses and weekly classes, in person or on Zoom", "/7581757"],
+        ["Celebrate", "Holidays and events through the year", "/7581764"],
+        ["Women", "NEXT GENesis: monthly evenings of learning, with dinner", "/7593500"],
+        ["Tanya", "A weekly class and a podcast", "/7581759"]
+      ],
       numbersTitle: "In Bloomfield Hills since", numbersYear: "2017",
       numbers: [["46", "courses taught"], ["550+", "course participants"], ["40,000+", "Tanya podcast plays"], ["95", "countries listening"]],
       numbersLinks: [["See this season’s courses", "/7581757"], ["Listen to the Tanya podcast", "/7581759"]],
@@ -240,6 +252,14 @@
       t.appendChild(h("span", { "class": "cc-title-sub", text: CC.titleSub }));
       if (sub) { sub.style.display = "none"; t.appendChild(sub); }
       t.setAttribute("aria-label", CC.org + " home");
+    }
+    // New look: the official wide logo in place of the emblem and the typed name
+    // (maroon on the white header; the white one shows over the homepage photo)
+    if (t && /cc-v2/.test(html.className) && !q(".cc-logo-wide", t)) {
+      var lb = (window.ccBase || "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/live/").replace(/[^\/]+\/$/, "") + "data/brand/";
+      t.appendChild(h("img", { "class": "cc-logo-wide", src: lb + "logo-wide-color-web.png", alt: "", width: "661", height: "176" }));
+      t.appendChild(h("img", { "class": "cc-logo-wide cc-logo-wide--dark", src: lb + "logo-wide-on-dark-web.png", alt: "", width: "614", height: "176" }));
+      addClass(q("#header_branding"), "cc-brand-wide");
     }
     // The emblem repeats the title's home link: keep it clickable, but out of the tab order and screen readers
     qa("#header_branding a").forEach(function (a) {
@@ -769,7 +789,7 @@
   /* Homepage photos page (CC.photosUrl): groups pictures by the heading above them */
   function parsePhotos(doc) {
     var root = q(".article-body", doc) || q(".co_body", doc) || q("#BodyContainer", doc) || doc.body;
-    var g = { welcome: [], strip: [], donate: [], cards: [] }, all = [], cur = null, headed = false;
+    var g = { hero: [], welcome: [], strip: [], donate: [], cards: [] }, all = [], cur = null, headed = false;
     qa("h1, h2, h3, h4, h5, h6, strong, b, img", root).forEach(function (el) {
       if (el.tagName === "IMG") {
         var src = imgSrc(el);
@@ -779,7 +799,8 @@
         return;
       }
       var t = txt(el).toLowerCase();
-      if (/welcome/.test(t)) { cur = "welcome"; headed = true; }
+      if (/hero|opening/.test(t)) { cur = "hero"; headed = true; }
+      else if (/welcome/.test(t)) { cur = "welcome"; headed = true; }
       else if (/strip|gallery|community/.test(t)) { cur = "strip"; headed = true; }
       else if (/donat|partner/.test(t)) { cur = "donate"; headed = true; }
       else if (/card|program/.test(t)) { cur = "cards"; headed = true; }
@@ -797,6 +818,73 @@
       photoData = v || null;
       photoWaiters.forEach(function (f) { try { f(photoData); } catch (e) {} });
     });
+  }
+
+  /* New look only: the homepage opening. One photo across the page, the first slide's own words over it,
+     and a "Next up" card that eventsSection fills with the nearest dated event (fillNext). */
+  var ARROW = '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>';
+  function withArrow(el) { var s = d.createElement("span"); s.className = "cc-arrow"; s.innerHTML = ARROW; el.appendChild(s); return el; }
+  var nextBox = null;
+  function fillNext(c) {
+    if (!nextBox) { return; }
+    var w = c && c.when;
+    if (!w) { nextBox.hidden = true; return; }
+    var st = splitTitle(c.title), rsvp = c.oneOff && c.reg;
+    nextBox.textContent = "";
+    nextBox.setAttribute("href", rsvp ? c.reg : c.href);
+    nextBox.appendChild(h("span", { "class": "cc-next__date" }, [h("span", { text: w.mon }), h("strong", { text: w.day }), h("span", { text: w.wd })]));
+    nextBox.appendChild(h("span", { "class": "cc-next__body" }, [
+      h("span", { "class": "cc-next__label", text: "Next up" + (w.time ? " · " + w.time : "") }),
+      h("span", { "class": "cc-next__title cc-head", text: st.title }),
+      withArrow(h("span", { "class": "cc-next__go", text: rsvp ? "RSVP" : "Learn more" }))
+    ]));
+    nextBox.hidden = false;
+  }
+  function topSection(slides) {
+    var s = slides[0];
+    if (!s) { return null; }
+    var title = h("h2", { "class": "cc-top__title cc-head" }), em = CC.home.topEm, at = em ? s.title.indexOf(em) : -1;
+    if (at < 0) { title.textContent = s.title; }
+    else { title.appendChild(d.createTextNode(s.title.slice(0, at))); title.appendChild(h("em", { text: em })); title.appendChild(d.createTextNode(s.title.slice(at + em.length))); }
+    var photos = h("div", { "class": "cc-top__photos", "aria-hidden": "true" }, [s.img ? photoLayer(s.img, "") : null]);
+    nextBox = h("a", { "class": "cc-next", href: CC.eventsUrl, hidden: "hidden" });
+    var sec = h("section", { "class": "cc-top", "aria-label": "Welcome" }, [
+      photos,
+      h("div", { "class": "cc-wrap" }, [
+        h("div", { "class": "cc-top__text" }, [
+          h("p", { "class": "cc-eyebrow", text: s.eyebrow || CC.home.heroEyebrow }),
+          title,
+          s.sub ? h("p", { "class": "cc-top__sub", text: s.sub }) : null,
+          h("div", { "class": "cc-hero__ctas" }, (CC.home.topCtas || []).map(function (l, i) {
+            var a = h("a", { "class": "cc-btn " + (i ? "cc-btn--ghost" : "cc-btn--light"), href: l[1], text: l[0] });
+            return i ? a : withArrow(a);
+          }))
+        ]),
+        nextBox
+      ])
+    ]);
+    // "Hero" pictures from the photos page take the slide picture's place, changing slowly
+    withPhotos(function (g) {
+      var list = g && g.hero || [];
+      if (!list.length) { return; }
+      var box = stack("cc-top__photos", list.map(function (p) { return photoLayer(p.src, ""); }));
+      box.setAttribute("aria-hidden", "true");
+      sec.replaceChild(box, photos);
+      if (list.length > 1 && !reduceMotion) { var i = 0; setInterval(function () { if (d.hidden) { return; } i = (i + 1) % list.length; box.show(i); }, 8000); }
+    });
+    return sec;
+  }
+  // New look only: four ways in, as a row of plain numbered links
+  function waysSection() {
+    var list = CC.home.ways || [];
+    if (!list.length) { return null; }
+    return h("nav", { "class": "cc-ways", "aria-label": "Find your way in" }, [h("ul", { "class": "cc-wrap" }, list.map(function (w, i) {
+      var name = h("span", { "class": "cc-ways__name cc-head", text: w[0] });
+      var arrow = d.createElement("span"); arrow.className = "cc-ways__arrow";
+      arrow.innerHTML = '<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
+      name.appendChild(arrow);
+      return h("li", null, [h("a", { href: w[2] }, [h("span", { "class": "cc-ways__n", text: "0" + (i + 1) }), name, h("span", { "class": "cc-ways__line", text: w[1] })])]);
+    }))]);
   }
 
   // New look only: the centre in four numbers, on the dark band
@@ -1018,8 +1106,10 @@
       }
       cards.sort(function (x, y) { return x.when && y.when ? (x.when.key < y.when.key ? -1 : x.when.key > y.when.key ? 1 : 0) : (x.when ? -1 : y.when ? 1 : 0); });
       // An extra item marked first (CC.home.extraEvents) leads the row until its date (Levi, Nov 26: menorah lighting first)
+      var soonest = cards.filter(function (c) { return c.when; })[0];
       cards = cards.filter(function (c) { return c.first; }).concat(cards.filter(function (c) { return !c.first; }));
       cards.slice(0, 8).forEach(function (c) { c.img = c.img || slidePic(c.title); grid.appendChild(eventCard(linkPage(c))); });
+      fillNext(soonest ? linkPage(soonest) : null);   // new look: the "Next up" card in the opening
       smartQuotes(grid);   // the cards can be rebuilt after the page's own pass ran
       setTimeout(upd, 0);
     }
@@ -1197,13 +1287,15 @@
       programs: function () { return programsSection(hp); },
       testimonials: function () { return testimonialsSection(); },
       numbers: numbersSection,
+      top: function () { return topSection(readSlides(q(".promo_slider", hp) || hp)); },
+      ways: waysSection,
       partner: partnerSection,
       subscribe: function () { return subscribeSection(hp); },
       pair: function () { return pairSection(hp); }
     };
     var order = /cc-v2/.test(html.className) && CC.home.sectionsNext ? CC.home.sectionsNext : CC.home.sections;
     order.forEach(function (k) { var s = build[k] && build[k](); if (s) { shell.appendChild(s); } });
-    var heroWrap = CC.home.bh && q(".cc-hero .cc-wrap", shell);
+    var heroWrap = CC.home.bh && q(".cc-hero .cc-wrap, .cc-top .cc-wrap", shell);
     if (heroWrap) {
       if (CC.bhFont && !q("link[data-cc-bh-font]")) { d.head.appendChild(h("link", { rel: "stylesheet", href: CC.bhFont, "data-cc-bh-font": "1" })); }
       heroWrap.appendChild(h("span", { "class": "cc-bh", lang: "he", "aria-hidden": "true", text: CC.home.bh }));
