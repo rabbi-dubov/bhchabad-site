@@ -2554,3 +2554,8 @@ html.cc-v2 body.cco_body .cc-regtop--fit .cc-regtop__art img { object-fit: conta
 html body.cco_body .cc-welcome__img { touch-action: pan-y; }
 html.cc-v2 body.cco_body .cc-welcome__dots span { position: relative; cursor: pointer; }
 html.cc-v2 body.cco_body .cc-welcome__dots span::after { content: ""; position: absolute; top: -14px; bottom: -14px; left: -4px; right: -4px; }
+/* Course registration page: the header above already says what, when, where and how much, so ChabadOne's own
+   block under it (banner, description, "Event info" box) is left out and the form follows the header directly
+   (Levi, Nov 27: "This page seems seriously redundant"). Rule: docs "Course pages: what goes where". */
+html.cc-v2.cc-reg-course body.cco_body #RegisterHeader { display: none !important; }
+html.cc-v2.cc-reg-course body.cco_body #RegisterBody { margin-top: 8px; }
