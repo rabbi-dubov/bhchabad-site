@@ -2088,6 +2088,8 @@ html body.cco_body #CalendarContentContainer .event { background-color: var(--cc
 html body.cco_body #CalendarContentContainer .category_item { border-left-color: var(--cc-accent) !important; background-color: var(--cc-cream) !important; }
 /* day view: the centre's events start below the floated Halachic Times box, not underneath it */
 html body.cco_body #CalendarContentContainer #events { clear: both; }
+/* day view: each section is width 100% plus a 15px margin, so it ran 15px past the frame */
+html body.cco_body #CalendarContentContainer .main { width: auto !important; }
 /* the shaded bar under the tabs holds print-only text on screen: hide it unless it carries real controls */
 @media screen { html body.cco_body #CalendarViewContainer .filter-container:not(:has(input, select, label, button, form)) { display: none !important; } }
 /* phones: the month grid scrolls sideways inside its own box, the page does not */
