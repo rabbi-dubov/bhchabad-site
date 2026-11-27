@@ -28,7 +28,10 @@
       "note": "The first class is yours to try, commitment-free.",
       "bar": "Six Wednesdays from Jan 20 · 11:00 am or 7:00 pm · Jewish Federation or Zoom",
       "price": "$125 · couples $215",
-      "priceShort": ["$125", "couples $215"],
+      "priceShort": [
+        "$125",
+        "couples $215"
+      ],
       "about": {
         "lead": "Why is Judaism so attached to one slice of the earth’s crust?",
         "text": [
@@ -37,10 +40,26 @@
       },
       "trailer": "",
       "facts": [
-        ["When", "Six Wednesdays, Jan 20 to Feb 24", "11:00 am or 7:00 pm, ninety minutes"],
-        ["Where", "Jewish Federation", "6735 Telegraph Rd, or on Zoom"],
-        ["Teacher", "Rabbi Levi Dubov", ""],
-        ["Fee", "$125 · couples $215", "Textbook included"]
+        [
+          "When",
+          "Six Wednesdays, Jan 20 to Feb 24",
+          "11:00 am or 7:00 pm, ninety minutes"
+        ],
+        [
+          "Where",
+          "Jewish Federation",
+          "6735 Telegraph Rd, or on Zoom"
+        ],
+        [
+          "Teacher",
+          "Rabbi Levi Dubov",
+          ""
+        ],
+        [
+          "Fee",
+          "$125 · couples $215",
+          "Textbook included"
+        ]
       ],
       "lessonsTitle": "Six lessons",
       "lessons": [
@@ -87,28 +106,61 @@
         "photo": "https://w2.chabad.org/media/images/1393/Copa13937778.jpg",
         "photoAlt": "Rabbi Levi Dubov teaching a full JLI class",
         "stats": [
-          ["46", "courses taught"],
-          ["550+", "participants"],
-          ["9", "years of classes"]
+          [
+            "46",
+            "courses taught"
+          ],
+          [
+            "550+",
+            "participants"
+          ],
+          [
+            "9",
+            "years of classes"
+          ]
         ]
       },
       "faq": [
-        ["Do I need any background?", "None at all. Everything is taught in English from a textbook written for adults coming to these sources for the first time."],
-        ["Is this a political course?", "No. It presents classical Jewish sources and uses them to explore questions that also touch public life today."],
-        ["Can I join on Zoom?", "Yes. Choose in person or Zoom when you register."],
-        ["What if I miss a class?", "Missing one will not leave you lost. Let us know and we will make sure you have the material before the next session."],
-        ["What if the cost is difficult right now?", "Please still come. Speak to us privately and we will work something out. Nobody is turned away over tuition."]
+        [
+          "Do I need any background?",
+          "None at all. Everything is taught in English from a textbook written for adults coming to these sources for the first time."
+        ],
+        [
+          "Is this a political course?",
+          "No. It presents classical Jewish sources and uses them to explore questions that also touch public life today."
+        ],
+        [
+          "Can I join on Zoom?",
+          "Yes. Choose in person or Zoom when you register."
+        ],
+        [
+          "What if I miss a class?",
+          "Missing one will not leave you lost. Let us know and we will make sure you have the material before the next session."
+        ],
+        [
+          "What if the cost is difficult right now?",
+          "Please still come. Speak to us privately and we will work something out. Nobody is turned away over tuition."
+        ]
       ],
       "closing": {
         "title": "Save your",
         "em": "seat.",
         "text": "Six Wednesdays from January 20, at the Jewish Federation or on Zoom.",
         "prices": [
-          ["Standard", "$125"],
-          ["Couple", "$215"]
+          [
+            "Standard",
+            "$125"
+          ],
+          [
+            "Couple",
+            "$215"
+          ]
         ]
       },
-      "pattern": ["M560 -40 700 41 700 203 560 284 420 203 420 41Z", "M610 430 720 494 720 620 610 684 500 620 500 494Z"],
+      "pattern": [
+        "M560 -40 700 41 700 203 560 284 420 203 420 41Z",
+        "M610 430 720 494 720 620 610 684 500 620 500 494Z"
+      ],
       "lessonsShape": "hex"
     },
     "kabbalah": {
@@ -128,11 +180,10 @@
         "btn": "#2F2A1F",
         "btnText": "#FFFFFF",
         "deep": "#453D2D",
-        "onDeepAccent": "#F0B55C",
-        "paper": "#D8D4C8"
+        "onDeepAccent": "#F0B55C"
       },
       "opening": "banner",
-      "banner": "",
+      "banner": "https://w2.chabad.org/media/images/1398/bfrD13982964.jpg",
       "art": "https://jli-marketing.web.app/chabadone-minisite/theme/assets/about-main.jpg",
       "artAlt": "Course art: a collage of an old key, an eye, a record and a diagram of the sefirot",
       "eyebrow": "JLI course · Fall 2026 · Now in session",
@@ -150,42 +201,58 @@
       },
       "trailer": "",
       "facts": [
-        ["When", "Six weeks from Oct 27", "Tuesdays 11:00 am · Wednesdays 11:00 am or 7:00 pm"],
-        ["Where", "Jewish Federation", "6735 Telegraph Rd · Zoom on request"],
-        ["Teacher", "Rabbi Levi Dubov", ""],
-        ["Status", "In session, registration closed", ""]
+        [
+          "When",
+          "Six weeks from Oct 27",
+          "Tuesdays 11:00 am · Wednesdays 11:00 am or 7:00 pm"
+        ],
+        [
+          "Where",
+          "Jewish Federation",
+          "6735 Telegraph Rd · Zoom on request"
+        ],
+        [
+          "Teacher",
+          "Rabbi Levi Dubov",
+          ""
+        ],
+        [
+          "Status",
+          "In session, registration closed",
+          ""
+        ]
       ],
       "lessonsTitle": "Six lessons",
       "lessons": [
         {
           "title": "Echoes of Your Soul in Everyday Life",
           "text": "Why do you like that song? Why did you marry that one? Where does your soul go when you sleep? Why do you dream? Do animals have souls?",
-          "img": "https://jli-marketing.web.app/chabadone-minisite/theme/assets/lesson-1-collage.jpg"
+          "img": "https://w2.chabad.org/media/images/1398/utpo13982948.png"
         },
         {
           "title": "Traces of the Sefirot in Your Body and Soul",
           "text": "What are the sefirot and how are they relevant to your life? Why do you have ten fingers? Is G-d’s name written on your body?",
-          "img": "https://jli-marketing.web.app/chabadone-minisite/theme/assets/lesson-2-collage.jpg"
+          "img": "https://w2.chabad.org/media/images/1398/rnWN13982949.png"
         },
         {
           "title": "The Mystical Backstory of Your Soul",
           "text": "What’s the secret behind your preferences in food and music? What is reincarnation? Why do you keep facing the same struggle? What did your soul come here to do?",
-          "img": "https://jli-marketing.web.app/chabadone-minisite/theme/assets/lesson-3-collage.jpg"
+          "img": "https://w2.chabad.org/media/images/1398/sVTv13982950.png"
         },
         {
           "title": "Signals from Heaven in Your Daily Life",
           "text": "Can someone else’s soul join yours? Who really chose your name? Why do you sometimes wake up inspired? Why does that person’s flaw bother you?",
-          "img": "https://jli-marketing.web.app/chabadone-minisite/theme/assets/lesson-4-collage.jpg"
+          "img": "https://w2.chabad.org/media/images/1398/vXVj13982951.png"
         },
         {
           "title": "The Ripples of Your Thoughts and Words",
           "text": "Can your thoughts reach someone far away? Do words affect the people you talk about? Can positive thinking change your reality?",
-          "img": "https://jli-marketing.web.app/chabadone-minisite/theme/assets/lesson-5-collage.jpg"
+          "img": "https://w2.chabad.org/media/images/1398/bwql13982952.png"
         },
         {
           "title": "How You Can Touch Infinity in a Finite World",
           "text": "What’s the secret behind G-d’s many names? Where in my life can I touch Divine infinity? If G-d already decided, why pray?",
-          "img": "https://jli-marketing.web.app/chabadone-minisite/theme/assets/lesson-6-collage.jpg"
+          "img": "https://w2.chabad.org/media/images/1398/VEJw13982953.png"
         }
       ],
       "teacher": {
@@ -194,15 +261,33 @@
         "photo": "https://w2.chabad.org/media/images/1393/Copa13937778.jpg",
         "photoAlt": "Rabbi Levi Dubov teaching a full JLI class",
         "stats": [
-          ["46", "courses taught"],
-          ["550+", "participants"],
-          ["9", "years of classes"]
+          [
+            "46",
+            "courses taught"
+          ],
+          [
+            "550+",
+            "participants"
+          ],
+          [
+            "9",
+            "years of classes"
+          ]
         ]
       },
       "faq": [
-        ["Do I need any background?", "None at all. The course is built for adults coming to this material for the first time, and everything is taught in English."],
-        ["Can I join on Zoom?", "Yes, on request."],
-        ["What if I miss a class?", "Each of the six lessons stands on its own, so missing one will not leave you lost. Let us know and we will make sure you have the material you missed."]
+        [
+          "Do I need any background?",
+          "None at all. The course is built for adults coming to this material for the first time, and everything is taught in English."
+        ],
+        [
+          "Can I join on Zoom?",
+          "Yes, on request."
+        ],
+        [
+          "What if I miss a class?",
+          "Each of the six lessons stands on its own, so missing one will not leave you lost. Let us know and we will make sure you have the material you missed."
+        ]
       ],
       "closing": {
         "title": "Missed this",
@@ -237,7 +322,7 @@
       "lead": "In Bereshit, the story began. In us, it continues.",
       "note": "",
       "bar": "Monthly on Tuesdays · 6:30 pm · At a home in Bloomfield Hills",
-      "price": "",
+      "price": "$150 for the series · $20 a session",
       "about": {
         "lead": "Every life is a story unfolding, but not every story is fully understood.",
         "text": [
@@ -246,74 +331,117 @@
       },
       "trailer": "",
       "facts": [
-        ["When", "Monthly on Tuesdays", "6:30 pm · Nov 17, 2026 to May 18, 2027"],
-        ["Where", "A home in Bloomfield Hills", "Address provided upon registration"],
-        ["Teacher", "Mushky Dubov", ""]
+        [
+          "When",
+          "Monthly on Tuesdays",
+          "6:30 pm · Nov 17, 2026 to May 18, 2027"
+        ],
+        [
+          "Where",
+          "A home in Bloomfield Hills",
+          "Address provided upon registration"
+        ],
+        [
+          "Teacher",
+          "Mushky Dubov",
+          ""
+        ],
+        [
+          "Fee",
+          "$150 for the full series",
+          "Textbook included · or $20 a session"
+        ]
       ],
       "lessonsTitle": "Seven lessons",
-      "lessonsBlend": true,
-      "lessonsZoom": true,
       "lessons": [
         {
           "when": "Nov 17",
           "title": "Generating a Universe",
           "text": "Living between the Trees",
-          "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L1.png"
+          "img": "https://w2.chabad.org/media/images/1398/gNEO13982954.png"
         },
         {
           "when": "Dec 15",
           "title": "Engendering Evil",
           "text": "Biting More Than Can Be Swallowed",
-          "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L2.png"
+          "img": "https://w2.chabad.org/media/images/1398/QECr13982955.png"
         },
         {
           "when": "Jan 19",
           "title": "Emergent Shame",
           "text": "Wrapping to Reveal, Laboring to Rise",
-          "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L3.png"
+          "img": "https://w2.chabad.org/media/images/1398/sYzN13982956.png"
         },
         {
           "when": "Feb 16",
           "title": "Divergence",
           "text": "Mending the Rift between Sky and Soil",
-          "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L4.png"
+          "img": "https://w2.chabad.org/media/images/1398/vtlQ13982958.png"
         },
         {
           "when": "Mar 16",
           "title": "Degeneration",
           "text": "Harnessing Progress for Moral Greatness",
-          "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L5.png"
+          "img": "https://w2.chabad.org/media/images/1398/mTtB13982959.png"
         },
         {
           "when": "Apr 13",
           "title": "Regenerating Society",
           "text": "Becoming a Beacon",
-          "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L6.png"
+          "img": "https://w2.chabad.org/media/images/1398/vBKb13982960.png"
         },
         {
           "when": "May 18",
           "title": "Convergence",
           "text": "Living with the Creator",
-          "img": "https://bucket.myjli.com/roshchodeshsociety/RCS87/NG_L7.png"
+          "img": "https://w2.chabad.org/media/images/1398/kFaI13982962.png"
         }
       ],
       "teacher": {
         "name": "Mushky Dubov",
         "text": "Mushky runs the center day to day, leads its women’s learning and hosts Shabbat and holiday meals at home.",
-        "photo": "https://w2.chabad.org/media/images/1395/QEtF13954513.jpg",
-        "photoAlt": "Women learning together",
+        "photo": "https://w2.chabad.org/media/images/1398/dPwU13982946.jpg",
+        "photoAlt": "Mushky teaching a women’s class around the table",
         "stats": []
       },
       "faq": [
-        ["Do I need any background?", "None. No membership, no labels, no prior knowledge needed."],
-        ["Where do we meet?", "At a home in Bloomfield Hills. The address is provided upon registration."]
+        [
+          "Do I need any background?",
+          "None. No membership, no labels, no prior knowledge needed."
+        ],
+        [
+          "Where do we meet?",
+          "At a home in Bloomfield Hills. The address is provided upon registration."
+        ],
+        [
+          "Can I come to a single evening?",
+          "Yes. Each lesson stands on its own, and you can register for one session at $20."
+        ]
       ],
       "closing": {
         "title": "Save your",
         "em": "seat.",
-        "text": "Monthly on Tuesdays at 6:30 pm, at a home in Bloomfield Hills."
+        "text": "Monthly on Tuesdays at 6:30 pm, at a home in Bloomfield Hills.",
+        "prices": [
+          [
+            "Full series",
+            "$150"
+          ],
+          [
+            "One session",
+            "$20"
+          ]
+        ]
       },
-      "pattern": ["M440 720 760 100", "M430 70v14M440 70v14M450 70v14M460 70v14M470 70v14M480 70v14M490 70v14M500 70v14M510 70v14M520 70v14", "M520 600v14M530 600v14M540 600v14M550 600v14M560 600v14M570 600v14"]
+      "pattern": [
+        "M440 720 760 100",
+        "M430 70v14M440 70v14M450 70v14M460 70v14M470 70v14M480 70v14M490 70v14M500 70v14M510 70v14M520 70v14",
+        "M520 600v14M530 600v14M540 600v14M550 600v14M560 600v14M570 600v14"
+      ],
+      "priceShort": [
+        "$150",
+        "or $20 a session"
+      ]
     }
   }
 }
