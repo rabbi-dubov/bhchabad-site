@@ -2517,3 +2517,25 @@ html body.cco_body .cc-notfound-label + .cc-notfound-links { margin-top: 12px; }
    tablets and phones. The rules for five stay above in case a fifth returns. */
 @media (min-width: 1025px) { html.cc-v2 body.cco_body .cc-ways ul:has(> li:nth-child(4)):not(:has(> li:nth-child(5))) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (min-width: 761px) and (max-width: 1024px) { html.cc-v2 body.cco_body .cc-ways ul:has(> li:nth-child(4)):not(:has(> li:nth-child(5))) { grid-template-columns: 1fr 1fr; } }
+/* Registration page of a course (theme.js registrationCourse): a short version of the course page's opening in
+   place of the plain title band. Colors come from the course (the same --cp-* values as its page). */
+html.cc-v2 body.cco_body .cc-regtop { position: relative; overflow: hidden; background: var(--cp-bg, var(--cc-ink)); color: var(--cp-on-bg, #fff); --cc-focus: var(--cp-on-bg, #fff); }
+html.cc-v2 body.cco_body .cc-regtop__in { position: relative; padding-top: 40px; padding-bottom: 52px; }
+html.cc-v2 body.cco_body .cc-regtop--art .cc-regtop__in > * { max-width: 56%; }
+html.cc-v2 body.cco_body .cc-regtop__art { position: absolute; top: 0; right: 0; bottom: 0; width: 44%; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 30%); mask-image: linear-gradient(90deg, transparent 0, #000 30%); }
+html.cc-v2 body.cco_body .cc-regtop__art img { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; max-width: none !important; object-fit: cover; }
+html.cc-v2 body.cco_body a.cc-regtop__back { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 26px; font-size: 14px; font-weight: 600; color: var(--cp-on-bg, #fff) !important; text-decoration: none !important; opacity: .86; }
+html.cc-v2 body.cco_body a.cc-regtop__back::before { content: "\2190"; }
+html.cc-v2 body.cco_body a.cc-regtop__back:hover, html.cc-v2 body.cco_body a.cc-regtop__back:focus-visible { opacity: 1; text-decoration: underline !important; }
+html.cc-v2 body.cco_body .cc-regtop__eyebrow { margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cp-accent, currentColor) !important; }
+html.cc-v2 body.cco_body .cc-regtop__title { margin: 0; font-weight: 400; font-size: clamp(38px, 5vw, 66px) !important; line-height: 1; letter-spacing: -0.015em; color: var(--cp-on-bg, #fff) !important; text-wrap: balance; }
+html.cc-v2 body.cco_body .cc-regtop__title em { font-style: italic; color: var(--cp-accent, currentColor); }
+html.cc-v2 body.cco_body .cc-regtop__line { margin: 18px 0 0; font-size: 17px; line-height: 1.5; color: var(--cp-on-bg-soft, var(--cp-on-bg, #fff)) !important; }
+html.cc-v2 body.cco_body .cc-regtop__price { margin: 6px 0 0; font-size: 17px; font-weight: 700; color: var(--cp-on-bg, #fff) !important; }
+@media (max-width: 760px) {
+  html.cc-v2 body.cco_body .cc-regtop__art { display: none; }
+  html.cc-v2 body.cco_body .cc-regtop--art .cc-regtop__in > * { max-width: none; }
+  html.cc-v2 body.cco_body .cc-regtop__in { padding-top: 26px; padding-bottom: 34px; }
+  html.cc-v2 body.cco_body a.cc-regtop__back { margin-bottom: 18px; }
+  html.cc-v2 body.cco_body .cc-regtop__line, html.cc-v2 body.cco_body .cc-regtop__price { font-size: 16px; }
+}

@@ -1894,6 +1894,44 @@
 
     return h("div", { "class": "cc-landing cc-cp cc-cp--" + (open ? "open" : "closed"), style: vars.join(";") }, [top, bar, main, lessons, teacher, faq, close]);
   }
+  /* The registration page of a course (Levi, Nov 27: it "needs some help, to make it feel more seamless visually
+     with the course info page"). When the event being registered for is a course in course-pages.json, the
+     page's plain title band gives way to a short version of the course page's opening: the course's own
+     colors, its title in the same lettering, when and where, the fee, the course art, and a way back to the
+     course page. The event's own banner picture (the same art with JLI's lettering) is left out, since the
+     band now does its job. The form itself is ChabadOne's and is not touched. */
+  function registrationCourse() {
+    if (!/cc-v2/.test(html.className) || !window.fetch || !window.ccBase) { return; }
+    if (!/\/tools\/events\/register/i.test(location.pathname)) { return; }
+    var m = /eventid[=\/](\d+)/i.exec(location.pathname + location.search), head = q("header.article-header");
+    if (!m || !head || !q("#co_body_container") || q(".cc-regtop")) { return; }
+    fetch(window.ccBase + "course-pages.json" + (window.ccV || "")).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      var all = (data && data.courses) || {}, slug = "", c = null;
+      Object.keys(all).forEach(function (k) { if (new RegExp("eventid=" + m[1] + "(\\D|$)").test(all[k].register || "")) { slug = k; c = all[k]; } });
+      if (!c || c.state === "closed" || q(".cc-regtop")) { return; }
+      var col = c.colors || {}, vars = [];
+      Object.keys(col).forEach(function (k) { if (/^#[0-9a-f]{3,8}$/i.test(col[k])) { vars.push("--cp-" + k.replace(/[A-Z]/g, function (x) { return "-" + x.toLowerCase(); }) + ":" + col[k]); } });
+      var title = h("h1", { "class": "cc-regtop__title cc-head" }), at = c.em ? c.title.lastIndexOf(c.em) : -1;
+      if (at < 0) { title.textContent = c.title; }
+      else { title.appendChild(d.createTextNode(c.title.slice(0, at))); title.appendChild(h("em", { text: c.em })); title.appendChild(d.createTextNode(c.title.slice(at + c.em.length))); }
+      var band = h("header", { "class": "cc-regtop" + (c.art ? " cc-regtop--art" : ""), style: vars.join(";") }, [
+        c.art ? h("div", { "class": "cc-regtop__art", "aria-hidden": "true" }, [h("img", { src: c.art, alt: "", style: c.artPos ? "object-position:" + c.artPos : null })]) : null,
+        h("div", { "class": "cc-wrap cc-regtop__in" }, [
+          h("a", { "class": "cc-regtop__back", href: courseHref(slug), text: "About this course" }),
+          h("p", { "class": "cc-regtop__eyebrow", text: "Registration" }),
+          title,
+          c.bar ? h("p", { "class": "cc-regtop__line", text: c.bar }) : null,
+          c.price ? h("p", { "class": "cc-regtop__price", text: c.price }) : null
+        ])
+      ]);
+      var wrap = head.parentNode, holder = wrap && /master-content-wrapper/.test(wrap.className) && wrap.children.length === 1 ? wrap : head;
+      holder.parentNode.insertBefore(band, holder);
+      holder.hidden = true; holder.setAttribute("aria-hidden", "true"); holder.style.setProperty("display", "none", "important");
+      addClass(html, "cc-reg-course");
+      smartQuotes(band);
+    }).catch(function () {});
+  }
+
   function coursePageNext() {
     var cfg = CC.courseNext;
     if (!cfg || !/cc-v2/.test(html.className)) { return; }
@@ -1960,7 +1998,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCap, rsvpJump, closedCourse, eventsListClosed, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, coursePageNext, courseLibrary, registration, registrationCourse, registrationCap, rsvpJump, closedCourse, eventsListClosed, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }
