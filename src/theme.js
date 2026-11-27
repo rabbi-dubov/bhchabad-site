@@ -1703,6 +1703,10 @@
     if (!box) { return; }
     var to = (CC.oldPaths || {})[location.pathname.replace(/\/+$/, "").toLowerCase()];
     if (to) { location.replace(to); return; }
+    // a course page that was replaced (CC.courseNext.moved): its old address, short or long, goes to the new page
+    var gone = /\/aid\/(\d+)\//.exec(location.pathname) || /^\/(\d+)\/?$/.exec(location.pathname);
+    var now = gone && CC.courseNext && (CC.courseNext.moved || {})[gone[1]];
+    if (now) { location.replace("/" + now); return; }
     var sb = q(".notfound-search-form button", box), si = q(".notfound-search-input", box);
     if (sb && !sb.getAttribute("aria-label")) { sb.setAttribute("aria-label", "Search"); }
     if (si && !si.getAttribute("aria-label")) { si.setAttribute("aria-label", "Search this site"); }
