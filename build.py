@@ -41,13 +41,18 @@ def write_folder(folder):
     (d/'theme.min.css').write_text(f'/* BH Chabad theme v{ver} */{build_css()}\n')
     (d/'theme.min.js').write_text(f'/* BH Chabad theme v{ver} */{build_js()}\n')
     (d/'VERSION').write_text(ver + '\n')
+    # course pages of the new look: one data file, checked and packed (same as tools/build.mjs)
+    import json
+    courses = json.loads((root/'src/course-pages.json').read_text(encoding='utf-8'))
+    courses.pop('_about', None)
+    (d/'course-pages.json').write_text(json.dumps(courses, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
     print(folder + '/', 'version', ver)
 
 
 def promote():
     assert (root/'test/theme.min.css').exists(), 'run "build.py test" first'
     (root/'live').mkdir(exist_ok=True)
-    for f in ('theme.min.css', 'theme.min.js', 'VERSION'):
+    for f in ('theme.min.css', 'theme.min.js', 'VERSION', 'course-pages.json'):
         shutil.copyfile(root/'test'/f, root/'live'/f)
     print('live/ now =', (root/'live/VERSION').read_text().strip())
 
