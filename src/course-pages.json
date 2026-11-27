@@ -2,7 +2,7 @@
   "_about": "One entry per course page of the new look (theme.js coursePageNext draws every course from this file with one template). Built into test/ and live/ as course-pages.json by tools/build.mjs. Pictures are addresses only: JLI's own public files or pictures already on ChabadOne; no picture files live in this repo. A \"Can I get CE credits?\" answer goes in a course's faq only when that course really offers them (Levi, Nov 27).",
   "courses": {
     "missing-piece": {
-      "page": "7620415",
+      "page": "7645556",
       "state": "open",
       "register": "/tools/events/register.asp?eventid=24326",
       "colors": {
@@ -164,7 +164,7 @@
       "lessonsShape": "hex"
     },
     "kabbalah": {
-      "page": "7593397",
+      "page": "7645563",
       "state": "closed",
       "next": {
         "text": "Next course: The Missing Piece",

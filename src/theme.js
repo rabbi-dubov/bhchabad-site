@@ -84,10 +84,11 @@
     // starts with a dash: "— Name, context". The homepage reads them; no quotes = no section.
     testimonialsUrl: "/7617013", // "In their words" page (hidden, under About)
     // New look, course pages (see coursePageNext): page number -> the course's name in course-pages.json.
-    // bare = pages that are still JLI mini-sites with no site header; host = the page that shows them in the preview.
+    // moved = the old JLI mini-site pages (no site header) -> the ordinary pages made Nov 27 to replace them
+    // (Levi: "Move all of them over to the new template"); host = the page that shows a course by "?course=<name>".
     courseNext: {
-      pages: { "7620415": "missing-piece", "7593397": "kabbalah", "7593500": "genesis" },
-      bare: ["7620415", "7593397"],
+      pages: { "7645556": "missing-piece", "7645563": "kabbalah", "7593500": "genesis" },
+      moved: { "7620415": "7645556", "7593397": "7645563" },
       host: "/7581757"
     },
     // Homepage photos live on an ordinary ChabadOne page: pictures under a heading containing "Welcome"
@@ -1731,19 +1732,23 @@
      lessons list, teacher, Good to know, closing Register band. Only the words, the pictures and a few colors
      taken from the course art change from course to course.
      Where it shows (preview only, html.cc-v2): on a course's own page (CC.courseNext.pages), in place of the
-     page's body; and on the Learn page with "?course=<name>" in the address. Two course pages are still JLI
-     mini-sites without the site's header and menu, so in the preview their links open the Learn-page address
-     instead. Nothing on ChabadOne is changed by this. */
+     page's body; and on the Learn page with "?course=<name>" in the address. Two courses used to live on JLI
+     mini-site pages without the site's header and menu; each now has an ordinary page (CC.courseNext.moved),
+     and in the preview the old addresses and links to them lead to the new page. */
+  function coursePageId() {
+    var p = /\/aid\/(\d+)\//.exec(location.pathname) || /^\/(\d+)\/?$/.exec(location.pathname);
+    return p ? p[1] : "";
+  }
   function courseSlug() {
     var cfg = CC.courseNext || {}, m = /[?&\/]course[=\/]([a-z0-9-]+)(?=[\/&#.]|$)/i.exec(location.pathname + location.search);
     if (m) { return m[1].toLowerCase(); }
-    var p = /\/aid\/(\d+)\//.exec(location.pathname) || /^\/(\d+)\/?$/.exec(location.pathname);
-    return (p && (cfg.pages || {})[p[1]]) || "";
+    var id = coursePageId();
+    return (cfg.pages || {})[(cfg.moved || {})[id] || id] || "";
   }
   function courseHref(slug) {
     var cfg = CC.courseNext || {}, id = "";
     Object.keys(cfg.pages || {}).forEach(function (k) { if (cfg.pages[k] === slug) { id = k; } });
-    return id && (cfg.bare || []).indexOf(id) < 0 ? "/" + id : cfg.host + "?course=" + slug;
+    return id ? "/" + id : cfg.host + "?course=" + slug;
   }
   function buildCourse(c) {
     var open = c.state !== "closed", col = c.colors || {}, vars = [];
@@ -1868,15 +1873,18 @@
   function coursePageNext() {
     var cfg = CC.courseNext;
     if (!cfg || !/cc-v2/.test(html.className)) { return; }
-    // In the preview, a link to a course page that is still a JLI mini-site opens the new template instead
+    var moved = cfg.moved || {};
+    // In the preview, a link to an old JLI mini-site course page opens the ordinary page that replaced it
     d.addEventListener("click", function (e) {
       var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
       if (!a) { return; }
       var hr = a.getAttribute("href") || "", m = /^(?:https?:\/\/(?:www\.)?bhchabad\.org)?\/(\d{5,})\/?$/i.exec(hr) || /\/aid\/(\d{5,})\//.exec(hr);
-      if (m && (cfg.bare || []).indexOf(m[1]) >= 0 && cfg.pages[m[1]]) { a.setAttribute("href", cfg.host + "?course=" + cfg.pages[m[1]]); }
+      if (m && moved[m[1]]) { a.setAttribute("href", "/" + moved[m[1]]); }
     }, true);
     var slug = courseSlug();
     if (!slug) { return; }
+    var to = moved[coursePageId()];
+    if (to) { location.replace("/" + to); return; }                     // an old mini-site address: on to its new page
     if (!q("#header")) { location.replace(cfg.host + "?course=" + slug); return; }
     var old = q(".cc-landing"), holder = old ? old.parentNode : (q(".co_body.article-body") || q("#co_content_container"));
     if (!holder || !window.fetch || !window.ccBase) { return; }
