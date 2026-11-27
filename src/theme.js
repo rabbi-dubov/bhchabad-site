@@ -1189,6 +1189,11 @@
     if (at < 0) { headNode.textContent = headText; }
     else { headNode.appendChild(d.createTextNode(headText.slice(0, at))); headNode.appendChild(h("em", { text: em })); headNode.appendChild(d.createTextNode(headText.slice(at + em.length))); }
     var points = v2 ? (CC.home.introPoints || []) : [];
+    // the promises stand on their own line now: a closing sentence of the text that only repeats them is left out
+    if (points.length && bodyText) {
+      var cut = bodyText.lastIndexOf(". ", bodyText.length - 3), lastSentence = cut > 0 ? bodyText.slice(cut + 2).toLowerCase() : "";
+      if (lastSentence && points.every(function (p) { return lastSentence.indexOf(p.toLowerCase()) >= 0; })) { bodyText = bodyText.slice(0, cut + 1); }
+    }
     var words = h("div", { "class": v2 ? "cc-welcome__words" : null }, [
       v2 ? null : h("p", { "class": "cc-eyebrow", text: CC.home.introEyebrow }),
       headNode,
