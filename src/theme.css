@@ -2225,10 +2225,12 @@ html.cc-v2 body.cco_body .cc-events__nav .cc-round { display: none !important; }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:nth-child(n+5) { display: none; }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child { grid-row: 1 / span 3; position: relative; min-height: 560px; justify-content: flex-end; border: 0; background: var(--cc-ink-deep); --cc-focus: var(--cc-accent-on-dark); }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child:last-child { grid-column: 1 / -1; }
-  html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__img { position: absolute; top: 0; right: 0; bottom: 0; left: 0; aspect-ratio: auto; }
-  html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__img::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(180deg, rgba(47, 6, 25, 0) 30%, rgba(47, 6, 25, .93) 100%); }
+  /* the picture fills the top and melts into the dark panel that carries the words: an event's picture is often a
+     flyer with its own lettering, so the words never sit on top of it */
+  html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__img { flex: 1 1 auto; aspect-ratio: auto; min-height: 300px; }
+  html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__img::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 90px; background: linear-gradient(180deg, rgba(47, 6, 25, 0) 0%, var(--cc-ink-deep) 100%); }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__tag { top: 20px; left: 20px; padding: 9px 14px; border-radius: 999px; font-size: 12px; }
-  html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__body { position: relative; flex: 0 0 auto; padding: 32px; gap: 10px; }
+  html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__body { position: relative; flex: 0 0 auto; padding: 14px 32px 32px; gap: 10px; }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__when { font-size: 14px; letter-spacing: .06em; color: var(--cc-accent-on-dark); }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__title { font-size: clamp(34px, 3.6vw, 50px) !important; line-height: 1.02; color: var(--cc-white) !important; }
   html.cc-v2 body.cco_body .cc-evs > .cc-ev:first-child .cc-ev__desc { max-width: 520px; font-size: 16px; color: #F0E3E8 !important; -webkit-line-clamp: 3; }
