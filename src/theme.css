@@ -2072,3 +2072,23 @@ html.cc-course-closed body.cco_body a[href*="jli-register"],
 html.cc-course-closed body.cco_body a[href*="/tools/events/register"] { display: none !important; }
 html.cc-course-closed body.cco_body li:has(> a[href*="jli-register"]) { display: none !important; }
 html.cc-course-closed body.cco_body .jlik-band.jlik-register { display: none !important; }
+
+/* ---------- 24. CALENDAR VIEWS (/calendar month, day, week, year, events; audited Nov 26, 2026) ----------
+   ChabadOne's own template: Arial, blue and gold, and a month table 761px wide on a 320px phone column.
+   Header and tabs live in #CalendarViewContainer, the grid or day list in #CalendarContentContainer.
+   Not linked from the menu (the footer links /calendar/candlelighting.htm, which the base rules already cover). */
+html body.cco_body :is(#CalendarViewContainer, #CalendarContentContainer) :is(div, span, a, b, strong, p, td, th, label, button, li, h2, h3, h4, input, select):not(.fa):not(.fas):not(.far) { font-family: var(--cc-font-body) !important; }
+html body.cco_body #SecondaryHeader, html body.cco_body #SecondaryHeader a { color: var(--cc-accent-text) !important; }
+html body.cco_body .cal_header_info, html body.cco_body .cal_header_info b { color: var(--cc-ink) !important; }
+html body.cco_body .cal_header_info a { color: var(--cc-accent-text) !important; }
+html body.cco_body #CalendarViewContainer .co_toggle_buttons label.item { color: var(--cc-ink) !important; border-color: var(--cc-ink) !important; }
+html body.cco_body #CalendarViewContainer .co_toggle_buttons label.item.selected { background: var(--cc-ink) !important; color: var(--cc-white) !important; }
+html body.cco_body #CalendarContentContainer :is(a, .title, .header, .jewish_date, .zman, .holidays, .holidays div, .event span, .icons div) { color: var(--cc-ink) !important; }
+html body.cco_body #CalendarContentContainer .event { background-color: var(--cc-cream) !important; }
+html body.cco_body #CalendarContentContainer .category_item { border-left-color: var(--cc-accent) !important; background-color: var(--cc-cream) !important; }
+/* day view: the centre's events start below the floated Halachic Times box, not underneath it */
+html body.cco_body #CalendarContentContainer #events { clear: both; }
+/* the shaded bar under the tabs holds print-only text on screen: hide it unless it carries real controls */
+@media screen { html body.cco_body #CalendarViewContainer .filter-container:not(:has(input, select, label, button, form)) { display: none !important; } }
+/* phones: the month grid scrolls sideways inside its own box, the page does not */
+@media (max-width: 900px) { html body.cco_body #CalendarContentContainer { overflow-x: auto; overflow-y: hidden; padding-bottom: 8px; -webkit-overflow-scrolling: touch; } }
