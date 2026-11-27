@@ -109,13 +109,13 @@
     // No headings: the first 4 pictures = welcome, all = strip.
     photosUrl: "/7603881",   // "Homepage photos" page (hidden, under About)
     shabbatPlace: "Bloomfield Hills",
-    // Slim notice bar at the top of every page; a visitor's × hides it for them. Set to null to remove it.
-    notice: {
-      id: "new-site-2026",   // change the id to show a new message to visitors who closed the old one
-      text: "Welcome to our new website! We're still building it, so some pages are on the way.",
-      linkText: "Can't find something? Let us know",
-      linkHref: "/tools/feedback.asp"
-    },
+    // Slim notice bar at the top of every page; a visitor's × hides it for them. null = no bar.
+    // Removed Nov 27, 2026 (Levi: "agree, please update"): the "still building" message was the first thing on
+    // every page and three lines tall on a phone. The unfinished pages say so themselves, and the footer has
+    // "Send us a message". To show a bar again:
+    //   notice: { id: "some-new-id", text: "...", linkText: "...", linkHref: "/..." }
+    // (a new id shows it again to visitors who closed an earlier one).
+    notice: null,
     quoteFont: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap",
     // Hebrew serif for the homepage B"H, loaded for just those letters
     bhFont: "https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500&text=%D7%91%D7%94%D7%B4&display=swap",
