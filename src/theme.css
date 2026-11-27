@@ -2549,3 +2549,8 @@ html.cc-v2 body.cco_body .cc-regtop--fit .cc-regtop__art img { object-fit: conta
 @media (max-width: 760px) {
   html body.cco_body .cc-events__track, html body.cco_body .cc-evs { margin-left: calc(-1 * var(--cc-gutter)); margin-right: calc(-1 * var(--cc-gutter)); padding-left: var(--cc-gutter); padding-right: var(--cc-gutter); scroll-padding-left: var(--cc-gutter); }
 }
+/* Welcome photos: a finger can swipe them left and right (the page still scrolls up and down), and each dot can
+   be tapped; the dots get a larger touch area than they show */
+html body.cco_body .cc-welcome__img { touch-action: pan-y; }
+html.cc-v2 body.cco_body .cc-welcome__dots span { position: relative; cursor: pointer; }
+html.cc-v2 body.cco_body .cc-welcome__dots span::after { content: ""; position: absolute; top: -14px; bottom: -14px; left: -4px; right: -4px; }

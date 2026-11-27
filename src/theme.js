@@ -1227,15 +1227,34 @@
       wrap.appendChild(v2 ? h("div", { "class": "cc-welcome__media" }, [box, dots]) : box);
       // a calm change every 6 seconds (3 was restless beside the text); it waits while the mouse is on the photo
       // or the browser tab is in the background
-      if (list.length > 1 && !reduceMotion) {
-        var i = 0, held = false;
+      // A finger can also move them (Levi, Nov 27: "swiping with your fingers doesn't move the pictures"): a
+      // swipe left or right shows the next or the previous photo, a tap on a dot shows that photo, and the
+      // 6 seconds start again from there. People who asked their device for less motion get no automatic
+      // change, but can still swipe and tap.
+      if (list.length > 1) {
+        var i = 0, held = false, timer = null;
+        var go = function (n) {
+          i = (n + list.length) % list.length; box.show(i);
+          if (dots) { qa("span", dots).forEach(function (s, j) { s.className = j === i ? "is-on" : ""; }); }
+        };
+        var auto = function () {
+          if (timer) { clearInterval(timer); }
+          if (reduceMotion) { return; }
+          timer = setInterval(function () { if (!held && !d.hidden) { go(i + 1); } }, 6000);
+        };
         box.addEventListener("mouseenter", function () { held = true; });
         box.addEventListener("mouseleave", function () { held = false; });
-        setInterval(function () {
-          if (held || d.hidden) { return; }
-          i = (i + 1) % list.length; box.show(i);
-          if (dots) { qa("span", dots).forEach(function (s, j) { s.className = j === i ? "is-on" : ""; }); }
-        }, 6000);
+        var x0 = null, y0 = 0;
+        box.addEventListener("touchstart", function (e) { var t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; }, { passive: true });
+        box.addEventListener("touchend", function (e) {
+          if (x0 === null) { return; }
+          var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+          x0 = null;
+          if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy) * 1.2) { go(i + (dx < 0 ? 1 : -1)); auto(); }
+        }, { passive: true });
+        box.addEventListener("touchcancel", function () { x0 = null; }, { passive: true });
+        if (dots) { qa("span", dots).forEach(function (s, j) { s.addEventListener("click", function () { go(j); auto(); }); }); }
+        auto();
       }
     });
     return sec;
