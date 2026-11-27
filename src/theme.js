@@ -1451,6 +1451,18 @@
   /* ---------- "Page not found" (ChabadOne's own page, .notfound-container) ----------
      An old Wix address listed in CC.oldPaths goes straight to its new page. Otherwise the page gets the
      site's sections as buttons (read from the menu), and its search field and button get names. */
+  // The page of a course whose registration has closed (CC.home.closedEvents + eventPages): mark it, and the
+  // theme's CSS drops its Register buttons. JLI's minisite draws its buttons after this script runs, so the
+  // hiding is done in CSS, not here (Levi, Nov 26: the Kabbalah page's Register opened the Missing Piece form).
+  function closedCourse() {
+    var home = CC.home || {}, pages = home.eventPages || {};
+    var hit = (home.closedEvents || []).some(function (id) {
+      var p = String(pages[id] || "").replace(/^\//, "");
+      return !!p && new RegExp("(^|/)" + p + "(/|$)").test(location.pathname);
+    });
+    if (hit) { addClass(html, "cc-course-closed"); }
+  }
+
   function notFound() {
     var box = q(".notfound-main-content");
     if (!box) { return; }
@@ -1493,7 +1505,7 @@
 
   /* ---------- Run ---------- */
   onReady(function () {
-    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
+    [favicon, header, noticeBar, footer, shabbatTimes, homeShell, landingPage, courseLibrary, registration, registrationCap, rsvpJump, closedCourse, notFound, subscribePage, fixLinks, smartQuotes].forEach(function (fn) {
       try { fn(); } catch (e) {
         if (window.console) { console.error("[cc-theme]", fn.name, e); }
         if (fn === homeShell) { addClass(html, "cc-shell-failed"); }

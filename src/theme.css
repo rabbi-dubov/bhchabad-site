@@ -2065,3 +2065,10 @@ html body.cco_body #ContentBody #MainSearchForm .co_global_submit { float: none 
 html body.cco_body #ContentBody #MainSearchForm .co_global_input_container { flex: 1 1 auto; min-width: 0; width: auto !important; float: none !important; margin: 0 !important; }
 html body.cco_body #ContentBody #MainSearchForm .co_global_input_container input.co_global_input { width: 100% !important; }
 html body.cco_body #ContentBody #MainSearchForm .break_floats { display: none; }
+
+/* Closed course page (html.cc-course-closed, set by theme.js from closedEvents + eventPages; Levi, Nov 26):
+   no Register buttons and no register band, on our own pages and on JLI's minisite (jlik-, ms- classes). */
+html.cc-course-closed body.cco_body a[href*="jli-register"],
+html.cc-course-closed body.cco_body a[href*="/tools/events/register"] { display: none !important; }
+html.cc-course-closed body.cco_body li:has(> a[href*="jli-register"]) { display: none !important; }
+html.cc-course-closed body.cco_body .jlik-band.jlik-register { display: none !important; }
