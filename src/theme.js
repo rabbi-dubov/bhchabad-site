@@ -1293,7 +1293,7 @@
       subscribe: function () { return subscribeSection(hp); },
       pair: function () { return pairSection(hp); }
     };
-    var order = /cc-v2/.test(html.className) && CC.home.sectionsNext ? CC.home.sectionsNext : CC.home.sections;
+    var order = /cc-v2/.test(html.className) && CC.home.sectionsNext ? CC.home.sectionsNext : CC.home.sections;
     order.forEach(function (k) { var s = build[k] && build[k](); if (s) { shell.appendChild(s); } });
     var heroWrap = CC.home.bh && q(".cc-hero .cc-wrap, .cc-top .cc-wrap", shell);
     if (heroWrap) {
