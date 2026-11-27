@@ -2481,3 +2481,11 @@ html.cc-v2 body.cco_body .cc-cp--end .cc-cp__barwrap { opacity: 0; pointer-event
 @media (prefers-reduced-motion: reduce) { html.cc-v2 body.cco_body .cc-cp__barwrap { transition: none; } }
 /* ChabadOne's Event Reservations list: the note that stands in for Register on a closed event (theme.js eventsListClosed) */
 html body.cco_body .event .cc-ev-closed { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin: 0 0 0 15px; font-size: 16px; font-weight: 600; color: var(--cc-muted); text-align: left; }
+
+/* ---------- 30. Launch polish (Nov 27) ---------- */
+/* Tablets (761 to 1039px): the course opening stacks at this width. Words and Register come first and the art
+   follows as a rounded picture, as on phones; before, the art alone filled the first screen. */
+@media (min-width: 761px) and (max-width: 1039px) {
+  html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__words { order: 1; flex-basis: 100%; padding: 56px 56px 36px; }
+  html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__art { order: 2; flex: 1 1 100%; min-height: 380px; margin: 0 56px 84px; border-radius: 22px; }
+}

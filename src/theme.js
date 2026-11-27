@@ -1888,8 +1888,9 @@
     // the page are corrected now and once more after the late-built parts (events, cards) are in, and any
     // link is corrected again at the moment it is clicked.
     function movedHref(a) {
-      var hr = a.getAttribute("href") || "", m = /^(?:https?:\/\/(?:www\.)?bhchabad\.org)?\/(\d{5,})\/?$/i.exec(hr) || /\/aid\/(\d{5,})\//.exec(hr);
-      if (m && moved[m[1]]) { a.setAttribute("href", "/" + moved[m[1]]); }
+      var hr = a.getAttribute("href") || "", m = /^(?:https?:\/\/(?:www\.)?bhchabad\.org)?\/(\d{5,})\/?(#[\w-]*)?$/i.exec(hr) || /\/aid\/(\d{5,})\/[^#]*(#[\w-]*)?$/.exec(hr);
+      // "#lessons" was the lessons block of the mini-site; on the new page it is "#cc-cp-lessons"
+      if (m && moved[m[1]]) { a.setAttribute("href", "/" + moved[m[1]] + (m[2] === "#lessons" ? "#cc-cp-lessons" : (m[2] || ""))); }
     }
     function movedAll() { qa("a[href]").forEach(movedHref); }
     movedAll(); setTimeout(movedAll, 1500); window.addEventListener("load", function () { setTimeout(movedAll, 600); });
@@ -1925,7 +1926,9 @@
         }, { threshold: 0.35 }).observe(closing);
       }
       done();
-      window.scrollTo(0, 0);
+      // a link that named a part of the page ("...#cc-cp-lessons") lands on that part, now that it exists
+      var part = /^#[\w-]+$/.test(location.hash) ? d.getElementById(location.hash.slice(1)) : null;
+      if (part && page.contains(part)) { part.scrollIntoView(); } else { window.scrollTo(0, 0); }
     }).catch(done);
   }
 
