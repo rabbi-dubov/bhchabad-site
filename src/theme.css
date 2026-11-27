@@ -2489,3 +2489,5 @@ html body.cco_body .event .cc-ev-closed { display: flex; flex-wrap: wrap; align-
   html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__words { order: 1; flex-basis: 100%; padding: 56px 56px 36px; }
   html.cc-v2 body.cco_body .cc-cp__top--split .cc-cp__art { order: 2; flex: 1 1 100%; min-height: 380px; margin: 0 56px 84px; border-radius: 22px; }
 }
+/* ChabadOne's calendar day page: words in italics inside the day's notes came out in the platform's own font */
+html body.cco_body .main .details i, html body.cco_body .main .details em { font-family: inherit !important; }
