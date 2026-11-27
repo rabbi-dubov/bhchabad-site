@@ -280,13 +280,13 @@
       if (sub) { sub.style.display = "none"; t.appendChild(sub); }
       t.setAttribute("aria-label", CC.org + " home");
     }
-    // New look: the official wide logo in place of the emblem and the typed name
-    // (maroon on the white header; the white one shows over the homepage photo)
-    if (t && /cc-v2/.test(html.className) && !q(".cc-logo-wide", t)) {
+    // New look: the header keeps the emblem and the name typed in the site's own fonts (Levi, Nov 27: "Revert
+    // back to the websites fonts/style"; the official wide logo with its own lettering was tried and dropped).
+    // Over the homepage photo the emblem has to be white: that is the emblem part of the official on-dark logo
+    // file, shown through a cut-out (theme.css .cc-emblem-dark); the typed name turns white there.
+    if (lw && /cc-v2/.test(html.className) && !q(".cc-emblem-dark", lw)) {
       var lb = (window.ccBase || "https://cdn.jsdelivr.net/gh/rabbi-dubov/bhchabad-site@main/live/").replace(/[^\/]+\/$/, "") + "data/brand/";
-      t.appendChild(h("img", { "class": "cc-logo-wide", src: lb + "logo-wide-color-web.png", alt: "", width: "661", height: "176" }));
-      t.appendChild(h("img", { "class": "cc-logo-wide cc-logo-wide--dark", src: lb + "logo-wide-on-dark-web.png", alt: "", width: "614", height: "176" }));
-      addClass(q("#header_branding"), "cc-brand-wide");
+      lw.appendChild(h("span", { "class": "cc-emblem-dark", "aria-hidden": "true" }, [h("img", { src: lb + "logo-wide-on-dark-web.png", alt: "", width: "614", height: "176" })]));
     }
     // The emblem repeats the title's home link: keep it clickable, but out of the tab order and screen readers
     qa("#header_branding a").forEach(function (a) {

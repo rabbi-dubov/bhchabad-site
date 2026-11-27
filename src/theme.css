@@ -2134,14 +2134,12 @@ html.cc-v2 body.cco_body .cc-numbers__list span { font-size: 13px; font-weight: 
 html.cc-v2 body.cco_body .cc-numbers .cc-btn--ghost { color: var(--cc-white) !important; border-color: rgba(255, 255, 255, .6) !important; }
 
 /* ---------- 26. NEW LOOK, LAYER 3 (html.cc-v2 only): wide logo, homepage opening, four ways in, Coming up ---------- */
-/* The official wide logo replaces the emblem and the typed name (theme.js header) */
-html.cc-v2 body.cco_body #header_branding.cc-brand-wide .site-logo-wrapper { display: none !important; }
-html.cc-v2 body.cco_body #header_branding.cc-brand-wide a.site_title { display: block; font-size: 0 !important; line-height: 0; }
-html.cc-v2 body.cco_body #header_branding.cc-brand-wide .cc-title-sub { display: none; }
-html.cc-v2 body.cco_body #header_branding .cc-logo-wide { display: block; height: 56px !important; width: auto !important; max-width: none; }
-html.cc-v2 body.cco_body #header_branding .cc-logo-wide.cc-logo-wide--dark { display: none; }
-@media (max-width: 1024px) { html.cc-v2 body.cco_body #header_branding .cc-logo-wide { height: 44px !important; } }
-@media (max-width: 380px) { html.cc-v2 body.cco_body #header_branding .cc-logo-wide { height: 38px !important; } }
+/* The header keeps the emblem and the name typed in the site's own fonts (Levi, Nov 27: "Revert back to the
+   websites fonts/style"). .cc-emblem-dark is the white emblem for the homepage photo: the emblem part of the
+   official on-dark logo file (614x176; the emblem is its first 250px, the lettering starts under its right arm,
+   so the lower right corner is cut away). Hidden except over the photo (rules further down). */
+html.cc-v2 body.cco_body #header_branding .cc-emblem-dark { display: none; overflow: hidden; height: var(--cc-logo-h); width: calc(var(--cc-logo-h) * 250 / 176); -webkit-clip-path: polygon(0 0, 100% 0, 100% 45%, 88% 45%, 88% 100%, 0 100%); clip-path: polygon(0 0, 100% 0, 100% 45%, 88% 45%, 88% 100%, 0 100%); }
+html.cc-v2 body.cco_body #header_branding .site-logo-wrapper .cc-emblem-dark img { display: block; width: auto !important; height: var(--cc-logo-h) !important; max-width: none !important; margin: 0 !important; mix-blend-mode: normal; }
 
 /* Homepage, computers: the header lies over the opening photo (white logo and menu) until the page is scrolled */
 @media (min-width: 1025px) {
@@ -2150,8 +2148,11 @@ html.cc-v2 body.cco_body #header_branding .cc-logo-wide.cc-logo-wide--dark { dis
   html.cc-v2.cc-shell-ready body.cco_body #header, html.cc-v2.cc-shell-ready body.cco_body #header.on-scroll { transition: background-color .25s ease, border-color .25s ease; }
   html.cc-v2.cc-shell-ready body.cco_body .cc-top { margin-top: calc(-1 * var(--cc-hdr-h, 84px)); }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header, html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header.on-scroll { background: transparent !important; border-bottom-color: rgba(255, 255, 255, .18); -webkit-backdrop-filter: none; backdrop-filter: none; }
-  html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header_branding .cc-logo-wide { display: none; }
-  html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header_branding .cc-logo-wide.cc-logo-wide--dark { display: block; }
+  html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header_branding .site-logo-wrapper > a { display: none !important; }
+  html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header_branding .cc-emblem-dark { display: block; }
+  html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header_branding .site-logo-wrapper { border-right-color: rgba(255, 255, 255, .32) !important; }
+  html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header #header_branding a.site_title, html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header.on-scroll #header_branding a.site_title { color: var(--cc-white) !important; }
+  html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header #header_branding a.site_title .cc-title-sub { color: var(--cc-accent-on-dark); }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header #tabContentMain .co_menu_item:not(.donate_link) span.parent a { color: var(--cc-white) !important; }
   html.cc-v2.cc-shell-ready body.cco_body:not(.cc-scrolled) #header #tabContentMain .co_menu_item:not(.donate_link) span.parent a:hover { color: var(--cc-accent-on-dark) !important; }
   html.cc-v2.cc-shell-ready body.cco_body .cc-top .cc-wrap { padding-top: calc(var(--cc-hdr-h, 84px) + 64px); }
@@ -2491,3 +2492,21 @@ html body.cco_body .event .cc-ev-closed { display: flex; flex-wrap: wrap; align-
 }
 /* ChabadOne's calendar day page: words in italics inside the day's notes came out in the platform's own font */
 html body.cco_body .main .details i, html body.cco_body .main .details em { font-family: inherit !important; }
+/* Phones: the homepage opening (Levi, Nov 27: it "looked very tight and packed, didnt really give space to the
+   picture, and just looked cluttered instead of clean and modern"). Now: the photo fills the first screen with
+   its upper part left clear; the title, one line of welcome and ONE button sit at its foot; the small label
+   above the title and the second button are left out; the "Next up" card moves off the photo onto the dark
+   band under it, where its top edge shows at the bottom of the first screen. */
+@media (max-width: 760px) {
+  html.cc-v2 body.cco_body .cc-top .cc-wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-start; gap: 0; padding-top: 0; padding-bottom: 28px; }
+  html.cc-v2 body.cco_body .cc-top__text { flex: 0 0 auto; max-width: none; display: flex; flex-direction: column; justify-content: flex-end; box-sizing: border-box; min-height: max(420px, calc(100vh - 200px)); min-height: max(420px, calc(100svh - 200px)); padding-bottom: 36px; }
+  html.cc-v2 body.cco_body .cc-top__photos { bottom: 132px; }
+  html.cc-v2 body.cco_body .cc-top__photos > .cc-photo { background-position: center 22%; }
+  html.cc-v2 body.cco_body .cc-top__photos::after { background: linear-gradient(180deg, rgba(47, 6, 25, .16) 0%, rgba(47, 6, 25, 0) 26%, rgba(47, 6, 25, .5) 56%, rgba(47, 6, 25, .92) 84%, #2F0619 100%); }
+  html.cc-v2 body.cco_body .cc-top .cc-eyebrow { display: none; }
+  html.cc-v2 body.cco_body .cc-top__title { font-size: 44px !important; line-height: 1; }
+  html.cc-v2 body.cco_body .cc-top__sub { font-size: 16px; line-height: 1.5; margin-top: 14px; max-width: 34ch; }
+  html.cc-v2 body.cco_body .cc-top .cc-hero__ctas { margin-top: 22px; }
+  html.cc-v2 body.cco_body .cc-top .cc-hero__ctas .cc-btn--ghost { display: none !important; }
+  html.cc-v2 body.cco_body .cc-top a.cc-next { flex: 0 0 auto; margin-top: 4px; box-shadow: none; }
+}
